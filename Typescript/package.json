@@ -1,0 +1,13 @@
+{
+  "name": "typescript-learning-folder",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Chapter-wise TypeScript tutorial with runnable examples",
+  "scripts": {
+    "build": "tsc -p .",
+    "watch": "tsc -w -p ."
+  },
+  "devDependencies": {
+    "typescript": "^5.7.3"
+  }
+}

@@ -1,0 +1,16 @@
+export {};
+
+type Session = {
+  token: string | null;
+  refreshToken?: string;
+};
+
+const session: Session = {
+  token: null
+};
+
+const tokenUpper = session.token?.toUpperCase() ?? "NO TOKEN";
+const refresh = session.refreshToken ?? "NO REFRESH TOKEN";
+
+console.log("Token state:", tokenUpper);
+console.log("Refresh token state:", refresh);

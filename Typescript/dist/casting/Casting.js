@@ -1,0 +1,11 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const rawValue = "42";
+const asString = rawValue;
+const asNumber = Number(asString);
+const parsed = JSON.parse('{"id":1,"name":"Ava"}');
+const maybeFound = ["ts", "js", "node"].find((v) => v === "ts");
+console.log("Casted string:", asString);
+console.log("Converted number:", asNumber + 8);
+console.log("Parsed user:", parsed);
+console.log("Non-null assertion value:", maybeFound);

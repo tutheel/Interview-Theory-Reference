@@ -1,0 +1,10 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const checkA = true;
+const checkB = false;
+const success = { ok: true, data: 99 };
+const failure = { ok: false, error: "Something failed" };
+console.log("IsString<string>:", checkA);
+console.log("IsString<number>:", checkB);
+console.log("Success result:", success);
+console.log("Failure result:", failure);

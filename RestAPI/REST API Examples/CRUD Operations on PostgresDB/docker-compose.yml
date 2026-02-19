@@ -1,0 +1,17 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: crud-operations-on-postgresdb-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: crud_db
+    ports:
+      - "${POSTGRES_PORT}:5432"
+    volumes:
+      - crudoperationsonpostgresdb_pgdata:/var/lib/postgresql/data
+
+volumes:
+  crudoperationsonpostgresdb_pgdata:
+

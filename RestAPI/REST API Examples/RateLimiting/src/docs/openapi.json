@@ -1,0 +1,15 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "RateLimiting",
+    "version": "1.0.0",
+    "description": "IP and API-key based rate limiting API"
+  },
+  "servers": [{ "url": "http://localhost:3010" }],
+  "paths": {
+    "/health": { "get": { "summary": "Health", "responses": { "200": { "description": "OK" } } } },
+    "/ready": { "get": { "summary": "Readiness", "responses": { "200": { "description": "Ready" }, "503": { "description": "DB unavailable" } } } },
+    "/limited": { "get": { "summary": "Rate-limited endpoint", "responses": { "200": { "description": "Allowed" }, "429": { "description": "Rate limited" } } } },
+    "/limited/config": { "get": { "summary": "Limiter config", "responses": { "200": { "description": "OK" } } } }
+  }
+}

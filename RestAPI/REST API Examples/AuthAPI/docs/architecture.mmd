@@ -1,0 +1,22 @@
+flowchart LR
+  C[Client] --> E[AuthAPI Express]
+  E --> MW[Security + Validation + Logging]
+  MW --> R[Auth Routes]
+  R --> B[bcrypt]
+  R --> J[JWT Sign/Verify]
+  R --> P[Prisma]
+  P --> D[(Postgres)]
+
+sequenceDiagram
+  participant C as Client
+  participant E as Express
+  participant P as Prisma
+  participant D as Postgres
+  C->>E: POST /auth/refresh
+  E->>E: verify refresh JWT
+  E->>P: find refresh token
+  P->>D: SELECT token row
+  D-->>P: token row
+  E->>P: revoke old + insert new token
+  P->>D: UPDATE + INSERT
+  E-->>C: new access + refresh tokens

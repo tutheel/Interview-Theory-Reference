@@ -1,0 +1,29 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "SimpleWebhookExample",
+    "version": "1.0.0",
+    "description": "Webhook ingestion API with signature verification and idempotency"
+  },
+  "servers": [{ "url": "http://localhost:3004" }],
+  "paths": {
+    "/health": { "get": { "summary": "Health", "responses": { "200": { "description": "OK" } } } },
+    "/ready": { "get": { "summary": "Readiness", "responses": { "200": { "description": "Ready" }, "503": { "description": "DB unavailable" } } } },
+    "/webhooks/demo": {
+      "post": {
+        "summary": "Ingest webhook event",
+        "responses": {
+          "202": { "description": "Accepted" },
+          "200": { "description": "Duplicate" },
+          "401": { "description": "Invalid signature" }
+        }
+      }
+    },
+    "/webhooks/events": {
+      "get": {
+        "summary": "List ingested events",
+        "responses": { "200": { "description": "OK" } }
+      }
+    }
+  }
+}

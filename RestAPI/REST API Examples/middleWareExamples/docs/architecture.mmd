@@ -1,0 +1,13 @@
+flowchart LR
+  C[Client] --> E[Express middleware examples]
+  E --> CID[Correlation ID Middleware]
+  CID --> LOG[Request Logger]
+  LOG --> VAL[Validation]
+  LOG --> AUTH[Auth Guard]
+  LOG --> RL[Rate Limiter]
+  VAL --> H[Handlers]
+  AUTH --> H
+  RL --> H
+  H --> ERR[Global Error Handler]
+  E --> P[Prisma Ready Check]
+  P --> D[(Postgres)]

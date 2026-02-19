@@ -1,0 +1,105 @@
+flowchart TB
+  subgraph Client["Client Layer"]
+    C[Postman / HTTP Client]
+  end
+
+  subgraph Boot["Boot + Configuration"]
+    ENV[".env / .env.example"]
+    CFG["src/config.js"]
+    S["src/server.js<br/>starts app + graceful shutdown"]
+    APP["src/app.js"]
+    ENV --> CFG
+    CFG --> S
+    CFG --> APP
+    S --> APP
+  end
+
+  subgraph Pipeline["Middleware Pipeline (order in src/app.js)"]
+    M1["express.json + express.urlencoded"]
+    M2["helmet"]
+    M3["cors"]
+    M4["src/middlewares/correlationId.js"]
+    M5["src/middlewares/requestLogger.js"]
+    M6["swagger-ui-express<br/>GET /docs + /docs.json"]
+    DISPATCH["Route dispatch"]
+    M1 --> M2 --> M3 --> M4 --> M5 --> M6 --> DISPATCH
+  end
+
+  subgraph Routes["Route Modules"]
+    H["src/routes/health.js<br/>GET /health<br/>GET /ready"]
+    USERS["src/routes/service.js<br/>/users CRUD"]
+    PRODUCTS["src/routes/service.js<br/>/products CRUD"]
+    V["src/middlewares/validate.js<br/>Zod schemas in service.js"]
+    AH["src/utils/asyncHandler.js"]
+  end
+
+  subgraph Data["Data Layer"]
+    PRISMA["src/lib/prisma.js<br/>PrismaClient"]
+    PG["(Postgres 16 container)<br/>docker-compose.yml<br/>localhost:5433 -> 5432"]
+    SCHEMA["prisma/schema.prisma<br/>migrations/*.sql"]
+    PRISMA --> PG
+    SCHEMA --> PG
+  end
+
+  subgraph Errors["Not Found + Error Handling"]
+    NF["src/middlewares/notFound.js"]
+    EH["src/middlewares/errorHandler.js"]
+    APIERR["src/utils/apiError.js"]
+    LOG["src/lib/logger.js (pino)"]
+  end
+
+  OPENAPI["src/docs/openapi.json"] -. loaded by .-> M6
+
+  C --> S
+  APP --> M1
+  DISPATCH --> H
+  DISPATCH --> USERS
+  DISPATCH --> PRODUCTS
+
+  H -->|/ready uses SELECT 1| PRISMA
+  USERS --> V --> AH --> PRISMA
+  PRODUCTS --> V --> AH --> PRISMA
+
+  DISPATCH -->|route not matched| NF --> EH
+  V -->|ZodError| EH
+  AH -->|thrown/rejected error| EH
+  APIERR --> EH
+  EH --> LOG
+  M5 --> LOG
+  EH --> C
+  S -->|SIGINT/SIGTERM -> prisma.$disconnect()| PRISMA
+
+sequenceDiagram
+  participant C as Client/Postman
+  participant APP as src/app.js
+  participant CID as correlationId.js
+  participant RL as requestLogger.js
+  participant ROUTE as routes/service.js
+  participant VAL as validate.js + Zod schema
+  participant P as prisma.js
+  participant DB as Postgres
+  participant ERR as errorHandler.js
+
+  C->>APP: POST /products
+  APP->>CID: resolve x-correlation-id
+  CID-->>APP: req.correlationId + response header
+  APP->>RL: start request timer
+  APP->>ROUTE: dispatch /products
+  ROUTE->>VAL: validate(createProductSchema, body)
+
+  alt valid request body
+    VAL-->>ROUTE: parsed body
+    ROUTE->>P: prisma.product.create({ data })
+    P->>DB: INSERT INTO Product ...
+    DB-->>P: created row
+    P-->>ROUTE: product
+    ROUTE-->>C: 201 { data: product }
+  else validation error
+    VAL-->>ERR: ZodError
+    ERR-->>C: 400 VALIDATION_ERROR
+  else Prisma conflict or missing row
+    P-->>ERR: P2002 or P2025
+    ERR-->>C: 409 CONFLICT or 404 NOT_FOUND
+  end
+
+  RL-->>C: logs request.completed after response

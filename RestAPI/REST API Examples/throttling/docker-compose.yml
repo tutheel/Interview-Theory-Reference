@@ -1,0 +1,17 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: throttling-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: throttle_db
+    ports:
+      - "${POSTGRES_PORT}:5432"
+    volumes:
+      - throttling_pgdata:/var/lib/postgresql/data
+
+volumes:
+  throttling_pgdata:
+

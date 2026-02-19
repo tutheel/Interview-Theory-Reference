@@ -1,0 +1,15 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Aggregation - Composition APIs (Dashboard - Reports)",
+    "version": "1.0.0",
+    "description": "Aggregation/composition API with partial failure handling"
+  },
+  "servers": [{ "url": "http://localhost:3008" }],
+  "paths": {
+    "/health": { "get": { "summary": "Health", "responses": { "200": { "description": "OK" } } } },
+    "/ready": { "get": { "summary": "Readiness", "responses": { "200": { "description": "Ready" }, "503": { "description": "DB unavailable" } } } },
+    "/dashboard": { "get": { "summary": "Dashboard composition endpoint", "responses": { "200": { "description": "OK" }, "503": { "description": "Downstream unavailable" } } } },
+    "/reports/summary": { "get": { "summary": "Reports summary endpoint", "responses": { "200": { "description": "OK" } } } }
+  }
+}

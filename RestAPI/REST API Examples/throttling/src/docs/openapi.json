@@ -1,0 +1,15 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "throttling",
+    "version": "1.0.0",
+    "description": "Token-bucket throttling API"
+  },
+  "servers": [{ "url": "http://localhost:3011" }],
+  "paths": {
+    "/health": { "get": { "summary": "Health", "responses": { "200": { "description": "OK" } } } },
+    "/ready": { "get": { "summary": "Readiness", "responses": { "200": { "description": "Ready" }, "503": { "description": "DB unavailable" } } } },
+    "/throttle": { "get": { "summary": "Token bucket endpoint", "responses": { "200": { "description": "Allowed" }, "429": { "description": "Throttled" } } } },
+    "/throttle/config": { "get": { "summary": "Bucket config", "responses": { "200": { "description": "OK" } } } }
+  }
+}

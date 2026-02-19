@@ -1,0 +1,18 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "AuthAPI",
+    "version": "1.0.0",
+    "description": "Authentication API with JWT + refresh token rotation"
+  },
+  "servers": [{ "url": "http://localhost:3002" }],
+  "paths": {
+    "/health": { "get": { "summary": "Health", "responses": { "200": { "description": "OK" } } } },
+    "/ready": { "get": { "summary": "Readiness", "responses": { "200": { "description": "Ready" }, "503": { "description": "DB unavailable" } } } },
+    "/auth/register": { "post": { "summary": "Register", "responses": { "201": { "description": "Created" }, "409": { "description": "Conflict" } } } },
+    "/auth/login": { "post": { "summary": "Login", "responses": { "200": { "description": "OK" }, "401": { "description": "Unauthorized" } } } },
+    "/auth/refresh": { "post": { "summary": "Refresh token", "responses": { "200": { "description": "OK" }, "401": { "description": "Unauthorized" } } } },
+    "/auth/logout": { "post": { "summary": "Logout", "responses": { "204": { "description": "No content" } } } },
+    "/me": { "get": { "summary": "Current user", "responses": { "200": { "description": "OK" }, "401": { "description": "Unauthorized" } } } }
+  }
+}

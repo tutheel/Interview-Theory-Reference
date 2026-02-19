@@ -1,0 +1,8 @@
+flowchart LR
+  C[Client] --> E[Express throttling API]
+  E --> B[In-memory token buckets]
+  B --> R[Refill + consume algorithm]
+  R --> OK[200 allowed]
+  R --> NO[429 throttled]
+  E --> P[Prisma ready check]
+  P --> D[(Postgres)]

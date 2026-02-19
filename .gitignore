@@ -1,0 +1,48 @@
+# Node dependencies
+**/node_modules/
+
+# Environment and secrets
+**/.env
+**/.env.*
+!**/.env.example
+
+# Logs
+**/logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Build / coverage output
+**/dist/
+**/build/
+**/coverage/
+**/.nyc_output/
+**/.cache/
+**/.parcel-cache/
+**/.turbo/
+
+# Next.js / Vite / TS temp outputs
+**/.next/
+**/out/
+**/*.tsbuildinfo
+
+# Runtime / temp files
+**/*.pid
+**/*.seed
+**/*.tmp
+**/*.temp
+
+# Local DB artifacts (if any sqlite is used)
+**/*.db
+**/*.db-journal
+
+# Uploads and generated local files
+**/uploads/
+
+# IDE / OS files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

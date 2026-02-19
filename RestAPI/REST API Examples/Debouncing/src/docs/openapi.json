@@ -1,0 +1,15 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Debouncing",
+    "version": "1.0.0",
+    "description": "Server-side debounce demonstration API"
+  },
+  "servers": [{ "url": "http://localhost:3009" }],
+  "paths": {
+    "/health": { "get": { "summary": "Health", "responses": { "200": { "description": "OK" } } } },
+    "/ready": { "get": { "summary": "Readiness", "responses": { "200": { "description": "Ready" }, "503": { "description": "DB unavailable" } } } },
+    "/search": { "post": { "summary": "Queue debounced search", "responses": { "202": { "description": "Accepted" } } } },
+    "/search/{requestId}": { "get": { "summary": "Get request status/result", "responses": { "200": { "description": "OK" }, "404": { "description": "Not found" } } } }
+  }
+}

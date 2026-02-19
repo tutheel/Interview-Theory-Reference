@@ -1,0 +1,10 @@
+flowchart LR
+  C[Client] --> E[Express Aggregation API]
+  E --> D1[/dashboard handler/]
+  D1 --> DB[Prisma DB Query]
+  D1 --> EXT[External API with timeout]
+  DB --> P[(Postgres)]
+  EXT --> OM[Open-Meteo]
+  D1 --> OUT[Partial response + warnings]
+  E --> D2[/reports/summary handler/]
+  D2 --> DB

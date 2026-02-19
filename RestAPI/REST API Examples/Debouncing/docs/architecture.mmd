@@ -1,0 +1,7 @@
+flowchart LR
+  C[Client] --> E[Express Debouncing API]
+  E --> M[In-memory Maps: timers + request store]
+  M --> T[setTimeout debounce window]
+  T --> S[Search execution]
+  S --> P[Prisma]
+  P --> D[(Postgres SearchAudit)]

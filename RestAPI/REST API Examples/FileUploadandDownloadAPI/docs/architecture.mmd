@@ -1,0 +1,7 @@
+flowchart LR
+  C[Client] --> E[Express File API]
+  E --> U[Multer Upload Middleware]
+  U --> FS[(Disk /uploads)]
+  E --> P[Prisma]
+  P --> D[(Postgres)]
+  E --> S[Download Stream]

@@ -1,0 +1,15 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "QueryReadAPI's (Search, Filter, Pagination)",
+    "version": "1.0.0",
+    "description": "Query-read API with offset and cursor pagination"
+  },
+  "servers": [{ "url": "http://localhost:3007" }],
+  "paths": {
+    "/health": { "get": { "summary": "Health", "responses": { "200": { "description": "OK" } } } },
+    "/ready": { "get": { "summary": "Readiness", "responses": { "200": { "description": "Ready" }, "503": { "description": "DB unavailable" } } } },
+    "/items": { "get": { "summary": "Offset pagination endpoint", "responses": { "200": { "description": "OK" } } } },
+    "/items/cursor": { "get": { "summary": "Cursor pagination endpoint", "responses": { "200": { "description": "OK" } } } }
+  }
+}

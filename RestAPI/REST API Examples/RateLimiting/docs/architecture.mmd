@@ -1,0 +1,9 @@
+flowchart LR
+  C[Client] --> E[Express RateLimiting API]
+  E --> CH{Header x-api-key?}
+  CH -->|No| IP[IP limiter]
+  CH -->|Yes| KEY[API-key limiter]
+  IP --> R[Route handler]
+  KEY --> R
+  E --> P[Prisma ready check]
+  P --> D[(Postgres)]

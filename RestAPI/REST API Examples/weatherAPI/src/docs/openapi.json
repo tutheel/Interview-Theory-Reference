@@ -1,0 +1,30 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "weatherAPI",
+    "version": "1.0.0",
+    "description": "Weather endpoints backed by Open-Meteo"
+  },
+  "servers": [{ "url": "http://localhost:3003" }],
+  "paths": {
+    "/health": { "get": { "summary": "Health", "responses": { "200": { "description": "OK" } } } },
+    "/ready": { "get": { "summary": "Readiness", "responses": { "200": { "description": "Ready" }, "503": { "description": "DB unavailable" } } } },
+    "/weather": {
+      "get": {
+        "summary": "Weather by city",
+        "parameters": [{ "name": "city", "in": "query", "required": true, "schema": { "type": "string" } }],
+        "responses": { "200": { "description": "OK" }, "404": { "description": "City not found" } }
+      }
+    },
+    "/weather/latlon": {
+      "get": {
+        "summary": "Weather by lat/lon",
+        "parameters": [
+          { "name": "lat", "in": "query", "required": true, "schema": { "type": "number" } },
+          { "name": "lon", "in": "query", "required": true, "schema": { "type": "number" } }
+        ],
+        "responses": { "200": { "description": "OK" } }
+      }
+    }
+  }
+}

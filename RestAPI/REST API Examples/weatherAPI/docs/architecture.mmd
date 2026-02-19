@@ -1,0 +1,7 @@
+flowchart LR
+  C[Client] --> E[Express weatherAPI]
+  E --> K[Map cache with TTL]
+  E --> G[Open-Meteo geocoding]
+  E --> W[Open-Meteo forecast]
+  E --> P[Prisma ready check]
+  P --> D[(Postgres)]

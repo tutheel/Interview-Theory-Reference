@@ -1,0 +1,8 @@
+flowchart LR
+  S[Webhook Sender] --> E[Express Webhook API]
+  E --> V[HMAC Signature Verification]
+  V --> I[Idempotency Check by eventId]
+  I --> P[Prisma]
+  P --> D[(Postgres)]
+  E --> B[Background Promise Processor]
+  B --> P

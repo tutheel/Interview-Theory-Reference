@@ -1,0 +1,18 @@
+flowchart LR
+  C[Client] --> E[Express Query API]
+  E --> Q1[/items offset endpoint/]
+  E --> Q2[/items/cursor endpoint/]
+  Q1 --> P[Prisma]
+  Q2 --> P
+  P --> D[(Postgres with indexes)]
+
+sequenceDiagram
+  participant C as Client
+  participant E as Express
+  participant P as Prisma
+  participant D as Postgres
+  C->>E: GET /items?search=desk&page=1&limit=5
+  E->>P: findMany + count
+  P->>D: SELECT ... WHERE ... ORDER BY ... LIMIT/OFFSET
+  D-->>P: rows + count
+  E-->>C: data + pagination

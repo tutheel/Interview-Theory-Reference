@@ -1,0 +1,26 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model TeamStat {
+  id        Int      @id @default(autoincrement())
+  metric    String   @unique
+  value     Int
+  updatedAt DateTime @updatedAt
+}
+
+model SalesRecord {
+  id        String   @id @default(uuid())
+  region    String
+  amount    Decimal  @db.Decimal(10,2)
+  status    String
+  createdAt DateTime @default(now())
+
+  @@index([createdAt])
+  @@index([region])
+}

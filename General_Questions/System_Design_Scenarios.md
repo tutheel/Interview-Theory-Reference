@@ -150,3 +150,27 @@
 148. Design autoscaling policy.
 149. Design request correlation.
 150. Design high-scale REST API.
+Query / Read-heavy APIs (Search, Filter, Pagination)
+Interview focus:
+
+pagination (offset vs cursor)
+
+filtering/sorting design
+
+performance (indexes, query plans)
+
+caching
+3) Aggregation / Composition APIs (Dashboard / Reports)
+Interview focus:
+
+N+1 problems
+
+parallel calls (Promise.all)
+
+timeouts + partial failures
+
+response shaping
+
+Debouncing
+RateLimiting
+throwtling

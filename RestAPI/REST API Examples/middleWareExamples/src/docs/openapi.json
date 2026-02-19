@@ -1,0 +1,18 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "middleWareExamples",
+    "version": "1.0.0",
+    "description": "Middleware patterns in Express"
+  },
+  "servers": [{ "url": "http://localhost:3006" }],
+  "paths": {
+    "/health": { "get": { "summary": "Health", "responses": { "200": { "description": "OK" } } } },
+    "/ready": { "get": { "summary": "Readiness", "responses": { "200": { "description": "Ready" }, "503": { "description": "DB unavailable" } } } },
+    "/middleware/correlation": { "get": { "summary": "Correlation middleware", "responses": { "200": { "description": "OK" } } } },
+    "/middleware/validate": { "post": { "summary": "Validation middleware", "responses": { "200": { "description": "OK" }, "400": { "description": "Validation error" } } } },
+    "/middleware/protected": { "get": { "summary": "Auth guard middleware", "responses": { "200": { "description": "OK" }, "401": { "description": "Unauthorized" } } } },
+    "/middleware/rate-limited": { "get": { "summary": "Rate limiter middleware", "responses": { "200": { "description": "OK" }, "429": { "description": "Too many requests" } } } },
+    "/middleware/error": { "get": { "summary": "Intentional error route", "responses": { "500": { "description": "Demo error" } } } }
+  }
+}

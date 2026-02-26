@@ -1,44 +1,25 @@
-import fakeDb from '../db/fakeDb.js';
+import Item from '../models/Item.js';
 
-function createItem(payload) {
-  const item = {
-    id: fakeDb.nextId++,
-    name: payload.name
-  };
-
-  fakeDb.items.push(item);
+async function createItem(payload) {
+  const item = await Item.create({ name: payload.name });
   return item;
 }
 
-function getAllItems() {
-  return fakeDb.items;
+async function getAllItems() {
+  return Item.find();
 }
 
-function getItemById(id) {
-  return fakeDb.items.find((item) => item.id === id) || null;
+async function getItemById(id) {
+  return Item.findById(id);
 }
 
-function updateItem(id, payload) {
-  const item = getItemById(id);
-  if (!item) {
-    return null;
-  }
-
-  if (payload.name !== undefined) {
-    item.name = payload.name;
-  }
-
-  return item;
+async function updateItem(id, payload) {
+  return Item.findByIdAndUpdate(id, { name: payload.name }, { new: true });
 }
 
-function deleteItem(id) {
-  const index = fakeDb.items.findIndex((item) => item.id === id);
-  if (index === -1) {
-    return false;
-  }
-
-  fakeDb.items.splice(index, 1);
-  return true;
+async function deleteItem(id) {
+  const result = await Item.findByIdAndDelete(id);
+  return result !== null;
 }
 
 export { createItem, getAllItems, getItemById, updateItem, deleteItem };

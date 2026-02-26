@@ -5,13 +5,10 @@ function badRequest(message) {
 }
 
 function validateIdParam(req, res, next) {
-  const id = Number(req.params.id);
-
-  if (!Number.isInteger(id) || id <= 0) {
-    return next(badRequest('id must be a positive integer'));
+  const { id } = req.params;
+  if (!/^[a-f\d]{24}$/i.test(id)) {
+    return next(badRequest('id must be a valid MongoDB ObjectId'));
   }
-
-  req.params.id = id;
   return next();
 }
 

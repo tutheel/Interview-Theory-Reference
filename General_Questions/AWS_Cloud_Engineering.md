@@ -1,820 +1,1573 @@
-# AWS Cloud Engineering Interview Questions
-
-## Detailed Answers (Interview + Real-World Depth)
-
-This file keeps your original 1-180 list, but expands each item into practical interview-level answers.
-Use this as a speaking guide: define the concept, explain how it works, discuss tradeoffs, and give one production example.
-
-## Quick ASCII Architecture Diagrams
-
-### 1) Typical Highly Available Web Tier
-```text
-Users
-  |
-Route53 (DNS + health checks)
-  |
-CloudFront (+ WAF)
-  |
-ALB (multi-AZ)
-  |
-Auto Scaling Group (EC2 in private subnets)
-  |
-RDS Multi-AZ + Read Replica(s)
-```
-
-### 2) VPC Public/Private Design
-```text
-VPC 10.0.0.0/16
-+--------------------------------------------------+
-| Public Subnet (10.0.1.0/24)                      |
-|  ALB, NAT Gateway, Bastion/SSM endpoint          |
-|        |                                         |
-|        +--> Internet Gateway (IGW)               |
-|                                                  |
-| Private App Subnet (10.0.2.0/24)                 |
-|  EC2/ECS/EKS/Lambda ENIs                         |
-|        | outbound via route to NAT GW            |
-|                                                  |
-| Private DB Subnet (10.0.3.0/24)                  |
-|  RDS/Aurora (no direct internet route)           |
-+--------------------------------------------------+
-```
-
-### 3) Event-Driven Serverless Flow
-```text
-Client -> API Gateway -> Lambda -> DynamoDB
-                        |
-                        +-> EventBridge/SNS -> SQS -> Lambda Worker -> DLQ
-```
-
-### 4) Multi-Region DR Pattern (Warm Standby)
-```text
-Region A (Primary)                 Region B (DR)
-ALB + ASG + RDS/Aurora  ----replication---->  Scaled-down stack
-        |                                          |
-        +---------------- Route53 Failover -------+
-```
-
-## 1-20. Compute, Network, IAM Foundations
-
-1. **What is EC2?**  
-   Amazon EC2 (Elastic Compute Cloud) is AWS virtual server infrastructure where you choose AMI, instance type, storage, and network settings. It is used when you need OS-level control, custom runtimes, or long-running services. It is not serverless, so you are responsible for patching, right-sizing, and capacity strategy.
-
-2. **What are EC2 instance types?**  
-   Instance types are predefined hardware profiles (`t`, `m`, `c`, `r`, `i`, `p`, `g`, etc.) optimized for different workloads. Selection is based on CPU, memory, network, storage throughput, and cost profile. Strong interview answers mention benchmarking and Graviton for better price/performance in many cases.
-
-3. **What is Auto Scaling Group?**  
-   An ASG keeps a desired number of healthy EC2 instances across one or more Availability Zones. It scales capacity using metrics/schedules/predictive rules and replaces unhealthy instances automatically. It is a core high-availability and elasticity mechanism.
-
-4. **How does ALB work?**  
-   Application Load Balancer works at Layer 7 and routes HTTP/HTTPS requests by host/path/header/query rules to target groups. It performs health checks, TLS termination, sticky sessions, and integrates with WAF and authentication flows. It is ideal for web apps and microservice routing.
-
-5. **What is NLB?**  
-   Network Load Balancer is Layer 4 (TCP/UDP/TLS) and designed for very high throughput and low latency. It supports static IP and preserves source IP, making it good for non-HTTP protocols and high-volume traffic bursts. Choose NLB when raw network performance and connection handling are priorities.
-
-6. **What is ELB?**  
-   ELB (Elastic Load Balancing) is the service family that includes ALB, NLB, and GWLB. In interviews, clarify that "ELB" is often used generically, but architecture decisions should be specific to ALB vs NLB use cases. Each type addresses different layers and routing needs.
-
-7. **What is VPC?**  
-   A VPC is your logically isolated AWS network where you define CIDR ranges, subnets, route tables, and security controls. It is the foundational boundary for workload segmentation and connectivity. Good design starts with future CIDR growth, not just current needs.
-
-8. **What is subnet?**  
-   A subnet is a CIDR block segment of a VPC tied to one Availability Zone. Subnet placement controls where resources run and how traffic is routed/secured. Typical designs separate public ingress, private app, and private data subnets.
-
-9. **What is CIDR?**  
-   CIDR (Classless Inter-Domain Routing) expresses IP ranges like `10.0.0.0/16`, where prefix length defines network size. Smaller prefixes mean larger address pools. Correct CIDR planning prevents overlap issues with peering, TGW, and hybrid networking.
-
-10. **Public vs private subnet?**  
-    Public subnet has route to Internet Gateway and usually hosts internet-facing components. Private subnet has no direct route to IGW and is used for app/data tiers, often with outbound-only internet via NAT. Private-by-default is a common security baseline.
-
-11. **What is Internet Gateway?**  
-    Internet Gateway is a VPC attachment that enables internet routing for resources with proper route/public IP configuration. It is managed and highly available. Attaching IGW alone does nothing unless routes and addressing are correct.
-
-12. **What is NAT Gateway?**  
-    NAT Gateway allows private subnet resources to access internet/services outbound without inbound exposure. It sits in a public subnet and is referenced by private subnet route tables. For resilience and AZ-local routing, deploy NAT gateways per AZ.
-
-13. **What is route table?**  
-    A route table maps destination CIDRs to next-hop targets (local, IGW, NAT, TGW, VPC endpoint, peering). It is the core L3 forwarding policy for each associated subnet. Many network outages are route-table mistakes, so IaC and review are essential.
-
-14. **What is Security Group?**  
-    Security Group is a stateful virtual firewall attached to ENIs/resources. You define allow rules only; return traffic for established flows is automatically permitted. Best practice is SG-to-SG referencing rather than broad CIDR ranges.
-
-15. **What is NACL?**  
-    Network ACL is stateless subnet-level filtering with ordered allow/deny rules. Because it is stateless, you must allow both request and response port directions. It is useful for broad subnet boundaries and explicit deny requirements.
-
-16. **What is IAM role?**  
-    IAM role is an assumable identity with permissions and temporary credentials, not long-lived static keys. Services, users, and federated identities can assume roles. This pattern reduces secret sprawl and supports least privilege.
-
-17. **What is IAM policy?**  
-    IAM policy is a JSON permission document defining allowed/denied actions, resources, and conditions. Effective access is computed across identity policy, resource policy, boundaries, SCPs, and explicit deny precedence. Interview depth includes knowing evaluation logic, not only JSON shape.
-
-18. **What is least privilege?**  
-    Least privilege means granting only the minimum actions/resources/conditions needed for a job. In AWS, that includes scoping by ARN, condition keys, tags, source network, and session context. It limits blast radius from misconfigurations and compromised identities.
-
-19. **What is STS?**  
-    AWS STS issues temporary credentials for assumed roles and federation. Tokens expire, reducing risk compared to static keys. Common APIs include `AssumeRole` and identity federation variants.
-
-20. **What is cross-account access?**  
-    Cross-account access typically uses role assumption: a principal in Account A assumes a role in Account B. Correct setup requires both trust policy on target role and caller permissions in source account. Mature setups add `ExternalId`, MFA, session tags, and CloudTrail monitoring.
-
-**AWS Docs (1-20):**  
-- https://docs.aws.amazon.com/ec2/  
-- https://docs.aws.amazon.com/autoscaling/ec2/userguide/what-is-amazon-ec2-auto-scaling.html  
-- https://docs.aws.amazon.com/elasticloadbalancing/latest/userguide/how-elastic-load-balancing-works.html  
-- https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html  
-- https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-basics.html  
-- https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html  
-- https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp.html
-
-## 21-40. Storage, Databases, and Lambda Fundamentals
-
-21. **What is S3?**  
-    Amazon S3 is durable object storage built around buckets and object keys, not filesystem semantics. It is used for backups, static assets, logs, media, and data lake workloads. S3 design decisions usually include encryption, versioning, lifecycle, and access policy strategy.
-
-22. **What are S3 storage classes?**  
-    Storage classes optimize cost vs retrieval frequency: Standard, Intelligent-Tiering, Standard-IA, One Zone-IA, Glacier Instant Retrieval, Glacier Flexible Retrieval, and Glacier Deep Archive. Access pattern drives class selection. Lifecycle rules automate transitions to reduce manual cost management.
-
-23. **What is S3 lifecycle policy?**  
-    Lifecycle policies transition or expire objects based on age, prefix, or tags. Example: logs stay 30 days in Standard, then move to Glacier, then delete at retention end. This is a key cost and compliance control.
-
-24. **What is S3 versioning?**  
-    Versioning keeps multiple object versions under a single key, helping recover accidental overwrite/delete. Deletes create markers instead of permanent removal unless version-specific deletion is used. It is foundational for rollback and data protection patterns.
-
-25. **What is S3 replication?**  
-    Replication automatically copies objects to another bucket (same-region or cross-region) with policy controls. It supports DR, data sovereignty, and account isolation. Versioning must be enabled on both source and destination.
-
-26. **What is RDS?**  
-    Amazon RDS is managed relational database infrastructure service handling backups, patching, and operational automation. You still own schema, query design, and workload performance behavior. It reduces undifferentiated DB operations while preserving relational capabilities.
-
-27. **What engines does RDS support?**  
-    RDS supports engines including PostgreSQL, MySQL, MariaDB, SQL Server, Oracle, and Db2 (regional/edition variance). Engine choice depends on compatibility, licensing, operational expertise, and feature needs. Aurora is available as AWS-optimized MySQL/PostgreSQL-compatible family.
-
-28. **What is Multi-AZ?**  
-    Multi-AZ keeps synchronous standby in another AZ and provides automatic failover for availability. It improves resilience and durability, not read throughput. Applications must be retry-aware during failover transitions.
-
-29. **What is read replica?**  
-    Read replicas are asynchronous copies used to offload read traffic, reporting, or analytics queries. They scale reads and can promote during incidents, but replication lag can affect consistency-sensitive reads. Routing strategy should account for lag tolerance.
-
-30. **What is Aurora?**  
-    Aurora is an AWS-built relational engine architecture compatible with MySQL/PostgreSQL and backed by distributed multi-AZ storage. It provides fast failover, reader endpoints, and high throughput characteristics. It is often selected for cloud-native scale and availability targets.
-
-31. **Aurora vs RDS?**  
-    Aurora uses AWS custom storage/replication internals and cluster semantics, while standard RDS engines are closer to native engine deployments. Aurora generally offers better failover/read scale patterns; standard RDS can be better for strict engine behavior/licensing requirements. Decision depends on performance, portability, and operational priorities.
-
-32. **What is DynamoDB?**  
-    DynamoDB is serverless NoSQL database optimized for single-digit millisecond performance at large scale. It supports key-value/document access, autoscaling/on-demand capacity, TTL, streams, global tables, and secondary indexes. Modeling starts from access patterns, not normalized joins.
-
-33. **DynamoDB partition key?**  
-    Partition key determines data placement and throughput distribution across partitions. Poor key cardinality creates hot partitions and throttling even with high table capacity. Good design spreads writes while keeping efficient query access.
-
-34. **What is GSI?**  
-    Global Secondary Index provides alternate query paths with different partition/sort keys than base table. It enables new read patterns without table redesign. GSIs have separate capacity and add write amplification/cost.
-
-35. **What is LSI?**  
-    Local Secondary Index shares partition key with base table but uses alternate sort key for query variation within a partition. LSI must be created when table is created and has item-collection constraints. It is useful when partition locality is important.
-
-36. **What is DynamoDB TTL?**  
-    TTL uses timestamp attribute to mark items for background deletion. Removal is asynchronous and not immediate, so apps should tolerate short grace visibility. It is ideal for session data, temporary auth records, and retention cleanup.
-
-37. **What is Lambda?**  
-    Lambda is event-driven serverless compute where you run functions without managing servers. AWS handles runtime infrastructure, scaling, and patching; you focus on handler code and permissions. It is cost-effective for bursty/event workloads.
-
-38. **How Lambda scaling works?**  
-    Lambda scales by increasing concurrent execution environments with incoming demand, subject to account/function limits. Different event sources scale differently (request-driven for API, poll/batch for queues/streams). Concurrency limits and downstream capacity must be aligned.
-
-39. **What is cold start?**  
-    Cold start is latency added when Lambda creates a new execution environment before invoking handler. It includes runtime startup, code package load, and init logic execution. It mostly affects low-traffic or bursty synchronous endpoints.
-
-40. **What affects cold start?**  
-    Runtime, artifact size, dependency graph, initialization work, VPC attachment behavior, architecture, and burst scale affect cold starts. Provisioned Concurrency mitigates this by pre-initializing environments. Keep initialization lean and move heavy setup off critical path.
-
-**AWS Docs (21-40):**  
-- https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html  
-- https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Welcome.html  
-- https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html  
-- https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Introduction.html  
-- https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.CoreComponents.html  
-- https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GSI.html  
-- https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LSI.html  
-- https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/TTL.html  
-- https://docs.aws.amazon.com/lambda/latest/dg/welcome.html  
-- https://docs.aws.amazon.com/lambda/latest/dg/lambda-concurrency.html
-
-## 41-60. API, Observability, Messaging, Containers
-
-41. **What is API Gateway?**  
-    API Gateway is AWS managed API front door for REST, HTTP, and WebSocket APIs with auth, throttling, monitoring, and integration controls. It reduces custom gateway maintenance and standardizes ingress behavior. It integrates with Lambda, HTTP backends, and private VPC targets.
-
-42. **REST vs HTTP API Gateway?**  
-    REST APIs support broader legacy feature set and mature ecosystem, but usually with higher cost/overhead. HTTP APIs are simpler, lower-cost, and lower-latency for common modern patterns. Choose based on required features like usage plans/advanced transformations vs lean operations.
-
-43. **What is usage plan?**  
-    Usage plan links API keys to quotas and throttling limits (primarily REST APIs). It helps product-tier control and consumer governance. It should not be treated as strong authorization by itself.
-
-44. **What is throttling?**  
-    Throttling limits request rate and burst to protect backend stability and fairness. API Gateway enforces limits and returns `429` when exceeded. Clients should use retry with exponential backoff and jitter.
-
-45. **What is CloudWatch?**  
-    CloudWatch is AWS observability platform for metrics, logs, alarms, dashboards, and events. It powers autoscaling triggers, monitoring, and operational response. Effective usage requires clear SLI/SLO-aligned metrics and actionable alerts.
-
-46. **What are CloudWatch logs?**  
-    CloudWatch Logs stores service/app logs in groups and streams with configurable retention. Logs Insights enables query-based troubleshooting and analytics. Centralized log strategy is essential for incident response and compliance.
-
-47. **What is CloudWatch metric?**  
-    A metric is a timestamped measurement such as latency, error count, CPU, queue depth, or custom business KPI. Dimensions add filtering context (service, env, endpoint). Metrics are the basis for alarms and scaling policies.
-
-48. **What is alarm?**  
-    Alarm evaluates metric thresholds, anomaly bands, or math expressions and triggers actions (SNS, Auto Scaling, incident workflows). Strong alarms detect user impact quickly without excessive noise. State transitions (`OK`, `ALARM`, `INSUFFICIENT_DATA`) should map to runbooks.
-
-49. **What is EventBridge?**  
-    EventBridge is managed event bus that routes AWS/service/custom events using pattern-based rules. It supports decoupled event architectures, schedules, archive/replay, and cross-account buses. It improves extensibility vs hard-coded synchronous chains.
-
-50. **What is SQS?**  
-    SQS is durable message queue service for asynchronous decoupling and spike smoothing. It provides at-least-once delivery (standard) and integrates well with Lambda/ECS workers. Consumers must be idempotent because duplicates can occur.
-
-51. **What is FIFO queue?**  
-    FIFO queue preserves strict order per message group and supports deduplication semantics. It is used when ordering correctness matters (financial/event sequencing). Throughput depends on message-group parallelism and queue mode.
-
-52. **What is DLQ?**  
-    Dead-letter queue stores messages that repeatedly fail processing beyond receive threshold. It isolates poison messages and protects throughput of healthy workload. Teams should alert on DLQ growth and implement safe redrive tooling.
-
-53. **What is SNS?**  
-    SNS is pub/sub messaging for fan-out to multiple subscribers (SQS, Lambda, HTTP/S, email/SMS, etc.). It is ideal for broadcasting events and notifications. Delivery semantics differ from queues, so consumer design must reflect that.
-
-54. **SNS vs SQS?**  
-    SNS pushes same event to many subscribers; SQS buffers work for pull-based processing and retry control. A common pattern is SNS topic fan-out into service-specific SQS queues. This balances decoupling with independent consumer scaling.
-
-55. **What is Step Functions?**  
-    Step Functions orchestrates multi-step workflows with retries, catch/fallback, branching, and state tracking. It externalizes orchestration logic from code and gives visual execution history. It is preferred for complex, long-running distributed business processes.
-
-56. **What is state machine?**  
-    A state machine is a graph of states (`Task`, `Choice`, `Map`, `Parallel`, `Wait`, etc.) with transition logic and data flow. It formalizes workflow behavior and failure handling. This reduces brittle custom orchestration code.
-
-57. **What is ECR?**  
-    ECR is AWS managed container registry for storing Docker/OCI images. It integrates with IAM, vulnerability scanning, lifecycle policies, and cross-region/account replication. It is standard artifact source for ECS and EKS workloads.
-
-58. **What is ECS?**  
-    ECS is AWS-native container orchestration for deploying and scaling containerized services/tasks. It supports EC2 and Fargate launch types and integrates tightly with ALB, IAM, and CloudWatch. Operational overhead is lower than self-managed Kubernetes in many teams.
-
-59. **ECS vs EKS?**  
-    ECS is simpler and AWS-centric; EKS offers Kubernetes ecosystem portability and advanced K8s controls. ECS favors faster operational onboarding, EKS favors standard Kubernetes API/tooling. Decision depends on team skills, portability, and control requirements.
-
-60. **What is Fargate?**  
-    Fargate is serverless compute engine for ECS/EKS tasks/pods where AWS manages host infrastructure. You specify CPU/memory and pay per running resource/time. It removes node management and improves operational focus.
-
-**AWS Docs (41-60):**  
-- https://docs.aws.amazon.com/apigateway/latest/developerguide/welcome.html  
-- https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-request-throttling.html  
-- https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-api-usage-plans.html  
-- https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatch.html  
-- https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-tutorial.html  
-- https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-fifo-queues.html  
-- https://docs.aws.amazon.com/sns/latest/dg/welcome.html  
-- https://docs.aws.amazon.com/step-functions/latest/dg/welcome.html  
-- https://docs.aws.amazon.com/AmazonECR/latest/userguide/what-is-ecr.html  
-- https://docs.aws.amazon.com/AmazonECS/latest/developerguide/Welcome.html
-
-## 61-80. Kubernetes, IaC, Security, Core Networking
-
-61. **What is EKS?**  
-    EKS is AWS managed Kubernetes control plane service. You run workloads on managed node groups, self-managed nodes, or Fargate, while AWS runs control plane availability and patching. It is chosen when Kubernetes API portability and ecosystem tooling are required.
-
-62. **What is CloudFormation?**  
-    CloudFormation is AWS-native IaC service using templates and stacks to provision/update resources declaratively. It handles dependency ordering and rollback on failed updates. It is key for repeatable, auditable environment management.
-
-63. **What is Terraform?**  
-    Terraform is provider-based IaC tooling that supports AWS and multi-cloud resources with HCL configuration. It uses state to track infrastructure reality and plan changes safely. Teams need secure remote state and locking to avoid drift/conflicts.
-
-64. **What is Infrastructure as Code?**  
-    IaC means defining infrastructure in code instead of manual console changes. It enables version control, peer review, automated testing, and reproducible provisioning. IaC is foundational for platform reliability and compliance at scale.
-
-65. **What is blue-green deployment?**  
-    Blue-green uses two parallel environments and shifts traffic from old (blue) to new (green) after validation. Rollback is fast by switching traffic back. Tradeoff is temporary duplicate infrastructure cost.
-
-66. **What is canary deployment?**  
-    Canary sends a small traffic percentage to new version first, observes metrics, then gradually increases exposure. It limits blast radius of bad releases. Automated rollback based on SLO guardrails is best practice.
-
-67. **What is CodePipeline?**  
-    CodePipeline orchestrates CI/CD stages from source to build, test, and deploy. It provides auditable release flow and integration with AWS/third-party tools. It helps standardize delivery governance.
-
-68. **What is CodeBuild?**  
-    CodeBuild is managed build service for compiling code, running tests, and producing artifacts. It scales build workers on demand and avoids managing custom build infrastructure. Buildspec files keep build logic deterministic.
-
-69. **What is CodeDeploy?**  
-    CodeDeploy automates deployments to EC2, Lambda, and ECS with strategies like in-place or blue/green. It supports lifecycle hooks, traffic shifting, and rollback. It reduces deployment risk and manual drift.
-
-70. **What is Secrets Manager?**  
-    Secrets Manager stores sensitive credentials and supports rotation workflows. It integrates with IAM, KMS, and CloudTrail for access control/auditability. Prefer runtime retrieval over embedding secrets in code or AMIs.
-
-71. **What is Parameter Store?**  
-    Parameter Store (SSM) manages hierarchical config values and secure strings. It is commonly used for app settings, environment flags, and lightweight secret references. It is simple and cost-effective for many configuration use cases.
-
-72. **Secrets Manager vs Parameter Store?**  
-    Secrets Manager is stronger for secret lifecycle and automatic rotation. Parameter Store is better for broad config management and simpler secure values. Many architectures use both based on sensitivity and rotation needs.
-
-73. **What is KMS?**  
-    KMS is managed key service for encryption/decryption/signing integrated across AWS services. It controls key policies, grants, rotation, and usage audit trails. Secure design separates key administrators and key users.
-
-74. **What is encryption at rest?**  
-    Encryption at rest protects stored data in S3/EBS/RDS/backups by encrypting media with managed keys. It reduces risk if storage snapshots/media are exposed. Full solution also needs strict key access policy and monitoring.
-
-75. **What is encryption in transit?**  
-    Encryption in transit protects network data using TLS/mTLS/IPsec between clients and services. It prevents eavesdropping and tampering during transfer. Strong implementations include certificate automation and secure cipher policy.
-
-76. **What is WAF?**  
-    AWS WAF is web application firewall for filtering malicious HTTP patterns (SQLi, XSS, bots, bad IPs, excessive rates). It can attach to CloudFront, ALB, and API Gateway. WAF complements secure coding, not replaces it.
-
-77. **What is Shield?**  
-    AWS Shield protects against DDoS attacks; Shield Standard is baseline and Shield Advanced adds broader protections/support. It works best with resilient architecture and edge services like CloudFront. DDoS defense is layered, not single-control.
-
-78. **What is CloudTrail?**  
-    CloudTrail captures API activity/events across AWS accounts for auditing and forensics. It answers who changed what and when. Production landing zones centralize CloudTrail into dedicated log archives with guardrails.
-
-79. **What is VPC peering?**  
-    VPC peering creates private IP connectivity between two VPCs. It is low-latency and simple but non-transitive and does not scale well in full-mesh topologies. CIDR overlap is not allowed.
-
-80. **What is Transit Gateway?**  
-    Transit Gateway is centralized hub for connecting multiple VPCs, VPNs, and Direct Connect attachments. It simplifies large-scale routing and policy management. It is preferred for multi-account enterprise network architecture.
-
-**AWS Docs (61-80):**  
-- https://docs.aws.amazon.com/eks/latest/userguide/clusters.html  
-- https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/Welcome.html  
-- https://docs.aws.amazon.com/codepipeline/latest/userguide/welcome.html  
-- https://docs.aws.amazon.com/codebuild/latest/userguide/welcome.html  
-- https://docs.aws.amazon.com/codedeploy/latest/userguide/welcome.html  
-- https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html  
-- https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html  
-- https://docs.aws.amazon.com/kms/latest/developerguide/overview.html  
-- https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html  
-- https://docs.aws.amazon.com/waf/latest/developerguide/shield-chapter.html  
-- https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-user-guide.html  
-- https://docs.aws.amazon.com/vpc/latest/peering/what-is-vpc-peering.html  
-- https://docs.aws.amazon.com/vpc/latest/tgw/transit-gateway-centralized-router.html
-
-## 81-100. Advanced Network, DNS, Ops, Backup, DR
-
-81. **What is PrivateLink?**  
-    PrivateLink provides private connectivity to AWS services or SaaS endpoints through interface endpoints, without traversing public internet. It is heavily used for secure service consumption across VPCs/accounts. It reduces exposure and simplifies egress control.
-
-82. **What is Elastic IP?**  
-    Elastic IP is a static public IPv4 address that can be re-associated to another resource quickly. It helps with fixed-IP allowlist integrations and rapid failover scenarios. Because IPv4 is scarce, unnecessary EIPs increase cost and should be minimized.
-
-83. **What is NAT instance?**  
-    NAT instance is an EC2-based NAT alternative managed by you (patching, scaling, failover). It can be cheaper at very small scale but adds operational risk and maintenance burden. NAT Gateway is usually preferred for production reliability.
-
-84. **What is Bastion host?**  
-    Bastion host is a hardened jump server for administrative access into private networks. Modern AWS best practice often replaces bastions with SSM Session Manager to avoid inbound SSH exposure. If used, bastions need strict network/identity controls and logging.
-
-85. **What is IAM trust policy?**  
-    Trust policy defines who can assume a role (`Principal`) and under what conditions. It is separate from permission policy that defines what actions are allowed after assumption. Secure role design requires both parts aligned.
-
-86. **What is Cognito?**  
-    Cognito is AWS managed identity service for user sign-up/sign-in and token issuance. It supports user pools, identity federation, and JWT-based app authorization flows. It reduces custom auth implementation complexity.
-
-87. **What is federated identity?**  
-    Federated identity lets users authenticate via external providers (OIDC/SAML/social) and access AWS/app resources without local passwords. It centralizes identity governance and supports SSO. In AWS, federation usually maps to temporary role-based credentials.
-
-88. **What is CloudFront?**  
-    CloudFront is AWS CDN/edge delivery network that caches content close to users. It improves latency, protects origin, and integrates with WAF and signed access controls. It is central for global web performance.
-
-89. **What is CDN?**  
-    CDN is geographically distributed cache and edge network for faster content delivery and origin offload. It lowers latency and improves resilience during traffic spikes. CDNs can also enforce edge security and request filtering.
-
-90. **What is Route 53?**  
-    Route 53 is AWS managed DNS with routing policies, health checks, and domain registration support. It routes users to healthy endpoints based on latency/weights/failover logic. DNS strategy is a major availability control plane.
-
-91. **What is health check?**  
-    Health checks test endpoint availability and influence routing/failover decisions. Good health checks probe meaningful paths and use sensible intervals/thresholds. Poorly tuned checks can cause false failovers.
-
-92. **What is hosted zone?**  
-    Hosted zone stores DNS records for a domain in Route 53 (public or private). Public zones serve internet DNS; private zones resolve within associated VPCs. Split-horizon designs often use both.
-
-93. **What is latency-based routing?**  
-    Latency-based routing directs clients to region expected to provide lowest latency. It improves user performance globally but does not alone guarantee resilience. Health checks and regional capacity still matter.
-
-94. **What is weighted routing?**  
-    Weighted routing distributes DNS responses by percentage across targets. It is used for gradual migration, canary at DNS layer, and traffic experiments. Weight changes are operationally simple and reversible.
-
-95. **What is failover routing?**  
-    Failover routing uses primary/secondary records with health checks to shift traffic automatically during outages. It is common in active-passive DR. Success depends on tested data replication and recovery playbooks.
-
-96. **What is Global Accelerator?**  
-    Global Accelerator gives static anycast IPs and routes traffic through AWS global network to nearest healthy endpoint. It often reacts faster than DNS-only failover because it bypasses DNS cache propagation limits. It improves global application availability and performance.
-
-97. **What is SSM?**  
-    Systems Manager is AWS operations hub for fleet management, session access, command execution, automation, inventory, and patching. It reduces need for bastions and ad-hoc scripts. It is a core platform operations service in mature AWS environments.
-
-98. **What is patch manager?**  
-    Patch Manager automates patch baselines, scheduling, and compliance reporting for managed instances. It standardizes patching across fleets with auditability. This reduces security risk from manual patch drift.
-
-99. **What is backup strategy?**  
-    Backup strategy defines frequency, retention, encryption, immutability, cross-account/region copies, and restore testing. Backups are only useful if recovery is validated regularly. Strategy should align with data criticality and regulatory needs.
-
-100. **What is DR strategy?**  
-     DR strategy defines how services recover from major failure using patterns like backup/restore, pilot light, warm standby, or active-active. Choice is based on business RTO/RPO and budget. Mature DR includes runbooks, drills, and automated failover where justified.
-
-**AWS Docs (81-100):**  
-- https://docs.aws.amazon.com/vpc/latest/privatelink/what-is-privatelink.html  
-- https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_update-role-trust-policy.html  
-- https://docs.aws.amazon.com/cognito/latest/developerguide/what-is-amazon-cognito.html  
-- https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Introduction.html  
-- https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/Welcome.html  
-- https://docs.aws.amazon.com/global-accelerator/latest/dg/what-is-global-accelerator.html  
-- https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager.html  
-- https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html  
-- https://docs.aws.amazon.com/prescriptive-guidance/latest/strategy-database-disaster-recovery/defining.html
-
-## 101-120. Resilience Metrics, Cost Models, Scaling Controls
-
-101. **RTO vs RPO?**  
-     RTO (Recovery Time Objective) is maximum acceptable downtime; RPO (Recovery Point Objective) is maximum acceptable data loss window. Lower RTO/RPO means higher engineering and infrastructure cost. These metrics drive architecture and DR pattern choice.
-
-102. **What is multi-region setup?**  
-     Multi-region setup deploys workload capability in more than one AWS region for resilience, latency, or compliance. Patterns include active-passive and active-active with data replication strategies. Complexity increases significantly in consistency, release, and failover operations.
-
-103. **What is Lambda concurrency?**  
-     Lambda concurrency is the number of function invocations running simultaneously. It drives scaling behavior and can impact downstream systems if not controlled. Concurrency planning is critical for predictable performance.
-
-104. **What is reserved concurrency?**  
-     Reserved concurrency sets guaranteed and maximum concurrency for a specific function. It prevents noisy-neighbor functions from consuming all account concurrency and caps function blast radius. It is an important control for critical workloads.
-
-105. **What is provisioned concurrency?**  
-     Provisioned concurrency pre-initializes Lambda execution environments to reduce cold-start latency. It is best for latency-sensitive APIs with predictable traffic windows. Tradeoff is additional cost for pre-warmed capacity.
-
-106. **What is API caching?**  
-     API caching stores recent responses at API layer to reduce backend load and latency. It is useful for read-heavy and moderately static responses. Cache key design and TTL tuning determine effectiveness and consistency behavior.
-
-107. **What is DynamoDB auto scaling?**  
-     DynamoDB auto scaling adjusts provisioned read/write capacity based on utilization targets. It helps absorb traffic changes while controlling cost. Proper min/max bounds and alarm visibility are necessary to avoid under/over-provisioning.
-
-108. **What is burst capacity?**  
-     Burst capacity is short-term throughput above baseline using accrued unused capacity credits (service-specific behavior, e.g., DynamoDB partitions or burstable EC2 CPU credits). It handles brief spikes but is not a long-term scaling plan. Sustainable traffic needs proper steady capacity design.
-
-109. **What is IAM permission boundary?**  
-     Permission boundary is managed policy that sets maximum permissions an IAM principal can receive, even if identity policy allows more. It is a delegation guardrail for safe self-service IAM creation. It does not grant permissions by itself.
-
-110. **What is service control policy?**  
-     SCP is AWS Organizations policy that defines permission guardrails at account/OU level. It limits what identities in member accounts can ever do, regardless of local IAM allows. SCPs are preventive governance controls.
-
-111. **What is organization unit?**  
-     OU is a logical grouping of AWS accounts inside Organizations for governance and policy inheritance. You attach SCPs and apply controls at OU scope. It enables scalable multi-account management.
-
-112. **What is cost explorer?**  
-     Cost Explorer is AWS billing analytics tool for spend visualization, trend analysis, and forecasting by account/service/tag. It supports budgeting and anomaly investigation workflows. Tag hygiene is required for meaningful charge visibility.
-
-113. **What is reserved instance?**  
-     Reserved Instances are commitment-based pricing discounts for steady-state compute usage (term and payment options). They lower cost versus On-Demand when utilization is predictable. They are financial commitments, not capacity reservations in every case.
-
-114. **What is spot instance?**  
-     Spot Instances use spare AWS capacity at steep discount with interruption risk. They are excellent for fault-tolerant/stateless/batch workloads with checkpointing. Do not use as sole capacity for critical non-interruptible systems.
-
-115. **What is on-demand pricing?**  
-     On-Demand is pay-per-use pricing without long-term commitment. It offers maximum flexibility and simplest planning, but highest per-unit cost. It is commonly used for baseline unknown workloads and buffer capacity.
-
-116. **What is container registry?**  
-     A container registry stores versioned container images and metadata for deployment pipelines. In AWS, ECR is the managed registry service with IAM/scanning/lifecycle controls. Registry governance affects supply-chain security.
-
-117. **What is scaling policy?**  
-     Scaling policy defines when and how capacity should change based on metrics/schedules/events. Examples include target tracking, step scaling, and scheduled scaling. Good policies include cooldown/warmup and safe scale-in protections.
-
-118. **What is target tracking?**  
-     Target tracking keeps a metric near a target value (for example CPU 50%) by automatically adjusting capacity. It behaves like a thermostat and is often easiest default policy. Metric quality and warmup settings strongly influence stability.
-
-119. **What is rolling deployment?**  
-     Rolling deployment updates instances/tasks gradually while keeping some old capacity serving traffic. It limits release blast radius and avoids full cutover risk. Health checks and minimum healthy capacity settings are crucial.
-
-120. **What is load balancer health check?**  
-     Health checks probe target endpoints and determine whether traffic should be routed to them. Path/port/interval/threshold choices must match app startup and dependency behavior. Bad tuning can cause flapping and cascading failures.
-
-**AWS Docs (101-120):**  
-- https://docs.aws.amazon.com/lambda/latest/dg/lambda-concurrency.html  
-- https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-caching.html  
-- https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/AutoScaling.html  
-- https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html  
-- https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scps.html  
-- https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_ous.html  
-- https://docs.aws.amazon.com/cost-management/latest/userguide/ce-what-is.html  
-- https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-reserved-instances.html  
-- https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-spot-instances.html  
-- https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-scaling-cooldowns.html
-
-## 121-140. Runtime Tuning, IAM Details, Observability, Tracing
-
-121. **What is ephemeral storage?**  
-     Ephemeral storage is temporary local storage tied to lifecycle of compute instance/task/function environment. Data is lost when environment is terminated/recycled. It is suitable for scratch data, not durable state.
-
-122. **What is Lambda layer?**  
-     Lambda layer is reusable package (libraries/runtime assets) shared across functions. Layers reduce duplicate packaging and improve dependency consistency. They should be versioned and security-reviewed like code artifacts.
-
-123. **What is Lambda timeout?**  
-     Lambda timeout is maximum execution duration before function is terminated. It should be set slightly above expected p99 processing time, not maximum possible. Wrong timeout either causes premature failures or long resource lock/wait behavior.
-
-124. **What is Lambda memory tuning?**  
-     Lambda memory setting controls allocated memory and proportionally affects CPU/network throughput. Increasing memory can reduce execution time and even total cost for CPU-heavy tasks. Right-sizing requires measurement across realistic payloads.
-
-125. **What is VPC endpoint?**  
-     VPC endpoint allows private access to AWS services without internet/NAT path. Gateway endpoints are for S3/DynamoDB; interface endpoints are ENI-based for many services. They improve security posture and can reduce NAT data processing costs.
-
-126. **What is private DNS?**  
-     Private DNS maps service names to private IPs inside VPC/private hosted zones. It enables internal service resolution without public DNS exposure. It is critical for private endpoint usability and clean service discovery.
-
-127. **What is IAM condition?**  
-     IAM condition adds contextual constraints to permissions, such as source IP, MFA, tags, request time, or VPC endpoint. Conditions make policies precise and enforce least privilege contextually. They are powerful and often underused.
-
-128. **What is MFA?**  
-     MFA (multi-factor authentication) requires an additional verification factor beyond password/key. In AWS it is especially important for privileged IAM users and role assumption protection. Strong org policies enforce MFA for sensitive actions.
-
-129. **What is session token?**  
-     Session token is part of temporary credentials from STS (access key + secret + token). It proves temporary session context and expires automatically. Applications must refresh it before expiry.
-
-130. **What is EC2 user data?**  
-     User data is bootstrap script/config passed at launch, often used by cloud-init to install and configure software. It enables immutable provisioning workflows and consistent startup behavior. Keep it idempotent and avoid embedding long-term secrets.
-
-131. **What is AMI?**  
-     AMI (Amazon Machine Image) is a template for launching EC2 instances, including OS and optional prebuilt software. Golden AMI pipelines improve deployment speed and consistency. AMIs should be versioned, patched, and scanned.
-
-132. **What is CloudWatch insights?**  
-     CloudWatch Logs Insights is query engine for log analysis using purpose-built query language. It supports fast filtering, aggregation, and troubleshooting across large log volumes. It is useful for incident triage and trend analysis.
-
-133. **What is log retention?**  
-     Log retention is policy defining how long logs are stored before deletion or archival. It balances forensic/compliance needs against storage cost. Retention should be explicitly configured, not left to defaults.
-
-134. **What is cost optimization?**  
-     Cost optimization is continuous process of rightsizing, pricing-model selection, storage lifecycle, architecture efficiency, and waste elimination. It requires both engineering and FinOps discipline. "Cheapest now" is not always "lowest total cost over time."
-
-135. **What is tag policy?**  
-     Tag policy in AWS Organizations standardizes allowed tag keys/values across accounts for governance and reporting. It improves cost allocation, ownership tracking, and automation targeting. Consistent tagging is prerequisite for mature cloud operations.
-
-136. **What is S3 event notification?**  
-     S3 event notifications publish object-level events (create/delete/restore, etc.) to SNS, SQS, EventBridge, or Lambda triggers. They enable event-driven pipelines like ingestion/transcoding/audit flows. Implement idempotent handlers because duplicate notifications can occur.
-
-137. **What is CloudWatch dashboard?**  
-     CloudWatch dashboard visualizes key metrics/log widgets in shared operational views. Dashboards help NOC/SRE teams monitor system health quickly. Useful dashboards are service-oriented and include latency, errors, saturation, and business KPIs.
-
-138. **What is X-Ray?**  
-     AWS X-Ray collects and visualizes request traces across distributed components. It shows service maps, segment timelines, and latency bottlenecks. It is valuable for debugging microservice performance issues.
-
-139. **What is distributed tracing?**  
-     Distributed tracing follows a request through multiple services with correlated trace IDs and spans. It helps locate latency hotspots and cross-service failures. It complements logs/metrics rather than replacing them.
-
-140. **What is API Gateway authorizer?**  
-     API Gateway authorizer is auth mechanism that validates caller identity/permissions before invoking backend. Types include IAM, Lambda authorizer, and JWT/Cognito authorizers (depending on API type). It centralizes access control at API edge.
-
-**AWS Docs (121-140):**  
-- https://docs.aws.amazon.com/lambda/latest/dg/chapter-layers.html  
-- https://docs.aws.amazon.com/lambda/latest/dg/configuration-timeout.html  
-- https://docs.aws.amazon.com/lambda/latest/dg/configuration-memory.html  
-- https://docs.aws.amazon.com/vpc/latest/privatelink/vpc-endpoints.html  
-- https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/hosted-zones-private.html  
-- https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_condition.html  
-- https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa.html  
-- https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html  
-- https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIs.html  
-- https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/AnalyzingLogData.html  
-- https://docs.aws.amazon.com/AmazonS3/latest/userguide/EventNotifications.html  
-- https://docs.aws.amazon.com/xray/latest/devguide/aws-xray.html  
-- https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-use-lambda-authorizer.html
-
-## 141-160. Security Enforcement, Queue Controls, Storage, Data Streaming
-
-141. **What is Cognito JWT validation?**  
-     Cognito JWT validation means verifying token signature, issuer, audience/client ID, expiry, and scopes/claims before granting access. Never trust token contents without signature/key validation. API Gateway JWT authorizers or app middleware typically enforce this.
-
-142. **What is SNS topic policy?**  
-     SNS topic policy is resource-based policy controlling who can publish/subscribe/manage topic actions. It enables cross-account pub/sub patterns securely. Policy conditions should restrict source accounts/services where possible.
-
-143. **What is SQS visibility timeout?**  
-     Visibility timeout is period after a message is received during which it is hidden from other consumers. It should exceed normal processing time to avoid duplicate parallel processing. Long tasks may need heartbeat/visibility extension patterns.
-
-144. **What is SQS long polling?**  
-     Long polling waits up to configured seconds for messages before returning, reducing empty receives and API cost. It improves consumer efficiency and latency for sporadic traffic. Enable it by queue setting or receive parameter.
-
-145. **What is autoscaling lifecycle hook?**  
-     Lifecycle hooks pause instance launch/termination transitions so custom actions can run (bootstrap, drain, snapshot, notify). They improve graceful scaling behavior and data safety. Hooks usually integrate with EventBridge/Lambda/SSM automation.
-
-146. **What is capacity planning?**  
-     Capacity planning forecasts resource demand and sets scaling/quotas/headroom to meet performance goals. It combines historical metrics, growth assumptions, seasonality, and failure scenarios. Good planning prevents both outages and overprovisioning waste.
-
-147. **What is ELB stickiness?**  
-     Stickiness (session affinity) routes a client to same target for a period, typically using cookies at ALB. It is useful for stateful legacy apps but can create uneven load distribution. Stateless session design is generally preferred.
-
-148. **What is CloudWatch anomaly detection?**  
-     Anomaly detection builds dynamic expected metric bands from historical behavior and alarms on deviations. It reduces static-threshold tuning burden for seasonal patterns. Still requires validation to avoid noise in rapidly changing systems.
-
-149. **What is EBS?**  
-     EBS is persistent block storage for EC2 with volume types tuned for IOPS/throughput/cost. It behaves like network-attached disk and survives instance stop/start (unless deleted). Choose gp3/io2/st1/sc1 types based on workload profile.
-
-150. **What is EFS?**  
-     EFS is managed elastic NFS file system shared across many instances/containers. It scales storage automatically and supports multi-AZ access. It is suitable for shared POSIX file workloads and content repositories.
-
-151. **What is instance store?**  
-     Instance store is physically attached ephemeral storage on host hardware. It offers high performance but data is lost when instance stops/terminates or host fails. Use it for cache/scratch/temp data only.
-
-152. **What is snapshot?**  
-     Snapshot is point-in-time backup of EBS volumes stored in S3-managed backend. It is incremental after first full snapshot and used for restore, cloning, and DR. Consistent snapshots may require filesystem/app quiescing.
-
-153. **What is storage gateway?**  
-     AWS Storage Gateway is hybrid service connecting on-prem environments to AWS storage via file/volume/tape interfaces. It enables migration and backup modernization without immediate app rewrites. Local caching improves access latency for active data.
-
-154. **What is S3 presigned URL?**  
-     Presigned URL grants time-limited access to specific S3 object operation using signer permissions. It enables secure direct upload/download without exposing long-term credentials. URL scope and expiration should be tightly controlled.
-
-155. **What is bucket policy?**  
-     Bucket policy is resource-based JSON policy controlling access to S3 bucket and objects. It supports cross-account access, conditional restrictions, and service integrations. Combine with block public access, IAM policies, and encryption controls.
-
-156. **What is cross-region replication?**  
-     Cross-region replication copies S3 objects to another region automatically for DR/compliance/latency needs. It improves resilience against regional disruption. Replication has cost/latency implications and requires versioning.
-
-157. **What is Kinesis?**  
-     Amazon Kinesis is managed real-time data streaming platform (Data Streams, Firehose, etc.). It ingests high-throughput event streams for analytics, ETL, monitoring, and near-real-time processing. It is key for event pipelines beyond simple queue semantics.
-
-158. **What is data stream?**  
-     A data stream is ordered sequence of records partitioned into shards for scalable ingestion/consumption. Producers write records; consumers process using shard iteration semantics. Retention window enables replay scenarios.
-
-159. **What is shard?**  
-     Shard is the throughput unit in Kinesis Data Streams with specific read/write capacity limits. More shards increase parallelism and capacity. Partition key selection controls distribution and hot-shard risk.
-
-160. **What is Glue?**  
-     AWS Glue is serverless data integration/ETL service with crawlers, data catalog, jobs, and workflow orchestration. It prepares and transforms data for analytics services such as Athena/Redshift/S3 lakes. It reduces ETL infrastructure management overhead.
-
-**AWS Docs (141-160):**  
-- https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-using-tokens-verifying-a-jwt.html  
-- https://docs.aws.amazon.com/sns/latest/dg/sns-access-policy-use-cases.html  
-- https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html  
-- https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-short-and-long-polling.html  
-- https://docs.aws.amazon.com/autoscaling/ec2/userguide/lifecycle-hooks.html  
-- https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Anomaly_Detection.html  
-- https://docs.aws.amazon.com/ebs/latest/userguide/ebs-volumes.html  
-- https://docs.aws.amazon.com/efs/latest/ug/whatisefs.html  
-- https://docs.aws.amazon.com/storagegateway/latest/userguide/WhatIsStorageGateway.html  
-- https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-presigned-url.html  
-- https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucket-policies.html  
-- https://docs.aws.amazon.com/streams/latest/dev/introduction.html  
-- https://docs.aws.amazon.com/glue/latest/dg/what-is-glue.html
-
-## 161-180. Analytics, Kubernetes Ops, Governance, HA Best Practices
-
-161. **What is Athena?**  
-     Athena is serverless SQL query service for data in S3 using schema-on-read. It is useful for ad-hoc analytics, logs exploration, and lake querying without managing clusters. Performance/cost improve with partitioning, compression, and columnar formats.
-
-162. **What is Redshift?**  
-     Redshift is managed data warehouse optimized for large-scale analytical SQL workloads. It uses columnar storage, MPP execution, and integrations with lake and BI tooling. It is suited for complex analytics beyond simple ad-hoc queries.
-
-163. **What is Aurora Serverless?**  
-     Aurora Serverless automatically adjusts database capacity based on demand and can pause/resume in some modes. It is good for variable or intermittent workloads. Evaluate cold-start/resume behavior and connection patterns before production adoption.
-
-164. **What is Lambda alias?**  
-     Lambda alias is named pointer to a specific function version (for example `prod`, `beta`). It enables stable invocation targets while underlying versions change. Aliases support weighted traffic shifting for safer deployments.
-
-165. **What is Lambda versioning?**  
-     Lambda versions are immutable snapshots of function code/config. Publishing versions enables reproducible deployments and rollback safety. Common practice: deploy version, then move alias gradually.
-
-166. **What is EKS node group?**  
-     EKS node group is managed set of worker nodes (EC2 instances) for running Kubernetes pods. AWS manages lifecycle operations like updates and health replacement for managed node groups. Workload isolation often uses multiple node groups by workload class.
-
-167. **What is pod autoscaling?**  
-     Pod autoscaling (typically HPA) adjusts pod replicas based on CPU/memory/custom metrics. Cluster Autoscaler/Karpenter may scale nodes when pods cannot be scheduled. Effective tuning requires requests/limits and realistic metrics.
-
-168. **What is Fargate task?**  
-     Fargate task is an ECS task (or EKS pod profile) running on serverless infrastructure without managing EC2 nodes. You define resource requirements and networking; AWS handles host operations. It simplifies operations for containerized workloads.
-
-169. **What is container health check?**  
-     Container health checks verify liveness/readiness of containerized services and drive restart/traffic decisions. Poor health endpoints can trigger restart loops or send traffic to unhealthy tasks. Health logic should reflect real dependency readiness.
-
-170. **What is CloudFormation stack?**  
-     A stack is deployable unit of CloudFormation resources created from a template. Stack updates are change-set driven and can roll back on failure. Stack boundaries should match lifecycle ownership and blast-radius concerns.
-
-171. **What is drift detection?**  
-     Drift detection compares current resource state with IaC-declared state to identify manual/config drift. It helps governance and prevents surprise behavior during updates. Continuous drift checks improve infra reliability.
-
-172. **What is AWS CLI?**  
-     AWS CLI is command-line tool for managing AWS services via API operations. It supports automation scripts, debugging, and repeatable operational tasks. Profiles and role assumption patterns are important for secure usage.
-
-173. **What is IAM inline policy?**  
-     Inline policy is policy embedded directly into one IAM user/group/role and not reusable elsewhere. It is tightly coupled and useful for one-off cases, but managed policies are preferred for reuse/governance. Excessive inline policy usage can hurt maintainability.
-
-174. **What is SCP restriction?**  
-     SCP restriction means actions blocked by Organization SCP cannot be performed even if account IAM allows them. This creates central guardrails for all accounts in OU/root scope. Explicit denies in SCP are powerful governance controls.
-
-175. **What is VPC flow log?**  
-     VPC Flow Logs capture metadata about IP traffic to/from ENIs, subnets, or VPCs (not packet payload). They help troubleshoot connectivity and support security analytics. Logs are sent to CloudWatch Logs or S3 for analysis.
-
-176. **What is NAT cost optimization?**  
-     NAT cost optimization reduces NAT data processing/hourly charges using architecture choices: keep traffic in-region with VPC endpoints, deploy NAT per AZ to avoid cross-AZ data, and minimize internet egress. Workload-aware routing and endpoint usage are biggest levers.
-
-177. **What is cross-account S3 access?**  
-     Cross-account S3 access is controlled using bucket policy/resource policy + IAM role/user policy in accessing account. Ownership, ACL settings, and KMS key permissions must align for success. Prefer role-based access and explicit bucket policy conditions.
-
-178. **What is serverless architecture?**  
-     Serverless architecture uses managed event-driven services (Lambda, API Gateway, DynamoDB, SQS, EventBridge, etc.) with minimal server management. It improves agility and scales automatically, but needs careful observability and service-limit design. Event-driven decoupling is core pattern.
-
-179. **What is edge computing?**  
-     Edge computing runs logic closer to users/devices (for example CloudFront edge functions) to reduce latency and offload origin. It improves responsiveness for geo-distributed workloads. Data locality, consistency, and security controls become key design tradeoffs.
-
-180. **What is AWS best practice for high availability?**  
-     High availability on AWS is a layered pattern: multi-AZ deployment, stateless app tiers behind load balancers, automated scaling/healing, resilient data stores, monitored failover, and tested DR. Eliminate single points of failure in compute, data, and network paths. Design for failure explicitly, then test recovery regularly.
+# AWS Interview Questions Bank (Serverless + Core Services) - Answered
+
+## 1) AWS Lambda (1-15)
+
+### 1) Explain Lambda's execution model (init phase vs invocation phase).
+**Answer:**
+- `Init` runs once per execution environment: runtime bootstrap, code load, global scope, SDK client creation.
+- `Invoke` runs per request: handler executes with event/context.
+- Warm invocations skip most init, which lowers latency.
 
 ```text
-HA Checklist (practical):
-- Multi-AZ everywhere possible
-- Health checks + auto healing
-- Decouple with queues/events
-- Backups + restore drills
-- Infrastructure as Code + drift control
-- Clear alarms and runbooks
+Request -> [New Environment]
+            -> Init (runtime + imports + globals)
+            -> Invoke #1
+            -> Invoke #2 (warm)
+            -> Invoke #3 (warm)
 ```
 
-**AWS Docs (161-180):**  
-- https://docs.aws.amazon.com/athena/latest/ug/what-is.html  
-- https://docs.aws.amazon.com/redshift/latest/mgmt/welcome.html  
-- https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.how-it-works.html  
-- https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html  
-- https://docs.aws.amazon.com/lambda/latest/dg/configuration-versions.html  
-- https://docs.aws.amazon.com/eks/latest/userguide/managed-node-groups.html  
-- https://docs.aws.amazon.com/AmazonECS/latest/developerguide/healthcheck.html  
-- https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacks.html  
-- https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/detect-drift-stack.html  
-- https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-welcome.html  
-- https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scps.html  
-- https://docs.aws.amazon.com/vpc/latest/userguide/flow-logs.html  
-- https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-pricing.html  
-- https://docs.aws.amazon.com/AmazonS3/latest/userguide/example-walkthroughs-managing-access-example4.html  
-- https://docs.aws.amazon.com/wellarchitected/latest/framework/welcome.html
+---
 
-## In-Depth Scaling Notes (High-Value Interview Section)
+### 2) What causes cold starts, and how do you reduce them (practical steps)?
+**Answer:**
+- Causes: new environment creation, large package/layers, VPC ENI attach, runtime startup, low traffic bursts.
+- Reduce with: smaller bundle, lazy imports, lighter runtime, provisioned concurrency, keep memory high enough, avoid unnecessary VPC.
+- For Java/.NET, use SnapStart (where supported) to reduce startup latency.
 
-### A) EC2 Auto Scaling behavior in practice
+---
+
+### 3) Reserved concurrency vs provisioned concurrency vs account concurrency - differences and use cases.
+**Answer:**
+- `Account concurrency`: regional pool shared by all functions.
+- `Reserved concurrency`: hard min/max slice for one function; protects critical functions and caps noisy ones.
+- `Provisioned concurrency`: pre-initialized environments for low-latency startup.
 
 ```text
-CloudWatch Metric (CPU/ReqPerTarget/Custom)
-          |
-      Scaling Policy
-   (Target/Step/Scheduled)
-          |
- Launch/Terminate via ASG
-          |
-   ELB health check + warmup
+Regional Pool (e.g., 1000)
+|- Function A: Reserved 300 (guaranteed + capped)
+|- Function B: Reserved 100
+|- Unreserved pool: 600 (shared)
+Provisioned concurrency is configured per alias/version for pre-warm capacity.
 ```
 
-- `Target tracking`: easiest default, like thermostat (for example CPU target 50%).
-- `Step scaling`: good when you want different reactions for different alarm breach sizes.
-- `Scheduled scaling`: best for predictable traffic spikes (business hours, events).
-- `Warmup + cooldown` tuning matters to avoid oscillation (thrash) and under-reaction.
-- Always combine with multi-AZ, health checks, and minimum capacity floor.
+---
 
-### B) Lambda scaling math
+### 4) How does Lambda scale with SQS vs API Gateway triggers (what controls concurrency)?
+**Answer:**
+- API Gateway invokes per request; concurrency tracks incoming request rate and function duration.
+- SQS uses event source mappings; concurrency depends on queue depth, batch size, visibility timeout, scaling rules, and concurrency limits.
+- SQS can smooth bursts; API Gateway passes bursts directly unless throttled upstream.
 
-- Approximation: `Concurrency = Requests per second * Avg duration (seconds)`.
-- Example: 2,000 RPS with 120 ms avg duration -> `2,000 * 0.12 = 240` concurrency.
-- Use `Reserved Concurrency` to protect critical functions and isolate noisy neighbors.
-- Use `Provisioned Concurrency` for synchronous low-latency workloads.
-- Validate downstream limits (DB connections, third-party APIs), not just Lambda limits.
+---
 
-### C) DynamoDB scaling essentials
+### 5) What happens when a Lambda times out? What should your code do to avoid partial work?
+**Answer:**
+- Runtime terminates execution; in-flight work may be incomplete.
+- For sync calls, caller gets timeout error. For async/event sources, retry behavior depends on source.
+- Use idempotency keys, checkpoints, smaller atomic units, and `context.getRemainingTimeInMillis()` to stop safely before timeout.
+
+---
+
+### 6) Explain retries for async invocations (and how to control/stop them).
+**Answer:**
+- Asynchronous Lambda invocation retries on failure by default (with backoff).
+- Control via async invoke config: `MaximumRetryAttempts`, `MaximumEventAgeInSeconds`.
+- Route failures to DLQ or Lambda Destination for controlled handling.
+
+---
+
+### 7) What are Lambda Destinations, and when would you use them?
+**Answer:**
+- Destinations send async invocation results (`success` or `failure`) to SNS, SQS, EventBridge, or Lambda.
+- Use for audit trails, post-processing, and centralized failure workflows.
+- Prefer Destinations over only logs when you need machine-actionable outcomes.
+
+---
+
+### 8) How do you do idempotency in Lambda (common patterns)?
+**Answer:**
+- Use client-provided idempotency key (header/requestId/orderId).
+- Write key to DynamoDB with conditional put (`attribute_not_exists`) before side effects.
+- Store processing status/result to return consistent response on retries.
 
 ```text
-Client traffic -> Partition key hash -> Physical partitions
-                         |
-        uneven keys => hot partitions => throttling
+Client -> Lambda -> DynamoDB (Put if key not exists)
+                    |- success -> do side effect -> mark done
+                    |- exists  -> return stored result / no-op
 ```
 
-- Table capacity may look sufficient while one hot partition throttles requests.
-- Design high-cardinality partition keys and consider write sharding where needed.
-- Use auto scaling or on-demand mode, but still monitor hot-key patterns.
-- GSIs scale independently and can become hidden bottlenecks if ignored.
+---
 
-### D) Queue-driven worker scaling (SQS + Lambda/ECS)
+### 9) Lambda in a VPC: why it can be slower, and what setup is required for internet access.
+**Answer:**
+- VPC adds ENI networking overhead; cold starts can increase.
+- Private subnets need NAT Gateway for outbound internet (or VPC endpoints for AWS services).
+- Use VPC only when accessing private resources (RDS, internal services, private APIs).
+
+---
+
+### 10) Environment variables in Lambda: what to store there vs not store there?
+**Answer:**
+- Store non-secret config: feature flags, table names, URLs, stage names.
+- Do not store raw secrets; use Secrets Manager/Parameter Store and KMS.
+- Keep env vars stable and versioned by alias/stage to avoid drift.
+
+---
+
+### 11) How would you handle large dependencies and reduce package size?
+**Answer:**
+- Bundle with tree-shaking/minification; exclude test/dev files.
+- Use Lambda layers for shared libs carefully (still impacts cold start if oversized).
+- Move heavy binaries to container image only when needed; lazy load optional modules.
+
+---
+
+### 12) How do you monitor Lambda errors, throttles, and duration effectively?
+**Answer:**
+- Metrics: `Errors`, `Throttles`, `Duration`, `ConcurrentExecutions`, `IteratorAge` (for stream/queue sources).
+- Use structured logs + correlation IDs + CloudWatch alarms with actionable thresholds.
+- Track percentiles (p95/p99), not only averages.
+
+---
+
+### 13) What is Lambda ephemeral storage, and when do you need more of it?
+**Answer:**
+- `/tmp` storage per execution environment (configurable up to GBs).
+- Needed for temporary files: large zip/PDF/image processing, ML models, intermediate transforms.
+- Clean up temp files and monitor size/time to avoid disk and timeout issues.
+
+---
+
+### 14) How do you handle streaming/large payloads in Lambda safely?
+**Answer:**
+- Prefer passing object references (S3 key) instead of large payload bodies.
+- Stream data in chunks; avoid loading full file in memory.
+- Validate size/type early and enforce limits at API Gateway and S3 policy level.
+
+---
+
+### 15) Scenario: You see throttles + increased latency. What metrics/logs do you check first and what fixes do you try?
+**Answer:**
+- Check: `Throttles`, `ConcurrentExecutions`, `Duration p95/p99`, upstream 429/5xx, queue `ApproximateAgeOfOldestMessage`.
+- Confirm whether issue is concurrency exhaustion, long runtimes, or downstream slowness.
+- Fixes: raise reserved/account limits, optimize code/memory, increase batch/parallelism, add DLQ/backpressure.
 
 ```text
-Producers -> SQS Queue -> Consumers (Lambda/ECS workers)
-                 |
-              DLQ for poison messages
+Client -> API GW -> Lambda -> Downstream DB
+             |         |
+          429/5xx   Throttles, Duration spikes
 ```
 
-- Queue depth and age are better scale signals than CPU for async workers.
-- Long polling lowers empty receives and API cost.
-- Tune visibility timeout > normal processing duration.
-- DLQ alarms are mandatory to detect poison-message loops.
+---
 
-### E) Kubernetes (EKS) scaling
+## 2) API Gateway (16-30)
 
-- HPA scales pods by metrics (CPU/memory/custom).
-- Cluster Autoscaler/Karpenter scales nodes when pods are unschedulable.
-- Set realistic `requests/limits`; autoscaling is unreliable without them.
-- Use PodDisruptionBudgets and rolling-update parameters to keep availability.
+### 16) REST API vs HTTP API - key differences and when you choose which.
+**Answer:**
+- HTTP API: lower cost, lower latency, simpler feature set, great for most modern JWT-backed APIs.
+- REST API: richer features (API keys/usage plans, advanced mapping, request validation, cache controls, canary at stage, broader enterprise controls).
+- Choose HTTP API by default, REST API when you need specific advanced features.
 
-### F) Common scaling anti-patterns
+---
 
-- Scaling app tier without verifying DB/queue/cache bottlenecks.
-- Using only average latency, ignoring p95/p99.
-- No load testing before production events.
-- No scale-in protections, causing connection churn and cache cold misses.
-- Treating retries as free; they can amplify overload if not bounded.
+### 17) What are the available integration types (Lambda proxy, HTTP proxy, mock, etc.)?
+**Answer:**
+- Lambda proxy integration: request passed mostly as-is; backend handles mapping.
+- HTTP proxy/integration: forward to HTTP backends/private integrations.
+- Mock integration: return static responses for testing or contract stubs.
+- AWS service integrations (service-specific in REST/HTTP depending on feature set) reduce custom Lambda glue.
 
-**Scaling Deep-Dive Docs:**  
-- https://docs.aws.amazon.com/autoscaling/ec2/userguide/what-is-amazon-ec2-auto-scaling.html  
-- https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-scaling-target-tracking.html  
-- https://docs.aws.amazon.com/lambda/latest/dg/lambda-concurrency.html  
-- https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/bp-partition-key-design.html  
-- https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-best-practices.html  
-- https://docs.aws.amazon.com/eks/latest/userguide/horizontal-pod-autoscaler.html
+---
+
+### 18) Explain request/response mapping and when you need it.
+**Answer:**
+- Mapping templates transform incoming requests/outgoing responses between client and backend contracts.
+- Needed when you must hide backend shape, normalize legacy payloads, or inject context.
+- If backend already matches API contract, prefer proxy mode for simplicity.
+
+---
+
+### 19) How do you implement authentication with API Gateway (JWT authorizer vs Lambda authorizer)?
+**Answer:**
+- JWT authorizer validates tokens from issuer (Cognito/OIDC) with low latency and no custom code.
+- Lambda authorizer supports custom auth logic, policy decisions, external checks.
+- Prefer JWT authorizer when possible; use Lambda authorizer for complex, dynamic authorization.
+
+---
+
+### 20) What is a usage plan and API key, and when is it appropriate?
+**Answer:**
+- Usage plan defines client quota and throttle limits; API key identifies consumer app.
+- Good for partner/public APIs for metering and abuse control.
+- API keys are not authentication for user identity; combine with proper auth if needed.
+
+---
+
+### 21) Throttling: difference between account-level, stage-level, and usage plan throttling.
+**Answer:**
+- Account-level: global regional service limits.
+- Stage/method-level: per API deployment environment controls.
+- Usage plan: per API key/client controls.
+- Effective throughput is constrained by the strictest limit in the path.
+
+---
+
+### 22) How do you implement rate limiting + burst control for an endpoint?
+**Answer:**
+- Set API Gateway throttling (rate + burst) at stage/method.
+- For client-specific control, use usage plan quotas.
+- Add WAF rate-based rules for abusive IP patterns and protect Lambda concurrency.
+
+---
+
+### 23) Explain CORS in API Gateway and common mistakes that break it.
+**Answer:**
+- Browser sends preflight `OPTIONS`; server must return allowed origin/method/headers.
+- Main response also needs `Access-Control-Allow-Origin` (and credentials settings if needed).
+- Common failures: missing OPTIONS route, wildcard with credentials, missing custom header in allow list.
+
+---
+
+### 24) How do you do caching in API Gateway and what are the risks?
+**Answer:**
+- Enable stage cache (REST API) and define cache keys (path/query/header).
+- Good for read-heavy endpoints with stable responses.
+- Risks: stale/incorrect data leakage if auth context is not in cache key; extra cost.
+
+---
+
+### 25) How do you enable and analyze access logs and execution logs?
+**Answer:**
+- Access logs: structured request summary (latency, status, requestId, source IP).
+- Execution logs: integration details/errors for debugging.
+- Use JSON logs and CloudWatch Logs Insights queries by `requestId`, status, latency percentiles.
+
+---
+
+### 26) What is WAF and how can it protect API Gateway?
+**Answer:**
+- AWS WAF filters malicious requests before API backend processing.
+- Use managed rules (SQLi/XSS), custom allow/deny rules, and rate-based blocking.
+- Reduces attack surface and lowers backend cost from bad traffic.
+
+---
+
+### 27) What is a stage, deployment, and stage variables (use cases)?
+**Answer:**
+- Deployment: immutable snapshot of API config.
+- Stage: named pointer to a deployment (`dev`, `qa`, `prod`) with settings/logging/throttling.
+- Stage variables: environment-specific values (legacy/use carefully); prefer explicit config and IaC parameters.
+
+---
+
+### 28) How do you do canary releases / gradual rollout with API Gateway?
+**Answer:**
+- In REST API, use canary deployment percent at stage to route small traffic slice to new deployment.
+- Monitor 4xx/5xx/latency before increasing traffic.
+- Combine with Lambda aliases and weighted routing for safer progressive rollout.
+
+---
+
+### 29) How do you handle binary media types / file uploads through API Gateway?
+**Answer:**
+- Configure binary media types and base64 handling correctly.
+- For large uploads, prefer direct S3 presigned URL upload instead of proxying full file through Lambda.
+- Validate content-type/size and scan asynchronously after upload.
+
+---
+
+### 30) Scenario: Clients report random 502/504 from API Gateway. What do you investigate first?
+**Answer:**
+- Check API Gateway access/execution logs and integration latency.
+- 502 often indicates malformed backend response or integration failure; 504 usually timeout.
+- Validate Lambda timeout < API Gateway timeout constraints, VPC/NAT issues, and downstream availability.
+
+```text
+Client
+  -> API Gateway (access log: status, integrationLatency)
+     -> Lambda/backend (execution log: error/timeout)
+```
+
+---
+
+## 3) Step Functions (31-42)
+
+### 31) Standard vs Express workflows - differences (cost, duration, throughput).
+**Answer:**
+- Standard: long-running, durable, exactly-once state transitions (higher per-transition cost, execution history).
+- Express: high-throughput, short-lived, lower cost for high volume, at-least-once behavior.
+- Choose Standard for critical business workflows; Express for event-heavy pipelines.
+
+---
+
+### 32) Explain states: Task, Choice, Wait, Parallel, Map, Succeed, Fail.
+**Answer:**
+- `Task`: perform work (Lambda/service integration).
+- `Choice`: branch logic by conditions.
+- `Wait`: delay/schedule.
+- `Parallel`: concurrent branches.
+- `Map`: iterate array items (with optional concurrency).
+- `Succeed`/`Fail`: terminal states for outcome signaling.
+
+---
+
+### 33) How do retries and backoff work in Step Functions (Retry + Catch)?
+**Answer:**
+- `Retry` block defines errors, interval, max attempts, and backoff rate.
+- `Catch` handles terminal failures and routes to fallback/compensation.
+- Scope retries narrowly by error type to avoid retry storms.
+
+---
+
+### 34) What is a dead-letter style pattern in Step Functions (how do you isolate failures)?
+**Answer:**
+- Route failed execution context to SQS/SNS/EventBridge in `Catch`.
+- Persist failure payload + metadata for triage/replay.
+- Keep primary path clean while isolating poison inputs.
+
+---
+
+### 35) How do you pass data between states (InputPath, ResultPath, OutputPath)?
+**Answer:**
+- `InputPath`: selects input subset for a state.
+- `ResultPath`: merges state result back into JSON context.
+- `OutputPath`: filters what next state receives.
+- Use these to keep payload minimal and avoid state-size limits.
+
+---
+
+### 36) What is the maximum state input/output size, and how do you handle larger payloads?
+**Answer:**
+- Step Functions payload is limited (commonly 256 KB per state data exchange).
+- Store large payloads in S3 and pass pointers (`bucket`, `key`, `version`) in state.
+- Compress or prune data between states to stay within limits.
+
+---
+
+### 37) How do you do parallel processing safely (Map + concurrency control)?
+**Answer:**
+- Use `Map` with `MaxConcurrency` to cap fan-out.
+- Make each item handler idempotent and retry-safe.
+- Use partial failure strategy: per-item error capture and aggregate report.
+
+---
+
+### 38) Callback patterns: what is a task token and when would you use it?
+**Answer:**
+- Task token lets external systems call back to resume workflow (`SendTaskSuccess/Failure`).
+- Use for human approval, third-party async jobs, batch systems.
+- Include token securely and with timeout handling.
+
+```text
+Step Functions -> Task (waitForTaskToken) -> External Worker
+External Worker -> SendTaskSuccess(token, result) -> Step Functions resumes
+```
+
+---
+
+### 39) Service integrations (Lambda, SQS, SNS, DynamoDB, etc.) - benefits vs calling via Lambda.
+**Answer:**
+- Direct integrations reduce code, latency, and cost (fewer Lambda hops).
+- Better reliability and simpler IAM boundaries for straightforward operations.
+- Use Lambda when transformation/custom logic is truly needed.
+
+---
+
+### 40) How do you implement idempotency and dedup in a workflow?
+**Answer:**
+- Define business idempotency key at workflow start.
+- Store step completion markers (DynamoDB conditional writes).
+- Design each task to be safe on retries and re-entrancy.
+
+---
+
+### 41) How do you monitor Step Functions executions (metrics, logs, tracing)?
+**Answer:**
+- CloudWatch metrics: `ExecutionsStarted`, `Succeeded`, `Failed`, `TimedOut`, `Throttled`.
+- Enable execution logs with input/output redaction policy.
+- Use X-Ray/tracing correlation with upstream request IDs.
+
+---
+
+### 42) Scenario: A workflow sometimes runs twice due to upstream retries. How do you design for this?
+**Answer:**
+- Use deterministic execution name/idempotency key from upstream event.
+- Reject duplicate start if key already processed or running.
+- Make downstream writes conditional and side effects deduplicated.
+
+```text
+Upstream Event (id=abc123)
+    -> StartExecution(name=abc123)
+    -> Duplicate event -> same id -> ignore/no-op
+```
+
+---
+## 4) SNS (43-52)
+
+### 43) What is SNS used for in real architectures?
+**Answer:**
+- SNS is a pub/sub notification service for event fanout.
+- It decouples producers from multiple consumers (queues, Lambda, HTTP endpoints, email/SMS).
+- Common use: domain events, alerts, async orchestration triggers.
+
+---
+
+### 44) Fanout pattern: SNS -> SQS -> Lambda - why it is common.
+**Answer:**
+- SNS broadcasts once; each SQS queue gets its own durable copy.
+- Each consumer scales independently and can retry without affecting others.
+- Queues absorb bursts and isolate subscriber failures.
+
+```text
+Producer -> SNS Topic
+            |- SQS A -> Lambda A
+            |- SQS B -> Lambda B
+            |- SQS C -> Lambda C
+```
+
+---
+
+### 45) Standard vs FIFO SNS topics - differences and constraints.
+**Answer:**
+- Standard: best-effort ordering, at-least-once, highest throughput.
+- FIFO: ordered by message group, dedup support, lower throughput constraints.
+- Use FIFO only when strict ordering/dedup is mandatory end-to-end.
+
+---
+
+### 46) Message filtering: how does filter policy work and why it is useful?
+**Answer:**
+- Subscribers attach filter policy on message attributes/body.
+- SNS delivers only matching messages to each subscription.
+- Reduces downstream noise, cost, and custom routing logic.
+
+---
+
+### 47) Delivery retries: what happens if an endpoint/subscriber fails?
+**Answer:**
+- SNS retries delivery using protocol-specific retry policy.
+- For SQS/Lambda subscriptions, target service handles its own retry semantics after accepted delivery.
+- Configure redrive and monitoring to avoid silent drops.
+
+---
+
+### 48) How do you do DLQ for SNS subscriptions (and why)?
+**Answer:**
+- Configure subscription redrive policy to send undeliverable messages to SQS DLQ.
+- Keeps failed notifications for replay and investigation.
+- Prevents data loss when endpoints are misconfigured or unavailable.
+
+---
+
+### 49) SNS encryption at rest and in transit - what options exist?
+**Answer:**
+- In transit: TLS for publish/subscribe APIs.
+- At rest: SSE with AWS-managed key or customer-managed KMS key.
+- Use KMS key policies to tightly control who can publish/consume encrypted topics.
+
+---
+
+### 50) How do you send structured messages (JSON) and route them to different subscribers?
+**Answer:**
+- Publish JSON payload plus message attributes (eventType, tenant, priority).
+- Attach per-subscriber filter policy on attributes.
+- Keep an explicit event schema/version in message body.
+
+---
+
+### 51) SNS vs EventBridge - when would you prefer each?
+**Answer:**
+- SNS: simple low-latency fanout, high throughput, straightforward pub/sub.
+- EventBridge: richer routing rules, event buses, schema registry, SaaS integrations, replay on archives.
+- Choose SNS for simple broadcast; EventBridge for complex event routing/governance.
+
+---
+
+### 52) Scenario: You need to notify 5 systems and ensure none miss events. What design do you pick?
+**Answer:**
+- Use SNS topic with one SQS queue per consumer, each with DLQ.
+- Consumers process from their queue at their own pace; replay from queue/DLQ when needed.
+- Add idempotency in consumers because delivery is at-least-once.
+
+```text
+Producer -> SNS
+  |- Queue A -> Worker A
+  |- Queue B -> Worker B
+  |- Queue C -> Worker C
+  |- Queue D -> Worker D
+  |- Queue E -> Worker E
+Each Queue -> its own DLQ
+```
+
+---
+
+## 5) SQS (53-64)
+
+### 53) Standard vs FIFO queues - ordering, throughput, delivery semantics.
+**Answer:**
+- Standard: at-least-once, best-effort ordering, very high throughput.
+- FIFO: exactly-once processing intent with dedup window + ordered by message group.
+- Use FIFO for strict order/business sequence requirements.
+
+---
+
+### 54) Explain visibility timeout and how it prevents duplicate processing.
+**Answer:**
+- After receive, message becomes temporarily invisible to other consumers.
+- If consumer deletes before timeout, processing is complete.
+- If not deleted, message reappears for retry, enabling fault tolerance.
+
+---
+
+### 55) What happens if visibility timeout is too low or too high?
+**Answer:**
+- Too low: duplicate processing because message reappears before worker finishes.
+- Too high: slow retries/backlog if worker crashes.
+- Set timeout slightly above p99 processing time and extend dynamically when needed.
+
+---
+
+### 56) Long polling vs short polling - impact on cost and latency.
+**Answer:**
+- Short polling can return empty responses frequently, increasing API cost.
+- Long polling waits up to configured duration, reducing empty receives and cost.
+- Long polling usually improves efficiency with similar or better latency.
+
+---
+
+### 57) DLQ: how do you configure maxReceiveCount and redrive policies?
+**Answer:**
+- `maxReceiveCount` defines retry attempts before moving message to DLQ.
+- Redrive policy links source queue to DLQ.
+- Set count based on transient vs permanent failure profile; alert on DLQ growth.
+
+---
+
+### 58) What is the "at least once" delivery problem and how do you handle duplicates?
+**Answer:**
+- Same message can be delivered more than once.
+- Use idempotent handlers with dedup key store (DynamoDB conditional writes).
+- Make side effects safe on replay (upsert instead of blind insert).
+
+---
+
+### 59) How does SQS scale with Lambda event source mapping (batch size, concurrency)?
+**Answer:**
+- Lambda polls SQS and invokes with batches; more backlog increases poller concurrency.
+- Throughput depends on batch size/window, function duration, reserved concurrency, and queue type.
+- Use partial batch response to avoid retrying successful items in mixed-failure batches.
+
+---
+
+### 60) How do you handle poison messages safely?
+**Answer:**
+- Keep bounded retries using visibility timeout + maxReceiveCount.
+- Send to DLQ and quarantine for analysis/replay.
+- Add schema validation early to fail fast before expensive downstream calls.
+
+---
+
+### 61) What is message retention and when would you change it?
+**Answer:**
+- Retention is how long messages stay in queue before expiry.
+- Increase retention for recovery/replay windows and infrequent consumers.
+- Decrease only when strict data minimization or quick expiry is required.
+
+---
+
+### 62) Batching: pros/cons for SendMessageBatch/ReceiveMessage.
+**Answer:**
+- Pros: fewer API calls, lower cost, higher throughput.
+- Cons: larger failure surface per batch and more complex partial retry handling.
+- Tune batch size for workload and timeout constraints.
+
+---
+
+### 63) FIFO deduplication: content-based dedup vs explicit dedup IDs.
+**Answer:**
+- Content-based dedup hashes body; convenient when body uniquely identifies message.
+- Explicit dedup ID gives precise control for semantically identical payload variants.
+- Dedup window is limited; still design idempotent consumers.
+
+---
+
+### 64) Scenario: Processing spikes cause backlog growth. How do you increase throughput safely?
+**Answer:**
+- Increase Lambda concurrency and batch size while watching downstream limits.
+- Optimize handler duration and reduce per-message overhead.
+- Scale downstream capacity and monitor `ApproximateAgeOfOldestMessage` as primary backlog KPI.
+
+```text
+Spike -> Queue depth up -> AgeOfOldest up
+Fix path:
+  1) Raise consumer concurrency
+  2) Tune batch/window
+  3) Protect downstream with rate limits/backoff
+```
+
+---
+
+## 6) S3 (65-76)
+
+### 65) Explain S3 consistency model (reads-after-writes, overwrites, deletes) in modern S3.
+**Answer:**
+- Modern S3 provides strong read-after-write consistency for PUT/DELETE/LIST operations.
+- After successful write/delete, subsequent reads/list reflect latest state.
+- You still need versioning and app-level safeguards for concurrent writers.
+
+---
+
+### 66) Bucket policies vs IAM policies - how are they different?
+**Answer:**
+- IAM policy is identity-based (attached to user/role/group).
+- Bucket policy is resource-based (attached to bucket, can allow cross-account principals).
+- Effective access is union of allows minus any explicit deny.
+
+---
+
+### 67) What is the difference between SSE-S3, SSE-KMS, and SSE-C (when to use what)?
+**Answer:**
+- SSE-S3: AWS-managed keys, simplest default encryption.
+- SSE-KMS: KMS keys with audit and fine-grained access control; preferred for regulated workloads.
+- SSE-C: customer-provided keys per request; niche due to operational complexity.
+
+---
+
+### 68) Versioning: what problems does it solve and what costs does it add?
+**Answer:**
+- Protects against accidental overwrite/delete and supports recovery/rollback.
+- Enables safer replication and audit trails.
+- Adds storage cost for multiple object versions and delete markers.
+
+---
+
+### 69) Lifecycle rules: common patterns (transition to IA/Glacier, expire objects).
+**Answer:**
+- Transition infrequently accessed objects to IA/Glacier tiers by age.
+- Expire temporary files/logs after retention window.
+- Add noncurrent version cleanup when versioning is enabled.
+
+---
+
+### 70) Presigned URLs: how do they work and what are the security considerations?
+**Answer:**
+- URL contains temporary signed permissions for specific object operation.
+- Keep expiry short, scope to exact key/action, and require HTTPS.
+- Validate upload constraints (size/type) and never expose broad bucket credentials.
+
+---
+
+### 71) How do you secure public access (Block Public Access + policies)?
+**Answer:**
+- Enable account and bucket-level Block Public Access by default.
+- Use bucket policies with explicit principal/resource conditions.
+- Add AWS Config/Security Hub checks to detect public drift quickly.
+
+---
+
+### 72) S3 event notifications: what can trigger them and where can they deliver (SNS/SQS/Lambda)?
+**Answer:**
+- Triggers include object create/remove events (plus prefixes/suffix filters).
+- Destinations: SQS, SNS, Lambda (and EventBridge integration patterns).
+- Design for at-least-once and unordered delivery.
+
+---
+
+### 73) Multipart upload: when do you need it and what failures can occur?
+**Answer:**
+- Use for large files to improve reliability and parallel throughput.
+- Failures: incomplete multipart uploads, partial retries, orphaned parts (cost leakage).
+- Use lifecycle rule to abort incomplete multipart uploads automatically.
+
+---
+
+### 74) What is CRR (cross-region replication) and when is it required?
+**Answer:**
+- CRR asynchronously replicates objects to another region.
+- Used for disaster recovery, compliance, latency locality, and data sovereignty.
+- Requires versioning and proper IAM/KMS replication permissions.
+
+---
+
+### 75) S3 CORS: common config mistakes and how to debug.
+**Answer:**
+- Mistakes: missing method/header in CORS rule, wrong origin, missing exposed headers, wildcard with credentials.
+- Debug with browser dev tools preflight request/response and actual response headers.
+- Keep rules minimal and environment-specific.
+
+---
+
+### 76) Scenario: You store user uploads. How do you prevent malware uploads and enforce file size/type?
+**Answer:**
+- Use presigned POST with policy constraints (`content-length-range`, allowed MIME/extensions).
+- Trigger scan pipeline via S3 event -> queue -> malware scanner Lambda/container.
+- Quarantine unsafe files, tag clean files, and serve only from clean prefix.
+
+```text
+Client -> Presigned Upload -> S3 (incoming/)
+S3 Event -> SQS -> Scanner
+  |- clean  -> move to S3 (clean/)
+  |- infected -> quarantine/alert
+```
+
+---
+## 7) Secrets Manager (77-86)
+
+### 77) Secrets Manager vs SSM Parameter Store - differences and when to choose each.
+**Answer:**
+- Secrets Manager: built for secrets lifecycle, rotation workflows, version stages, higher cost.
+- Parameter Store: config + simple secure strings, cheaper, less built-in rotation workflow.
+- Use Secrets Manager for DB/API credentials that need rotation and audit depth.
+
+---
+
+### 78) How does secret rotation work (automatic rotation with Lambda)?
+**Answer:**
+- Rotation Lambda performs staged steps (`create`, `set`, `test`, `finish`).
+- Secrets Manager manages versions/stages (`AWSPENDING`, `AWSCURRENT`, `AWSPREVIOUS`).
+- Application should read by stage (`AWSCURRENT`) to switch safely after validation.
+
+---
+
+### 79) What are the best practices to read secrets in Lambda without causing latency spikes?
+**Answer:**
+- Cache secrets in-memory per execution environment with TTL.
+- Use Secrets Manager caching library or lightweight local cache.
+- Avoid fetching on every invocation; refresh only on expiration/error.
+
+---
+
+### 80) How do you control access to secrets (IAM + resource policies)?
+**Answer:**
+- Grant least-privilege IAM permissions (`GetSecretValue` on exact ARN).
+- Use resource policies for cross-account access with explicit principals/conditions.
+- Restrict KMS key usage to approved roles only.
+
+---
+
+### 81) How does KMS relate to secrets encryption?
+**Answer:**
+- Secrets are encrypted at rest with a KMS key.
+- Access requires both Secrets Manager permission and KMS decrypt permission.
+- Key policy + IAM policy together control decryption path.
+
+---
+
+### 82) How do you prevent secrets from leaking in logs/metrics?
+**Answer:**
+- Never log secret values; redact sensitive fields in structured logging.
+- Avoid embedding secrets in exception messages, traces, and env dumps.
+- Use static analysis and runtime log scrubbing rules.
+
+---
+
+### 83) What is secret version staging (AWSCURRENT, AWSPREVIOUS) used for?
+**Answer:**
+- `AWSCURRENT`: active production secret version.
+- `AWSPREVIOUS`: last good version for rollback.
+- Enables safe cutover and rapid rollback during failed rotation.
+
+---
+
+### 84) How do you handle multi-environment secrets (dev/stage/prod) safely?
+**Answer:**
+- Separate secret names/paths per environment and account where possible.
+- Use separate IAM roles and KMS keys per environment boundary.
+- Enforce naming conventions and IaC to prevent cross-env accidental reads.
+
+---
+
+### 85) How do you audit secret access?
+**Answer:**
+- CloudTrail logs secret read/update/rotation API calls.
+- Create alerts for unusual read patterns, new principals, or region anomalies.
+- Periodically review IAM principals with secret access.
+
+---
+
+### 86) Scenario: A rotated DB password caused downtime. What could have gone wrong and how do you fix the rotation design?
+**Answer:**
+- Likely causes: app cached stale password too long, rotation Lambda skipped test step, DB user mismatch, pool not refreshed.
+- Fix by enforcing staged rotation with validation, short-lived credential cache, and dual-user or alternating-user rotation strategy.
+- Add rollback path to `AWSPREVIOUS` and automated health checks before final cutover.
+
+```text
+Secrets Manager Rotation
+  1) Create pending credential
+  2) Set in DB
+  3) Test connection
+  4) Promote to AWSCURRENT
+If test fails -> keep current, alert, rollback
+```
+
+---
+
+## 8) CloudWatch (87-98)
+
+### 87) CloudWatch metrics vs logs vs traces - differences and when you use each.
+**Answer:**
+- Metrics: numeric time series for alerting and dashboards.
+- Logs: detailed event records for debugging and forensics.
+- Traces: request path and latency breakdown across services.
+- Use all three together for complete observability.
+
+---
+
+### 88) What are CloudWatch Alarms, and how do you reduce false positives?
+**Answer:**
+- Alarms evaluate metric conditions and trigger actions (SNS, Auto Scaling, Ops tools).
+- Reduce noise with proper periods, datapoints-to-alarm, and composite alarms.
+- Alert on symptom + impact (e.g., error rate with request volume guard).
+
+---
+
+### 89) Key Lambda metrics you monitor (Errors, Throttles, Duration, IteratorAge, etc.).
+**Answer:**
+- Core: `Invocations`, `Errors`, `Throttles`, `Duration p95/p99`, `ConcurrentExecutions`.
+- Event source: `IteratorAge`/backlog age, batch failure counts.
+- Add custom business metrics (orders processed, success ratio).
+
+---
+
+### 90) Log retention policies: why they matter and typical settings.
+**Answer:**
+- Controls storage cost, compliance, and forensic window.
+- Set explicit retention per log group by data classification.
+- Typical pattern: dev short retention, prod longer with archive/export for compliance.
+
+---
+
+### 91) CloudWatch Logs Insights: what problems does it solve and example queries you would run.
+**Answer:**
+- Fast ad hoc query over logs for incidents and trend analysis.
+- Typical queries: top error messages, p95 latency by endpoint, requestId trace chain.
+- Useful for debugging without exporting logs to external systems.
+
+---
+
+### 92) How do you create dashboards for API health (latency, 4xx, 5xx, throttles)?
+**Answer:**
+- Dashboard widgets by API stage/route: request count, latency p50/p95/p99, 4xx/5xx, throttle count.
+- Include backend Lambda duration/errors and queue depth where relevant.
+- Add annotation lines for deployments/incidents.
+
+---
+
+### 93) What is a log subscription filter and how do you stream logs elsewhere?
+**Answer:**
+- Subscription filter forwards matching log events to Lambda, Kinesis, or Firehose.
+- Use for SIEM ingestion, centralized analytics, or real-time alert enrichment.
+- Filter aggressively to control downstream volume/cost.
+
+---
+
+### 94) How do you correlate logs across services (requestId/correlationId)?
+**Answer:**
+- Generate or propagate a correlation ID at edge (API Gateway header).
+- Include it in every log line and downstream message payload.
+- Standardize field names (`correlationId`, `requestId`) across services.
+
+---
+
+### 95) What is embedded metrics format (EMF) and why it is useful?
+**Answer:**
+- EMF logs structured metrics JSON that CloudWatch auto-extracts as custom metrics.
+- Reduces separate metric API calls and keeps logs + metrics linked.
+- Good for high-dimensional app metrics with controlled cardinality.
+
+---
+
+### 96) CloudWatch Synthetics: what it tests and when to use it.
+**Answer:**
+- Synthetic canaries run scripted checks for API/UI endpoints from scheduled locations.
+- Detects user-visible outages before customer tickets.
+- Useful for SLA/SLO validation and regression detection after deploys.
+
+---
+
+### 97) How do you handle high-cardinality metrics safely?
+**Answer:**
+- Avoid unbounded labels (userId, requestId) in metric dimensions.
+- Aggregate by stable dimensions (service, endpoint, region, tenant tier).
+- Put high-cardinality detail in logs/traces instead of metric dimensions.
+
+---
+
+### 98) Scenario: API latency increases but errors do not. What do you check in CloudWatch first?
+**Answer:**
+- Compare API integration latency vs backend Lambda duration to isolate layer.
+- Check throttles, concurrency saturation, cold start rate, and downstream DB/queue metrics.
+- Drill into p95/p99 and route-specific outliers, then correlate with deploy/change timeline.
+
+```text
+Latency up, errors flat:
+API Gateway Latency
+  |- IntegrationLatency up? -> backend issue
+  |- IntegrationLatency flat? -> API layer/network/client side
+```
+
+---
+
+## 9) Cognito (99-110)
+
+### 99) User Pools vs Identity Pools - what is the difference?
+**Answer:**
+- User Pool: authentication and user directory (signup/signin, tokens).
+- Identity Pool: exchanges identities/tokens for temporary AWS credentials (STS).
+- Use User Pool for auth, Identity Pool when client needs scoped AWS resource access.
+
+---
+
+### 100) Explain JWT tokens in Cognito (ID token vs access token vs refresh token).
+**Answer:**
+- ID token: user identity claims for client app.
+- Access token: authorization to protected APIs/scopes.
+- Refresh token: obtain new ID/access tokens without full re-login.
+
+---
+
+### 101) How do you integrate Cognito with API Gateway authorization?
+**Answer:**
+- Configure API Gateway JWT/Cognito authorizer with User Pool issuer and audience.
+- Client sends bearer token in `Authorization` header.
+- Gateway validates signature/claims before invoking backend.
+
+---
+
+### 102) Hosted UI vs custom UI - tradeoffs.
+**Answer:**
+- Hosted UI: faster rollout, built-in security flows, less frontend auth complexity.
+- Custom UI: full UX control, but more implementation and security responsibility.
+- Start Hosted UI unless product requirements demand custom experience.
+
+---
+
+### 103) How do you implement social login (Google/GitHub) with Cognito (high level)?
+**Answer:**
+- Configure external IdP in Cognito User Pool and map claims.
+- Use OAuth/OIDC auth code flow through Cognito domain/Hosted UI.
+- Exchange callback code for Cognito tokens; apply app RBAC on mapped claims/groups.
+
+---
+
+### 104) Cognito user groups: how do you use them for RBAC?
+**Answer:**
+- Assign users to groups (`admin`, `editor`, `viewer`).
+- Group membership appears in token claims.
+- API/backend enforces role permissions from claims.
+
+---
+
+### 105) What are Cognito triggers (pre-signup, post-confirmation, pre-token-gen) and use cases?
+**Answer:**
+- Lambda triggers customize auth lifecycle events.
+- Examples: pre-signup validation, post-confirmation profile bootstrap, pre-token-gen custom claims.
+- Keep trigger logic minimal and resilient to avoid login latency spikes.
+
+---
+
+### 106) How do token expiry and refresh work (best practices)?
+**Answer:**
+- Access/ID tokens are short-lived; refresh token is longer-lived.
+- Use secure refresh flow and rotate/limit refresh token lifetime based on risk.
+- Handle token expiry gracefully with silent refresh and clear logout on failure.
+
+---
+
+### 107) How do you handle user account lockout and brute-force protection?
+**Answer:**
+- Enable adaptive auth/MFA and account recovery controls.
+- Rate-limit login endpoints with WAF and monitor suspicious attempts.
+- Alert on repeated failed logins and high-risk sign-in events.
+
+---
+
+### 108) What is SRP (Secure Remote Password) and when does it matter?
+**Answer:**
+- SRP is a password-auth protocol that avoids sending plain password over the wire.
+- Cognito supports SRP-based flows in certain SDK auth modes.
+- Matters when implementing secure custom auth clients and minimizing credential exposure.
+
+---
+
+### 109) How do you securely store and validate tokens on frontend/backend?
+**Answer:**
+- Frontend: prefer secure HTTP-only cookies for web apps when possible; avoid unsafe local storage patterns for sensitive apps.
+- Backend: validate JWT signature, issuer, audience, expiry, and optionally token use.
+- Enforce least privilege with scopes/claims and short token lifetime.
+
+---
+
+### 110) Scenario: Users randomly get "Not authorized" after login. What could cause this?
+**Answer:**
+- Common causes: expired token, clock skew, wrong audience/client ID, stale JWKS cache, missing group/claim mapping.
+- Check token claims and authorizer logs first.
+- Fix with proper refresh flow, synchronized time (NTP), and consistent environment config.
+
+```text
+User Login -> Cognito tokens -> API Gateway authorizer
+   if token invalid/expired/wrong aud -> 401 Not authorized
+```
+
+---
+## 10) IAM (111-128)
+
+### 111) IAM users vs groups vs roles - what is the difference?
+**Answer:**
+- User: long-term identity (usually for humans only when federated SSO is not used).
+- Group: permission collection for users.
+- Role: assumable identity with temporary credentials for services/humans/cross-account access.
+- Modern best practice: prefer roles + federation over long-lived IAM users.
+
+---
+
+### 112) Identity-based vs resource-based policies - compare with examples.
+**Answer:**
+- Identity policy attaches to principal (user/role) and says what it can do.
+- Resource policy attaches to resource (S3 bucket, SNS topic, Lambda) and says who can access it.
+- Cross-account patterns often require both sides aligned.
+
+---
+
+### 113) Explain least privilege: how do you apply it in a real project?
+**Answer:**
+- Start with minimum actions/resources, then add only required permissions.
+- Scope by ARN, condition keys, and environment tags.
+- Continuously refine with CloudTrail evidence and Access Analyzer findings.
+
+---
+
+### 114) What is the policy evaluation order (explicit deny vs allow)?
+**Answer:**
+- Default is implicit deny.
+- Explicit deny always wins.
+- Allow applies only if no explicit deny in SCP, permission boundary, session policy, identity policy, or resource policy chain.
+
+---
+
+### 115) Trust policy vs permission policy - what does each do?
+**Answer:**
+- Trust policy defines who can assume the role (`sts:AssumeRole`).
+- Permission policy defines what the role can do after assumption.
+- Both are required for effective role-based access.
+
+---
+
+### 116) STS AssumeRole: why and how it is used.
+**Answer:**
+- Provides temporary credentials with scoped permissions.
+- Used for cross-account access, CI/CD deploy roles, and short-lived privileged operations.
+- Reduces risk compared to static access keys.
+
+---
+
+### 117) How do you allow a Lambda to access DynamoDB + S3 securely?
+**Answer:**
+- Attach minimal execution role policy with exact table/bucket ARNs and actions.
+- Use KMS permissions only if encrypted resources require decrypt.
+- Add IAM conditions (prefix, VPC endpoint, source account) where possible.
+
+```text
+Lambda Execution Role
+  |- dynamodb:GetItem/PutItem on arn:...:table/Orders
+  |- s3:GetObject on arn:...:bucket/app-data/private/*
+```
+
+---
+
+### 118) IAM conditions: common keys (aws:SourceIp, aws:PrincipalArn, aws:RequestedRegion).
+**Answer:**
+- Conditions narrow access beyond action/resource.
+- `aws:SourceIp`: restrict by network origin.
+- `aws:PrincipalArn`: pin allowed caller identities.
+- `aws:RequestedRegion`: restrict permitted regions.
+
+---
+
+### 119) Permission boundaries: what problem do they solve?
+**Answer:**
+- They cap the maximum permissions a principal can receive.
+- Useful in delegated admin models to prevent privilege escalation.
+- Not a grant by itself; effective access still needs allow policies.
+
+---
+
+### 120) SCP (Service Control Policies): when do orgs use them?
+**Answer:**
+- SCPs set account-level guardrails in AWS Organizations.
+- Used for preventive governance (deny risky services/actions/regions).
+- They limit maximum permission even for admin roles in member accounts.
+
+---
+
+### 121) IAM role chaining: risks and pitfalls.
+**Answer:**
+- Multiple sequential role assumptions reduce session duration and add complexity.
+- Harder to debug authorization paths and trace principal identity.
+- Prefer direct trust paths where possible.
+
+---
+
+### 122) How do you rotate access keys safely (if you must use them)?
+**Answer:**
+- Create second key, update applications/secrets, verify usage, then disable old key.
+- Monitor CloudTrail/access logs during transition.
+- Automate rotation and move to roles/STS whenever possible.
+
+---
+
+### 123) How do you audit IAM activity (CloudTrail + Access Analyzer)?
+**Answer:**
+- CloudTrail captures who did what, when, from where.
+- Access Analyzer identifies unintended external access and broad policies.
+- Use periodic reviews plus real-time alerts for high-risk events.
+
+---
+
+### 124) What is IAM Access Analyzer and what findings are important?
+**Answer:**
+- It analyzes policies to detect public/cross-account resource exposure.
+- High-priority findings: public S3, cross-account KMS grants, wildcard principals on sensitive resources.
+- Treat new unexpected external access findings as incident-level until verified.
+
+---
+
+### 125) How do you secure cross-account access to an S3 bucket?
+**Answer:**
+- Bucket policy allows specific external role ARN only.
+- External role identity policy allows required S3 actions on target bucket.
+- Add condition keys (source VPC endpoint, aws:PrincipalArn, encryption requirement).
+
+---
+
+### 126) Why is "*" dangerous, and when is it acceptable (rare cases)?
+**Answer:**
+- Wildcards expand blast radius and enable accidental privilege escalation.
+- Acceptable only when resource-level restriction does not exist and conditions strongly constrain context.
+- Always document and review wildcard exceptions.
+
+---
+
+### 127) Scenario: A service suddenly gets AccessDenied. How do you debug it quickly?
+**Answer:**
+- Capture exact denied action/resource from error and CloudTrail event.
+- Use IAM Policy Simulator and evaluate SCP, permission boundary, session policy, resource policy, KMS policy.
+- Check recent deploy/policy changes first.
+
+```text
+AccessDenied triage:
+1) Who (principal ARN)
+2) What action/resource
+3) Which policy layer denied
+4) What changed recently
+```
+
+---
+
+### 128) Scenario: You must grant temporary access to a contractor. What is the safest approach?
+**Answer:**
+- Use federated identity + short-lived assumable role with least privilege.
+- Add time-bound access, MFA, IP restrictions, and mandatory session tagging.
+- Auto-expire assignment and log all activity.
+
+---
+
+## 11) DynamoDB (129-146)
+
+### 129) Partition key vs sort key - how they affect data modeling and queries.
+**Answer:**
+- Partition key determines item distribution and query partition target.
+- Sort key enables ordered/range queries within the same partition.
+- Model access patterns first, then design key schema to avoid scans.
+
+---
+
+### 130) What is a hot partition and how do you avoid it?
+**Answer:**
+- Hot partition is disproportionate traffic on one partition key.
+- Avoid with high-cardinality keys, write sharding, and time-bucket strategies.
+- Use adaptive capacity but do not rely on it as sole fix.
+
+---
+
+### 131) On-demand vs provisioned capacity - when to choose which.
+**Answer:**
+- On-demand: variable/unpredictable traffic, no capacity planning.
+- Provisioned: predictable workloads, lower cost at steady high utilization.
+- Auto scaling provisioned is common for known baseline + burst.
+
+---
+
+### 132) What is adaptive capacity and how does it help?
+**Answer:**
+- DynamoDB reallocates throughput to hotter partitions automatically within limits.
+- Helps with uneven but not pathological key distribution.
+- Good modeling is still required to prevent sustained hotspots.
+
+---
+
+### 133) Read/write capacity units: how they relate to item size.
+**Answer:**
+- WCUs are based on write size chunks; RCUs on read size and consistency level.
+- Larger items consume more capacity.
+- Keep items lean and project only needed attributes.
+
+---
+
+### 134) Strongly consistent vs eventually consistent reads - tradeoffs.
+**Answer:**
+- Strong reads return latest committed value, higher read cost and region-limited.
+- Eventual reads are cheaper and usually sufficient for many user flows.
+- Choose per endpoint by correctness requirement.
+
+---
+
+### 135) GSI vs LSI - differences, limits, and when to use each.
+**Answer:**
+- GSI: different partition/sort keys, separate throughput, eventual consistency.
+- LSI: same partition key as base table, alternate sort key, created at table creation, size constraints per partition.
+- Prefer GSI for most secondary access patterns.
+
+---
+
+### 136) How do you design a "search" feature in DynamoDB (without scanning)?
+**Answer:**
+- Encode searchable patterns into keys/indexes (`PK`, `SK`, prefixes, inverted indexes).
+- Precompute queryable tokens and write to GSIs.
+- For full-text/fuzzy search, offload to OpenSearch and keep DynamoDB as source of truth.
+
+---
+
+### 137) What is DynamoDB Streams and common use cases?
+**Answer:**
+- Streams emit item change records in near real-time.
+- Use for CDC, audit trails, materialized views, async event propagation.
+- Consumers must be idempotent due to retry/replay behavior.
+
+---
+
+### 138) What is TTL and what problems does it solve?
+**Answer:**
+- TTL auto-expires items based on timestamp attribute.
+- Useful for sessions, caches, temporary locks, and data retention policies.
+- Deletion is asynchronous, so do not rely on exact second-level expiration.
+
+---
+
+### 139) Conditional writes: how they help implement idempotency and locking.
+**Answer:**
+- `ConditionExpression` allows write only if predicate holds.
+- Idempotency: `attribute_not_exists(idempotencyKey)`.
+- Optimistic locking: version check before update.
+
+---
+
+### 140) Transactions: when to use them and what costs/limits exist.
+**Answer:**
+- Use `TransactWriteItems/TransactGetItems` for all-or-nothing multi-item operations.
+- Higher latency/cost vs single-item writes.
+- Keep transaction size and contention low for reliability.
+
+---
+
+### 141) BatchWrite and BatchGet: pros/cons and failure handling.
+**Answer:**
+- Pros: fewer round trips and better throughput for bulk operations.
+- Cons: no atomicity across items; partial failures return unprocessed keys.
+- Always retry `UnprocessedItems` with exponential backoff.
+
+---
+
+### 142) Pagination: how LastEvaluatedKey works and common mistakes.
+**Answer:**
+- Query/scan returns page plus `LastEvaluatedKey` cursor.
+- Pass cursor as `ExclusiveStartKey` for next page.
+- Mistakes: assuming full dataset in first page, using offset-style pagination.
+
+---
+
+### 143) What is DAX and when would you use it?
+**Answer:**
+- DAX is in-memory cache for DynamoDB API-compatible reads/writes (read acceleration).
+- Useful for read-heavy microsecond-latency workloads.
+- Adds operational complexity; use only when native DynamoDB latency is insufficient.
+
+---
+
+### 144) How do you handle JSON-like nested attributes and partial updates?
+**Answer:**
+- Store nested maps/lists for flexible schema where needed.
+- Use `UpdateExpression` to set/remove specific nested paths.
+- Avoid oversized deeply nested blobs that increase RCU/WCU and complicate indexing.
+
+---
+
+### 145) Scenario: You get "ProvisionedThroughputExceededException". What do you change first?
+**Answer:**
+- Identify whether table or specific GSI is throttling.
+- Increase capacity or switch to on-demand as immediate mitigation.
+- Then fix hot keys, optimize item size/access pattern, and add backoff/jitter in clients.
+
+---
+
+### 146) Scenario: You need "unique email" constraint. How do you enforce uniqueness in DynamoDB?
+**Answer:**
+- Create uniqueness item keyed by normalized email in same table or dedicated table.
+- Use transaction/conditional write to reserve email and create user atomically.
+- Handle retries so duplicate attempts return existing user gracefully.
+
+```text
+TransactWrite:
+  1) Put EmailLock(pk="EMAIL#alice@example.com") if not exists
+  2) Put User(pk="USER#123")
+If step 1 fails -> email already taken
+```
+
+---
+
+## 12) RDS (147-161)
+
+### 147) RDS vs DynamoDB - when is RDS the better choice?
+**Answer:**
+- Choose RDS for relational data, joins, complex queries, ACID transactions, and mature SQL tooling.
+- DynamoDB is better for key-value/known access patterns at massive scale.
+- Pick based on query model and consistency/transaction needs.
+
+---
+
+### 148) Multi-AZ vs Read Replicas - what do they solve (availability vs scaling)?
+**Answer:**
+- Multi-AZ: synchronous standby for high availability/failover.
+- Read Replica: asynchronous replicas for read scaling and analytics offload.
+- They solve different problems and are often used together.
+
+---
+
+### 149) How does automated backup + point-in-time recovery work?
+**Answer:**
+- Automated backups + transaction logs enable restore to specific point in retention window.
+- PITR creates a new DB instance/cluster from backup timeline.
+- Define retention based on RPO requirements.
+
+---
+
+### 150) What is a parameter group and why does it matter?
+**Answer:**
+- Parameter group controls engine runtime settings.
+- Some changes are dynamic; others require reboot.
+- Treat as versioned IaC to avoid configuration drift.
+
+---
+
+### 151) Connection pooling in serverless: why is it a problem and how do you fix it (RDS Proxy)?
+**Answer:**
+- Lambda burst concurrency can open too many DB connections and exhaust DB resources.
+- RDS Proxy pools/reuses connections and smooths spikes.
+- Also improves failover behavior by managing backend connections.
+
+```text
+Lambda (many short-lived invocations)
+   -> RDS Proxy (pool)
+      -> RDS (bounded connections)
+```
+
+---
+
+### 152) RDS encryption: at rest and in transit - what settings are needed?
+**Answer:**
+- At rest: enable storage encryption with KMS key.
+- In transit: enforce TLS from app to DB endpoint.
+- Rotate credentials, restrict network access, and protect snapshots/backups.
+
+---
+
+### 153) How do you do DB migrations safely in production?
+**Answer:**
+- Use versioned migration tooling and backward-compatible expand/contract changes.
+- Run prechecks, canary deploy app changes, and keep rollback scripts.
+- Avoid long blocking DDL during peak traffic.
+
+---
+
+### 154) How do you monitor RDS performance (CPU, connections, IOPS, slow queries)?
+**Answer:**
+- Track CloudWatch DB metrics: CPU, memory pressure indicators, connections, read/write IOPS, latency.
+- Enable Performance Insights and slow query logs.
+- Correlate app latency with DB wait events and lock contention.
+
+---
+
+### 155) What is failover and how long can it take (what affects it)?
+**Answer:**
+- Failover promotes standby/new writer after fault.
+- Duration depends on engine, workload, transaction replay, DNS/client reconnect behavior.
+- Typical objective is short minutes, not instant.
+
+---
+
+### 156) How do you implement least privilege DB users and credential rotation?
+**Answer:**
+- Separate DB roles by service and privilege scope (read/write/admin).
+- Store credentials in Secrets Manager with automated rotation.
+- Remove shared superuser credentials from application code paths.
+
+---
+
+### 157) IAM authentication for RDS: what it is and when it is useful.
+**Answer:**
+- Uses temporary IAM-generated auth tokens instead of static DB passwords.
+- Useful for short-lived access and centralized AWS IAM control.
+- Common in admin tooling and some service-to-DB access patterns.
+
+---
+
+### 158) What is read-after-write consistency in RDS read replicas (and how do you deal with lag)?
+**Answer:**
+- Replicas are async; recent writes may not appear immediately.
+- Send read-after-write critical requests to primary.
+- Use lag-aware routing and tolerate eventual consistency where acceptable.
+
+---
+
+### 159) How do you scale RDS vertically and what downtime risks exist?
+**Answer:**
+- Vertical scaling changes instance class/storage performance.
+- Usually involves restart/failover events; risk depends on engine/deployment model.
+- Plan maintenance window, test failover, and use Multi-AZ to reduce impact.
+
+---
+
+### 160) Scenario: Sudden spike in connections causes app outage. What is your triage and fix plan?
+**Answer:**
+- Immediate: enable/verify RDS Proxy or connection pool limits, shed load, scale app/DB carefully.
+- Diagnose: check connection storm source, idle connection leaks, retry storms.
+- Permanent fix: pool tuning, backpressure, circuit breakers, and max-connection safeguards.
+
+---
+
+### 161) Scenario: A query becomes slow after data growth. What steps do you take to optimize?
+**Answer:**
+- Capture execution plan and identify scan/lock/sort bottleneck.
+- Add/adjust indexes, rewrite query, reduce selected columns, archive old data/partition.
+- Validate improvement with load test and monitor regressions.
+
+---
+
+## Bonus: Multi-service System Design Scenarios (162-172)
+
+### 162) Design a serverless REST API for "document upload + async processing" using API Gateway, Lambda, S3, SQS, DynamoDB, and Step Functions.
+**Answer:**
+- API creates upload job + presigned URL; metadata stored in DynamoDB.
+- S3 upload event pushes to SQS; Step Functions orchestrates processing steps.
+- Final status/result stored in DynamoDB; client polls status endpoint.
+
+```text
+Client -> API GW -> Lambda -> DynamoDB (job=CREATED)
+                  -> S3 presigned URL
+Client -> S3 upload
+S3 Event -> SQS -> Step Functions -> Lambda processors -> DynamoDB (job=COMPLETED)
+```
+
+---
+
+### 163) You need guaranteed processing with retries and DLQ - which services and settings do you use?
+**Answer:**
+- Use SQS as durable buffer with Lambda consumers.
+- Configure visibility timeout > processing p99, retry backoff, maxReceiveCount, DLQ redrive.
+- Add idempotency keys to handle at-least-once delivery.
+
+---
+
+### 164) How do you implement end-to-end idempotency across API Gateway -> Lambda -> DynamoDB?
+**Answer:**
+- Client sends `Idempotency-Key` header.
+- Lambda conditionally writes request record in DynamoDB before side effects.
+- Subsequent same key returns stored outcome.
+
+```text
+Request (Idempotency-Key=K)
+ -> Lambda
+ -> DynamoDB Put if not exists (K)
+    |- success -> process -> store response
+    |- exists  -> return stored response
+```
+
+---
+
+### 165) Design a webhook receiver that must be secure and idempotent (API Gateway + Lambda + DynamoDB).
+**Answer:**
+- Verify webhook signature and timestamp in Lambda.
+- Use event ID as idempotency key in DynamoDB conditional write.
+- Quickly ACK accepted events, then process asynchronously via queue.
+
+```text
+Provider -> API GW -> Lambda verify signature
+                     -> DynamoDB dedup(eventId)
+                     -> SQS async worker
+```
+
+---
+
+### 166) You need fanout to multiple consumers and replay ability - SNS vs EventBridge vs SQS (design choice).
+**Answer:**
+- SNS + SQS per consumer: low-latency fanout with durable queues and replay via queue retention/DLQ.
+- EventBridge: richer routing/filtering and archive/replay features.
+- SQS alone: single-consumer queue semantics, not native multi-fanout.
+
+---
+
+### 167) How do you implement auditing and traceability for every request (CloudWatch + correlation IDs)?
+**Answer:**
+- Generate correlation ID at API edge and propagate through headers/messages.
+- Structured logs in every service include correlation ID and principal info.
+- Central dashboard/query links API logs, Lambda logs, and workflow execution IDs.
+
+---
+
+### 168) How do you secure secrets end-to-end (Secrets Manager + IAM + KMS) without leaking in logs?
+**Answer:**
+- Store secrets only in Secrets Manager encrypted by KMS CMK.
+- Grant least-privilege read to runtime roles; cache in memory, not logs.
+- Redact sensitive fields in logging middleware and error handlers.
+
+---
+
+### 169) Design for zero downtime deployments in serverless (versions/aliases, canary, rollbacks).
+**Answer:**
+- Publish immutable Lambda versions and route via aliases.
+- Shift traffic gradually (e.g., 5% -> 25% -> 100%) with alarms gating promotion.
+- Auto rollback alias on error/latency regression.
+
+```text
+Alias prod
+  -> v42 (95%)
+  -> v43 (5%)
+If alarms fire -> rollback prod -> v42
+```
+
+---
+
+### 170) How do you handle partial failures in a workflow (compensation/saga) using Step Functions?
+**Answer:**
+- Model each forward action with corresponding compensating action.
+- Use `Catch` on failing branch and execute compensation chain.
+- Record saga state for observability and manual replay.
+
+```text
+Reserve Inventory -> Charge Payment -> Create Shipment
+         if Shipment fails:
+           -> Refund Payment -> Release Inventory -> Mark Failed
+```
+
+---
+
+### 171) How do you set alerts that indicate real user impact (SLO-style alarms)?
+**Answer:**
+- Define SLIs: availability, latency, correctness.
+- Alert on error-budget burn rate (fast + slow windows), not raw noisy metrics alone.
+- Combine symptom alarms with traffic thresholds to avoid false positives during low volume.
+
+---
+
+### 172) Cost optimization: where do serverless systems usually waste money and how do you fix it?
+**Answer:**
+- Common waste: over-provisioned concurrency, noisy logs, excessive retries, oversized Lambda memory/runtime, NAT data processing costs.
+- Fix with right-sizing, log retention/filtering, idempotent retry policies, VPC endpoints, and architecture simplification.
+- Track cost per request/workflow as a first-class KPI.
+
+```text
+Cost review loop:
+Measure cost/unit -> find top 3 drivers -> optimize -> re-measure
+```
+
+---

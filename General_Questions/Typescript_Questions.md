@@ -1,4 +1,4 @@
-# TypeScript Interview Q&A (Core to Advanced) - 150 Questions
+# TypeScript Interview Q&A (Core to Advanced) - 212 Questions
 
 ## 1) TypeScript Fundamentals (1-35)
 
@@ -2784,3 +2784,850 @@ TypeScript safety stack
 
 All four together => reliable production systems
 ```
+
+---
+
+## 6) Declarations, Compiler Options, and Build Graph (151-170)
+
+ASCII map:
+
+```text
+.ts -> type-check -> JS emit + .d.ts + sourcemaps
+```
+
+### 151) Explain what `.d.ts` declaration files are and when you would generate them from a library.
+
+**Answer:**
+
+`.d.ts` files contain type signatures only, not runtime code. Generate them when publishing a TS/JS library so consumers get autocomplete, type safety, and API contracts.
+
+```json
+{
+  "compilerOptions": {
+    "declaration": true,
+    "emitDeclarationOnly": true
+  }
+}
+```
+
+---
+
+### 152) What does `declare` do in TypeScript (e.g., `declare const`, `declare function`, `declare module`)?
+
+**Answer:**
+
+`declare` tells TypeScript "this exists at runtime elsewhere." It adds types without emitting JS.
+
+```ts
+declare const BUILD_ID: string;
+declare function track(event: string): void;
+declare module "legacy-sdk" {
+  export function init(key: string): void;
+}
+```
+
+---
+
+### 153) What is the difference between `typeRoots` and `types` in tsconfig.json?
+
+**Answer:**
+
+- `typeRoots`: folders TS scans for declaration packages.
+- `types`: exact package names from `@types/*` to include.
+
+Use `types` to whitelist globals and keep ambient types predictable.
+
+---
+
+### 154) How does TypeScript decide which `lib` definitions to include, and what happens if `lib` is misconfigured?
+
+**Answer:**
+
+TS chooses default libs from `target` unless `lib` is explicitly set. If misconfigured, you get missing/extra globals (for example missing `Promise` or missing `DOM` types).
+
+```json
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2022"]
+  }
+}
+```
+
+---
+
+### 155) What is `skipLibCheck` actually skipping, and what kinds of bugs can it hide?
+
+**Answer:**
+
+It skips type checking inside `.d.ts` files. This speeds builds, but can hide incompatible third-party type packages and conflicting duplicate declarations.
+
+Use it for build speed only when dependency type quality is trusted.
+
+---
+
+### 156) What does `noEmit` vs `emitDeclarationOnly` vs `noEmitOnError` do in real projects?
+
+**Answer:**
+
+- `noEmit`: type-check only, output nothing.
+- `emitDeclarationOnly`: output `.d.ts` only.
+- `noEmitOnError`: emit JS/types only if there are zero TS errors.
+
+---
+
+### 157) Explain `declaration`, `declarationMap`, and `sourceMap` - how do they help debugging/consumers?
+
+**Answer:**
+
+- `declaration`: produce `.d.ts` for consumers.
+- `declarationMap`: map `.d.ts` back to `.ts` for editor navigation.
+- `sourceMap`: map `.js` stack traces/debugging back to `.ts`.
+
+```json
+{
+  "compilerOptions": {
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true
+  }
+}
+```
+
+---
+
+### 158) What are TypeScript project references and when would you use `tsc -b`?
+
+**Answer:**
+
+Project references split large repos into buildable subprojects with dependency order. Use `tsc -b` in monorepos or large codebases for incremental, graph-aware builds.
+
+```json
+{
+  "references": [{ "path": "../contracts" }]
+}
+```
+
+---
+
+### 159) How does incremental compilation work and what files does TS generate for it?
+
+**Answer:**
+
+With `incremental: true`, TS stores prior build graph/signatures in `.tsbuildinfo`, then recompiles only affected files.
+
+```json
+{
+  "compilerOptions": {
+    "incremental": true,
+    "tsBuildInfoFile": "./.tsbuildinfo"
+  }
+}
+```
+
+---
+
+### 160) What problems does `isolatedModules` catch, and why is it important with Babel/esbuild transpilation?
+
+**Answer:**
+
+It rejects patterns that require cross-file type analysis, because Babel/esbuild transpile one file at a time.
+
+Common catches:
+- type-only exports used as values
+- `const enum` usage that requires TS transform
+- namespaces in module code
+
+---
+
+### 161) What does `verbatimModuleSyntax` do and how can it break builds when mixed with CJS/ESM?
+
+**Answer:**
+
+It preserves import/export syntax as written and requires explicit `import type` for type-only imports. Builds can break if runtime module format (CJS/ESM) does not match your import style.
+
+Example: ESM `import` kept verbatim, but output/runtime expects CommonJS.
+
+---
+
+### 162) Explain the difference between `moduleResolution: Node`, `Node16`, and `NodeNext` (practical impact).
+
+**Answer:**
+
+- `Node`: older Node/CommonJS-style resolver.
+- `Node16`: honors modern Node rules (`type`, `exports`, ESM extension rules) with Node 16 behavior.
+- `NodeNext`: like `Node16` but follows latest Node resolution behavior.
+
+For modern Node apps/libraries, `NodeNext` is usually safest.
+
+---
+
+### 163) What are `package.json` `exports` and `imports` fields, and how do they affect TypeScript resolution?
+
+**Answer:**
+
+- `exports`: public entry points for consumers.
+- `imports`: private alias map (usually `#alias`) inside the package.
+
+TS can resolve through them (with matching options), which keeps type resolution consistent with Node runtime resolution.
+
+---
+
+### 164) When would you enable `resolvePackageJsonExports` / `resolvePackageJsonImports` and what breaks if you do not?
+
+**Answer:**
+
+Enable them when your dependencies or package use `exports`/`imports`. If disabled, TS may resolve a different file than Node, causing "compiles but fails at runtime" issues.
+
+---
+
+### 165) What is `allowImportingTsExtensions` and when is it needed?
+
+**Answer:**
+
+It allows imports like `import "./x.ts"`. Needed in TS-first runtime flows (for example some test runners, Deno/Bun-like flows, or no-emit pipelines) where `.ts` is executed/resolved directly.
+
+For normal `tsc` emit to JS, it is usually unnecessary.
+
+---
+
+### 166) Explain the difference between `esModuleInterop`, `allowSyntheticDefaultImports`, and CJS default imports.
+
+**Answer:**
+
+- `allowSyntheticDefaultImports`: type-check convenience only.
+- `esModuleInterop`: adds emit helpers and enables safer default interop with CommonJS.
+- CJS default imports may type-check but fail at runtime without compatible emit/bundler behavior.
+
+---
+
+### 167) How do you type JSON imports (`resolveJsonModule`) and what are the runtime considerations?
+
+**Answer:**
+
+Enable `resolveJsonModule` and TS infers JSON shape.
+
+```json
+{
+  "compilerOptions": {
+    "resolveJsonModule": true
+  }
+}
+```
+
+Runtime must also support JSON imports for your module system (Node ESM rules differ from CJS/bundlers).
+
+---
+
+### 168) What is `downlevelIteration` and when do you need it?
+
+**Answer:**
+
+It emits iterator-safe code for `for...of`, spread, and destructuring when targeting older JS (for example ES5). Needed when iterating non-array iterables like `Map`, `Set`, and strings in downlevel targets.
+
+---
+
+### 169) What does `useDefineForClassFields` change, and why does it matter with decorators and legacy class field semantics?
+
+**Answer:**
+
+It switches class field emit to standard `define` semantics instead of legacy assignment semantics. This affects initialization timing and interaction with decorators/accessors.
+
+During migrations, this can change runtime behavior even if types still pass.
+
+---
+
+### 170) Explain `strictFunctionTypes` and one real bug it prevents in callback-heavy code.
+
+**Answer:**
+
+It enforces safer function parameter variance. Prevents assigning a callback that expects a narrower type where a wider type may be passed.
+
+```ts
+type Animal = { name: string };
+type Dog = Animal & { bark(): void };
+
+let handleAnimal: (a: Animal) => void;
+const handleDog = (d: Dog) => d.bark();
+// handleAnimal = handleDog; // rejected with strictFunctionTypes
+```
+
+---
+
+## 7) Modules, Runtime vs Types, Declaration Spaces (171-184)
+
+ASCII map:
+
+```text
+Type space (erased) != Value space (runtime)
+```
+
+### 171) Why do `__dirname` / `__filename` behave differently in ESM, and how do you type/work around it in TS?
+
+**Answer:**
+
+They are CommonJS globals and are not available in ESM modules. In ESM, derive them from `import.meta.url`.
+
+```ts
+import { fileURLToPath } from "url";
+import { dirname } from "path";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+```
+
+---
+
+### 172) How do you publish a TS library that supports both CommonJS and ESM (high level strategy)?
+
+**Answer:**
+
+Build two outputs (`dist/esm`, `dist/cjs`), publish one type surface, and use `exports` with `import`/`require` conditions.
+
+```json
+{
+  "exports": {
+    ".": {
+      "types": "./dist/types/index.d.ts",
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.cjs"
+    }
+  }
+}
+```
+
+---
+
+### 173) What is `typesVersions` in package.json and when do library authors use it?
+
+**Answer:**
+
+`typesVersions` serves different type entry points by TS version. Library authors use it when newer TS syntax/types are not backward compatible with older TS compilers.
+
+---
+
+### 174) What is module augmentation and how is it different from global augmentation?
+
+**Answer:**
+
+- Module augmentation: extend types of a specific module.
+- Global augmentation: extend global namespace/types for the whole program.
+
+```ts
+declare module "express-serve-static-core" {
+  interface Request {
+    userId?: string;
+  }
+}
+```
+
+---
+
+### 175) How do you write a `global.d.ts` correctly, and what are common mistakes that make it not picked up?
+
+**Answer:**
+
+Put it under included paths and ensure it is a declaration file (no runtime code). Common mistakes:
+- file excluded by `include`/`exclude`
+- wrong folder not in `typeRoots` when custom roots are used
+- adding imports unintentionally changing scope behavior
+
+---
+
+### 176) How do namespace declarations still show up in real codebases (legacy/global scripts) and what are the risks?
+
+**Answer:**
+
+They appear in legacy script projects and old declaration files. Risks: global pollution, name collisions, and harder migration to ES modules.
+
+Prefer modules unless maintaining legacy interop.
+
+---
+
+### 177) Explain how tsconfig `include`/`exclude` interacts with files and references in monorepos.
+
+**Answer:**
+
+`include`/`exclude` applies per tsconfig. Referenced projects compile from their own configs, not parent include globs. In monorepos, missing references can silently skip type-checking package boundaries.
+
+---
+
+### 178) How do you avoid accidentally importing a type-only symbol at runtime (and breaking bundlers)?
+
+**Answer:**
+
+Use `import type` for types and keep `verbatimModuleSyntax` enabled so TS does not rewrite imports ambiguously.
+
+```ts
+import type { User } from "./types";
+import { makeUser } from "./runtime";
+```
+
+---
+
+### 179) What is the difference between `import type` and `export type`, and when must you use them?
+
+**Answer:**
+
+- `import type`: brings in declarations erased at runtime.
+- `export type`: re-exports declarations only.
+
+You should use them when the symbol is type-only, especially with strict ESM settings and `verbatimModuleSyntax`.
+
+---
+
+### 180) How do you type `require()` imports in TS and what changes when you switch to ESM imports?
+
+**Answer:**
+
+In CJS TS, use `import x = require("x")` or `const x = require("x")` (with Node types). In ESM, switch to `import` syntax and ensure module/resolution settings align with Node ESM rules.
+
+---
+
+### 181) How would you migrate a Node backend from CJS to ESM in TS without breaking everything?
+
+**Answer:**
+
+Use staged migration:
+- set `module`/`moduleResolution` to `NodeNext`
+- convert leaf modules first
+- replace CJS globals (`__dirname`, `require`) with ESM patterns
+- update package `type`, `exports`, test tooling, and runtime scripts
+
+---
+
+### 182) How do you configure TS paths (`paths`) in a monorepo and make Jest and Node resolve them too?
+
+**Answer:**
+
+Define aliases in TS, then mirror them in runtime/test tooling.
+
+- TypeScript: `baseUrl` + `paths`
+- Jest: `moduleNameMapper`
+- Node runtime: package `imports`/`exports`, bundler plugin, or path resolver hook
+
+---
+
+### 183) What is a path-alias pitfall that causes code to compile but fail at runtime?
+
+**Answer:**
+
+`tsc` does not rewrite alias imports by default. So code compiles, but Node cannot resolve `@app/foo` at runtime unless your runtime/bundler also knows that alias.
+
+---
+
+### 184) How do you generate and publish source maps correctly so stack traces point to `.ts` in production?
+
+**Answer:**
+
+Enable `sourceMap`, ship `.map` files with deployed JS, and run Node with source-map support.
+
+```json
+{
+  "compilerOptions": {
+    "sourceMap": true,
+    "inlineSources": true
+  }
+}
+```
+
+For Node, use `--enable-source-maps` (or equivalent runtime setting).
+
+---
+
+## 8) Advanced Type-System Edge Cases (185-204)
+
+ASCII map:
+
+```text
+Value-level runtime safety + Type-level compile-time safety
+```
+
+### 185) How do you model "read-only at compile time" vs "immutable at runtime" in TS/JS?
+
+**Answer:**
+
+Use `readonly`/`Readonly<T>` for compile-time guarantees, and `Object.freeze` (or immutable data libraries) for runtime immutability.
+
+```ts
+const cfg: Readonly<{ port: number }> = { port: 3000 };
+const frozen = Object.freeze({ port: 3000 });
+```
+
+---
+
+### 186) What is the difference between `unknown` and `object` as a top-ish type for values?
+
+**Answer:**
+
+- `unknown`: truly any value, requires narrowing before use.
+- `object`: any non-primitive value only.
+
+`unknown` is safer for untrusted input.
+
+---
+
+### 187) Explain `unique symbol` and one place it is actually useful (branding, opaque keys).
+
+**Answer:**
+
+`unique symbol` creates a nominally distinct symbol type. Useful for hidden keys/branding that should not collide.
+
+```ts
+declare const Brand: unique symbol;
+type UserId = string & { [Brand]: "UserId" };
+```
+
+---
+
+### 188) What is the difference between `bigint` and `number` in TS and where does `bigint` show up in backend work?
+
+**Answer:**
+
+`number` is IEEE-754 floating point; `bigint` is arbitrary-precision integer. Use `bigint` for IDs/counters beyond `Number.MAX_SAFE_INTEGER`, financial integer math, and some DB/crypto domains.
+
+---
+
+### 189) How do you type `process.env` safely without sprinkling `as string` everywhere?
+
+**Answer:**
+
+Parse env once with a runtime schema, then export a typed config object.
+
+```ts
+import { z } from "zod";
+
+const EnvSchema = z.object({
+  NODE_ENV: z.enum(["development", "test", "production"]),
+  PORT: z.coerce.number().int().positive()
+});
+
+export const env = EnvSchema.parse(process.env);
+```
+
+---
+
+### 190) How do you model errors as data (typed error codes) instead of throwing raw `Error` everywhere?
+
+**Answer:**
+
+Use discriminated unions with explicit codes and metadata.
+
+```ts
+type AppError =
+  | { code: "NOT_FOUND"; resource: string }
+  | { code: "VALIDATION"; fields: string[] };
+```
+
+---
+
+### 191) What is the difference between `Error`, custom error classes, and discriminated error unions?
+
+**Answer:**
+
+- `Error`: generic exception object.
+- Custom classes: richer runtime behavior + `instanceof` checks.
+- Discriminated unions: explicit typed error flows (great for non-throw result patterns).
+
+Use unions for domain errors, classes for exception boundaries.
+
+---
+
+### 192) How do you type a `Result` pipeline where functions can short-circuit on error without exceptions?
+
+**Answer:**
+
+Model `Result<T, E>` and define `map`/`flatMap` helpers.
+
+```ts
+type Result<T, E> = { ok: true; value: T } | { ok: false; error: E };
+
+function flatMap<A, B, E>(r: Result<A, E>, fn: (a: A) => Result<B, E>): Result<B, E> {
+  return r.ok ? fn(r.value) : r;
+}
+```
+
+---
+
+### 193) How would you type a `mapAsync` helper that preserves tuple/array element types?
+
+**Answer:**
+
+Use const generics for tuples and a mapped tuple return type.
+
+```ts
+async function mapAsync<const T extends readonly unknown[], R>(
+  items: T,
+  fn: <I extends T[number]>(item: I, index: number) => Promise<R>
+): Promise<{ [K in keyof T]: R }> {
+  return Promise.all(items.map(fn)) as Promise<{ [K in keyof T]: R }>;
+}
+```
+
+---
+
+### 194) How do you type a function that returns different object shapes based on a boolean option parameter?
+
+**Answer:**
+
+Use overloads or conditional generics keyed by a boolean literal option.
+
+```ts
+function getUser(opts: { full: true }): { id: string; profile: { bio: string } };
+function getUser(opts: { full: false }): { id: string };
+function getUser(opts: { full: boolean }) {
+  return opts.full ? { id: "1", profile: { bio: "x" } } : { id: "1" };
+}
+```
+
+---
+
+### 195) Explain how `as const` interacts with arrays/tuples and why readonly tuples matter.
+
+**Answer:**
+
+`as const` keeps literal element types and turns arrays into readonly tuples.
+
+```ts
+const pair = ["ok", 200] as const;
+// type: readonly ["ok", 200]
+```
+
+This preserves exact positions/values for safer APIs.
+
+---
+
+### 196) What is the difference between `readonly string[]` and `ReadonlyArray<string>` and when does it matter?
+
+**Answer:**
+
+They are equivalent for normal use. `ReadonlyArray<T>` can be clearer in generic-heavy code, while `readonly T[]` is often more readable inline.
+
+---
+
+### 197) Explain the `satisfies` operator on arrays/tuples - what does it preserve that annotations lose?
+
+**Answer:**
+
+`satisfies` checks compatibility without widening away inferred literal details.
+
+```ts
+const routes = ["/", "/health"] as const satisfies readonly string[];
+```
+
+You keep the tuple literals while validating the broader contract.
+
+---
+
+### 198) How do you type a const generic parameter (TS 5.x) and why is it useful for literal preservation?
+
+**Answer:**
+
+Use `const` on generic params to keep literals/tuples exact through function boundaries.
+
+```ts
+function defineRoutes<const T extends readonly string[]>(routes: T) {
+  return routes;
+}
+```
+
+---
+
+### 199) How do you enforce exhaustiveness without a default case in switch (pattern + benefit)?
+
+**Answer:**
+
+Switch on discriminant and add a post-switch `assertNever` check.
+
+```ts
+function assertNever(x: never): never {
+  throw new Error(`Unhandled: ${String(x)}`);
+}
+```
+
+Benefit: compiler fails when a new union member is added but not handled.
+
+---
+
+### 200) What are template literal types used for in APIs (routes, event names, env keys) beyond toy examples?
+
+**Answer:**
+
+They encode naming conventions and valid key patterns.
+
+```ts
+type EnvKey = `APP_${Uppercase<string>}`;
+type UserEvent = `user:${"created" | "deleted"}`;
+```
+
+This catches invalid strings at compile time for route/event/env APIs.
+
+---
+
+### 201) Explain how conditional types can cause performance issues in TS (type instantiation depth) and how to simplify.
+
+**Answer:**
+
+Deep nested/distributive conditional types can explode instantiations and slow IDE/check times. Simplify by:
+- reducing recursion depth
+- avoiding unnecessary distributive behavior
+- splitting mega-types into named intermediate helpers
+
+---
+
+### 202) What is the difference between `never` as "unreachable" vs `never` produced by distributive conditional types?
+
+**Answer:**
+
+- Unreachable `never`: control-flow impossibility (for example exhaustive switch remainder).
+- Conditional `never`: type-level filtering result (for example `Extract`/`Exclude` branches removed).
+
+Same type token, different cause.
+
+---
+
+### 203) How do you type recursive data structures safely (trees, JSON) without infinite recursion?
+
+**Answer:**
+
+Use explicit recursive aliases/interfaces and keep helper types shallow when possible.
+
+```ts
+type Tree<T> = { value: T; children: Tree<T>[] };
+```
+
+For advanced transforms, add depth limits to avoid type-instantiation blowups.
+
+---
+
+### 204) How do you represent JSON values as a TS type (`JsonValue`) and what are the tradeoffs?
+
+**Answer:**
+
+Use a recursive union:
+
+```ts
+type JsonValue =
+  | string
+  | number
+  | boolean
+  | null
+  | { [k: string]: JsonValue }
+  | JsonValue[];
+```
+
+Tradeoff: accurate enough for JSON, but can be restrictive for app objects with methods, `Date`, `Map`, etc.
+
+---
+
+## 9) Practical Backend + AWS TS Usage (205-212)
+
+### 205) How do you type `Map<K, V>` vs `Record<string, V>` and how do you choose between them?
+
+**Answer:**
+
+- `Record<string, V>`: plain object keyed by strings, easy JSON serialization.
+- `Map<K, V>`: supports non-string keys, ordered iteration, explicit API.
+
+Choose `Record` for config/DTO-like objects; choose `Map` for dynamic keyed collections.
+
+---
+
+### 206) How do you type `Set<T>` and what pitfalls happen when you try to store objects as keys?
+
+**Answer:**
+
+`Set<T>` stores unique values by reference equality for objects. Pitfall: two equal-looking object literals are different entries.
+
+```ts
+const s = new Set<{ id: string }>();
+s.add({ id: "1" });
+s.add({ id: "1" }); // still two items
+```
+
+Use stable IDs or canonical objects when deduping entities.
+
+---
+
+### 207) How do you type AWS Lambda handlers (`APIGatewayProxyEvent`/`Result`) and avoid `any` in `event.body`?
+
+**Answer:**
+
+Type the handler with AWS types, parse `event.body` as `unknown`, then validate.
+
+```ts
+import { APIGatewayProxyHandlerV2 } from "aws-lambda";
+import { z } from "zod";
+
+const Body = z.object({ name: z.string().min(1) });
+
+export const handler: APIGatewayProxyHandlerV2 = async (event) => {
+  const raw: unknown = event.body ? JSON.parse(event.body) : {};
+  const body = Body.parse(raw);
+  return { statusCode: 200, body: JSON.stringify({ ok: true, name: body.name }) };
+};
+```
+
+---
+
+### 208) How would you model an API contract shared between frontend and backend (DTOs + runtime validation strategy)?
+
+**Answer:**
+
+Create a shared contracts package with runtime schemas and inferred TS types.
+
+```text
+packages/contracts: zod schemas + exported inferred DTO types
+frontend/backend: import same schema/types
+runtime: validate external inputs at boundaries
+```
+
+This keeps compile-time and runtime contracts aligned.
+
+---
+
+### 209) What are the pros/cons of Zod `infer` types vs hand-written interfaces in large codebases?
+
+**Answer:**
+
+- Zod `infer` pros: single source of truth, runtime + compile-time alignment.
+- Zod `infer` cons: heavy schema coupling everywhere, possible type complexity/perf costs.
+- Hand-written interface pros: lightweight, explicit domain types.
+- Hand-written interface cons: duplication risk against runtime validators.
+
+---
+
+### 210) In Jest, what is the difference between `jest.mocked()` and `as jest.Mock` casts, and why does it matter?
+
+**Answer:**
+
+`jest.mocked()` preserves the original module/function shape with typed mock methods. `as jest.Mock` is a blunt cast that can hide wrong signatures and reduce type safety.
+
+Prefer `jest.mocked()` for safer refactors.
+
+---
+
+### 211) How do you ensure your TS types do not slow down IDEs (practical refactor tactics)?
+
+**Answer:**
+
+- Replace deeply recursive/distributive utility types with simpler explicit types.
+- Cache complex computed types in named aliases.
+- Split giant files/types into smaller modules.
+- Avoid broad generic APIs where concrete types are enough.
+- Measure with `tsc --extendedDiagnostics`.
+
+---
+
+### 212) What does `exactOptionalPropertyTypes` break most often during TS upgrades, and how do you fix it safely?
+
+**Answer:**
+
+It most often breaks code that assigns `undefined` to optional props expecting it to mean "absent." With this flag, `x?: T` does not imply `x: T | undefined`.
+
+Safe fixes:
+- omit property instead of setting `undefined`
+- explicitly model `| undefined` where needed
+- adjust patch/update DTOs to represent omission vs explicit null/undefined clearly
+
+---

@@ -1571,3 +1571,417 @@ Measure cost/unit -> find top 3 drivers -> optimize -> re-measure
 ```
 
 ---
+
+
+
+## 13) ECS (173-182)
+
+### 173) ECS on Fargate vs EC2 - tradeoffs (cost, control, scaling, networking)?
+**Answer:**
+- Fargate removes node management and gives fast onboarding, but usually costs more at steady high utilization.
+- EC2 gives more control (instance types, daemons, host tuning) and can be cheaper with reserved/spot capacity.
+- Choose Fargate for low-ops isolation; choose EC2 when you need deep control, special hardware, or tighter unit economics.
+
+---
+
+### 174) Explain ECS task definition: container defs, env vars, secrets, CPU/memory, logging.
+**Answer:**
+- Task definitions declare image, command, ports, health check, and resource limits at task/container level.
+- Put non-secret config in env vars; inject secrets from Secrets Manager/SSM via task definition references.
+- Configure logging driver (`awslogs`/FireLens), task role, and execution role explicitly.
+
+---
+
+### 175) How do ECS services maintain desired count and replace unhealthy tasks?
+**Answer:**
+- ECS scheduler continuously reconciles running tasks to the service `desiredCount`.
+- Unhealthy tasks are detected from container checks, ELB target health, or task stop events and then replaced.
+- Placement strategies, deployment config, and AZ spread determine where replacements launch.
+
+---
+
+### 176) How do you set up autoscaling in ECS (target tracking on CPU/memory/ALB requests)?
+**Answer:**
+- Use Application Auto Scaling with target tracking policies on ECS service metrics (CPU, memory, ALB requests/target).
+- Define min/max desired tasks and cooldowns to avoid oscillation.
+- Ensure compute capacity can grow too (capacity providers or cluster autoscaling), or scale-out will stall.
+
+---
+
+### 177) How do you do rolling deployments in ECS and avoid downtime?
+**Answer:**
+- Tune `minimumHealthyPercent` and `maximumPercent` so old and new tasks overlap during rollout.
+- Use readiness/health checks plus graceful shutdown so connections drain before stop.
+- For higher safety, use CodeDeploy blue/green with alarm-based automatic rollback.
+
+---
+
+### 178) How do you wire ALB -> ECS and configure health checks properly?
+**Answer:**
+- Attach service to an ALB target group (IP targets for `awsvpc`) and route listener rules to that group.
+- Expose a fast, dependency-light health endpoint and tune interval/timeout/thresholds for your startup profile.
+- Restrict task security group ingress to ALB security group only.
+
+---
+
+### 179) Explain ECS networking modes and security groups with awsvpc.
+**Answer:**
+- `awsvpc` assigns each task its own ENI/IP/security groups (required for Fargate).
+- `bridge` and `host` are EC2-focused modes with different port-mapping and isolation tradeoffs.
+- With `awsvpc`, design SG rules per service and watch subnet IP/ENI limits under scale.
+
+---
+
+### 180) How do you run background jobs/cron on ECS (scheduled tasks)?
+**Answer:**
+- Use EventBridge Scheduler/Rules to trigger `RunTask` on cron or rate expressions.
+- Keep scheduled jobs idempotent, because retries and duplicate triggers can happen.
+- For continuous background processing, run worker services consuming SQS.
+
+---
+
+### 181) How do you store container logs (CloudWatch Logs, FireLens) and debug production incidents?
+**Answer:**
+- Send logs to CloudWatch Logs for baseline observability; use structured JSON for fast querying.
+- Use FireLens when you need multi-destination routing or advanced log enrichment.
+- During incidents, correlate task/service events, container exit codes, deployment IDs, and app traces.
+
+---
+
+### 182) Common ECS failures (image pull, IAM, networking, task exits) - how do you identify root cause?
+**Answer:**
+- Check ECS service events first for pull auth failures, missing image tags, or placement/capacity errors.
+- Validate execution role permissions (ECR/logs) and task role permissions (app AWS calls).
+- Inspect stopped task reason, container logs, and VPC path (SG/NACL/DNS/NAT/endpoints) for network-driven failures.
+
+---
+
+## 14) EKS (183-192)
+
+### 183) EKS architecture: control plane vs worker nodes - what does AWS manage?
+**Answer:**
+- AWS manages control plane components (API server/etcd availability, patching, control plane scaling).
+- You manage worker compute (managed nodes, self-managed nodes, or Fargate profiles), add-ons, and workloads.
+- Security, RBAC, network policy, and observability are still customer responsibilities.
+
+---
+
+### 184) Managed node groups vs self-managed nodes vs Fargate on EKS - when to use what?
+**Answer:**
+- Managed node groups are default for most teams: easier lifecycle, patching, and rolling upgrades.
+- Self-managed nodes are for advanced customization (custom AMIs/bootstrap flags/special hardware needs).
+- EKS on Fargate fits pod-level isolation and no-node-ops use cases, with feature/cost constraints to validate.
+
+---
+
+### 185) How does Kubernetes scheduling work (requests/limits, taints/tolerations, affinity)?
+**Answer:**
+- Scheduler places pods based on requested CPU/memory and node availability.
+- Limits cap runtime usage; bad request sizing causes either waste or unschedulable pods.
+- Taints/tolerations, affinity/anti-affinity, and topology rules shape placement for isolation and resilience.
+
+---
+
+### 186) How do you expose services: ClusterIP vs NodePort vs LoadBalancer vs Ingress?
+**Answer:**
+- `ClusterIP`: internal-only service access inside cluster.
+- `NodePort`/`LoadBalancer`: external exposure at L4; `LoadBalancer` auto-provisions cloud LB.
+- `Ingress`: L7 routing (host/path/TLS) via ingress controller, typically for multiple HTTP services.
+
+---
+
+### 187) What is the AWS Load Balancer Controller and why do teams use it?
+**Answer:**
+- It watches Kubernetes resources and provisions ALB/NLB resources automatically via AWS APIs.
+- Enables managed ingress with host/path routing, TLS via ACM, and WAF integration.
+- Reduces manual LB drift and keeps infra changes declarative in Kubernetes manifests.
+
+---
+
+### 188) How do you handle secrets in EKS (KMS, Sealed Secrets, external secrets)?
+**Answer:**
+- Source secrets from Secrets Manager/SSM encrypted with KMS, then project into pods via operators/CSI drivers.
+- Avoid plaintext secrets in Git; for GitOps, use encrypted manifests (for example Sealed Secrets/SOPS patterns).
+- Lock down access using namespace scoping, RBAC, and least-privilege IAM roles.
+
+---
+
+### 189) Explain IAM Roles for Service Accounts (IRSA) and why it matters.
+**Answer:**
+- IRSA maps a Kubernetes service account to a dedicated IAM role through OIDC federation.
+- It removes dependency on broad node IAM roles and avoids static credentials in pods.
+- This enables per-workload least privilege and clearer CloudTrail attribution.
+
+---
+
+### 190) How do you implement autoscaling in EKS (HPA, Cluster Autoscaler/Karpenter)?
+**Answer:**
+- HPA scales pod replicas using resource/custom metrics.
+- Cluster Autoscaler or Karpenter scales node capacity when pods are pending.
+- Right-size requests/limits first; otherwise autoscaling decisions will be inaccurate.
+
+---
+
+### 191) How do you do zero-downtime deployments in Kubernetes (readiness/liveness, rolling updates)?
+**Answer:**
+- Use correct readiness probes so traffic only reaches pods that are truly ready.
+- Configure rolling updates (`maxUnavailable`, `maxSurge`) to maintain serving capacity during rollout.
+- Add graceful termination (`preStop`, termination grace period) and PodDisruptionBudgets.
+
+---
+
+### 192) Typical EKS issues (DNS, CNI, pod networking, image pulls) - debugging approach?
+**Answer:**
+- Start with `kubectl describe` events and pod/node status to isolate scheduling vs runtime failures.
+- Check CoreDNS and VPC CNI health for DNS/IP exhaustion/network attachment issues.
+- For image pulls, verify ECR auth/permissions, registry reachability, and node-level network egress.
+
+---
+
+## 15) AWS Glue (193-198)
+
+### 193) What problems does AWS Glue solve in data engineering?
+**Answer:**
+- Glue provides managed ETL/ELT execution for batch and streaming pipelines.
+- It centralizes metadata with Data Catalog for shared schema discovery/governance.
+- It reduces operational overhead compared with self-managed Spark clusters for common data workloads.
+
+---
+
+### 194) Glue Crawler vs Glue Job - when to use which?
+**Answer:**
+- Crawlers detect schema/partitions and update Data Catalog tables.
+- Jobs execute transformation logic and write curated outputs.
+- Typical flow: crawl raw zone, run jobs for cleansing/enrichment, publish curated datasets.
+
+---
+
+### 195) Glue DynamicFrames vs Spark DataFrames - differences and tradeoffs.
+**Answer:**
+- DynamicFrames are schema-flexible and handle semi-structured inconsistencies better.
+- DataFrames are usually faster and have richer Spark SQL/function support.
+- Common pattern: ingest with DynamicFrame, convert to DataFrame for heavy transforms.
+
+---
+
+### 196) How do you handle schema evolution with Glue + Data Catalog?
+**Answer:**
+- Use partition-aware crawls and controlled table updates for additive schema changes.
+- For breaking changes, version tables/contracts instead of silently mutating shared schemas.
+- Add validation checks in jobs to fail fast when producer schema drifts unexpectedly.
+
+---
+
+### 197) How do you optimize Glue jobs (DPUs, partitioning, pushdown predicates)?
+**Answer:**
+- Reduce data scanned using partition pruning and pushdown predicates.
+- Right-size workers/DPUs and use job bookmarks for incremental processing.
+- Store outputs in columnar formats (Parquet/ORC) with reasonable file sizes.
+
+---
+
+### 198) How do you secure Glue (IAM, KMS, VPC endpoints, data access controls)?
+**Answer:**
+- Apply least-privilege IAM for crawlers/jobs and scoped data-path permissions.
+- Encrypt source/target/temp data and catalog artifacts with KMS.
+- Run jobs in VPC with private connectivity/endpoints when accessing private data stores.
+
+---
+
+## 16) Redshift (199-203)
+
+### 199) Redshift vs RDS/Aurora - when is Redshift the right choice?
+**Answer:**
+- Redshift is a columnar MPP warehouse optimized for analytics over large datasets.
+- RDS/Aurora are OLTP relational databases optimized for transactional workloads.
+- Choose Redshift for BI/reporting workloads with heavy scans, aggregations, and concurrency at scale.
+
+---
+
+### 200) What are distribution styles/keys and sort keys - why do they matter?
+**Answer:**
+- Distribution determines how rows are spread across nodes, affecting join/shuffle cost.
+- Sort keys determine on-disk ordering and improve range filtering and compression.
+- Correct dist/sort design is one of the highest-leverage factors for query performance.
+
+---
+
+### 201) How do you load data efficiently into Redshift (COPY, S3, compression)?
+**Answer:**
+- Stage data in S3 and use `COPY` with compressed, well-sized files.
+- Avoid many tiny files; parallelism is best with multiple moderately large objects.
+- Use proper IAM role access and run post-load statistics updates.
+
+---
+
+### 202) How do you optimize query performance (VACUUM/ANALYZE, WLM, concurrency scaling)?
+**Answer:**
+- Keep table stats fresh with `ANALYZE`; use `VACUUM` strategy as needed for table maintenance.
+- Tune WLM/query priorities to isolate heavy queries from latency-sensitive workloads.
+- Use concurrency scaling and monitor skew/spill in execution plans for targeted fixes.
+
+---
+
+### 203) How do you secure Redshift (networking, IAM auth, encryption)?
+**Answer:**
+- Place clusters in private subnets and restrict access via tight security group rules.
+- Prefer IAM-based temporary credentials/federation over long-lived passwords where possible.
+- Enable encryption at rest (KMS) and enforce TLS in transit.
+
+---
+
+## 17) EMR (204-208)
+
+### 204) What is EMR and when would you choose it over Glue?
+**Answer:**
+- EMR is managed big-data compute for frameworks like Spark, Hive, and Hadoop.
+- Choose EMR when you need deep cluster/framework tuning or long-running custom workloads.
+- Choose Glue when serverless managed ETL is enough and minimal ops is a priority.
+
+---
+
+### 205) EMR cluster types: transient vs long-running - use cases.
+**Answer:**
+- Transient clusters run a pipeline then terminate, good for scheduled batch cost control.
+- Long-running clusters fit interactive analytics, notebooks, and frequent ad-hoc jobs.
+- Pick based on workload frequency, startup tolerance, and operational model.
+
+---
+
+### 206) How do you manage scaling and cost on EMR (Spot, autoscaling, instance fleets)?
+**Answer:**
+- Use instance fleets with a mix of On-Demand and Spot for better price/performance.
+- Enable managed scaling/autoscaling based on YARN and workload metrics.
+- Add checkpointing and interruption-aware design so Spot reclaim events do not lose progress.
+
+---
+
+### 207) How do you troubleshoot Spark jobs on EMR (logs, YARN UI, executor memory)?
+**Answer:**
+- Review Spark History Server and YARN UI to locate stage failures, skew, spills, and retries.
+- Check driver/executor logs for OOM, GC pressure, and serialization issues.
+- Tune executor memory/cores/partitions and retest on representative data.
+
+---
+
+### 208) How do you integrate EMR with S3, Glue Data Catalog, and IAM securely?
+**Answer:**
+- Use EMRFS with least-privilege IAM roles and controlled S3 path permissions.
+- Configure Glue Data Catalog as metastore for consistent schema sharing.
+- Protect data paths with KMS encryption and private network connectivity where required.
+
+---
+
+## 18) AWS KMS (209-222)
+
+### 209) What is AWS KMS and what problems does it solve in cloud security?
+**Answer:**
+- KMS is a managed key management service used by applications and AWS services.
+- It centralizes key lifecycle controls, access policy, audit trails, and cryptographic operations.
+- It simplifies secure encryption patterns without teams running their own HSM infrastructure.
+
+---
+
+### 210) What's the difference between AWS-managed keys and customer-managed keys (CMK)?
+**Answer:**
+- AWS-managed keys are created/managed by AWS services with limited policy control.
+- Customer-managed keys give you full control over policy, rotation, grants, disable/delete, and sharing.
+- Use customer-managed keys when compliance, tenancy boundaries, or cross-account control matters.
+
+---
+
+### 211) What's the difference between KMS key policy and IAM policy for KMS access? Which one is required?
+**Answer:**
+- Key policy is mandatory and is the primary authorization layer on the key resource.
+- IAM policy can allow use only when key policy also permits IAM principals.
+- In practice, both are often used together for least-privilege and operational flexibility.
+
+---
+
+### 212) Explain envelope encryption. Where does KMS fit in this flow?
+**Answer:**
+- KMS generates/protects data keys, while data is encrypted/decrypted by your app or service locally.
+- `GenerateDataKey` returns plaintext key (for immediate use) plus encrypted key blob (for storage).
+- Later, `Decrypt` unwraps the encrypted data key so data can be read.
+
+---
+
+### 213) What is the difference between Encrypt/Decrypt vs GenerateDataKey APIs?
+**Answer:**
+- `Encrypt/Decrypt` is for small payloads directly through KMS crypto operations.
+- `GenerateDataKey` is for high-volume envelope encryption where data is encrypted outside KMS.
+- Data key workflows usually scale better and reduce KMS API overhead for large data.
+
+---
+
+### 214) What is a KMS alias, and why do teams prefer alias-based references in code/IaC?
+**Answer:**
+- An alias is a stable friendly name that points to a KMS key.
+- Code/IaC can reference alias names instead of hardcoded key IDs.
+- This allows key replacement/rotation workflows with less application change.
+
+---
+
+### 215) What is key rotation in KMS (automatic vs manual), and what changes for apps?
+**Answer:**
+- Automatic rotation rotates key material for supported symmetric keys on a schedule.
+- Manual rotation typically means creating a new key and migrating encryption over time.
+- Most apps continue working without decrypt breakage, but governance and migration processes must be planned.
+
+---
+
+### 216) How do you use KMS with S3 SSE-KMS and what permissions are needed for read/write?
+**Answer:**
+- Writes need S3 object permissions plus KMS permissions like `kms:Encrypt`/`kms:GenerateDataKey`.
+- Reads need S3 read permissions plus `kms:Decrypt` on the same key.
+- Align bucket policy, IAM policy, and key policy to the same principals and conditions.
+
+---
+
+### 217) Common causes of AccessDeniedException for KMS in Lambda/ECS/EKS - how do you debug?
+**Answer:**
+- Confirm the runtime principal (assumed role/service account role) and requested key ARN/region.
+- Validate key policy, IAM policy, permissions boundaries, and SCPs for explicit denies.
+- Check encryption context/service conditions and CloudTrail events to find the failed decision point.
+
+---
+
+### 218) What are KMS grants, and when would you use grants instead of key policy changes?
+**Answer:**
+- Grants are scoped permissions on a key, often short-lived and service-driven.
+- They are useful for high-churn delegation without repeatedly editing key policies.
+- Use them when temporary/runtime access delegation is needed with clear revocation control.
+
+---
+
+### 219) What is cross-account KMS access? How do you design it safely?
+**Answer:**
+- Cross-account use requires key policy in owner account and IAM allow in caller account.
+- Grant only required actions (`Encrypt`, `Decrypt`, `GenerateDataKey`) and specific principals.
+- Add conditions and monitoring to prevent broad, persistent cross-account blast radius.
+
+---
+
+### 220) How do you handle KMS in multi-region scenarios (multi-region keys, replication, DR planning)?
+**Answer:**
+- Multi-region keys provide related key material in multiple regions for lower-latency decrypt and DR.
+- Pair key strategy with data replication design (S3, DynamoDB global tables, database replicas).
+- Test failover paths end-to-end so decrypt/reencrypt behavior is verified before incidents.
+
+---
+
+### 221) What's the difference between KMS and CloudHSM (when would EY expect CloudHSM)?
+**Answer:**
+- KMS is fully managed and integrated broadly with AWS services.
+- CloudHSM provides dedicated HSM control and custom crypto capabilities with more operational overhead.
+- Choose CloudHSM for strict regulatory/key-custody requirements or custom cryptographic needs.
+
+---
+
+### 222) What are KMS quotas/limits (API rate limits, request patterns) and how can apps avoid throttling?
+**Answer:**
+- KMS enforces per-region request quotas and can throttle bursty usage patterns.
+- Reduce call volume with envelope encryption, data key reuse/caching, and batching patterns.
+- Implement retries with exponential backoff + jitter and monitor throttling signals proactively.
+
+---

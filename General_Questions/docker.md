@@ -1,4 +1,4 @@
-# Docker Interview Q&A (Core Concepts) - 25 Questions
+# Docker Interview Q&A (Combined Core Concepts and Additional Topics)
 
 ## 1) What is Docker, and how is it different from a virtual machine?
 
@@ -804,3 +804,822 @@ Good production image
 ```
 
 This is the interview-friendly answer: small image, fewer attack surfaces, reproducible builds, and clean runtime behavior.
+
+---
+
+## Additional Docker Interview Questions
+
+## 26) What are the main features of Docker?
+
+**Answer:**
+
+Docker is popular because it makes applications portable and consistent across environments.
+
+- It packages the app and its dependencies together
+- Containers start faster than virtual machines
+- Images are versioned and easy to share through registries
+- Containers isolate processes and filesystem changes
+- Docker works well with CI/CD and modern DevOps workflows
+
+```text
+Build once -> ship image -> run consistently
+```
+
+---
+
+## 27) What are the pros and cons of Docker?
+
+**Answer:**
+
+**Pros:**
+
+- Consistent behavior across dev, test, and production
+- Lightweight compared with full virtual machines
+- Fast startup and simpler deployment packaging
+- Easy image versioning and rollback
+
+**Cons:**
+
+- Containers share the host kernel, so isolation is weaker than VMs
+- Storage and networking need careful setup
+- Misconfigured images or privileges can create security risks
+- Large multi-container systems usually need orchestration
+
+Interview summary:
+Docker improves portability and deployment speed, but you still need good practices around security, persistence, and operations.
+
+---
+
+## 28) What are the main components of Docker?
+
+**Answer:**
+
+Core Docker components include:
+
+- **Docker Client**: the `docker` CLI used to send commands
+- **Docker Daemon**: the background service that builds and runs containers
+- **Images**: reusable templates for containers
+- **Containers**: running instances of images
+- **Registries**: places to store and pull images, like Docker Hub
+- **Volumes and Networks**: persistent storage and communication layers
+
+```text
+docker CLI -> Docker daemon -> images / containers / volumes / networks
+```
+
+---
+
+## 29) What are the common states of a Docker container?
+
+**Answer:**
+
+Common container states are:
+
+- `created`
+- `running`
+- `paused`
+- `restarting`
+- `exited`
+
+```bash
+docker ps -a --format "table {{.Names}}\t{{.Status}}"
+```
+
+Interview shortcut:
+
+- running = active process
+- paused = frozen temporarily
+- exited = stopped process
+
+---
+
+## 30) What is the role of a hypervisor?
+
+**Answer:**
+
+A hypervisor is the software layer that lets multiple virtual machines run on one physical host.
+
+- It creates and manages guest operating systems
+- It allocates CPU, memory, storage, and networking to each VM
+- It provides stronger isolation than containers, but with more overhead
+
+This is one reason VMs are heavier than Docker containers.
+
+---
+
+## 31) When can data stored inside a container be lost?
+
+**Answer:**
+
+Data written into the container's writable layer is ephemeral.
+
+- It can be lost when the container is removed
+- Recreating the container does not preserve that writable layer
+- This is why databases and uploads should use volumes or bind mounts
+
+```bash
+docker run -d -v pg_data:/var/lib/postgresql/data postgres:16
+```
+
+If the container is replaced, the data in `pg_data` still remains.
+
+---
+
+## 32) How do you export and import a Docker image as a tar archive?
+
+**Answer:**
+
+Use `docker save` to export an image and `docker load` to import it on another host.
+
+```bash
+docker save -o my-app.tar my-app:1.0
+docker load -i my-app.tar
+```
+
+Important distinction:
+
+- `save` and `load` are for images
+- `export` and `import` are for container filesystems
+
+---
+
+## 33) Can a paused container be removed?
+
+**Answer:**
+
+The safe interview answer is: unpause it, stop it, then remove it.
+
+```bash
+docker unpause my-container
+docker stop my-container
+docker rm my-container
+```
+
+That is clearer and safer than trying to remove a paused container directly.
+
+---
+
+## 34) How do you count running, paused, and stopped containers?
+
+**Answer:**
+
+Use `docker ps` with filters and count the results.
+
+```bash
+docker ps -q | wc -l
+docker ps -aq -f "status=paused" | wc -l
+docker ps -aq -f "status=exited" | wc -l
+```
+
+This is useful in scripts, dashboards, and quick health checks.
+
+---
+
+## 35) What is the difference between daemon-level logging and container-level logging?
+
+**Answer:**
+
+- **Daemon-level logging** refers to logs and logging configuration for the Docker service itself
+- **Container-level logging** refers to stdout and stderr logs produced by a specific container
+
+```bash
+docker logs my-container
+```
+
+Interview shortcut:
+
+- daemon level = Docker engine behavior
+- container level = application output for one container
+
+---
+
+## 36) What does the `docker info` command do?
+
+**Answer:**
+
+`docker info` gives a high-level summary of the current Docker environment.
+
+It typically shows:
+
+- number of containers and images
+- storage driver
+- logging driver
+- CPU and memory availability
+- runtimes and other host details
+
+```bash
+docker info
+```
+
+---
+
+## 37) Where are Docker volumes stored?
+
+**Answer:**
+
+On a typical Linux installation, named volumes are usually stored under:
+
+```text
+/var/lib/docker/volumes/
+```
+
+Important note:
+
+- the exact location depends on the host OS and Docker backend
+- with Docker Desktop, volumes are usually managed inside Docker's internal VM
+
+In practice, teams usually manage volumes with Docker commands rather than browsing the filesystem path directly.
+
+---
+
+## 38) What is the difference between a Docker image and an image layer?
+
+**Answer:**
+
+- A Docker image is the final packaged artifact used to create containers
+- A layer is one filesystem change inside that image
+- Multiple images can share common layers
+
+```text
+Image = ordered stack of layers + metadata
+```
+
+This layered design is why Docker builds can reuse cache efficiently.
+
+---
+
+## 39) Can a container restart automatically?
+
+**Answer:**
+
+Yes. Docker supports restart policies that automatically restart containers in specific situations.
+
+```bash
+docker run -d --restart unless-stopped nginx
+```
+
+Common reasons to use restart policies:
+
+- recover from app crashes
+- restart after the Docker daemon restarts
+- keep long-running services available
+
+---
+
+## 40) What are Docker object labels?
+
+**Answer:**
+
+Labels are key-value metadata attached to Docker objects such as images, containers, volumes, and networks.
+
+Typical uses:
+
+- environment tagging
+- ownership and team mapping
+- automation and filtering
+- version or service metadata
+
+```bash
+docker run -d --label environment=prod --label team=payments nginx
+```
+
+---
+
+## 41) How do you check Docker client and server versions?
+
+**Answer:**
+
+Use the `docker version` command.
+
+```bash
+docker version
+```
+
+It shows:
+
+- client version
+- server version
+- API version
+- platform details
+
+---
+
+## 42) What does `docker system prune` do?
+
+**Answer:**
+
+`docker system prune` removes unused Docker resources and helps free disk space.
+
+It can clean:
+
+- stopped containers
+- unused networks
+- dangling or unused images
+- build cache
+
+```bash
+docker system prune
+docker system prune -a
+```
+
+Use it carefully because it deletes resources Docker considers unused.
+
+---
+
+## 43) What is Docker Swarm?
+
+**Answer:**
+
+Docker Swarm is Docker's built-in orchestration mode for managing services across multiple nodes.
+
+It provides:
+
+- service replicas
+- rolling updates
+- service discovery
+- built-in load balancing
+
+```bash
+docker swarm init
+docker service create --name web -p 80:80 nginx
+```
+
+Compared with Kubernetes, Swarm is simpler but less feature-rich.
+
+---
+
+## 44) How do you scale Docker containers horizontally?
+
+**Answer:**
+
+Horizontal scaling means running multiple instances of the same service.
+
+Examples:
+
+```bash
+docker compose up -d --scale web=3
+docker service scale web=5
+```
+
+Why teams do this:
+
+- handle more traffic
+- improve availability
+- reduce single-container bottlenecks
+
+---
+
+## 45) What is the difference between restart policies `no`, `on-failure`, and `always`?
+
+**Answer:**
+
+- `no`: never restart automatically
+- `on-failure`: restart only if the container exits with a non-zero status
+- `always`: restart regardless of how it exited
+
+```bash
+docker run --restart no my-app
+docker run --restart on-failure:3 my-app
+docker run --restart always my-app
+```
+
+One more policy often seen in practice is `unless-stopped`.
+
+---
+
+## 46) How do you inspect Docker image metadata?
+
+**Answer:**
+
+Use `docker inspect` on the image.
+
+```bash
+docker inspect nginx:latest
+```
+
+This helps you view:
+
+- labels
+- environment variables
+- entrypoint and command
+- architecture and OS
+- low-level config metadata
+
+---
+
+## 47) How do you limit CPU and memory for a Docker container?
+
+**Answer:**
+
+Set resource limits when starting the container.
+
+```bash
+docker run --cpus="2.0" -m 1g my-app
+```
+
+This helps:
+
+- protect the host from noisy containers
+- prevent one service from consuming all resources
+- make performance behavior more predictable
+
+---
+
+## 48) What is the purpose of `docker checkpoint`?
+
+**Answer:**
+
+`docker checkpoint` captures the runtime state of a container so it can later be restored on a compatible system.
+
+```bash
+docker checkpoint create my-container checkpoint-1
+```
+
+Important interview note:
+
+- it is a specialized feature
+- it depends on runtime and kernel support
+- it is not part of most everyday Docker workflows
+
+---
+
+## 49) What is the lifecycle of a Docker container?
+
+**Answer:**
+
+A container usually moves through these stages:
+
+- created
+- running
+- paused
+- exited
+- removed
+
+```text
+create -> start -> running -> stop -> exited -> rm
+```
+
+If a restart policy is set, the container can move back into `running` automatically.
+
+---
+
+## 50) How do you control startup order in Docker Compose?
+
+**Answer:**
+
+Use `depends_on` to declare service dependencies.
+
+```yaml
+services:
+  api:
+    build: .
+    depends_on:
+      - db
+
+  db:
+    image: postgres:16
+```
+
+Important detail:
+
+- `depends_on` controls startup order
+- it does not guarantee the dependency is fully ready
+- use health checks or retry logic if readiness matters
+
+---
+
+## 51) How does Docker handle isolation and security?
+
+**Answer:**
+
+Docker uses Linux kernel features and runtime restrictions to isolate containers.
+
+Key mechanisms:
+
+- namespaces for process, network, and filesystem isolation
+- cgroups for resource limits
+- capabilities to reduce privileges
+- seccomp and other runtime security options
+
+Interview summary:
+containers give process-level isolation, but not the same boundary as a full virtual machine.
+
+---
+
+## 52) How do the Docker client and Docker daemon communicate?
+
+**Answer:**
+
+The Docker client sends requests to the Docker daemon through the Docker API.
+
+This usually happens over:
+
+- a Unix socket on Linux
+- a named pipe on Windows
+- optionally a TCP endpoint
+
+```text
+docker CLI -> Docker API -> dockerd
+```
+
+The daemon then builds images, starts containers, and manages networks and volumes.
+
+---
+
+## 53) How is Docker used in CI/CD pipelines?
+
+**Answer:**
+
+Docker makes CI/CD more predictable because builds, tests, and deployments can use the same packaged environment.
+
+Common pattern:
+
+- build the image in CI
+- run tests inside the image
+- push the image to a registry
+- deploy the same image to staging and production
+
+```text
+build -> test -> push -> deploy
+```
+
+---
+
+## 54) Is it a good practice to run stateful applications in Docker?
+
+**Answer:**
+
+Yes, but it requires more care than running stateless services.
+
+Good practices:
+
+- use persistent volumes or external storage
+- plan backups and restore procedures
+- monitor disk, latency, and I/O
+- understand failover and scheduling behavior
+
+Interview answer:
+Docker is easiest with stateless apps, but stateful workloads are common when storage is designed properly.
+
+---
+
+## 55) What is the purpose of Docker Secrets?
+
+**Answer:**
+
+Docker Secrets is used to pass sensitive data to services without baking it into the image.
+
+Typical examples:
+
+- database passwords
+- API keys
+- certificates
+
+```bash
+docker secret create db_password db_password.txt
+```
+
+This topic is most commonly discussed with Docker Swarm services.
+
+---
+
+## 56) How do you update a Docker container without losing data?
+
+**Answer:**
+
+Keep persistent data outside the container, then replace the old container with a new one built from the updated image.
+
+Typical pattern:
+
+- store data in a volume or bind mount
+- stop and remove the old container
+- start a new container using the same data mount
+
+```bash
+docker run -d -v app_data:/app/data my-app:2.0
+```
+
+Containers should be replaceable. The data should not live only inside the container layer.
+
+---
+
+## 57) How does service discovery work in Docker Swarm mode?
+
+**Answer:**
+
+Swarm provides built-in service discovery through an internal DNS system.
+
+That means:
+
+- services get DNS names
+- containers can reach other services by service name
+- requests can be balanced across service tasks
+
+```text
+web service -> resolves db -> connects over overlay network
+```
+
+---
+
+## 58) How do you access a running container?
+
+**Answer:**
+
+Use `docker exec` to run a shell or command inside a running container.
+
+```bash
+docker exec -it my-container sh
+docker exec -it my-container bash
+```
+
+Use `sh` when `bash` is not installed, which is common in minimal images like Alpine.
+
+---
+
+## 59) What factors determine how many containers a host can run?
+
+**Answer:**
+
+There is no fixed number. It depends on:
+
+- available CPU and memory
+- per-container limits
+- application workload
+- storage and network load
+- file descriptor and process limits
+
+Interview shortcut:
+the limit depends on the workload profile, not just the amount of RAM.
+
+---
+
+## 60) How do you monitor Docker in production?
+
+**Answer:**
+
+Use a combination of metrics, logs, and alerts.
+
+Common monitoring inputs:
+
+- `docker stats` for quick live usage
+- Prometheus and Grafana for metrics
+- centralized logging like ELK or Loki
+- health checks and restart monitoring
+
+```bash
+docker stats
+```
+
+You usually want visibility into CPU, memory, disk, restart count, health status, and container logs.
+
+---
+
+## 61) How does load balancing work across containers and hosts?
+
+**Answer:**
+
+Load balancing distributes traffic across multiple healthy container instances.
+
+This can be handled by:
+
+- reverse proxies like Nginx or Traefik
+- Docker Swarm routing mesh
+- orchestration platforms like Kubernetes
+
+Benefits:
+
+- better throughput
+- higher availability
+- smoother horizontal scaling
+
+---
+
+## 62) How do containers share data in Docker?
+
+**Answer:**
+
+The normal way is to mount the same volume into multiple containers.
+
+```bash
+docker volume create shared_data
+docker run -d --name c1 -v shared_data:/data alpine sleep 1000
+docker run -d --name c2 -v shared_data:/data alpine sleep 1000
+```
+
+You can also use bind mounts when containers need access to a specific host path.
+
+---
+
+## 63) How do you perform live migration of Docker containers between hosts?
+
+**Answer:**
+
+In most real systems, ordinary Docker containers are not live-migrated the way virtual machines are.
+
+Common practice is:
+
+- start a replacement container on another host
+- reattach persistent data if needed
+- shift traffic using a load balancer or orchestrator
+
+For true stateful migration, checkpoint and restore on compatible Linux systems may be required, but that is a specialized workflow rather than the default Docker model.
+
+---
+
+## 64) How do you start, stop, and kill a container?
+
+**Answer:**
+
+Use these commands:
+
+```bash
+docker start my-container
+docker stop my-container
+docker kill my-container
+```
+
+Interview shortcut:
+
+- `start` runs an existing stopped container
+- `stop` asks the container to shut down gracefully
+- `kill` stops it immediately by sending a signal, usually `SIGKILL`
+
+---
+
+## 65) What are the essential Docker commands and what do they do?
+
+**Answer:**
+
+Some commonly used Docker commands are:
+
+- `docker build`: build an image from a Dockerfile
+- `docker pull`: download an image from a registry
+- `docker run`: create and start a container
+- `docker ps`: list running containers
+- `docker exec`: run a command inside a running container
+- `docker logs`: view container logs
+- `docker inspect`: view detailed metadata
+- `docker stop`: stop a container
+- `docker rm`: remove a container
+- `docker image ls`: list images
+
+```bash
+docker build -t my-app .
+docker run -d --name app my-app
+docker ps
+docker logs app
+```
+
+---
+
+## 66) What are the differences between Docker Community Edition (CE) and Docker Enterprise Edition (EE)?
+
+**Answer:**
+
+This is mostly a historical interview question.
+
+- **Docker CE** was the free community distribution used widely for development and general container workflows
+- **Docker EE** was the enterprise offering focused on support, certification, security features, and enterprise management needs
+
+Interview-safe summary:
+
+- CE = community/free usage
+- EE = enterprise support and enterprise-focused tooling
+
+Today, teams more often talk about Docker Engine, Docker Desktop, Kubernetes platforms, or vendor-supported enterprise container stacks rather than the older CE vs EE split.
+
+---
+
+## 67) Can you use JSON instead of YAML for a Docker Compose file?
+
+**Answer:**
+
+In practice, Docker Compose files are written in YAML.
+
+- The standard and common format is `compose.yaml`, `compose.yml`, or `docker-compose.yml`
+- Official examples and normal team workflows use YAML
+- JSON-shaped content may be parseable in some cases because YAML is a superset of JSON, but it is not the normal or recommended interview answer
+
+Interview shortcut:
+Compose files are expected in YAML.
+
+---
+
+## 68) What is the preferred way to remove a container: `docker stop` plus `docker rm`, or `docker rm` by itself?
+
+**Answer:**
+
+If the container is running, the preferred approach is:
+
+```bash
+docker stop my-container
+docker rm my-container
+```
+
+Why:
+
+- it gives the application a chance to shut down cleanly
+- it avoids abrupt interruption of active processes
+- it is safer for logs, connections, and in-flight work
+
+Use `docker rm` by itself only when the container is already stopped. Use `docker rm -f` only when you really need to force removal.

@@ -35,336 +35,336 @@
 Hide/Show table of contents
 </summary>
 
-| No. | Questions                                                                                                                                                                                                                        |
-| --- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|     | **Core React**                                                                                                                                                                                                                   |
-| 1   | [What is React?](#what-is-react)                                                                                                                                                                                                 |
-| 2   | [What is the history behind React’s evolution?](#what-is-the-history-behind-react-evolution)                                                                                                                                      |
-| 3   | [What are the major features of React?](#what-are-the-major-features-of-react)                                                                                                                                                   |
-| 4   | [What is JSX?](#what-is-jsx)                                                                                                                                                                                                     |
-| 5   | [What is the difference between an Element and a Component?](#what-is-the-difference-between-an-element-and-a-component)                                                                                                              |
-| 6   | [How do you create components in React?](#how-to-create-components-in-react)                                                                                                                                                     |
-| 7   | [When should you use a Class Component over a Function Component?](#when-to-use-a-class-component-over-a-function-component)                                                                                                    |
-| 8   | [What are Pure Components?](#what-are-pure-components)                                                                                                                                                                           |
-| 9   | [What is state in React?](#what-is-state-in-react)                                                                                                                                                                               |
-| 10  | [What are props in React?](#what-are-props-in-react)                                                                                                                                                                             |
-| 11  | [What is the difference between state and props?](#what-is-the-difference-between-state-and-props)                                                                                                                               |
-| 12  | [What is the difference between HTML and React event handling?](#what-is-the-difference-between-html-and-react-event-handling)                                                                                                   |
-| 13  | [What are synthetic events in React?](#what-are-synthetic-events-in-react)                                                                                                                                                       |
-| 14  | [What are inline conditional expressions?](#what-are-inline-conditional-expressions)                                                                                                                                             |
-| 15  | [What is the "key" prop and what is its benefit when used in arrays of elements?](#what-is-key-prop-and-what-is-the-benefit-of-using-it-in-arrays-of-elements)                                                                    |
-| 16  | [What is the Virtual DOM?](#what-is-virtual-dom)                                                                                                                                                                                 |
-| 17  | [How does the Virtual DOM work?](#how-virtual-dom-works)                                                                                                                                                                         |
-| 18  | [What is the difference between Shadow DOM and Virtual DOM?](#what-is-the-difference-between-shadow-dom-and-virtual-dom)                                                                                                         |
-| 19  | [What is React Fiber?](#what-is-react-fiber)                                                                                                                                                                                     |
-| 20  | [What is the main goal of React Fiber?](#what-is-the-main-goal-of-react-fiber)                                                                                                                                                   |
-| 21  | [What are controlled components?](#what-are-controlled-components)                                                                                                                                                               |
-| 22  | [What are uncontrolled components?](#what-are-uncontrolled-components)                                                                                                                                                           |
-| 23  | [What is the difference between createElement and cloneElement?](#what-is-the-difference-between-createelement-and-cloneelement)                                                                                                 |
-| 24  | [What is Lifting State Up in React?](#what-is-lifting-state-up-in-react)                                                                                                                                                         |
-| 25  | [What are Higher-Order Components?](#what-are-higher-order-components)                                                                                                                                                           |
-| 26  | [What is the children prop?](#what-is-children-prop)                                                                                                                                                                             |
-| 27  | [How do you write comments in React?](#how-to-write-comments-in-react)                                                                                                                                                           |
-| 28  | [What is reconciliation?](#what-is-reconciliation)                                                                                                                                                                               |
-| 29  | [Does the lazy function support named exports?](#does-the-lazy-function-support-named-exports)                                                                                                                                   |
-| 30  | [Why does React use className instead of the class attribute?](#why-react-uses-classname-over-class-attribute)                                                                                                                   |
-| 31  | [What are Fragments?](#what-are-fragments)                                                                                                                                                                                       |
-| 32  | [Why are Fragments better than container divs?](#why-fragments-are-better-than-container-divs)                                                                                                                                   |
-| 33  | [What are portals in React?](#what-are-portals-in-react)                                                                                                                                                                         |
-| 34  | [What are stateless components?](#what-are-stateless-components)                                                                                                                                                                 |
-| 35  | [What are stateful components?](#what-are-stateful-components)                                                                                                                                                                   |
-| 36  | [How do you apply validation to props in React?](#how-to-apply-validation-on-props-in-react)                                                                                                                                     |
-| 37  | [What are the advantages of React?](#what-are-the-advantages-of-react)                                                                                                                                                           |
-| 38  | [What are the limitations of React?](#what-are-the-limitations-of-react)                                                                                                                                                         |
-| 39  | [What are the recommended ways for static type checking?](#what-are-the-recommended-ways-for-static-type-checking)                                                                                                               |
-| 40  | [What is the use of the react-dom package?](#what-is-the-use-of-react-dom-package)                                                                                                                                               |
-| 41  | [What is ReactDOMServer?](#what-is-reactdomserver)                                                                                                                                                                               |
-| 42  | [How do you use innerHTML in React?](#how-to-use-innerhtml-in-react)                                                                                                                                                             |
-| 43  | [How do you apply styles in React?](#how-to-use-styles-in-react)                                                                                                                                                                 |
-| 44  | [How are events different in React?](#how-events-are-different-in-react)                                                                                                                                                         |
-| 45  | [What is the impact of using indexes as keys?](#what-is-the-impact-of-indexes-as-keys)                                                                                                                                          |
-| 46  | [How do you conditionally render components?](#how-do-you-conditionally-render-components)                                                                                                                                       |
-| 47  | [Why do we need to be careful when spreading props on DOM elements?](#why-we-need-to-be-careful-when-spreading-props-on-dom-elements)                                                                                             |
-| 48  | [How do you memoize a component?](#how-do-you-memoize-a-component)                                                                                                                                                               |
-| 49  | [How do you implement Server-Side Rendering (SSR)?](#how-you-implement-server-side-rendering-or-ssr)                                                                                                                              |
-| 50  | [How do you enable production mode in React?](#how-to-enable-production-mode-in-react)                                                                                                                                           |
-| 51  | [Do Hooks replace render props and higher-order components?](#do-hooks-replace-render-props-and-higher-order-components)                                                                                                         |
-| 52  | [What is a switching component?](#what-is-a-switching-component)                                                                                                                                                                 |
-| 53  | [What are React Mixins?](#what-are-react-mixins)                                                                                                                                                                                 |
-| 54  | [What are the pointer events supported in React?](#what-are-the-pointer-events-supported-in-react)                                                                                                                               |
-| 55  | [Why should component names start with a capital letter?](#why-should-component-names-start-with-capital-letter)                                                                                                                  |
-| 56  | [Are custom DOM attributes supported in React v16?](#are-custom-dom-attributes-supported-in-react-v16)                                                                                                                           |
-| 57  | [How do you loop inside JSX?](#how-to-loop-inside-jsx)                                                                                                                                                                           |
-| 58  | [How do you access props within attribute quotes?](#how-do-you-access-props-in-attribute-quotes)                                                                                                                                 |
-| 59  | [What is a React PropType array with shape?](#what-is-react-proptype-array-with-shape)                                                                                                                                           |
-| 60  | [How do you conditionally apply class attributes?](#how-to-conditionally-apply-class-attributes)                                                                                                                                 |
-| 61  | [What is the difference between React and ReactDOM?](#what-is-the-difference-between-react-and-reactdom)                                                                                                                         |
-| 62  | [Why is ReactDOM separated from React?](#why-reactdom-is-separated-from-react)                                                                                                                                                   |
-| 63  | [How do you use the React label element?](#how-to-use-react-label-element)                                                                                                                                                       |
-| 64  | [How do you combine multiple inline style objects?](#how-to-combine-multiple-inline-style-objects)                                                                                                                               |
-| 65  | [How do you re-render the view when the browser is resized?](#how-to-re-render-the-view-when-the-browser-is-resized)                                                                                                             |
-| 66  | [How do you pretty-print JSON with React?](#how-to-pretty-print-json-with-react)                                                                                                                                                 |
-| 67  | [Why can’t you update props in React?](#why-you-cant-update-props-in-react)                                                                                                                                                      |
-| 68  | [How do you focus an input element on page load?](#how-to-focus-an-input-element-on-page-load)                                                                                                                                   |
-| 69  | [How can you find the version of React at runtime in the browser?](#how-can-we-find-the-version-of-react-at-runtime-in-the-browser)                                                                                              |
-| 70  | [How do you add Google Analytics for React Router?](#how-to-add-google-analytics-for-react-router)                                                                                                                               |
-| 71  | [How do you apply vendor prefixes to inline styles in React?](#how-do-you-apply-vendor-prefixes-to-inline-styles-in-react)                                                                                                       |
-| 72  | [How do you import and export components using React and ES6?](#how-to-import-and-export-components-using-react-and-es6)                                                                                                         |
-| 73  | [What are the exceptions to React component naming?](#what-are-the-exceptions-on-react-component-naming)                                                                                                                         |
-| 74  | [Is it possible to use async/await in plain React?](#is-it-possible-to-use-asyncawait-in-plain-react)                                                                                                                            |
-| 75  | [What are common folder structures for React?](#what-are-the-common-folder-structures-for-react)                                                                                                                                 |
-| 76  | [What are popular packages for animation?](#what-are-the-popular-packages-for-animation)                                                                                                                                         |
-| 77  | [What are the benefits of style modules?](#what-is-the-benefit-of-styles-modules)                                                                                                                                                |
-| 78  | [What are popular React-specific linters?](#what-are-the-popular-react-specific-linters)                                                                                                                                         |
-|     | **React Router**                                                                                                                                                                                                                 |
-| 79  | [What is React Router?](#what-is-react-router)                                                                                                                                                                                   |
-| 80  | [How is React Router different from the history library?](#how-react-router-is-different-from-history-library)                                                                                                                   |
-| 81  | [What are the <Router> components of React Router v6?](#what-are-the-router-components-of-react-router-v6)                                                                                                                       |
-| 82  | [What is the purpose of the push and replace methods of history?](#what-is-the-purpose-of-push-and-replace-methods-of-history)                                                                                                   |
-| 83  | [How do you programmatically navigate using React Router v4?](#how-do-you-programmatically-navigate-using-react-router-v4)                                                                                                       |
-| 84  | [How do you get query parameters in React Router v4?](#how-to-get-query-parameters-in-react-router-v4)                                                                                                                           |
-| 85  | [Why do you get a "Router may have only one child element" warning?](#why-you-get-router-may-have-only-one-child-element-warning)                                                                                                |
-| 86  | [How do you pass params to the history.push method in React Router v4?](#how-to-pass-params-to-historypush-method-in-react-router-v4)                                                                                            |
-| 87  | [How do you implement a default or NotFound page?](#how-to-implement-default-or-notfound-page)                                                                                                                                   |
-| 88  | [How do you get history in React Router v4?](#how-to-get-history-on-react-router-v4)                                                                                                                                             |
-| 89  | [How do you perform an automatic redirect after login?](#how-to-perform-automatic-redirect-after-login) 
-|     | **React Internationalization**                                                                                                                                                                                                   |
-| 90  | [What is React Intl?](#what-is-react-intl)                                                                                                                                                                                       |
-| 91  | [What are the main features of React Intl?](#what-are-the-main-features-of-react-intl)                                                                                                                                           |
-| 92  | [What are the two ways of formatting in React Intl?](#what-are-the-two-ways-of-formatting-in-react-intl)                                                                                                                         |
-| 93  | [How do you use FormattedMessage as a placeholder with React Intl?](#how-to-use-formattedmessage-as-placeholder-using-react-intl)                                                                                                |
-| 94  | [How do you access the current locale with React Intl?](#how-to-access-current-locale-with-react-intl)                                                                                                                           |
-| 95  | [How do you format a date using React Intl?](#how-to-format-date-using-react-intl)                                                                                                                                               |
-|     | **React Testing**                                                                                                                                                                                                                |
-| 96  | [What is the Shallow Renderer in React testing?](#what-is-shallow-renderer-in-react-testing)                                                                                                                                     |
-| 97  | [What is the TestRenderer package in React?](#what-is-testrenderer-package-in-react)                                                                                                                                             |
-| 98  | [What is the purpose of the ReactTestUtils package?](#what-is-the-purpose-of-reacttestutils-package)                                                                                                                             |
-| 99  | [What is Jest?](#what-is-jest)                                                                                                                                                                                                   |
-| 100 | [What are the advantages of Jest over Jasmine?](#what-are-the-advantages-of-jest-over-jasmine)                                                                                                                                   |
-| 101 | [Can you give a simple example of a Jest test case?](#give-a-simple-example-of-jest-test-case)                                                                                                                                   |
-|     | **React Redux**                                                                                                                                                                                                                  |
-| 102 | [What is Flux?](#what-is-flux)                                                                                                                                                                                                   |
-| 103 | [What is Redux?](#what-is-redux)                                                                                                                                                                                                 |
-| 104 | [What are the core principles of Redux?](#what-are-the-core-principles-of-redux)                                                                                                                                                 |
-| 105 | [What are the downsides of Redux compared to Flux?](#what-are-the-downsides-of-redux-compared-to-flux)                                                                                                                           |
-| 106 | [What is the difference between mapStateToProps() and mapDispatchToProps()?](#what-is-the-difference-between-mapstatetoprops-and-mapdispatchtoprops)                                                                             |
-| 107 | [Can you dispatch an action in a reducer?](#can-i-dispatch-an-action-in-reducer)                                                                                                                                                 |
-| 108 | [How do you access the Redux store outside a component?](#how-to-access-redux-store-outside-a-component)                                                                                                                         |
-| 109 | [What are the drawbacks of the MVW pattern?](#what-are-the-drawbacks-of-mvw-pattern)                                                                                                                                            |
-| 110 | [Are there any similarities between Redux and RxJS?](#are-there-any-similarities-between-redux-and-rxjs)                                                                                                                         |
-| 111 | [How do you reset state in Redux?](#how-to-reset-state-in-redux)                                                                                                                                                                 |
-| 112 | [What is the difference between React Context and React Redux?](#what-is-the-difference-between-react-context-and-react-redux)                                                                                                   |
-| 113 | [Why are Redux state functions called reducers?](#why-are-redux-state-functions-called-reducers)                                                                                                                                 |
-| 114 | [How do you make an AJAX request in Redux?](#how-to-make-ajax-request-in-redux)                                                                                                                                                  |
-| 115 | [Should you keep all component states in the Redux store?](#should-i-keep-all-components-state-in-redux-store)                                                                                                                   |
-| 116 | [What is the proper way to access the Redux store?](#what-is-the-proper-way-to-access-redux-store)                                                                                                                               |
-| 117 | [What is the difference between a component and a container in React Redux?](#what-is-the-difference-between-component-and-container-in-react-redux)                                                                               |
-| 118 | [What is the purpose of constants in Redux?](#what-is-the-purpose-of-the-constants-in-redux)                                                                                                                                     |
-| 119 | [What are the different ways to write mapDispatchToProps()?](#what-are-the-different-ways-to-write-mapdispatchtoprops)                                                                                                           |
-| 120 | [What is the use of the ownProps parameter in mapStateToProps() and mapDispatchToProps()?](#what-is-the-use-of-the-ownprops-parameter-in-mapstatetoprops-and-mapdispatchtoprops)                                                 |
-| 121 | [How do you structure Redux top-level directories?](#how-to-structure-redux-top-level-directories)                                                                                                                               |
-| 122 | [What is Redux Saga?](#what-is-redux-saga)                                                                                                                                                                                       |
-| 123 | [What is the mental model of Redux Saga?](#what-is-the-mental-model-of-redux-saga)                                                                                                                                               |
-| 124 | [What are the differences between call and put in Redux Saga?](#what-are-the-differences-between-call-and-put-in-redux-saga)                                                                                                     |
-| 125 | [What is Redux Thunk?](#what-is-redux-thunk)                                                                                                                                                                                     |
-| 126 | [What are the differences between Redux Saga and Redux Thunk?](#what-are-the-differences-between-redux-saga-and-redux-thunk)                                                                                                     |
-| 127 | [What is Redux DevTools?](#what-is-redux-devtools)                                                                                                                                                                               |
-| 128 | [What are the features of Redux DevTools?](#what-are-the-features-of-redux-devtools)                                                                                                                                             |
-| 129 | [What are Redux selectors and why should you use them?](#what-are-redux-selectors-and-why-use-them)                                                                                                                              |
-| 130 | [What is Redux Form?](#what-is-redux-form)                                                                                                                                                                                       |
-| 131 | [What are the main features of Redux Form?](#what-are-the-main-features-of-redux-form)                                                                                                                                           |
-| 132 | [How do you add multiple middlewares to Redux?](#how-to-add-multiple-middlewares-to-redux)                                                                                                                                       |
-| 133 | [How do you set the initial state in Redux?](#how-to-set-initial-state-in-redux)                                                                                                                                                 |
-| 134 | [How is Relay different from Redux?](#how-relay-is-different-from-redux)                                                                                                                                                         |
-| 135 | [What is an action in Redux?](#what-is-an-action-in-redux)                                                                                                                                                                       |
-|     | **React Native**                                                                                                                                                                                                                 |
-| 136 | [What is the difference between React Native and React?](#what-is-the-difference-between-react-native-and-react)                                                                                                                 |
-| 137 | [How do you test React Native apps?](#how-to-test-react-native-apps)                                                                                                                                                             |
-| 138 | [How do you log in React Native?](#how-to-do-logging-in-react-native)                                                                                                                                                            |
-| 139 | [How do you debug React Native apps?](#how-to-debug-your-react-native)                                                                                                                                                           |
-|     | **React Supported Libraries and Integration**                                                                                                                                                                                    |
-| 140 | [What is Reselect and how does it work?](#what-is-reselect-and-how-it-works)                                                                                                                                                     |
-| 141 | [What is Flow?](#what-is-flow)                                                                                                                                                                                                   |
-| 142 | [What is the difference between Flow and PropTypes?](#what-is-the-difference-between-flow-and-proptypes)                                                                                                                         |
-| 143 | [How do you use Font Awesome icons in React?](#how-to-use-font-awesome-icons-in-react)                                                                                                                                           |
-| 144 | [What is React DevTools?](#what-is-react-dev-tools)                                                                                                                                                                              |
-| 145 | [Why does DevTools not load in Chrome for local files?](#why-is-devtools-not-loading-in-chrome-for-local-files)                                                                                                                  |
-| 146 | [How do you use Polymer in React?](#how-to-use-polymer-in-react)                                                                                                                                                                 |
-| 147 | [What are the advantages of React over Vue.js?](#what-are-the-advantages-of-react-over-vuejs)                                                                                                                                    |
-| 148 | [What is the difference between React and Angular?](#what-is-the-difference-between-react-and-angular)                                                                                                                           |
-| 149 | [Why is the React tab not showing up in DevTools?](#why-react-tab-is-not-showing-up-in-devtools)                                                                                                                                 |
-| 150 | [What are styled-components?](#what-are-styled-components)                                                                                                                                                                       |
-| 151 | [Can you give an example of styled-components?](#give-an-example-of-styled-components)                                                                                                                                           |
-| 152 | [What is Relay?](#what-is-relay)                                                                                                                                                                                                 |
-|     | **Miscellaneous**                                                                                                                                                                                                                |
-| 153 | [What are the main features of the Reselect library?](#what-are-the-main-features-of-reselect-library)                                                                                                                           |
-| 154 | [Can you give an example of Reselect usage?](#give-an-example-of-reselect-usage)                                                                                                                                                 |
-| 155 | [Can Redux only be used with React?](#can-redux-only-be-used-with-react)                                                                                                                                                         |
-| 156 | [Do you need a specific build tool to use Redux?](#do-you-need-to-have-a-particular-build-tool-to-use-redux)                                                                                                                     |
-| 157 | [How do Redux Form initial values get updated from state?](#how-redux-form-initialvalues-get-updated-from-state)                                                                                                                 |
-| 158 | [How do React PropTypes allow different types for one prop?](#how-react-proptypes-allow-different-types-for-one-prop)                                                                                                             |
-| 159 | [Can you import an SVG file as a React component?](#can-i-import-an-svg-file-as-react-component)                                                                                                                                  |
-| 160 | [What is render hijacking in React?](#what-is-render-hijacking-in-react)                                                                                                                                                         |
-| 161 | [How do you pass numbers to a React component?](#how-to-pass-numbers-to-react-component)                                                                                                                                         |
-| 162 | [Do you need to keep all state in Redux? Should you ever use React’s internal state?](#do-i-need-to-keep-all-my-state-into-redux-should-i-ever-use-react-internal-state)                                                          |
-| 163 | [What is the purpose of registerServiceWorker in React?](#what-is-the-purpose-of-registerserviceworker-in-react)                                                                                                                 |
-| 164 | [What is the React.memo function?](#what-is-react-memo-function)                                                                                                                                                                 |
-| 165 | [What is the React.lazy function?](#what-is-react-lazy-function)                                                                                                                                                                 |
-| 166 | [How do you prevent unnecessary updates using setState?](#how-to-prevent-unnecessary-updates-using-setstate)                                                                                                                     |
-| 167 | [How do you render arrays, strings, and numbers in React v16?](#how-do-you-render-array-strings-and-numbers-in-react-16-version)                                                                                                  |
-| 168 | [What are Hooks?](#what-are-hooks)                                                                                                                                                                                               |
-| 169 | [What rules must be followed for Hooks?](#what-rules-need-to-be-followed-for-hooks)                                                                                                                                             |
-| 170 | [How do you ensure Hooks follow the rules in your project?](#how-to-ensure-hooks-followed-the-rules-in-your-project)                                                                                                             |
-| 171 | [What are the differences between Flux and Redux?](#what-are-the-differences-between-flux-and-redux)                                                                                                                             |
-| 172 | [What are the benefits of React Router v4?](#what-are-the-benefits-of-react-router-v4)                                                                                                                                           |
-| 173 | [Can you describe the componentDidCatch lifecycle method signature?](#can-you-describe-about-componentdidcatch-lifecycle-method-signature)                                                                                       |
-| 174 | [In which scenarios do error boundaries not catch errors?](#in-which-scenarios-do-error-boundaries-not-catch-errors)                                                                                                             |
-| 175 | [What is the behavior of uncaught errors in React v16?](#what-is-the-behavior-of-uncaught-errors-in-react-16)                                                                                                                    |
-| 176 | [What is the proper placement for error boundaries?](#what-is-the-proper-placement-for-error-boundaries)                                                                                                                         |
-| 177 | [What is the benefit of a component stack trace from an error boundary?](#what-is-the-benefit-of-component-stack-trace-from-error-boundary)                                                                                       |
-| 178 | [What are default props?](#what-are-default-props)                                                                                                                                                                               |
-| 179 | [What is the purpose of the displayName class property?](#what-is-the-purpose-of-displayname-class-property)                                                                                                                     |
-| 180 | [What is the browser support for React applications?](#what-is-the-browser-support-for-react-applications)                                                                                                                       |
-| 181 | [What is code-splitting?](#what-is-code-splitting)                                                                                                                                                                               |
-| 182 | [What are keyed Fragments?](#what-are-keyed-fragments)                                                                                                                                                                           |
-| 183 | [Does React support all HTML attributes?](#does-react-support-all-html-attributes)                                                                                                                                               |
-| 184 | [When do component props default to true?](#when-component-props-defaults-to-true)                                                                                                                                               |
-| 185 | [What is Next.js and what are its major features?](#what-is-nextjs-and-major-features-of-it)                                                                                                                                     |
-| 186 | [How do you pass an event handler to a component?](#how-do-you-pass-an-event-handler-to-a-component)                                                                                                                             |
-| 187 | [How do you prevent a function from being called multiple times?](#how-to-prevent-a-function-from-being-called-multiple-times)                                                                                                   |
-| 188 | [How does JSX prevent injection attacks?](#how-jsx-prevents-injection-attacks)                                                                                                                                                   |
-| 189 | [How do you update rendered elements?](#how-do-you-update-rendered-elements)                                                                                                                                                     |
-| 190 | [How do you indicate that props are read-only?](#how-do-you-say-that-props-are-read-only)                                                                                                                                        |
-| 191 | [What are the conditions for safely using an index as a key?](#what-are-the-conditions-to-safely-use-the-index-as-a-key)                                                                                                         |
-| 192 | [Do keys need to be globally unique?](#is-it-keys-should-be-globally-unique)                                                                                                                                                     |
-| 193 | [What is the popular choice for form handling?](#what-is-the-popular-choice-for-form-handling)                                                                                                                                   |
-| 194 | [What are the advantages of Formik over the Redux Form library?](#what-are-the-advantages-of-formik-over-redux-form-library)                                                                                                     |
-| 195 | [Why are you not required to use inheritance?](#why-do-you-not-required-to-use-inheritance)                                                                                                                                       |
-| 196 | [Can you use web components in a React application?](#can-i-use-web-components-in-react-application)                                                                                                                             |
-| 197 | [What is a dynamic import?](#what-is-dynamic-import)                                                                                                                                                                             |
-| 198 | [What are loadable components?](#what-are-loadable-components)                                                                                                                                                                   |
-| 199 | [What is a Suspense component?](#what-is-suspense-component)                                                                                                                                                                     |
-| 200 | [What is route-based code splitting?](#what-is-route-based-code-splitting)                                                                                                                                                       |
-| 201 | [What is the purpose of the default value in Context?](#what-is-the-purpose-of-default-value-in-context)                                                                                                                         |
-| 202 | [What is the diffing algorithm?](#what-is-diffing-algorithm)                                                                                                                                                                     |
-| 203 | [What rules are covered by the diffing algorithm?](#what-are-the-rules-covered-by-diffing-algorithm)                                                                                                                             |
-| 204 | [When do you need to use refs?](#when-do-you-need-to-use-refs)                                                                                                                                                                   |
-| 205 | [Must a prop be named "render" for render props?](#is-it-prop-must-be-named-as-render-for-render-props)                                                                                                                          |
-| 206 | [What are the problems with using render props with Pure Components?](#what-are-the-problems-of-using-render-props-with-pure-components)                                                                                         |
-| 207 | [What is the windowing technique?](#what-is-windowing-technique)                                                                                                                                                                 |
-| 208 | [How do you print falsy values in JSX?](#how-do-you-print-falsy-values-in-jsx)                                                                                                                                                   |
-| 209 | [What is the typical use case for portals?](#what-is-the-typical-use-case-of-portals)                                                                                                                                           |
-| 210 | [How do you set a default value for an uncontrolled component?](#how-do-you-set-default-value-for-uncontrolled-component)                                                                                                         |
-| 211 | [What is your favorite React stack?](#what-is-your-favorite-react-stack)                                                                                                                                                         |
-| 212 | [What is the difference between the real DOM and the Virtual DOM?](#what-is-the-difference-between-real-dom-and-virtual-dom)                                                                                                     |
-| 213 | [How do you add Bootstrap to a React application?](#how-to-add-bootstrap-to-a-react-application)                                                                                                                                 |
-| 214 | [Can you list the top websites or applications using React as a front-end framework?](#can-you-list-down-top-websites-or-applications-using-react-as-front-end-framework)                                                         |
-| 215 | [Is it recommended to use the CSS-in-JS technique in React?](#is-it-recommended-to-use-css-in-js-technique-in-react)                                                                                                             |
-| 216 | [Do you need to rewrite all class components with Hooks?](#do-i-need-to-rewrite-all-my-class-components-with-hooks)                                                                                                              |
-| 217 | [How do you fetch data with React Hooks?](#how-to-fetch-data-with-react-hooks)                                                                                                                                                   |
-| 218 | [Do Hooks cover all use cases for classes?](#is-hooks-cover-all-use-cases-for-classes)                                                                                                                                           |
-| 219 | [What is the stable release for Hooks support?](#what-is-the-stable-release-for-hooks-support)                                                                                                                                   |
-| 220 | [Why do we use array destructuring (square bracket notation) in useState?](#why-do-we-use-array-destructuring-square-brackets-notation-in-usestate)                                                                               |
-| 221 | [What sources were used for introducing Hooks?](#what-are-the-sources-used-for-introducing-hooks)                                                                                                                                |
-| 222 | [How do you access the imperative API of web components?](#how-do-you-access-imperative-api-of-web-components)                                                                                                                   |
-| 223 | [What is Formik?](#what-is-formik)                                                                                                                                                                                               |
-| 224 | [What are typical middleware choices for handling asynchronous calls in Redux?](#what-are-typical-middleware-choices-for-handling-asynchronous-calls-in-redux)                                                                     |
-| 225 | [Do browsers understand JSX code?](#do-browsers-understand-jsx-code)                                                                                                                                                             |
-| 226 | [Can you describe data flow in React?](#describe-about-data-flow-in-react)                                                                                                                                                       |
-| 227 | [What is MobX?](#what-is-mobx)                                                                                                                                                                                                   |
-| 228 | [What are the differences between Redux and MobX?](#what-are-the-differences-between-redux-and-mobx)                                                                                                                             |
-| 229 | [Should you learn ES6 before learning ReactJS?](#should-i-learn-es6-before-learning-reactjs)                                                                                                                                     |
-| 230 | [What is concurrent rendering?](#what-is-concurrent-rendering)                                                                                                                                                                   |
-| 231 | [What is the difference between async mode and concurrent mode?](#what-is-the-difference-between-async-mode-and-concurrent-mode)                                                                                                 |
-| 232 | [Can you use JavaScript URLs in React v16.9?](#can-i-use-javascript-urls-in-react169)                                                                                                                                            |
-| 233 | [What is the purpose of the ESLint plugin for Hooks?](#what-is-the-purpose-of-eslint-plugin-for-hooks)                                                                                                                           |
-| 234 | [What is the difference between imperative and declarative programming in React?](#what-is-the-difference-between-imperative-and-declarative-in-react)                                                                             |
-| 235 | [What are the benefits of using TypeScript with ReactJS?](#what-are-the-benefits-of-using-typescript-with-reactjs)                                                                                                               |
-| 236 | [How do you ensure a user remains authenticated on page refresh while using Context API state management?](#how-do-you-make-sure-that-user-remains-authenticated-on-page-refresh-while-using-context-api-state-management)         |
-| 237 | [What are the benefits of the new JSX transform?](#what-are-the-benefits-of-new-jsx-transform)                                                                                                                                   |
-| 238 | [How is the new JSX transform different from the old transform?](#how-is-the-new-jsx-transform-different-from-old-transform)                                                                                                     |
-| 239 | [What are React Server Components?](#what-are-react-server-components)                                                                                                                                                           |
-| 240 | [What is prop drilling?](#what-is-prop-drilling)                                                                                                                                                                                 |
-| 241 | [What is the difference between the useState and useRef Hooks?](#what-is-the-difference-between-usestate-and-useref-hook)                                                                                                       |
-| 242 | [What is a wrapper component?](#what-is-a-wrapper-component)                                                                                                                                                                     |
-| 243 | [What are the differences between the useEffect and useLayoutEffect Hooks?](#what-are-the-differences-between-useeffect-and-uselayouteffect-hooks)                                                                               |
-| 244 | [What are the differences between functional and class components?](#what-are-the-differences-between-functional-and-class-components)                                                                                           |
-| 245 | [What is Strict Mode in React?](#what-is-strict-mode-in-react)                                                                                                                                                                   |
-| 246 | [What is the benefit of Strict Mode?](#what-is-the-benefit-of-strict-mode)                                                                                                                                                       |
-| 247 | [Why does Strict Mode render twice in React?](#why-does-strict-mode-render-twice-in-react)                                                                                                                                       |
-| 248 | [What are the rules of JSX?](#what-are-the-rules-of-jsx)                                                                                                                                                                         |
-| 249 | [What is the reason multiple JSX tags must be wrapped?](#what-is-the-reason-behind-multiple-jsx-tags-to-be-wrapped)                                                                                                              |
-| 250 | [How do you prevent mutating array variables?](#how-do-you-prevent-mutating-array-variables)                                                                                                                                     |
-| 251 | [What are capture phase events?](#what-are-capture-phase-events)                                                                                                                                                                 |
-| 252 | [How does React update the screen in an application?](#how-does-react-updates-screen-in-an-application)                                                                                                                          |
-| 253 | [How does React batch multiple state updates?](#how-does-react-batch-multiple-state-updates)                                                                                                                                     |
-| 254 | [Is it possible to prevent automatic batching?](#is-it-possible-to-prevent-automatic-batching)                                                                                                                                   |
-| 255 | [What is React hydration?](#what-is-react-hydration)                                                                                                                                                                             |
-| 256 | [How do you update objects inside state?](#how-do-you-update-objects-inside-state)                                                                                                                                               |
-| 257 | [How do you update nested objects inside state?](#How-do-you-update-nested-objects-inside-state)                                                                                                                                 |
-| 258 | [How do you update arrays inside state?](#how-do-you-update-arrays-inside-state)                                                                                                                                                 |
-| 259 | [How do you use the Immer library for state updates?](#how-do-you-use-immer-library-for-state-updates)                                                                                                                           |
-| 260 | [What are the benefits of preventing direct state mutations?](#what-are-the-benefits-of-preventing-the-direct-state-mutations)                                                                                                 |
-| 261 | [What are the preferred and non-preferred array operations for updating state?](#what-are-the-preferred-and-non-preferred-array-operations-for-updating-the-state)                                                             |
-| 262 | [What will happen when defining nested function components?](#what-will-happen-by-defining-nested-function-components)                                                                                                         |
-| 263 | [Can I use keys for non-list items?](#can-i-use-keys-for-non-list-items)                                                                                                                                                         |
-| 264 | [What are the guidelines to follow for writing reducers?](#what-are-the-guidelines-to-be-followed-for-writing-reducers)                                                                                                       |
-|     | **Hooks**                                                                                                                                                                                                                 |
+| No. | Questions                                                                                                                                                                                                                  |
+| --- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|     | **Core React**                                                                                                                                                                                                             |
+| 1   | [What is React?](#what-is-react)                                                                                                                                                                                           |
+| 2   | [What is the history behind React’s evolution?](#what-is-the-history-behind-react-evolution)                                                                                                                               |
+| 3   | [What are the major features of React?](#what-are-the-major-features-of-react)                                                                                                                                             |
+| 4   | [What is JSX?](#what-is-jsx)                                                                                                                                                                                               |
+| 5   | [What is the difference between an Element and a Component?](#what-is-the-difference-between-an-element-and-a-component)                                                                                                   |
+| 6   | [How do you create components in React?](#how-to-create-components-in-react)                                                                                                                                               |
+| 7   | [When should you use a Class Component over a Function Component?](#when-to-use-a-class-component-over-a-function-component)                                                                                               |
+| 8   | [What are Pure Components?](#what-are-pure-components)                                                                                                                                                                     |
+| 9   | [What is state in React?](#what-is-state-in-react)                                                                                                                                                                         |
+| 10  | [What are props in React?](#what-are-props-in-react)                                                                                                                                                                       |
+| 11  | [What is the difference between state and props?](#what-is-the-difference-between-state-and-props)                                                                                                                         |
+| 12  | [What is the difference between HTML and React event handling?](#what-is-the-difference-between-html-and-react-event-handling)                                                                                             |
+| 13  | [What are synthetic events in React?](#what-are-synthetic-events-in-react)                                                                                                                                                 |
+| 14  | [What are inline conditional expressions?](#what-are-inline-conditional-expressions)                                                                                                                                       |
+| 15  | [What is the "key" prop and what is its benefit when used in arrays of elements?](#what-is-key-prop-and-what-is-the-benefit-of-using-it-in-arrays-of-elements)                                                             |
+| 16  | [What is the Virtual DOM?](#what-is-virtual-dom)                                                                                                                                                                           |
+| 17  | [How does the Virtual DOM work?](#how-virtual-dom-works)                                                                                                                                                                   |
+| 18  | [What is the difference between Shadow DOM and Virtual DOM?](#what-is-the-difference-between-shadow-dom-and-virtual-dom)                                                                                                   |
+| 19  | [What is React Fiber?](#what-is-react-fiber)                                                                                                                                                                               |
+| 20  | [What is the main goal of React Fiber?](#what-is-the-main-goal-of-react-fiber)                                                                                                                                             |
+| 21  | [What are controlled components?](#what-are-controlled-components)                                                                                                                                                         |
+| 22  | [What are uncontrolled components?](#what-are-uncontrolled-components)                                                                                                                                                     |
+| 23  | [What is the difference between createElement and cloneElement?](#what-is-the-difference-between-createelement-and-cloneelement)                                                                                           |
+| 24  | [What is Lifting State Up in React?](#what-is-lifting-state-up-in-react)                                                                                                                                                   |
+| 25  | [What are Higher-Order Components?](#what-are-higher-order-components)                                                                                                                                                     |
+| 26  | [What is the children prop?](#what-is-children-prop)                                                                                                                                                                       |
+| 27  | [How do you write comments in React?](#how-to-write-comments-in-react)                                                                                                                                                     |
+| 28  | [What is reconciliation?](#what-is-reconciliation)                                                                                                                                                                         |
+| 29  | [Does the lazy function support named exports?](#does-the-lazy-function-support-named-exports)                                                                                                                             |
+| 30  | [Why does React use className instead of the class attribute?](#why-react-uses-classname-over-class-attribute)                                                                                                             |
+| 31  | [What are Fragments?](#what-are-fragments)                                                                                                                                                                                 |
+| 32  | [Why are Fragments better than container divs?](#why-fragments-are-better-than-container-divs)                                                                                                                             |
+| 33  | [What are portals in React?](#what-are-portals-in-react)                                                                                                                                                                   |
+| 34  | [What are stateless components?](#what-are-stateless-components)                                                                                                                                                           |
+| 35  | [What are stateful components?](#what-are-stateful-components)                                                                                                                                                             |
+| 36  | [How do you apply validation to props in React?](#how-to-apply-validation-on-props-in-react)                                                                                                                               |
+| 37  | [What are the advantages of React?](#what-are-the-advantages-of-react)                                                                                                                                                     |
+| 38  | [What are the limitations of React?](#what-are-the-limitations-of-react)                                                                                                                                                   |
+| 39  | [What are the recommended ways for static type checking?](#what-are-the-recommended-ways-for-static-type-checking)                                                                                                         |
+| 40  | [What is the use of the react-dom package?](#what-is-the-use-of-react-dom-package)                                                                                                                                         |
+| 41  | [What is ReactDOMServer?](#what-is-reactdomserver)                                                                                                                                                                         |
+| 42  | [How do you use innerHTML in React?](#how-to-use-innerhtml-in-react)                                                                                                                                                       |
+| 43  | [How do you apply styles in React?](#how-to-use-styles-in-react)                                                                                                                                                           |
+| 44  | [How are events different in React?](#how-events-are-different-in-react)                                                                                                                                                   |
+| 45  | [What is the impact of using indexes as keys?](#what-is-the-impact-of-indexes-as-keys)                                                                                                                                     |
+| 46  | [How do you conditionally render components?](#how-do-you-conditionally-render-components)                                                                                                                                 |
+| 47  | [Why do we need to be careful when spreading props on DOM elements?](#why-we-need-to-be-careful-when-spreading-props-on-dom-elements)                                                                                      |
+| 48  | [How do you memoize a component?](#how-do-you-memoize-a-component)                                                                                                                                                         |
+| 49  | [How do you implement Server-Side Rendering (SSR)?](#how-you-implement-server-side-rendering-or-ssr)                                                                                                                       |
+| 50  | [How do you enable production mode in React?](#how-to-enable-production-mode-in-react)                                                                                                                                     |
+| 51  | [Do Hooks replace render props and higher-order components?](#do-hooks-replace-render-props-and-higher-order-components)                                                                                                   |
+| 52  | [What is a switching component?](#what-is-a-switching-component)                                                                                                                                                           |
+| 53  | [What are React Mixins?](#what-are-react-mixins)                                                                                                                                                                           |
+| 54  | [What are the pointer events supported in React?](#what-are-the-pointer-events-supported-in-react)                                                                                                                         |
+| 55  | [Why should component names start with a capital letter?](#why-should-component-names-start-with-capital-letter)                                                                                                           |
+| 56  | [Are custom DOM attributes supported in React v16?](#are-custom-dom-attributes-supported-in-react-v16)                                                                                                                     |
+| 57  | [How do you loop inside JSX?](#how-to-loop-inside-jsx)                                                                                                                                                                     |
+| 58  | [How do you access props within attribute quotes?](#how-do-you-access-props-in-attribute-quotes)                                                                                                                           |
+| 59  | [What is a React PropType array with shape?](#what-is-react-proptype-array-with-shape)                                                                                                                                     |
+| 60  | [How do you conditionally apply class attributes?](#how-to-conditionally-apply-class-attributes)                                                                                                                           |
+| 61  | [What is the difference between React and ReactDOM?](#what-is-the-difference-between-react-and-reactdom)                                                                                                                   |
+| 62  | [Why is ReactDOM separated from React?](#why-reactdom-is-separated-from-react)                                                                                                                                             |
+| 63  | [How do you use the React label element?](#how-to-use-react-label-element)                                                                                                                                                 |
+| 64  | [How do you combine multiple inline style objects?](#how-to-combine-multiple-inline-style-objects)                                                                                                                         |
+| 65  | [How do you re-render the view when the browser is resized?](#how-to-re-render-the-view-when-the-browser-is-resized)                                                                                                       |
+| 66  | [How do you pretty-print JSON with React?](#how-to-pretty-print-json-with-react)                                                                                                                                           |
+| 67  | [Why can’t you update props in React?](#why-you-cant-update-props-in-react)                                                                                                                                                |
+| 68  | [How do you focus an input element on page load?](#how-to-focus-an-input-element-on-page-load)                                                                                                                             |
+| 69  | [How can you find the version of React at runtime in the browser?](#how-can-we-find-the-version-of-react-at-runtime-in-the-browser)                                                                                        |
+| 70  | [How do you add Google Analytics for React Router?](#how-to-add-google-analytics-for-react-router)                                                                                                                         |
+| 71  | [How do you apply vendor prefixes to inline styles in React?](#how-do-you-apply-vendor-prefixes-to-inline-styles-in-react)                                                                                                 |
+| 72  | [How do you import and export components using React and ES6?](#how-to-import-and-export-components-using-react-and-es6)                                                                                                   |
+| 73  | [What are the exceptions to React component naming?](#what-are-the-exceptions-on-react-component-naming)                                                                                                                   |
+| 74  | [Is it possible to use async/await in plain React?](#is-it-possible-to-use-asyncawait-in-plain-react)                                                                                                                      |
+| 75  | [What are common folder structures for React?](#what-are-the-common-folder-structures-for-react)                                                                                                                           |
+| 76  | [What are popular packages for animation?](#what-are-the-popular-packages-for-animation)                                                                                                                                   |
+| 77  | [What are the benefits of style modules?](#what-is-the-benefit-of-styles-modules)                                                                                                                                          |
+| 78  | [What are popular React-specific linters?](#what-are-the-popular-react-specific-linters)                                                                                                                                   |
+|     | **React Router**                                                                                                                                                                                                           |
+| 79  | [What is React Router?](#what-is-react-router)                                                                                                                                                                             |
+| 80  | [How is React Router different from the history library?](#how-react-router-is-different-from-history-library)                                                                                                             |
+| 81  | [What are the <Router> components of React Router v6?](#what-are-the-router-components-of-react-router-v6)                                                                                                                 |
+| 82  | [What is the purpose of the push and replace methods of history?](#what-is-the-purpose-of-push-and-replace-methods-of-history)                                                                                             |
+| 83  | [How do you programmatically navigate using React Router v4?](#how-do-you-programmatically-navigate-using-react-router-v4)                                                                                                 |
+| 84  | [How do you get query parameters in React Router v4?](#how-to-get-query-parameters-in-react-router-v4)                                                                                                                     |
+| 85  | [Why do you get a "Router may have only one child element" warning?](#why-you-get-router-may-have-only-one-child-element-warning)                                                                                          |
+| 86  | [How do you pass params to the history.push method in React Router v4?](#how-to-pass-params-to-historypush-method-in-react-router-v4)                                                                                      |
+| 87  | [How do you implement a default or NotFound page?](#how-to-implement-default-or-notfound-page)                                                                                                                             |
+| 88  | [How do you get history in React Router v4?](#how-to-get-history-on-react-router-v4)                                                                                                                                       |
+| 89  | [How do you perform an automatic redirect after login?](#how-to-perform-automatic-redirect-after-login)                                                                                                                    |
+|     | **React Internationalization**                                                                                                                                                                                             |
+| 90  | [What is React Intl?](#what-is-react-intl)                                                                                                                                                                                 |
+| 91  | [What are the main features of React Intl?](#what-are-the-main-features-of-react-intl)                                                                                                                                     |
+| 92  | [What are the two ways of formatting in React Intl?](#what-are-the-two-ways-of-formatting-in-react-intl)                                                                                                                   |
+| 93  | [How do you use FormattedMessage as a placeholder with React Intl?](#how-to-use-formattedmessage-as-placeholder-using-react-intl)                                                                                          |
+| 94  | [How do you access the current locale with React Intl?](#how-to-access-current-locale-with-react-intl)                                                                                                                     |
+| 95  | [How do you format a date using React Intl?](#how-to-format-date-using-react-intl)                                                                                                                                         |
+|     | **React Testing**                                                                                                                                                                                                          |
+| 96  | [What is the Shallow Renderer in React testing?](#what-is-shallow-renderer-in-react-testing)                                                                                                                               |
+| 97  | [What is the TestRenderer package in React?](#what-is-testrenderer-package-in-react)                                                                                                                                       |
+| 98  | [What is the purpose of the ReactTestUtils package?](#what-is-the-purpose-of-reacttestutils-package)                                                                                                                       |
+| 99  | [What is Jest?](#what-is-jest)                                                                                                                                                                                             |
+| 100 | [What are the advantages of Jest over Jasmine?](#what-are-the-advantages-of-jest-over-jasmine)                                                                                                                             |
+| 101 | [Can you give a simple example of a Jest test case?](#give-a-simple-example-of-jest-test-case)                                                                                                                             |
+|     | **React Redux**                                                                                                                                                                                                            |
+| 102 | [What is Flux?](#what-is-flux)                                                                                                                                                                                             |
+| 103 | [What is Redux?](#what-is-redux)                                                                                                                                                                                           |
+| 104 | [What are the core principles of Redux?](#what-are-the-core-principles-of-redux)                                                                                                                                           |
+| 105 | [What are the downsides of Redux compared to Flux?](#what-are-the-downsides-of-redux-compared-to-flux)                                                                                                                     |
+| 106 | [What is the difference between mapStateToProps() and mapDispatchToProps()?](#what-is-the-difference-between-mapstatetoprops-and-mapdispatchtoprops)                                                                       |
+| 107 | [Can you dispatch an action in a reducer?](#can-i-dispatch-an-action-in-reducer)                                                                                                                                           |
+| 108 | [How do you access the Redux store outside a component?](#how-to-access-redux-store-outside-a-component)                                                                                                                   |
+| 109 | [What are the drawbacks of the MVW pattern?](#what-are-the-drawbacks-of-mvw-pattern)                                                                                                                                       |
+| 110 | [Are there any similarities between Redux and RxJS?](#are-there-any-similarities-between-redux-and-rxjs)                                                                                                                   |
+| 111 | [How do you reset state in Redux?](#how-to-reset-state-in-redux)                                                                                                                                                           |
+| 112 | [What is the difference between React Context and React Redux?](#what-is-the-difference-between-react-context-and-react-redux)                                                                                             |
+| 113 | [Why are Redux state functions called reducers?](#why-are-redux-state-functions-called-reducers)                                                                                                                           |
+| 114 | [How do you make an AJAX request in Redux?](#how-to-make-ajax-request-in-redux)                                                                                                                                            |
+| 115 | [Should you keep all component states in the Redux store?](#should-i-keep-all-components-state-in-redux-store)                                                                                                             |
+| 116 | [What is the proper way to access the Redux store?](#what-is-the-proper-way-to-access-redux-store)                                                                                                                         |
+| 117 | [What is the difference between a component and a container in React Redux?](#what-is-the-difference-between-component-and-container-in-react-redux)                                                                       |
+| 118 | [What is the purpose of constants in Redux?](#what-is-the-purpose-of-the-constants-in-redux)                                                                                                                               |
+| 119 | [What are the different ways to write mapDispatchToProps()?](#what-are-the-different-ways-to-write-mapdispatchtoprops)                                                                                                     |
+| 120 | [What is the use of the ownProps parameter in mapStateToProps() and mapDispatchToProps()?](#what-is-the-use-of-the-ownprops-parameter-in-mapstatetoprops-and-mapdispatchtoprops)                                           |
+| 121 | [How do you structure Redux top-level directories?](#how-to-structure-redux-top-level-directories)                                                                                                                         |
+| 122 | [What is Redux Saga?](#what-is-redux-saga)                                                                                                                                                                                 |
+| 123 | [What is the mental model of Redux Saga?](#what-is-the-mental-model-of-redux-saga)                                                                                                                                         |
+| 124 | [What are the differences between call and put in Redux Saga?](#what-are-the-differences-between-call-and-put-in-redux-saga)                                                                                               |
+| 125 | [What is Redux Thunk?](#what-is-redux-thunk)                                                                                                                                                                               |
+| 126 | [What are the differences between Redux Saga and Redux Thunk?](#what-are-the-differences-between-redux-saga-and-redux-thunk)                                                                                               |
+| 127 | [What is Redux DevTools?](#what-is-redux-devtools)                                                                                                                                                                         |
+| 128 | [What are the features of Redux DevTools?](#what-are-the-features-of-redux-devtools)                                                                                                                                       |
+| 129 | [What are Redux selectors and why should you use them?](#what-are-redux-selectors-and-why-use-them)                                                                                                                        |
+| 130 | [What is Redux Form?](#what-is-redux-form)                                                                                                                                                                                 |
+| 131 | [What are the main features of Redux Form?](#what-are-the-main-features-of-redux-form)                                                                                                                                     |
+| 132 | [How do you add multiple middlewares to Redux?](#how-to-add-multiple-middlewares-to-redux)                                                                                                                                 |
+| 133 | [How do you set the initial state in Redux?](#how-to-set-initial-state-in-redux)                                                                                                                                           |
+| 134 | [How is Relay different from Redux?](#how-relay-is-different-from-redux)                                                                                                                                                   |
+| 135 | [What is an action in Redux?](#what-is-an-action-in-redux)                                                                                                                                                                 |
+|     | **React Native**                                                                                                                                                                                                           |
+| 136 | [What is the difference between React Native and React?](#what-is-the-difference-between-react-native-and-react)                                                                                                           |
+| 137 | [How do you test React Native apps?](#how-to-test-react-native-apps)                                                                                                                                                       |
+| 138 | [How do you log in React Native?](#how-to-do-logging-in-react-native)                                                                                                                                                      |
+| 139 | [How do you debug React Native apps?](#how-to-debug-your-react-native)                                                                                                                                                     |
+|     | **React Supported Libraries and Integration**                                                                                                                                                                              |
+| 140 | [What is Reselect and how does it work?](#what-is-reselect-and-how-it-works)                                                                                                                                               |
+| 141 | [What is Flow?](#what-is-flow)                                                                                                                                                                                             |
+| 142 | [What is the difference between Flow and PropTypes?](#what-is-the-difference-between-flow-and-proptypes)                                                                                                                   |
+| 143 | [How do you use Font Awesome icons in React?](#how-to-use-font-awesome-icons-in-react)                                                                                                                                     |
+| 144 | [What is React DevTools?](#what-is-react-dev-tools)                                                                                                                                                                        |
+| 145 | [Why does DevTools not load in Chrome for local files?](#why-is-devtools-not-loading-in-chrome-for-local-files)                                                                                                            |
+| 146 | [How do you use Polymer in React?](#how-to-use-polymer-in-react)                                                                                                                                                           |
+| 147 | [What are the advantages of React over Vue.js?](#what-are-the-advantages-of-react-over-vuejs)                                                                                                                              |
+| 148 | [What is the difference between React and Angular?](#what-is-the-difference-between-react-and-angular)                                                                                                                     |
+| 149 | [Why is the React tab not showing up in DevTools?](#why-react-tab-is-not-showing-up-in-devtools)                                                                                                                           |
+| 150 | [What are styled-components?](#what-are-styled-components)                                                                                                                                                                 |
+| 151 | [Can you give an example of styled-components?](#give-an-example-of-styled-components)                                                                                                                                     |
+| 152 | [What is Relay?](#what-is-relay)                                                                                                                                                                                           |
+|     | **Miscellaneous**                                                                                                                                                                                                          |
+| 153 | [What are the main features of the Reselect library?](#what-are-the-main-features-of-reselect-library)                                                                                                                     |
+| 154 | [Can you give an example of Reselect usage?](#give-an-example-of-reselect-usage)                                                                                                                                           |
+| 155 | [Can Redux only be used with React?](#can-redux-only-be-used-with-react)                                                                                                                                                   |
+| 156 | [Do you need a specific build tool to use Redux?](#do-you-need-to-have-a-particular-build-tool-to-use-redux)                                                                                                               |
+| 157 | [How do Redux Form initial values get updated from state?](#how-redux-form-initialvalues-get-updated-from-state)                                                                                                           |
+| 158 | [How do React PropTypes allow different types for one prop?](#how-react-proptypes-allow-different-types-for-one-prop)                                                                                                      |
+| 159 | [Can you import an SVG file as a React component?](#can-i-import-an-svg-file-as-react-component)                                                                                                                           |
+| 160 | [What is render hijacking in React?](#what-is-render-hijacking-in-react)                                                                                                                                                   |
+| 161 | [How do you pass numbers to a React component?](#how-to-pass-numbers-to-react-component)                                                                                                                                   |
+| 162 | [Do you need to keep all state in Redux? Should you ever use React’s internal state?](#do-i-need-to-keep-all-my-state-into-redux-should-i-ever-use-react-internal-state)                                                   |
+| 163 | [What is the purpose of registerServiceWorker in React?](#what-is-the-purpose-of-registerserviceworker-in-react)                                                                                                           |
+| 164 | [What is the React.memo function?](#what-is-react-memo-function)                                                                                                                                                           |
+| 165 | [What is the React.lazy function?](#what-is-react-lazy-function)                                                                                                                                                           |
+| 166 | [How do you prevent unnecessary updates using setState?](#how-to-prevent-unnecessary-updates-using-setstate)                                                                                                               |
+| 167 | [How do you render arrays, strings, and numbers in React v16?](#how-do-you-render-array-strings-and-numbers-in-react-16-version)                                                                                           |
+| 168 | [What are Hooks?](#what-are-hooks)                                                                                                                                                                                         |
+| 169 | [What rules must be followed for Hooks?](#what-rules-need-to-be-followed-for-hooks)                                                                                                                                        |
+| 170 | [How do you ensure Hooks follow the rules in your project?](#how-to-ensure-hooks-followed-the-rules-in-your-project)                                                                                                       |
+| 171 | [What are the differences between Flux and Redux?](#what-are-the-differences-between-flux-and-redux)                                                                                                                       |
+| 172 | [What are the benefits of React Router v4?](#what-are-the-benefits-of-react-router-v4)                                                                                                                                     |
+| 173 | [Can you describe the componentDidCatch lifecycle method signature?](#can-you-describe-about-componentdidcatch-lifecycle-method-signature)                                                                                 |
+| 174 | [In which scenarios do error boundaries not catch errors?](#in-which-scenarios-do-error-boundaries-not-catch-errors)                                                                                                       |
+| 175 | [What is the behavior of uncaught errors in React v16?](#what-is-the-behavior-of-uncaught-errors-in-react-16)                                                                                                              |
+| 176 | [What is the proper placement for error boundaries?](#what-is-the-proper-placement-for-error-boundaries)                                                                                                                   |
+| 177 | [What is the benefit of a component stack trace from an error boundary?](#what-is-the-benefit-of-component-stack-trace-from-error-boundary)                                                                                |
+| 178 | [What are default props?](#what-are-default-props)                                                                                                                                                                         |
+| 179 | [What is the purpose of the displayName class property?](#what-is-the-purpose-of-displayname-class-property)                                                                                                               |
+| 180 | [What is the browser support for React applications?](#what-is-the-browser-support-for-react-applications)                                                                                                                 |
+| 181 | [What is code-splitting?](#what-is-code-splitting)                                                                                                                                                                         |
+| 182 | [What are keyed Fragments?](#what-are-keyed-fragments)                                                                                                                                                                     |
+| 183 | [Does React support all HTML attributes?](#does-react-support-all-html-attributes)                                                                                                                                         |
+| 184 | [When do component props default to true?](#when-component-props-defaults-to-true)                                                                                                                                         |
+| 185 | [What is Next.js and what are its major features?](#what-is-nextjs-and-major-features-of-it)                                                                                                                               |
+| 186 | [How do you pass an event handler to a component?](#how-do-you-pass-an-event-handler-to-a-component)                                                                                                                       |
+| 187 | [How do you prevent a function from being called multiple times?](#how-to-prevent-a-function-from-being-called-multiple-times)                                                                                             |
+| 188 | [How does JSX prevent injection attacks?](#how-jsx-prevents-injection-attacks)                                                                                                                                             |
+| 189 | [How do you update rendered elements?](#how-do-you-update-rendered-elements)                                                                                                                                               |
+| 190 | [How do you indicate that props are read-only?](#how-do-you-say-that-props-are-read-only)                                                                                                                                  |
+| 191 | [What are the conditions for safely using an index as a key?](#what-are-the-conditions-to-safely-use-the-index-as-a-key)                                                                                                   |
+| 192 | [Do keys need to be globally unique?](#is-it-keys-should-be-globally-unique)                                                                                                                                               |
+| 193 | [What is the popular choice for form handling?](#what-is-the-popular-choice-for-form-handling)                                                                                                                             |
+| 194 | [What are the advantages of Formik over the Redux Form library?](#what-are-the-advantages-of-formik-over-redux-form-library)                                                                                               |
+| 195 | [Why are you not required to use inheritance?](#why-do-you-not-required-to-use-inheritance)                                                                                                                                |
+| 196 | [Can you use web components in a React application?](#can-i-use-web-components-in-react-application)                                                                                                                       |
+| 197 | [What is a dynamic import?](#what-is-dynamic-import)                                                                                                                                                                       |
+| 198 | [What are loadable components?](#what-are-loadable-components)                                                                                                                                                             |
+| 199 | [What is a Suspense component?](#what-is-suspense-component)                                                                                                                                                               |
+| 200 | [What is route-based code splitting?](#what-is-route-based-code-splitting)                                                                                                                                                 |
+| 201 | [What is the purpose of the default value in Context?](#what-is-the-purpose-of-default-value-in-context)                                                                                                                   |
+| 202 | [What is the diffing algorithm?](#what-is-diffing-algorithm)                                                                                                                                                               |
+| 203 | [What rules are covered by the diffing algorithm?](#what-are-the-rules-covered-by-diffing-algorithm)                                                                                                                       |
+| 204 | [When do you need to use refs?](#when-do-you-need-to-use-refs)                                                                                                                                                             |
+| 205 | [Must a prop be named "render" for render props?](#is-it-prop-must-be-named-as-render-for-render-props)                                                                                                                    |
+| 206 | [What are the problems with using render props with Pure Components?](#what-are-the-problems-of-using-render-props-with-pure-components)                                                                                   |
+| 207 | [What is the windowing technique?](#what-is-windowing-technique)                                                                                                                                                           |
+| 208 | [How do you print falsy values in JSX?](#how-do-you-print-falsy-values-in-jsx)                                                                                                                                             |
+| 209 | [What is the typical use case for portals?](#what-is-the-typical-use-case-of-portals)                                                                                                                                      |
+| 210 | [How do you set a default value for an uncontrolled component?](#how-do-you-set-default-value-for-uncontrolled-component)                                                                                                  |
+| 211 | [What is your favorite React stack?](#what-is-your-favorite-react-stack)                                                                                                                                                   |
+| 212 | [What is the difference between the real DOM and the Virtual DOM?](#what-is-the-difference-between-real-dom-and-virtual-dom)                                                                                               |
+| 213 | [How do you add Bootstrap to a React application?](#how-to-add-bootstrap-to-a-react-application)                                                                                                                           |
+| 214 | [Can you list the top websites or applications using React as a front-end framework?](#can-you-list-down-top-websites-or-applications-using-react-as-front-end-framework)                                                  |
+| 215 | [Is it recommended to use the CSS-in-JS technique in React?](#is-it-recommended-to-use-css-in-js-technique-in-react)                                                                                                       |
+| 216 | [Do you need to rewrite all class components with Hooks?](#do-i-need-to-rewrite-all-my-class-components-with-hooks)                                                                                                        |
+| 217 | [How do you fetch data with React Hooks?](#how-to-fetch-data-with-react-hooks)                                                                                                                                             |
+| 218 | [Do Hooks cover all use cases for classes?](#is-hooks-cover-all-use-cases-for-classes)                                                                                                                                     |
+| 219 | [What is the stable release for Hooks support?](#what-is-the-stable-release-for-hooks-support)                                                                                                                             |
+| 220 | [Why do we use array destructuring (square bracket notation) in useState?](#why-do-we-use-array-destructuring-square-brackets-notation-in-usestate)                                                                        |
+| 221 | [What sources were used for introducing Hooks?](#what-are-the-sources-used-for-introducing-hooks)                                                                                                                          |
+| 222 | [How do you access the imperative API of web components?](#how-do-you-access-imperative-api-of-web-components)                                                                                                             |
+| 223 | [What is Formik?](#what-is-formik)                                                                                                                                                                                         |
+| 224 | [What are typical middleware choices for handling asynchronous calls in Redux?](#what-are-typical-middleware-choices-for-handling-asynchronous-calls-in-redux)                                                             |
+| 225 | [Do browsers understand JSX code?](#do-browsers-understand-jsx-code)                                                                                                                                                       |
+| 226 | [Can you describe data flow in React?](#describe-about-data-flow-in-react)                                                                                                                                                 |
+| 227 | [What is MobX?](#what-is-mobx)                                                                                                                                                                                             |
+| 228 | [What are the differences between Redux and MobX?](#what-are-the-differences-between-redux-and-mobx)                                                                                                                       |
+| 229 | [Should you learn ES6 before learning ReactJS?](#should-i-learn-es6-before-learning-reactjs)                                                                                                                               |
+| 230 | [What is concurrent rendering?](#what-is-concurrent-rendering)                                                                                                                                                             |
+| 231 | [What is the difference between async mode and concurrent mode?](#what-is-the-difference-between-async-mode-and-concurrent-mode)                                                                                           |
+| 232 | [Can you use JavaScript URLs in React v16.9?](#can-i-use-javascript-urls-in-react169)                                                                                                                                      |
+| 233 | [What is the purpose of the ESLint plugin for Hooks?](#what-is-the-purpose-of-eslint-plugin-for-hooks)                                                                                                                     |
+| 234 | [What is the difference between imperative and declarative programming in React?](#what-is-the-difference-between-imperative-and-declarative-in-react)                                                                     |
+| 235 | [What are the benefits of using TypeScript with ReactJS?](#what-are-the-benefits-of-using-typescript-with-reactjs)                                                                                                         |
+| 236 | [How do you ensure a user remains authenticated on page refresh while using Context API state management?](#how-do-you-make-sure-that-user-remains-authenticated-on-page-refresh-while-using-context-api-state-management) |
+| 237 | [What are the benefits of the new JSX transform?](#what-are-the-benefits-of-new-jsx-transform)                                                                                                                             |
+| 238 | [How is the new JSX transform different from the old transform?](#how-is-the-new-jsx-transform-different-from-old-transform)                                                                                               |
+| 239 | [What are React Server Components?](#what-are-react-server-components)                                                                                                                                                     |
+| 240 | [What is prop drilling?](#what-is-prop-drilling)                                                                                                                                                                           |
+| 241 | [What is the difference between the useState and useRef Hooks?](#what-is-the-difference-between-usestate-and-useref-hook)                                                                                                  |
+| 242 | [What is a wrapper component?](#what-is-a-wrapper-component)                                                                                                                                                               |
+| 243 | [What are the differences between the useEffect and useLayoutEffect Hooks?](#what-are-the-differences-between-useeffect-and-uselayouteffect-hooks)                                                                         |
+| 244 | [What are the differences between functional and class components?](#what-are-the-differences-between-functional-and-class-components)                                                                                     |
+| 245 | [What is Strict Mode in React?](#what-is-strict-mode-in-react)                                                                                                                                                             |
+| 246 | [What is the benefit of Strict Mode?](#what-is-the-benefit-of-strict-mode)                                                                                                                                                 |
+| 247 | [Why does Strict Mode render twice in React?](#why-does-strict-mode-render-twice-in-react)                                                                                                                                 |
+| 248 | [What are the rules of JSX?](#what-are-the-rules-of-jsx)                                                                                                                                                                   |
+| 249 | [What is the reason multiple JSX tags must be wrapped?](#what-is-the-reason-behind-multiple-jsx-tags-to-be-wrapped)                                                                                                        |
+| 250 | [How do you prevent mutating array variables?](#how-do-you-prevent-mutating-array-variables)                                                                                                                               |
+| 251 | [What are capture phase events?](#what-are-capture-phase-events)                                                                                                                                                           |
+| 252 | [How does React update the screen in an application?](#how-does-react-updates-screen-in-an-application)                                                                                                                    |
+| 253 | [How does React batch multiple state updates?](#how-does-react-batch-multiple-state-updates)                                                                                                                               |
+| 254 | [Is it possible to prevent automatic batching?](#is-it-possible-to-prevent-automatic-batching)                                                                                                                             |
+| 255 | [What is React hydration?](#what-is-react-hydration)                                                                                                                                                                       |
+| 256 | [How do you update objects inside state?](#how-do-you-update-objects-inside-state)                                                                                                                                         |
+| 257 | [How do you update nested objects inside state?](#How-do-you-update-nested-objects-inside-state)                                                                                                                           |
+| 258 | [How do you update arrays inside state?](#how-do-you-update-arrays-inside-state)                                                                                                                                           |
+| 259 | [How do you use the Immer library for state updates?](#how-do-you-use-immer-library-for-state-updates)                                                                                                                     |
+| 260 | [What are the benefits of preventing direct state mutations?](#what-are-the-benefits-of-preventing-the-direct-state-mutations)                                                                                             |
+| 261 | [What are the preferred and non-preferred array operations for updating state?](#what-are-the-preferred-and-non-preferred-array-operations-for-updating-the-state)                                                         |
+| 262 | [What will happen when defining nested function components?](#what-will-happen-by-defining-nested-function-components)                                                                                                     |
+| 263 | [Can I use keys for non-list items?](#can-i-use-keys-for-non-list-items)                                                                                                                                                   |
+| 264 | [What are the guidelines to follow for writing reducers?](#what-are-the-guidelines-to-be-followed-for-writing-reducers)                                                                                                    |
+|     | **Hooks**                                                                                                                                                                                                                  |
 | 265 | [What is useReducer hook? Can you describe its usage?](#what-is-use-reducer-hook-can-you-describe-its-usage)                                                                                                               |
-| 266 | [How do you compare useState and useReducer?](#how-do-you-compare-use-state-and-use-reducer)                                                                                                                                     |
-| 267 | [How does Context work with the useContext hook?](#how-does-context-works-using-usecontext-hook)                                                                                                                                 |
-| 268 | [What are the use cases of the useContext hook?](#what-are-the-use-cases-of-usecontext-hook)                                                                                                                                     |
-| 269 | [When should you use client and server components?](#when-to-use-client-and-server-components)                                                                                                                                   |
-| 270 | [What are the differences between the Page Router and App Router in Next.js?](#what-are-the-differences-between-page-router-and-app-router-in-nextjs)                                                                            |
-| 271 | [Can you describe the useMemo() Hook?](#can-you-describe-the-usememo-hook)                                                                                                                                                       |
-| 272 | [Can Hooks be used in class components?](#can-hooks-be-used-in-class-components)                                                                                                                                                 |
-| 273 | [What is an updater function? Should an updater function be used in all cases?](#what-is-an-updater-function-should-an-updater-function-be-used-in-all-cases)                                                                    |
-| 274 | [Can useState take a function as an initial value?](#can-usestate-take-a-function-as-an-initial-value)                                                                                                                           |
-| 275 | [What types of values can useState hold?](#what-types-of-values-can-usestate-hold)                                                                                                                                               |
-| 276 | [What happens if you call useState conditionally?](#what-happens-if-you-call-usestate-conditionally)                                                                                                                             |
-| 277 | [Is useState Synchronous or Asynchronous?](#is-usestate-synchronous-or-asynchronous)                                                                                                                                             |
-| 278 | [Can you explain how useState works internally?](#can-you-explain-how-usestate-works-internally)                                                                                                                                 |
-| 279 | [What is useReducer? Why do you use useReducer?](#what-is-usereducer-why-do-you-use-usereducer)                                                                                                                                   |
-| 280 | [How does useReducer work? Explain with an example](#how-does-usereducer-works-explain-with-an-example)                                                                                                                          |
-| 281 | [Can you combine useReducer with useContext?](#can-you-combine-usereducer-with-usecontext)                                                                                                                                       |
-| 282 | [Can you dispatch multiple actions in a row with useReducer?](#can-you-dispatch-multiple-actions-in-a-row-with-usereducer)                                                                                                       |
-| 283 | [Is dispatch from useReducer asynchronous and does it update state immediately?](#is-dispatch-from-usereducer-asynchronous-and-does-it-update-state-immediately)                                                                 |
-| 284 | [How does useContext work? Explain with an example](#how-does-usecontext-works-explain-with-an-example)                                                                                                                          |
-| 285 | [Can you use multiple Contexts in one component?](#can-you-use-multiple-contexts-in-one-component)                                                                                                                               |
-| 286 | [What's a common pitfall when using useContext with objects?](#whats-a-common-pitfall-when-using-usecontext-with-objects)                                                                                                        |
-| 287 | [What would the context value be for no matching provider?](#what-would-the-context-value-be-for-no-matching-provider)                                                                                                           |
-| 288 | [How do reactive dependencies in the useEffect dependency array affect its execution behavior?](#how-do-reactive-dependencies-in-the-useeffect-dependency-array-affect-its-execution-behavior)                                   |
-| 289 | [When and how often does React invoke the setup and cleanup functions inside a useEffect hook?](#when-and-how-often-does-react-invoke-the-setup-and-cleanup-functions-inside-a-useeffect-hook)                                   |
-| 290 | [What happens if you return a Promise from useEffect?](#what-happens-if-you-return-a-promise-from-useeffect)                                                                                                                     |
-| 291 | [Can you have multiple useEffect hooks in a single component?](#can-you-have-multiple-useeffect-hooks-in-a-single-component)                                                                                                     |
-| 292 | [How to prevent infinite loops with useEffect?](#how-to-prevent-infinite-loops-with-useeffect)                                                                                                                                   |
-| 293 | [What are the use cases of useLayoutEffect?](#what-are-the-usecases-of-uselayouteffect)                                                                                                                                          |
-| 294 | [How does useLayoutEffect work during server-side rendering (SSR)?](#how-does-uselayouteffect-work-during-server-side-rendering-ssr)                                                                                             |
-| 295 | [What happens if you use useLayoutEffect for non-layout logic?](#what-happens-if-you-use-uselayouteffect-for-non-layout-logic)                                                                                                   |
-| 296 | [How does useLayoutEffect cause layout thrashing?](#how-does-uselayouteffect-cause-layout-thrashing)                                                                                                                             |
-| 297 | [How do you use useRef to access a DOM element in React? Give an example](#how-do-you-use-useref-to-access-a-dom-element-in-react-give-an-example)                                                                               |
-| 298 | [Can you use useRef to persist values across renders?](#can-you-use-useref-to-persist-values-across-renders)                                                                                                                     |
-| 299 | [Can useRef be used to store previous values?](#can-useref-be-used-to-store-previous-values)                                                                                                                                     |
-| 300 | [Is it possible to access a ref in the render method?](#is-it-possible-to-access-a-ref-in-the-render-method)                                                                                                                     |
-| 301 | [What are the common use cases of useRef hook?](#what-are-the-common-usecases-of-useref-hook)                                                                                                                                    |
-| 302 | [What is useImperativeHandle Hook? Give an example](#what-is-useimperativehandle-hook-give-an-example)                                                                                                                           |
-| 303 | [When should you use useImperativeHandle?](#when-should-you-use-useimperativehandle)                                                                                                                                             |
-| 304 | [Is it possible to use useImperativeHandle without forwardRef?](#is-that-possible-to-use-useimperativehandle-without-forwardref)                                                                                                 |
-| 305 | [How is useMemo different from useCallback?](#how-is-usememo-different-from-usecallback)                                                                                                                                         |
-| 306 | [Does useMemo prevent re-rendering of child components?](#does-usememo-prevent-re-rendering-of-child-components)                                                                                                                 |
-| 307 | [What is useCallback and why is it used?](#what-is-usecallback-and-why-is-it-used)                                                                                                                                               |
-| 308 | [What are Custom React Hooks, and how can you develop one?](#what-are-custom-react-hooks-and-how-can-you-develop-one)                                                                                                            |
-| 309 | [How does React Fiber work? Explain in detail](#how-does-react-fiber-works-explain-in-detail)                                                                                                                                    |
-| 310 | [What is the useId hook and when should you use it?](#what-is-the-useid-hook-and-when-should-you-use-it)                                                                                                                         |
-| 311 | [What is the useDeferredValue hook?](#what-is-the-usedeferredvalue-hook)                                                                                                                                                         |
-| 312 | [What is the useTransition hook and how does it differ from useDeferredValue?](#what-is-the-usetransition-hook-and-how-does-it-differ-from-usedeferredvalue)                                                                     |
-| 313 | [What is the useSyncExternalStore hook?](#what-is-the-usesyncexternalstore-hook)                                                                                                                                                 |
-| 314 | [What is the useInsertionEffect hook?](#what-is-the-useinsertioneffect-hook)                                                                                                                                                     |
-| 315 | [How do you share state logic between components using custom hooks?](#how-do-you-share-state-logic-between-components-using-custom-hooks)                                                                                       |
-| 316 | [What is the useDebugValue hook?](#what-is-the-usedebugvalue-hook)                                                                                                                                                               |
-| 317 | [How do you handle cleanup in useEffect?](#how-do-you-handle-cleanup-in-useeffect)                                                                                                                                               |
-| 318 | [What are the differences between useEffect and useEvent (experimental)?](#what-are-the-differences-between-useeffect-and-useevent-experimental)                                                                                 |
-| 319 | [What are the best practices for using React Hooks?](#what-are-the-best-practices-for-using-react-hooks)                                                                                                                         |
+| 266 | [How do you compare useState and useReducer?](#how-do-you-compare-use-state-and-use-reducer)                                                                                                                               |
+| 267 | [How does Context work with the useContext hook?](#how-does-context-works-using-usecontext-hook)                                                                                                                           |
+| 268 | [What are the use cases of the useContext hook?](#what-are-the-use-cases-of-usecontext-hook)                                                                                                                               |
+| 269 | [When should you use client and server components?](#when-to-use-client-and-server-components)                                                                                                                             |
+| 270 | [What are the differences between the Page Router and App Router in Next.js?](#what-are-the-differences-between-page-router-and-app-router-in-nextjs)                                                                      |
+| 271 | [Can you describe the useMemo() Hook?](#can-you-describe-the-usememo-hook)                                                                                                                                                 |
+| 272 | [Can Hooks be used in class components?](#can-hooks-be-used-in-class-components)                                                                                                                                           |
+| 273 | [What is an updater function? Should an updater function be used in all cases?](#what-is-an-updater-function-should-an-updater-function-be-used-in-all-cases)                                                              |
+| 274 | [Can useState take a function as an initial value?](#can-usestate-take-a-function-as-an-initial-value)                                                                                                                     |
+| 275 | [What types of values can useState hold?](#what-types-of-values-can-usestate-hold)                                                                                                                                         |
+| 276 | [What happens if you call useState conditionally?](#what-happens-if-you-call-usestate-conditionally)                                                                                                                       |
+| 277 | [Is useState Synchronous or Asynchronous?](#is-usestate-synchronous-or-asynchronous)                                                                                                                                       |
+| 278 | [Can you explain how useState works internally?](#can-you-explain-how-usestate-works-internally)                                                                                                                           |
+| 279 | [What is useReducer? Why do you use useReducer?](#what-is-usereducer-why-do-you-use-usereducer)                                                                                                                            |
+| 280 | [How does useReducer work? Explain with an example](#how-does-usereducer-works-explain-with-an-example)                                                                                                                    |
+| 281 | [Can you combine useReducer with useContext?](#can-you-combine-usereducer-with-usecontext)                                                                                                                                 |
+| 282 | [Can you dispatch multiple actions in a row with useReducer?](#can-you-dispatch-multiple-actions-in-a-row-with-usereducer)                                                                                                 |
+| 283 | [Is dispatch from useReducer asynchronous and does it update state immediately?](#is-dispatch-from-usereducer-asynchronous-and-does-it-update-state-immediately)                                                           |
+| 284 | [How does useContext work? Explain with an example](#how-does-usecontext-works-explain-with-an-example)                                                                                                                    |
+| 285 | [Can you use multiple Contexts in one component?](#can-you-use-multiple-contexts-in-one-component)                                                                                                                         |
+| 286 | [What's a common pitfall when using useContext with objects?](#whats-a-common-pitfall-when-using-usecontext-with-objects)                                                                                                  |
+| 287 | [What would the context value be for no matching provider?](#what-would-the-context-value-be-for-no-matching-provider)                                                                                                     |
+| 288 | [How do reactive dependencies in the useEffect dependency array affect its execution behavior?](#how-do-reactive-dependencies-in-the-useeffect-dependency-array-affect-its-execution-behavior)                             |
+| 289 | [When and how often does React invoke the setup and cleanup functions inside a useEffect hook?](#when-and-how-often-does-react-invoke-the-setup-and-cleanup-functions-inside-a-useeffect-hook)                             |
+| 290 | [What happens if you return a Promise from useEffect?](#what-happens-if-you-return-a-promise-from-useeffect)                                                                                                               |
+| 291 | [Can you have multiple useEffect hooks in a single component?](#can-you-have-multiple-useeffect-hooks-in-a-single-component)                                                                                               |
+| 292 | [How to prevent infinite loops with useEffect?](#how-to-prevent-infinite-loops-with-useeffect)                                                                                                                             |
+| 293 | [What are the use cases of useLayoutEffect?](#what-are-the-usecases-of-uselayouteffect)                                                                                                                                    |
+| 294 | [How does useLayoutEffect work during server-side rendering (SSR)?](#how-does-uselayouteffect-work-during-server-side-rendering-ssr)                                                                                       |
+| 295 | [What happens if you use useLayoutEffect for non-layout logic?](#what-happens-if-you-use-uselayouteffect-for-non-layout-logic)                                                                                             |
+| 296 | [How does useLayoutEffect cause layout thrashing?](#how-does-uselayouteffect-cause-layout-thrashing)                                                                                                                       |
+| 297 | [How do you use useRef to access a DOM element in React? Give an example](#how-do-you-use-useref-to-access-a-dom-element-in-react-give-an-example)                                                                         |
+| 298 | [Can you use useRef to persist values across renders?](#can-you-use-useref-to-persist-values-across-renders)                                                                                                               |
+| 299 | [Can useRef be used to store previous values?](#can-useref-be-used-to-store-previous-values)                                                                                                                               |
+| 300 | [Is it possible to access a ref in the render method?](#is-it-possible-to-access-a-ref-in-the-render-method)                                                                                                               |
+| 301 | [What are the common use cases of useRef hook?](#what-are-the-common-usecases-of-useref-hook)                                                                                                                              |
+| 302 | [What is useImperativeHandle Hook? Give an example](#what-is-useimperativehandle-hook-give-an-example)                                                                                                                     |
+| 303 | [When should you use useImperativeHandle?](#when-should-you-use-useimperativehandle)                                                                                                                                       |
+| 304 | [Is it possible to use useImperativeHandle without forwardRef?](#is-that-possible-to-use-useimperativehandle-without-forwardref)                                                                                           |
+| 305 | [How is useMemo different from useCallback?](#how-is-usememo-different-from-usecallback)                                                                                                                                   |
+| 306 | [Does useMemo prevent re-rendering of child components?](#does-usememo-prevent-re-rendering-of-child-components)                                                                                                           |
+| 307 | [What is useCallback and why is it used?](#what-is-usecallback-and-why-is-it-used)                                                                                                                                         |
+| 308 | [What are Custom React Hooks, and how can you develop one?](#what-are-custom-react-hooks-and-how-can-you-develop-one)                                                                                                      |
+| 309 | [How does React Fiber work? Explain in detail](#how-does-react-fiber-works-explain-in-detail)                                                                                                                              |
+| 310 | [What is the useId hook and when should you use it?](#what-is-the-useid-hook-and-when-should-you-use-it)                                                                                                                   |
+| 311 | [What is the useDeferredValue hook?](#what-is-the-usedeferredvalue-hook)                                                                                                                                                   |
+| 312 | [What is the useTransition hook and how does it differ from useDeferredValue?](#what-is-the-usetransition-hook-and-how-does-it-differ-from-usedeferredvalue)                                                               |
+| 313 | [What is the useSyncExternalStore hook?](#what-is-the-usesyncexternalstore-hook)                                                                                                                                           |
+| 314 | [What is the useInsertionEffect hook?](#what-is-the-useinsertioneffect-hook)                                                                                                                                               |
+| 315 | [How do you share state logic between components using custom hooks?](#how-do-you-share-state-logic-between-components-using-custom-hooks)                                                                                 |
+| 316 | [What is the useDebugValue hook?](#what-is-the-usedebugvalue-hook)                                                                                                                                                         |
+| 317 | [How do you handle cleanup in useEffect?](#how-do-you-handle-cleanup-in-useeffect)                                                                                                                                         |
+| 318 | [What are the differences between useEffect and useEvent (experimental)?](#what-are-the-differences-between-useeffect-and-useevent-experimental)                                                                           |
+| 319 | [What are the best practices for using React Hooks?](#what-are-the-best-practices-for-using-react-hooks)                                                                                                                   |
 
 </details>
 
@@ -482,55 +482,55 @@ Hide/Show table of contents
 
     **[⬆ Back to Top](#table-of-contents)**
 
-   2.  ### What is the history behind React evolution?
+2.  ### What is the history behind React evolution?
 
-       **Short definition:** This is a short overview of how React started and evolved over time.
+    **Short definition:** This is a short overview of how React started and evolved over time.
 
-       The history of ReactJS started in 2010 with the creation of **XHP**. XHP is a PHP extension which improved the syntax of the language such that XML document fragments become valid PHP expressions and the primary purpose was used to create custom and reusable HTML elements.
+    The history of ReactJS started in 2010 with the creation of **XHP**. XHP is a PHP extension which improved the syntax of the language such that XML document fragments become valid PHP expressions and the primary purpose was used to create custom and reusable HTML elements.
 
-       The main principle of this extension was to make front-end code easier to understand and to help avoid cross-site scripting attacks. The project was successful to prevent the malicious content submitted by the scrubbing user.
+    The main principle of this extension was to make front-end code easier to understand and to help avoid cross-site scripting attacks. The project was successful to prevent the malicious content submitted by the scrubbing user.
 
-       But there was a different problem with XHP in which dynamic web applications require many roundtrips to the server, and XHP did not solve this problem. Also, the whole UI was re-rendered for small change in the application. Later, the initial prototype of React is created with the name **FaxJ** by Jordan inspired from XHP. Finally after sometime React has been introduced as a new library into JavaScript world.
+    But there was a different problem with XHP in which dynamic web applications require many roundtrips to the server, and XHP did not solve this problem. Also, the whole UI was re-rendered for small change in the application. Later, the initial prototype of React is created with the name **FaxJ** by Jordan inspired from XHP. Finally after sometime React has been introduced as a new library into JavaScript world.
 
-       <details>
-           <summary><b>See deep-dive answer</b></summary>
-           The evolution of React has a fascinating history that spans over a decade:
-    
-       **2010-2011: The Origins**
-       - The journey began with **XHP**, a PHP extension created at Facebook that allowed HTML components to be used in PHP code
-       - XHP improved front-end code readability and helped prevent cross-site scripting (XSS) attacks
-       - However, XHP had limitations with dynamic web applications, requiring frequent server roundtrips and complete UI re-renders for small changes
+    <details>
+        <summary><b>See deep-dive answer</b></summary>
+        The evolution of React has a fascinating history that spans over a decade:
 
-       **2011-2012: Early Development**
-       - Jordan Walke created the first prototype called **FaxJS** (later renamed to React), inspired by XHP's component model
-       - The key innovation was bringing XHP's component model to JavaScript with performance improvements
-       - React introduced the Virtual DOM concept to solve the performance issues of full page re-renders
-       - First deployed internally on Facebook's News Feed in 2011 and Instagram in 2012
+    **2010-2011: The Origins**
+    - The journey began with **XHP**, a PHP extension created at Facebook that allowed HTML components to be used in PHP code
+    - XHP improved front-end code readability and helped prevent cross-site scripting (XSS) attacks
+    - However, XHP had limitations with dynamic web applications, requiring frequent server roundtrips and complete UI re-renders for small changes
 
-       **2013: Public Release**
-       - React was officially open-sourced at JSConf US in May 2013
-       - Initial public reception was mixed, with some developers skeptical about the JSX syntax and the approach of mixing markup with JavaScript
+    **2011-2012: Early Development**
+    - Jordan Walke created the first prototype called **FaxJS** (later renamed to React), inspired by XHP's component model
+    - The key innovation was bringing XHP's component model to JavaScript with performance improvements
+    - React introduced the Virtual DOM concept to solve the performance issues of full page re-renders
+    - First deployed internally on Facebook's News Feed in 2011 and Instagram in 2012
 
-       **2014-2015: Growing Adoption**
-       - React Native was announced in 2015, extending React's paradigm to mobile app development
-       - The ecosystem began to grow with tools like Redux for state management
-       - Companies beyond Facebook began adopting React for production applications
+    **2013: Public Release**
+    - React was officially open-sourced at JSConf US in May 2013
+    - Initial public reception was mixed, with some developers skeptical about the JSX syntax and the approach of mixing markup with JavaScript
 
-       **2016-2018: Maturation**
-       - React 16 ("Fiber") was released in 2017 with a complete rewrite of the core architecture
-       - Introduction of new features like Error Boundaries, Portals, and improved server-side rendering
-       - React 16.3 introduced the Context API for easier state management
+    **2014-2015: Growing Adoption**
+    - React Native was announced in 2015, extending React's paradigm to mobile app development
+    - The ecosystem began to grow with tools like Redux for state management
+    - Companies beyond Facebook began adopting React for production applications
 
-       **2019-Present: Modern React**
-       - React Hooks were introduced in React 16.8 (February 2019), revolutionizing state management in functional components
-       - React 17 (October 2020) focused on making React upgrades easier
-       - React 18 (March 2022) introduced concurrent rendering and automatic batching
-       - React continues to evolve with Server Components, the new React compiler (React Forget), and other performance improvements
-       </details>
+    **2016-2018: Maturation**
+    - React 16 ("Fiber") was released in 2017 with a complete rewrite of the core architecture
+    - Introduction of new features like Error Boundaries, Portals, and improved server-side rendering
+    - React 16.3 introduced the Context API for easier state management
 
-       **Note:** JSX, React's syntax extension, was indeed inspired by XHP's approach of embedding XML-like syntax in code.
+    **2019-Present: Modern React**
+    - React Hooks were introduced in React 16.8 (February 2019), revolutionizing state management in functional components
+    - React 17 (October 2020) focused on making React upgrades easier
+    - React 18 (March 2022) introduced concurrent rendering and automatic batching
+    - React continues to evolve with Server Components, the new React compiler (React Forget), and other performance improvements
+    </details>
 
-       **[⬆ Back to Top](#table-of-contents)**
+    **Note:** JSX, React's syntax extension, was indeed inspired by XHP's approach of embedding XML-like syntax in code.
+
+    **[⬆ Back to Top](#table-of-contents)**
 
 3.  ### What are the major features of React?
 
@@ -539,7 +539,6 @@ Hide/Show table of contents
     React offers a powerful set of features that have made it one of the most popular JavaScript libraries for building user interfaces:
 
     **Core Features:**
-
     - **Component-Based Architecture**: React applications are built using components - independent, reusable pieces of code that return HTML via a render function. This modular approach enables better code organization, reusability, and maintenance.
 
     - **Virtual DOM**: React creates an in-memory data structure cache, computes the resulting differences, and efficiently updates only the changed parts in the browser DOM. This approach significantly improves performance compared to direct DOM manipulation.
@@ -551,7 +550,6 @@ Hide/Show table of contents
     - **Declarative UI**: React allows you to describe what your UI should look like for a given state, and it handles the DOM updates when the underlying data changes.
 
     **Advanced Features:**
-
     - **React Hooks**: Introduced in React 16.8, hooks allow using state and other React features in functional components without writing classes.
 
     - **Context API**: Provides a way to share values between components without explicitly passing props through every level of the component tree.
@@ -593,7 +591,7 @@ Hide/Show table of contents
       return createElement(
         "h1",
         { className: "greeting" },
-        "Hello, this is a JSX Code!"
+        "Hello, this is a JSX Code!",
       );
     }
     ```
@@ -620,68 +618,77 @@ Hide/Show table of contents
 
     **Short definition:** It explains the main difference between an Element and a Component.
 
-      **Element:**
-      - A React **Element** is a plain JavaScript object that describes what you want to see on the UI. It represents a DOM node or a component at a specific point in time. 
-      - Elements are immutable: once created, you cannot change their properties. Instead, you create new elements to reflect updates.
-      - Elements can be nested within other elements through their `props`.
-      - Creating an element is a fast, lightweight operation—it does **not** create any actual DOM nodes or render anything to the screen directly.
+    **Element:**
+    - A React **Element** is a plain JavaScript object that describes what you want to see on the UI. It represents a DOM node or a component at a specific point in time.
+    - Elements are immutable: once created, you cannot change their properties. Instead, you create new elements to reflect updates.
+    - Elements can be nested within other elements through their `props`.
+    - Creating an element is a fast, lightweight operation—it does **not** create any actual DOM nodes or render anything to the screen directly.
 
-        **Example (without JSX):**
-        ```js
-        const element = React.createElement("button", { id: "login-btn" }, "Login");
-        ```
+      **Example (without JSX):**
 
-        **Equivalent JSX syntax:**
-        ```jsx
-        <button id="login-btn">Login</button>
-        ```
+      ```js
+      const element = React.createElement(
+        "button",
+        { id: "login-btn" },
+        "Login",
+      );
+      ```
 
-        **The object returned by `React.createElement`:**
-        ```js
-        {
-          type: 'button',
-          props: {
-            id: 'login-btn',
-            children: 'Login'
-          }
+      **Equivalent JSX syntax:**
+
+      ```jsx
+      <button id="login-btn">Login</button>
+      ```
+
+      **The object returned by `React.createElement`:**
+
+      ```js
+      {
+        type: 'button',
+        props: {
+          id: 'login-btn',
+          children: 'Login'
         }
-        ```
-        Elements are then passed to the React DOM renderer (e.g., `ReactDOM.render()`), which translates them to actual DOM nodes.
+      }
+      ```
 
-        ---
+      Elements are then passed to the React DOM renderer (e.g., `ReactDOM.render()`), which translates them to actual DOM nodes.
 
-      **Component:**
-      - A **Component** is a function or class that returns an element (or a tree of elements) to describe part of the UI. Components can accept inputs (called **props**) and manage their own state (in case of class or function components with hooks).
-      - Components allow you to split the UI into independent, reusable pieces, each isolated and composable.
-      - You can define a component using a function or a class:
+      ***
 
-        **Example (Function Component with JSX):**
-        ```jsx
-        const Button = ({ handleLogin }) => (
-          <button id="login-btn" onClick={handleLogin}>
-            Login
-          </button>
+    **Component:**
+    - A **Component** is a function or class that returns an element (or a tree of elements) to describe part of the UI. Components can accept inputs (called **props**) and manage their own state (in case of class or function components with hooks).
+    - Components allow you to split the UI into independent, reusable pieces, each isolated and composable.
+    - You can define a component using a function or a class:
+
+      **Example (Function Component with JSX):**
+
+      ```jsx
+      const Button = ({ handleLogin }) => (
+        <button id="login-btn" onClick={handleLogin}>
+          Login
+        </button>
+      );
+      ```
+
+      When JSX is compiled, it's transformed into a tree of `React.createElement` calls:
+
+      ```js
+      const Button = ({ handleLogin }) =>
+        React.createElement(
+          "button",
+          { id: "login-btn", onClick: handleLogin },
+          "Login",
         );
-        ```
+      ```
 
-        When JSX is compiled, it's transformed into a tree of `React.createElement` calls:
+      ***
 
-        ```js
-        const Button = ({ handleLogin }) =>
-          React.createElement(
-            "button",
-            { id: "login-btn", onClick: handleLogin },
-            "Login"
-          );
-        ```
+    **In summary:**
+    - **Elements** are the smallest building blocks in React—objects that describe what you want to see.
+    - **Components** are functions or classes that return elements and encapsulate logic, structure, and behavior for parts of your UI.
 
-        ---
-
-      **In summary:**
-      - **Elements** are the smallest building blocks in React—objects that describe what you want to see.
-      - **Components** are functions or classes that return elements and encapsulate logic, structure, and behavior for parts of your UI.
-
-       > Think of **elements** as the instructions for creating UI, and **components** as reusable blueprints that combine logic and structure to generate those instructions.
+    > Think of **elements** as the instructions for creating UI, and **components** as reusable blueprints that combine logic and structure to generate those instructions.
 
     **[⬆ Back to Top](#table-of-contents)**
 
@@ -690,7 +697,6 @@ Hide/Show table of contents
     **Short definition:** This shows how to create components in React.
 
     Components are the building blocks of creating User Interfaces(UI) in React. There are two possible ways to create a component.
-
     1. **Function Components:** This is the simplest way to create a component. Those are pure JavaScript functions that accept props object as the one and only one parameter and return React elements to render the output:
 
        ```jsx harmony
@@ -718,19 +724,16 @@ Hide/Show table of contents
     After the addition of Hooks(i.e. React 16.8 onwards) it is always recommended to use Function components over Class components in React. Because you could use state, lifecycle methods and other features that were only available in class component present in function component too.
 
     But even there are two reasons to use Class components over Function components.
-
     1. If you need a React functionality whose Function component equivalent is not present yet, like Error Boundaries.
     2. In older versions, If the component needs _state or lifecycle methods_ then you need to use class component.
 
     So the summary to this question is as follows:
 
     **Use Function Components:**
-
     - If you don't need state or lifecycle methods, and your component is purely presentational.
     - For simplicity, readability, and modern code practices, especially with the use of React Hooks for state and side effects.
 
     **Use Class Components:**
-
     - If you need to manage state or use lifecycle methods.
     - In scenarios where backward compatibility or integration with older code is necessary.
 
@@ -871,7 +874,6 @@ Hide/Show table of contents
     _Props_ are inputs to components. They are single values or objects containing a set of values that are passed to components on creation similar to HTML-tag attributes. Here, the data is passed down from a parent component to a child component.
 
     The primary purpose of props in React is to provide following component functionality:
-
     1. Pass custom data to your component.
     2. Trigger state changes.
     3. Use via `this.props.reactProp` inside component's `render()` method.
@@ -997,15 +999,15 @@ class ParentComponent extends React.Component {
 
     ### Summary Table
 
-    | Feature   | State                               | Props                             |
-    |-----------|-------------------------------------|-----------------------------------|
-    | Managed by| The component itself                | Parent component                  |
-    | Mutable   | Yes                                 | No (read-only)                    |
-    | Scope     | Local to the component              | Passed from parent to child       |
-    | Usage     | Manage dynamic data and UI changes  | Configure and customize component |
-    | Update    | Using setState/useState             | Cannot be updated by the component|
+    | Feature    | State                              | Props                              |
+    | ---------- | ---------------------------------- | ---------------------------------- |
+    | Managed by | The component itself               | Parent component                   |
+    | Mutable    | Yes                                | No (read-only)                     |
+    | Scope      | Local to the component             | Passed from parent to child        |
+    | Usage      | Manage dynamic data and UI changes | Configure and customize component  |
+    | Update     | Using setState/useState            | Cannot be updated by the component |
 
-    ---
+    ***
 
     **[⬆ Back to Top](#table-of-contents)**
 
@@ -1014,7 +1016,6 @@ class ParentComponent extends React.Component {
     **Short definition:** It explains the main difference between HTML and React event handling.
 
     Below are some of the main differences between HTML and React event handling,
-
     1. In HTML, the event name usually represents in _lowercase_ as a convention:
 
        ```html
@@ -1062,8 +1063,8 @@ class ParentComponent extends React.Component {
     function BookStore() {
       function handleTitleChange(e) {
         console.log("The new title is:", e.target.value);
-        console.log('Synthetic event:', e); // React SyntheticEvent
-        console.log('Native event:', e.nativeEvent); // Browser native event
+        console.log("Synthetic event:", e); // React SyntheticEvent
+        console.log("Native event:", e.nativeEvent); // Browser native event
         e.stopPropagation();
         e.preventDefault();
       }
@@ -1071,16 +1072,15 @@ class ParentComponent extends React.Component {
       return <input name="title" onChange={handleTitleChange} />;
     }
     ```
-    
-    List of common synthetic events are:
 
-    *   `onClick`
-    *   `onChange`
-    *   `onSubmit`
-    *   `onKeyDown`, `onKeyUp`
-    *   `onFocus`, `onBlur`
-    *   `onMouseEnter`, `onMouseLeave`
-    *   `onTouchStart`, `onTouchEnd`
+    List of common synthetic events are:
+    - `onClick`
+    - `onChange`
+    - `onSubmit`
+    - `onKeyDown`, `onKeyUp`
+    - `onFocus`, `onBlur`
+    - `onMouseEnter`, `onMouseLeave`
+    - `onTouchStart`, `onTouchEnd`
 
     **[⬆ Back to Top](#table-of-contents)**
 
@@ -1122,13 +1122,13 @@ class ParentComponent extends React.Component {
       <li key={index}>{todo.text}</li>
     ));
     ```
+
     **Benefits of key:**
-      *   Enables React to **efficiently update and re-render** components.
-      *   Prevents unnecessary re-renders by **reusing** components when possible.
-      *   Helps **maintain internal state** of list items correctly.
+    - Enables React to **efficiently update and re-render** components.
+    - Prevents unnecessary re-renders by **reusing** components when possible.
+    - Helps **maintain internal state** of list items correctly.
 
     **Note:**
-
     1. Using _indexes_ for _keys_ is **not recommended** if the order of items may change. This can negatively impact performance and may cause issues with component state.
     2. If you extract list item as separate component then apply _keys_ on list component instead of `li` tag.
     3. There will be a warning message in the console if the `key` prop is not present on list items.
@@ -1152,25 +1152,25 @@ class ParentComponent extends React.Component {
     The _Virtual DOM_ works in five simple steps.
 
     **1. Initial Render**  
-        When a UI component renders for the first time, it returns JSX. React uses this structure to create a Virtual DOM tree, which is a lightweight copy of the actual DOM. This Virtual DOM is then used to build and render the Real DOM in the browser.
+     When a UI component renders for the first time, it returns JSX. React uses this structure to create a Virtual DOM tree, which is a lightweight copy of the actual DOM. This Virtual DOM is then used to build and render the Real DOM in the browser.
 
     **2. State or Props Change**  
-        When the component's state or props change, React creates a new Virtual DOM reflecting the updated UI. However, it doesn't immediately update the Real DOM; instead, it works in memory to prepare for an efficient update.
-               
-      ![vdom](images/vdom1.png)
+     When the component's state or props change, React creates a new Virtual DOM reflecting the updated UI. However, it doesn't immediately update the Real DOM; instead, it works in memory to prepare for an efficient update.
+
+    ![vdom](images/vdom1.png)
 
     **3. Diffing Algorithm**  
-        React then compares the new Virtual DOM with the previous one using a process called diffing. It determines what has changed between the two versions and identifies the minimal set of updates needed.
-       
-       ![vdom2](images/vdom2.png)  
+     React then compares the new Virtual DOM with the previous one using a process called diffing. It determines what has changed between the two versions and identifies the minimal set of updates needed.
+
+    ![vdom2](images/vdom2.png)
 
     **4. Reconciliation**  
-        Based on the diffing results, React decides which parts of the Real DOM should be updated. It avoids re-rendering the entire DOM and instead updates only the elements that actually changed.
-        
-       ![vdom3](images/vdom3.png)
+     Based on the diffing results, React decides which parts of the Real DOM should be updated. It avoids re-rendering the entire DOM and instead updates only the elements that actually changed.
+
+    ![vdom3](images/vdom3.png)
 
     **5. Efficient DOM Updates**  
-        This entire process—working with the Virtual DOM, diffing, and selective updating—makes the UI rendering much faster and more efficient than manipulating the Real DOM directly.
+     This entire process—working with the Virtual DOM, diffing, and selective updating—makes the UI rendering much faster and more efficient than manipulating the Real DOM directly.
 
     **[⬆ Back to Top](#table-of-contents)**
 
@@ -1182,13 +1182,13 @@ class ParentComponent extends React.Component {
 
     The key differences in a table format shown below:
 
-    | Feature | Shadow DOM | Virtual DOM |
-    | --- | --- | --- |
-    | Purpose | Encapsulation for Web Components | Efficient UI rendering |
-    | Managed by | Browser | JS frameworks (e.g., React) |
-    | DOM Type | Part of real DOM (scoped) | In-memory representation |
-    | Encapsulation | Yes | No |
-    | Use Case | Web Components, scoped styling | UI diffing and minimal DOM updates |
+    | Feature       | Shadow DOM                       | Virtual DOM                        |
+    | ------------- | -------------------------------- | ---------------------------------- |
+    | Purpose       | Encapsulation for Web Components | Efficient UI rendering             |
+    | Managed by    | Browser                          | JS frameworks (e.g., React)        |
+    | DOM Type      | Part of real DOM (scoped)        | In-memory representation           |
+    | Encapsulation | Yes                              | No                                 |
+    | Use Case      | Web Components, scoped styling   | UI diffing and minimal DOM updates |
 
     **[⬆ Back to Top](#table-of-contents)**
 
@@ -1207,14 +1207,13 @@ class ParentComponent extends React.Component {
     The goal of _React Fiber_ is to increase its suitability for areas like animation, layout, and gestures. Its headline feature is **incremental rendering**: the ability to split rendering work into chunks and spread it out over multiple frames.
 
     Its main goals are:
-
-    *   **Incremental Rendering** – Breaks work into chunks for smoother updates.
-    *   **Interruptible Rendering** – Pauses and resumes rendering to keep the UI responsive.
-    *   **Prioritization** – Handles high-priority updates (e.g. animations) before low-priority ones.
-    *   **Concurrency Support** – Enables working on multiple UI versions simultaneously.
-    *   **Better Error Handling** – Supports component-level error boundaries.
-    *   **Suspense Support** – Allows waiting for async data before rendering.
-    *   **Improved DevTools** – Enables better debugging and performance tracking.
+    - **Incremental Rendering** – Breaks work into chunks for smoother updates.
+    - **Interruptible Rendering** – Pauses and resumes rendering to keep the UI responsive.
+    - **Prioritization** – Handles high-priority updates (e.g. animations) before low-priority ones.
+    - **Concurrency Support** – Enables working on multiple UI versions simultaneously.
+    - **Better Error Handling** – Supports component-level error boundaries.
+    - **Suspense Support** – Allows waiting for async data before rendering.
+    - **Improved DevTools** – Enables better debugging and performance tracking.
 
     **[⬆ Back to Top](#table-of-contents)**
 
@@ -1222,10 +1221,9 @@ class ParentComponent extends React.Component {
 
     **Short definition:** A controlled component is a React component that fully manages the form element's state using React's internal state mechanism.
 
-    A **controlled component** is a React component that **fully manages the form element's state**(e.g, elements like `<input>`, `<textarea>`, or `<select>`))  using React's internal state mechanism. i.e, The component does not manage its own internal state — instead, React acts as the single source of truth for form data.
+    A **controlled component** is a React component that **fully manages the form element's state**(e.g, elements like `<input>`, `<textarea>`, or `<select>`)) using React's internal state mechanism. i.e, The component does not manage its own internal state — instead, React acts as the single source of truth for form data.
 
     The controlled components will be implemented using the below steps,
-
     1. Initialize the state using `useState` hooks in function components or inside constructor for class components.
     2. Set the value of the form element to the respective state variable.
     3. Create an event handler(`onChange`) to handle the user input changes through `useState`'s updater function or `setState` from class component.
@@ -1233,37 +1231,38 @@ class ParentComponent extends React.Component {
 
     **Note:** React re-renders the component every time the input value changes.
 
-   For example, the name input field updates the username using `handleChange` event handler as below,
+For example, the name input field updates the username using `handleChange` event handler as below,
 
-   ```javascript
-   import React, { useState } from "react";
+```javascript
+import React, { useState } from "react";
 
-   function UserProfile() {
-     const [username, setUsername] = useState("");
+function UserProfile() {
+  const [username, setUsername] = useState("");
 
-     const handleChange = (e) => {
-       setUsername(e.target.value);
-     };
+  const handleChange = (e) => {
+    setUsername(e.target.value);
+  };
 
-     return (
-       <form>
-         <label>
-           Name:
-           <input type="text" value={username} onChange={handleChange} />
-         </label>
-       </form>
-     );
-   }
-   ```
-   In these components, DOM does not hold the actual data instead React does.
-   
-   **Benefits:**
+  return (
+    <form>
+      <label>
+        Name:
+        <input type="text" value={username} onChange={handleChange} />
+      </label>
+    </form>
+  );
+}
+```
 
-   *   Easy to implement **validation**, **conditional formatting**, or **live feedback**.
-   *   Full control over form data.
-   *   Easier to test and debug because the data is centralized in the component’s state.
+In these components, DOM does not hold the actual data instead React does.
 
-   **[⬆ Back to Top](#table-of-contents)**
+**Benefits:**
+
+- Easy to implement **validation**, **conditional formatting**, or **live feedback**.
+- Full control over form data.
+- Easier to test and debug because the data is centralized in the component’s state.
+
+**[⬆ Back to Top](#table-of-contents)**
 
 22. ### What are uncontrolled components?
 
@@ -1273,7 +1272,6 @@ class ParentComponent extends React.Component {
     You can query the DOM using a `ref` to find its current value when you need it. This is a bit more like traditional HTML.
 
     The uncontrolled components will be implemented using the below steps,
-
     1. Create a ref using `useRef` react hook in function component or `React.createRef()` in class based component.
     2. Attach this `ref` to the form element.
     3. The form element value can be accessed directly through `ref` in event handlers or `componentDidMount` for class components
@@ -1302,12 +1300,13 @@ class ParentComponent extends React.Component {
       );
     }
     ```
+
     **Note:** Here, DOM is in charge of the value. React only accesses the value when needed (via `ref`).
 
     **Benefits:**
-     *   **Less boilerplate** — no need for `useState` and `onChange`.
-     *   Useful for **quick form setups** or when integrating with **non-React code**.
-     *   Slightly better **performance** in very large forms (fewer re-renders).
+    - **Less boilerplate** — no need for `useState` and `onChange`.
+    - Useful for **quick form setups** or when integrating with **non-React code**.
+    - Slightly better **performance** in very large forms (fewer re-renders).
 
     In most cases, it's recommend to use controlled components to implement forms. In a controlled component, form data is handled by a React component. The alternative is uncontrolled components, where form data is handled by the DOM itself.
 
@@ -1352,29 +1351,39 @@ class ParentComponent extends React.Component {
 
     Both `React.createElement` and `React.cloneElement` are used to work with React elements, but they serve different purposes.
 
-    #### **createElement:** 
+    #### **createElement:**
+
     Creates a new React element from scratch. JSX elements will be transpiled to `React.createElement()` functions to create React elements which are going to be used for the object representation of UI.
     **Syntax:**
+
     ```jsx
-    React.createElement(type, props, ...children)
+    React.createElement(type, props, ...children);
     ```
+
     **Example:**
+
     ```jsx
-    React.createElement('button', { className: 'btn' }, 'Click Me')
+    React.createElement("button", { className: "btn" }, "Click Me");
     ```
+
     #### **cloneElement:**
-     The `cloneElement` method is used to clone an existing React element and optionally adds or overrides props.
+
+    The `cloneElement` method is used to clone an existing React element and optionally adds or overrides props.
 
     **Syntax:**
+
     ```jsx
-    React.cloneElement(element, newProps, ...children)
+    React.cloneElement(element, newProps, ...children);
     ```
+
     **Example:**
+
     ```jsx
     const button = <button className="btn">Click Me</button>;
-    const cloned = React.cloneElement(button, { className: 'btn-primary' });
+    const cloned = React.cloneElement(button, { className: "btn-primary" });
     // Result: <button className="btn-primary">Click Me</button>
     ```
+
     **[⬆ Back to Top](#table-of-contents)**
 
 24. ### What is Lifting State Up in React?
@@ -1396,16 +1405,18 @@ class ParentComponent extends React.Component {
     ```javascript
     const EnhancedComponent = higherOrderComponent(WrappedComponent);
     ```
+
     Let's take an example of a `withAuth` higher-order component (HOC) in React. This HOC will check if a user is authenticated and either render the wrapped component if authenticated or redirect (or show a message) if not.
 
     **withAuth HOC Example:**
+
     ```jsx
-    import React from 'react';
-    import { Navigate } from 'react-router-dom'; // For redirection (assuming React Router v6)
+    import React from "react";
+    import { Navigate } from "react-router-dom"; // For redirection (assuming React Router v6)
 
     const isAuthenticated = () => {
       // e.g., check for a valid token in localStorage or context
-      return !!localStorage.getItem('authToken');
+      return !!localStorage.getItem("authToken");
     };
 
     function withAuth(WrappedComponent) {
@@ -1422,10 +1433,12 @@ class ParentComponent extends React.Component {
 
     export default withAuth;
     ```
+
     **Usage**
+
     ```jsx
-    import React from 'react';
-    import withAuth from './withAuth';
+    import React from "react";
+    import withAuth from "./withAuth";
 
     function Dashboard() {
       return <h1>Welcome to the Dashboard!</h1>;
@@ -1436,12 +1449,11 @@ class ParentComponent extends React.Component {
     ```
 
     HOC can be used for many use cases:
-
     1. Code reuse, logic and bootstrap abstraction (e.g., fetching data, permissions, theming).
     2. Render hijacking (e.g., conditional rendering or layout changes).
     3. State abstraction and manipulation(e.g., handling form logic).
     4. Props manipulation(e.g., injecting additional props or filtering them).
-    
+
     Some of the real-world examples of HOCs in react eco-system:
     1. connect() from react-redux
     2. withRouter() from React Router v5
@@ -1456,7 +1468,7 @@ class ParentComponent extends React.Component {
 
     **Short definition:** The children prop is a special prop in React used to pass elements between the opening and closing tags of a component.
 
-    The `children` prop is a special prop in React used to pass elements between the opening and closing tags of a component. It is commonly used in layout and wrapper componnents. 
+    The `children` prop is a special prop in React used to pass elements between the opening and closing tags of a component. It is commonly used in layout and wrapper componnents.
 
     A simple usage of children prop looks as below,
 
@@ -1478,6 +1490,7 @@ class ParentComponent extends React.Component {
       );
     }
     ```
+
     Here, everything inside `<MyDiv>...</MyDiv>` is passed as children to the custom div component.
 
     The children can be text, JSX elements, fragments, arrays and functions(for advance use case like render props).
@@ -1497,7 +1510,7 @@ class ParentComponent extends React.Component {
         <span>{"Hello"}</span>
         <span>{"World"}</span>
       </MyDiv>,
-      node
+      node,
     );
     ```
 
@@ -1581,45 +1594,53 @@ class ParentComponent extends React.Component {
     **Short definition:** React uses className instead of class because of a JavaScript naming conflict with the class keyword.
 
     React uses **className** instead of **class** because of a JavaScript naming conflict with the class keyword.
-
     1. `class` is a reserved keyword in JavaScript
-        In JavaScript, class is used to define ES6 classes:
-      
-        ```js
-        class Person {
-          constructor(name) {
-            this.name = name;
-          }
-        }
-        ```
-        If you try to use class as a variable or property name, it will throw a syntax error. Since JSX is just JavaScript with XML-like syntax, using class directly in JSX would break the parser.
+       In JavaScript, class is used to define ES6 classes:
+
+       ```js
+       class Person {
+         constructor(name) {
+           this.name = name;
+         }
+       }
+       ```
+
+       If you try to use class as a variable or property name, it will throw a syntax error. Since JSX is just JavaScript with XML-like syntax, using class directly in JSX would break the parser.
 
     2. JSX Is JavaScript
-    
-        When you write JSX like this:
-        ```jsx
-        <div class="btn">Click</div>
-        ```
-        It will be compiled to:
-        ```jsx
-        React.createElement('div', { class: 'btn' }, 'Click');
-        ```
-        But `class` is invalid in this object literal context (since it clashes with the JS keyword), hence React instead uses className.
-        ```jsx
-        <div className="btn">Click</div>
-        ```
-        which compiles to:
-        ```jsx
-        React.createElement('div', { className: 'btn' }, 'Click');
-        ```
-        React then translates `className` to` class` in the final HTML DOM.
+
+       When you write JSX like this:
+
+       ```jsx
+       <div class="btn">Click</div>
+       ```
+
+       It will be compiled to:
+
+       ```jsx
+       React.createElement("div", { class: "btn" }, "Click");
+       ```
+
+       But `class` is invalid in this object literal context (since it clashes with the JS keyword), hence React instead uses className.
+
+       ```jsx
+       <div className="btn">Click</div>
+       ```
+
+       which compiles to:
+
+       ```jsx
+       React.createElement("div", { className: "btn" }, "Click");
+       ```
+
+       React then translates `className` to` class` in the final HTML DOM.
 
     3. Aligns with DOM APIs
-        In vanilla JavaScript, you interact with element classes using:
-        ```js
-        element.className = 'my-class';
-        ```
-        React follows this convention, staying consistent with the DOM API's property name rather than HTML’s attribute.
+       In vanilla JavaScript, you interact with element classes using:
+       ```js
+       element.className = "my-class";
+       ```
+       React follows this convention, staying consistent with the DOM API's property name rather than HTML’s attribute.
 
     **[⬆ Back to Top](#table-of-contents)**
 
@@ -1679,7 +1700,6 @@ class ParentComponent extends React.Component {
     **Short definition:** are the list of reasons to prefer fragments over container DOM elements.
 
     Below are the list of reasons to prefer fragments over container DOM elements,
-
     1. Fragments are a bit faster and use less memory by not creating an extra DOM node. This only has a real benefit on very large and deep trees.
     2. Some CSS mechanisms like _Flexbox_ and _CSS Grid_ have a special parent-child relationships, and adding divs in the middle makes it hard to keep the desired layout.
     3. The DOM Inspector is less cluttered.
@@ -1695,12 +1715,14 @@ class ParentComponent extends React.Component {
     ```javascript
     ReactDOM.createPortal(child, container);
     ```
-    *   `child`: Any valid React node (e.g., JSX, string, fragment).
-    *   `container`: A real DOM node (e.g., `document.getElementById('modal-root')`).
+
+    - `child`: Any valid React node (e.g., JSX, string, fragment).
+    - `container`: A real DOM node (e.g., `document.getElementById('modal-root')`).
 
     Even though the content renders elsewhere in the DOM, it still behaves like a normal child in React. It has access to context, state, and event handling.
 
     **Example:- Modal:**
+
     ```jsx
     function Modal({ children }) {
       return ReactDOM.createPortal(
@@ -1709,6 +1731,7 @@ class ParentComponent extends React.Component {
       );
     }
     ```
+
     The above code will render the modal content into the body element in the HTML, not inside the component's usual location.
 
     **[⬆ Back to Top](#table-of-contents)**
@@ -1783,7 +1806,6 @@ class ParentComponent extends React.Component {
     When the application is running in _development mode_, React will automatically check all props that we set on components to make sure they have _correct type_. If the type is incorrect, React will generate warning messages in the console. It's disabled in _production mode_ due to performance impact. The mandatory props are defined with `isRequired`.
 
     The set of predefined prop types:
-
     1. `PropTypes.number`
     2. `PropTypes.string`
     3. `PropTypes.array`
@@ -1848,7 +1870,6 @@ class ParentComponent extends React.Component {
     **Short definition:** This lists the advantages of React.
 
     Below are the list of main advantages of React,
-
     1. Increases the application's performance with _Virtual DOM_.
     2. JSX makes code easy to read and write.
     3. It renders both on client and server side (_SSR_).
@@ -1862,7 +1883,6 @@ class ParentComponent extends React.Component {
     **Short definition:** This lists the limitations of React.
 
     Apart from the advantages, there are few limitations of React too,
-
     1. React is just a view library, not a full framework.
     2. There is a learning curve for beginners who are new to web development.
     3. Integrating React into a traditional MVC framework requires some additional configuration.
@@ -1884,7 +1904,6 @@ class ParentComponent extends React.Component {
     **Short definition:** This explains what react-dom package is used for.
 
     The `react-dom` package provides _DOM-specific methods_ that can be used at the top level of your app. Most of the components are not required to use this module. Some of the methods of this package are:
-
     1. `render()`
     2. `hydrate()`
     3. `unmountComponentAtNode()`
@@ -1898,7 +1917,6 @@ class ParentComponent extends React.Component {
     **Short definition:** The ReactDOMServer object enables you to render components to static markup.
 
     The `ReactDOMServer` object enables you to render components to static markup (typically used on node server). This object is mainly used for _server-side rendering_ (SSR). The following methods can be used in both the server and browser environments:
-
     1. `renderToString()`
     2. `renderToStaticMarkup()`
 
@@ -1911,7 +1929,7 @@ class ParentComponent extends React.Component {
 
     app.get("/", (req, res) => {
       res.write(
-        "<!DOCTYPE html><html><head><title>My Page</title></head><body>"
+        "<!DOCTYPE html><html><head><title>My Page</title></head><body>",
       );
       res.write('<div id="content">');
       res.write(renderToString(<MyPage />));
@@ -1968,7 +1986,6 @@ class ParentComponent extends React.Component {
     **Short definition:** This explains how events are different in React.
 
     Handling events in React elements has some syntactic differences:
-
     1. React event handlers are named using camelCase, rather than lowercase.
     2. With JSX you pass a function as the event handler, rather than a string.
 
@@ -2178,7 +2195,6 @@ class ParentComponent extends React.Component {
     _Pointer Events_ provide a unified way of handling all input events. In the old days we had a mouse and respective event listeners to handle them but nowadays we have many devices which don't correlate to having a mouse, like phones with touch surface or pens. We need to remember that these events will only work in browsers that support the _Pointer Events_ specification.
 
     The following event types are now available in _React DOM_:
-
     1. `onPointerDown`
     2. `onPointerMove`
     3. `onPointerUp`
@@ -2318,7 +2334,7 @@ class ParentComponent extends React.Component {
         React.PropTypes.shape({
           color: React.PropTypes.string.isRequired,
           fontSize: React.PropTypes.number.isRequired,
-        })
+        }),
       ).isRequired,
     };
     ```
@@ -2602,7 +2618,7 @@ class ParentComponent extends React.Component {
 
     ReactDOM.render(
       <div>{`React version: ${REACT_VERSION}`}</div>,
-      document.getElementById("app")
+      document.getElementById("app"),
     );
     ```
 
@@ -2702,14 +2718,14 @@ class ParentComponent extends React.Component {
     ### Example Usage
 
     ```jsx
-    import { useEffect, useState } from 'react';
+    import { useEffect, useState } from "react";
 
     function UserProfile() {
       const [user, setUser] = useState(null);
 
       useEffect(() => {
         const fetchUser = async () => {
-          const response = await fetch('/api/user');
+          const response = await fetch("/api/user");
           const data = await response.json();
           setUser(data);
         };
@@ -2720,17 +2736,18 @@ class ParentComponent extends React.Component {
       return user ? <div>Hello, {user.name}</div> : <div>Loading...</div>;
     }
     ```
+
     But If you're not using a bundler like **Webpack or Babel**, you will need _Babel_ and [transform-async-to-generator](https://babeljs.io/docs/en/babel-plugin-transform-async-to-generator) plugin. However, React Native ships with Babel and a set of transforms.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-75.  ### What are the common folder structures for React?
+75. ### What are the common folder structures for React?
 
     **Short definition:** This lists the common folder structures for React.
 
-     There are two common practices for React project file structure.
+    There are two common practices for React project file structure.
+    1.  **Grouping by features or routes:**
 
-     1.  **Grouping by features or routes:**
 
         One common way to structure projects is locate CSS, JS, and tests together, grouped by feature or route.
 
@@ -2755,7 +2772,8 @@ class ParentComponent extends React.Component {
         └─ ProfileAPI.js
         ```
 
-     2.  **Grouping by file type:**
+    2.  **Grouping by file type:**
+
 
         Another popular way to structure projects is to group similar files together.
 
@@ -2848,7 +2866,6 @@ class ParentComponent extends React.Component {
     **Short definition:** React Router v6 provides 4 Router components.
 
     React Router v6 provides below 4 `<Router>` components:
-
     1.  `<BrowserRouter>`:Uses the HTML5 history API for standard web apps.
     2.  `<HashRouter>`:Uses hash-based routing for static servers.
     3.  `<MemoryRouter>`:Uses in-memory routing for testing and non-browser environments.
@@ -2863,7 +2880,6 @@ class ParentComponent extends React.Component {
     **Short definition:** This explains the purpose of push() and replace() methods of history.
 
     A history instance has two methods for navigation purpose.
-
     1.  `push()`
     2.  `replace()`
 
@@ -2876,7 +2892,6 @@ class ParentComponent extends React.Component {
     **Short definition:** This shows how to programmatically navigate using React Router v4.
 
     There are three different ways to achieve programmatic routing/navigation within components.
-
     1.  **Using the `withRouter()` higher-order function:**
 
         The `withRouter()` higher-order function will inject the history object as a prop of the component. This object provides `push()` and `replace()` methods to avoid the usage of context.
@@ -3030,7 +3045,6 @@ class ParentComponent extends React.Component {
     **Short definition:** This shows how to get history on React Router v4.
 
     Below are the list of steps to get history object on React Router v4,
-
     1.  Create a module that exports a `history` object and import this module across the project.
 
         For example, create `history.js` file:
@@ -3054,7 +3068,7 @@ class ParentComponent extends React.Component {
           <Router history={history}>
             <App />
           </Router>,
-          holder
+          holder,
         );
         ```
 
@@ -3125,7 +3139,6 @@ class ParentComponent extends React.Component {
     **Short definition:** This lists the main features of React Intl.
 
     Below are the main features of React Intl,
-
     1.  Display numbers with separators.
     2.  Display dates and times correctly.
     3.  Display dates relative to "now".
@@ -3141,7 +3154,6 @@ class ParentComponent extends React.Component {
     **Short definition:** This lists the two ways of formatting in React Intl.
 
     The library provides two ways to format strings, numbers, and dates:
-
     1.  **Using react components:**
 
         ```jsx harmony
@@ -3216,27 +3228,27 @@ class ParentComponent extends React.Component {
 
     **Short definition:** This shows how to format date using React Intl.
 
-     The `injectIntl()` higher-order component will give you access to the `formatDate()` method via the props in your component. The method is used internally by instances of `FormattedDate` and it returns the string representation of the formatted date.
+    The `injectIntl()` higher-order component will give you access to the `formatDate()` method via the props in your component. The method is used internally by instances of `FormattedDate` and it returns the string representation of the formatted date.
 
-     ```jsx harmony
-     import { injectIntl, intlShape } from "react-intl";
+    ```jsx harmony
+    import { injectIntl, intlShape } from "react-intl";
 
-     const stringDate = this.props.intl.formatDate(date, {
-       year: "numeric",
-       month: "numeric",
-       day: "numeric",
-     });
+    const stringDate = this.props.intl.formatDate(date, {
+      year: "numeric",
+      month: "numeric",
+      day: "numeric",
+    });
 
-     const MyComponent = ({ intl }) => (
-       <div>{`The formatted date is ${stringDate}`}</div>
-     );
+    const MyComponent = ({ intl }) => (
+      <div>{`The formatted date is ${stringDate}`}</div>
+    );
 
-     MyComponent.propTypes = {
-       intl: intlShape.isRequired,
-     };
+    MyComponent.propTypes = {
+      intl: intlShape.isRequired,
+    };
 
-     export default injectIntl(MyComponent);
-     ```
+    export default injectIntl(MyComponent);
+    ```
 
     **[⬆ Back to Top](#table-of-contents)**
 
@@ -3293,7 +3305,7 @@ class ParentComponent extends React.Component {
     const Link = ({ page, children }) => <a href={page}>{children}</a>;
 
     const testRenderer = TestRenderer.create(
-      <Link page={"https://www.facebook.com/"}>{"Facebook"}</Link>
+      <Link page={"https://www.facebook.com/"}>{"Facebook"}</Link>,
     );
 
     console.log(testRenderer.toJSON());
@@ -3324,10 +3336,9 @@ class ParentComponent extends React.Component {
 
 100. ### What are the advantages of Jest over Jasmine?
 
-    **Short definition:** This lists the advantages of Jest over Jasmine.
+     **Short definition:** This lists the advantages of Jest over Jasmine.
 
      There are couple of advantages compared to Jasmine:
-
      - Automatically finds tests to execute in your source code.
      - Automatically mocks dependencies when running your tests.
      - Allows you to test asynchronous code synchronously.
@@ -3338,7 +3349,7 @@ class ParentComponent extends React.Component {
 
 101. ### Give a simple example of Jest test case
 
-    **Short definition:** Let's write a test for a function that adds two numbers in sum.js file.
+     **Short definition:** Let's write a test for a function that adds two numbers in sum.js file.
 
      Let's write a test for a function that adds two numbers in `sum.js` file:
 
@@ -3382,96 +3393,95 @@ class ParentComponent extends React.Component {
 
 102. ### What is flux?
 
-    **Short definition:** Flux is an application architecture designed by Facebook to manage data flow in React applications.
+     **Short definition:** Flux is an application architecture designed by Facebook to manage data flow in React applications.
 
-       **Flux** is an **application architecture** (not a framework or library) designed by Facebook to manage **data flow** in React applications. It was created as an alternative to the traditional **MVC (Model-View-Controller)** pattern, and it emphasizes a **unidirectional data flow** to make state changes more predictable and easier to debug.
+     **Flux** is an **application architecture** (not a framework or library) designed by Facebook to manage **data flow** in React applications. It was created as an alternative to the traditional **MVC (Model-View-Controller)** pattern, and it emphasizes a **unidirectional data flow** to make state changes more predictable and easier to debug.
 
-       Flux complements React by organizing the way data moves through your application, especially in large-scale or complex projects.
+     Flux complements React by organizing the way data moves through your application, especially in large-scale or complex projects.
 
-       #### Core Concepts of Flux
+     #### Core Concepts of Flux
 
-       Flux operates using **four key components**, each with a specific responsibility:
-       *   **Actions**
-             *   Plain JavaScript objects or functions that describe _what happened_ (e.g., user interactions or API responses).
-             *   Example: `{ type: 'ADD_TODO', payload: 'Buy milk' }`
-       *   **Dispatcher**
-             *   A central hub that receives actions and **dispatches** them to the appropriate stores.
-             *   There is **only one dispatcher** in a Flux application.
-       *   **Stores**
-             *   Hold the **application state** and business logic.
-             *   Respond to actions from the dispatcher and update themselves accordingly.
-             *   They **emit change events** that views can listen to.
-       *   **Views (React Components)**
-             *   Subscribe to stores and **re-render** when the data changes.
-             *   They can also trigger new actions (e.g., on user input).
+     Flux operates using **four key components**, each with a specific responsibility:
+     - **Actions**
+       - Plain JavaScript objects or functions that describe _what happened_ (e.g., user interactions or API responses).
+       - Example: `{ type: 'ADD_TODO', payload: 'Buy milk' }`
+     - **Dispatcher**
+       - A central hub that receives actions and **dispatches** them to the appropriate stores.
+       - There is **only one dispatcher** in a Flux application.
+     - **Stores**
+       - Hold the **application state** and business logic.
+       - Respond to actions from the dispatcher and update themselves accordingly.
+       - They **emit change events** that views can listen to.
+     - **Views (React Components)**
+       - Subscribe to stores and **re-render** when the data changes.
+       - They can also trigger new actions (e.g., on user input).
 
+     The workflow between dispatcher, stores and views components with distinct inputs and outputs as follows:
 
-       The workflow between dispatcher, stores and views components with distinct inputs and outputs as follows:
-
-       ![flux](images/flux.png)
+     ![flux](images/flux.png)
 
 **[⬆ Back to Top](#table-of-contents)**
 
 103.  ### What is Redux?
 
-    **Short definition:** Redux is a predictable state container for JavaScript applications, most commonly used with React.
+      **Short definition:** Redux is a predictable state container for JavaScript applications, most commonly used with React.
 
-       Redux is a predictable state container for JavaScript applications, most commonly used with React. It helps you manage and centralize your application’s state in a single source of truth, enabling easier debugging, testing, and maintenance—especially in large or complex applications. Redux core is tiny library(about 2.5kB gzipped) and has no dependencies.
+      Redux is a predictable state container for JavaScript applications, most commonly used with React. It helps you manage and centralize your application’s state in a single source of truth, enabling easier debugging, testing, and maintenance—especially in large or complex applications. Redux core is tiny library(about 2.5kB gzipped) and has no dependencies.
 
 **[⬆ Back to Top](#table-of-contents)**
 
 104. ### What are the core principles of Redux?
 
-    **Short definition:** Redux follows three fundamental principles.
+     **Short definition:** Redux follows three fundamental principles.
 
      Redux follows three fundamental principles:
-
      1. **Single source of truth:** The state of your whole application is stored in an object tree within a single store. The single state tree makes it easier to keep track of changes over time and debug or inspect the application.
-   
-      ```jsx
-      const store = createStore(reducer);
-      ```
+
+     ```jsx
+     const store = createStore(reducer);
+     ```
+
      2. **State is read-only:** The only way to change the state is to emit an action, an object describing what happened. This ensures that neither the views nor the network callbacks will ever write directly to the state.
-      ```js
-      const action = { type: 'INCREMENT' };
-      store.dispatch(action);
-      ```
+
+     ```js
+     const action = { type: "INCREMENT" };
+     store.dispatch(action);
+     ```
+
      3. **Changes are made with pure functions(Reducers):** To specify how the state tree is transformed by actions, you write reducers. Reducers are just pure functions that take the previous state and an action as parameters, and return the next state.
-      
-      ```jsx
-      function counter(state = 0, action) {
-        switch (action.type) {
-          case 'INCREMENT':
-            return state + 1;
-          case 'DECREMENT':
-            return state - 1;
-          default:
-            return state;
-        }
-      }
-      ```
+
+     ```jsx
+     function counter(state = 0, action) {
+       switch (action.type) {
+         case "INCREMENT":
+           return state + 1;
+         case "DECREMENT":
+           return state - 1;
+         default:
+           return state;
+       }
+     }
+     ```
 
 **[⬆ Back to Top](#table-of-contents)**
 
 105. ### What are the downsides of Redux compared to Flux?
 
-    **Short definition:** While Redux offers a powerful and predictable state management solution, it comes with a few trade-offs when compared to Flux.
+     **Short definition:** While Redux offers a powerful and predictable state management solution, it comes with a few trade-offs when compared to Flux.
 
      While Redux offers a powerful and predictable state management solution, it comes with a few trade-offs when compared to Flux. These include:
-
-     1.  **Immutability is essential**  
+     1. **Immutability is essential**  
         Redux enforces a strict immutability model for state updates, which differs from Flux’s more relaxed approach. This means you must avoid mutating state directly. Many Redux-related libraries assume immutability, so your team must be disciplined in writing pure update logic. You can use tools like `redux-immutable-state-invariant`, `Immer`, or `Immutable.js` to help enforce this practice, especially during development.
-     2.  **Careful selection of complementary packages**  
+     2. **Careful selection of complementary packages**  
         Redux is more minimal by design and provides extension points such as middleware and store enhancers. This has led to a large ecosystem, but it also means you must thoughtfully choose and configure additional packages for features like undo/redo, persistence, or form handling—something Flux explicitly leaves out but may be simpler to manage in smaller setups.
-     3.  **Limited static type integration**  
+     3. **Limited static type integration**  
         While Flux has mature support for static type checking with tools like Flow, Redux’s type integration is less seamless. Although TypeScript is commonly used with Redux now, early Flow support was limited, and more boilerplate was required for static type safety. This may affect teams that rely heavily on type systems for large codebases.
-
 
 **[⬆ Back to Top](#table-of-contents)**
 
 106. ### What is the difference between `mapStateToProps()` and `mapDispatchToProps()`?
 
-    **Short definition:** It explains the main difference between mapStateToProps() and mapDispatchToProps().
+     **Short definition:** It explains the main difference between mapStateToProps() and mapDispatchToProps().
 
      `mapStateToProps()` is a utility which helps your component get updated state (which is updated by some other components):
 
@@ -3509,7 +3519,7 @@ class ParentComponent extends React.Component {
 
 107. ### Can I dispatch an action in reducer?
 
-    **Short definition:** Dispatching an action within a reducer is an anti-pattern.
+     **Short definition:** Dispatching an action within a reducer is an anti-pattern.
 
      Dispatching an action within a reducer is an **anti-pattern**. Your reducer should be _without side effects_, simply digesting the action payload and returning a new state object. Adding listeners and dispatching actions within the reducer can lead to chained actions and other side effects.
 
@@ -3517,7 +3527,7 @@ class ParentComponent extends React.Component {
 
 108. ### How to access Redux store outside a component?
 
-    **Short definition:** This shows how to access Redux store outside a component.
+     **Short definition:** This shows how to access Redux store outside a component.
 
      You just need to export the store from the module where it created with `createStore()`. Also, it shouldn't pollute the global window object.
 
@@ -3531,8 +3541,7 @@ class ParentComponent extends React.Component {
 
 109. ### What are the drawbacks of MVW pattern?
 
-    **Short definition:** This explains the idea behind the drawbacks of MVW pattern.
-
+     **Short definition:** This explains the idea behind the drawbacks of MVW pattern.
      1. DOM manipulation is very expensive which causes applications to behave slow and inefficient.
      2. Due to circular dependencies, a complicated model was created around models and views.
      3. Lot of data changes happens for collaborative applications(like Google Docs).
@@ -3542,7 +3551,7 @@ class ParentComponent extends React.Component {
 
 110. ### Are there any similarities between Redux and RxJS?
 
-    **Short definition:** These libraries are very different for very different purposes, but there are some vague similarities.
+     **Short definition:** These libraries are very different for very different purposes, but there are some vague similarities.
 
      These libraries are very different for very different purposes, but there are some vague similarities.
 
@@ -3552,7 +3561,7 @@ class ParentComponent extends React.Component {
 
 111. ### How to reset state in Redux?
 
-    **Short definition:** This shows how to reset state in Redux.
+     **Short definition:** This shows how to reset state in Redux.
 
      You need to write a _root reducer_ in your application which delegate handling the action to the reducer generated by `combineReducers()`.
 
@@ -3596,7 +3605,7 @@ class ParentComponent extends React.Component {
 
 112. ### What is the difference between React context and React Redux?
 
-    **Short definition:** It explains the main difference between React context and React Redux.
+     **Short definition:** It explains the main difference between React context and React Redux.
 
      You can use **Context** in your application directly and is going to be great for passing down data to deeply nested components which what it was designed for.
 
@@ -3606,7 +3615,7 @@ class ParentComponent extends React.Component {
 
 113. ### Why are Redux state functions called reducers?
 
-    **Short definition:** Reducers always return the accumulation of the state.
+     **Short definition:** Reducers always return the accumulation of the state.
 
      Reducers always return the accumulation of the state (based on all previous and current actions). Therefore, they act as a reducer of state. Each time a Redux reducer is called, the state and action are passed as parameters. This state is then reduced (or accumulated) based on the action, and then the next state is returned. You could _reduce_ a collection of actions and an initial state (of the store) on which to perform these actions to get the resulting final state.
 
@@ -3614,7 +3623,7 @@ class ParentComponent extends React.Component {
 
 114. ### How to make AJAX request in Redux?
 
-    **Short definition:** This shows how to make AJAX request in Redux.
+     **Short definition:** This shows how to make AJAX request in Redux.
 
      You can use `redux-thunk` middleware which allows you to define async actions.
 
@@ -3644,7 +3653,7 @@ class ParentComponent extends React.Component {
 
 115. ### Should I keep all component's state in Redux store?
 
-    **Short definition:** Keep your data in the Redux store, and the UI related state internally in the component.
+     **Short definition:** Keep your data in the Redux store, and the UI related state internally in the component.
 
      Keep your data in the Redux store, and the UI related state internally in the component.
 
@@ -3652,7 +3661,7 @@ class ParentComponent extends React.Component {
 
 116. ### What is the proper way to access Redux store?
 
-    **Short definition:** The best way to access your store in a component is to use the connect() function, that creates a new component that wraps around your existing one.
+     **Short definition:** The best way to access your store in a component is to use the connect() function, that creates a new component that wraps around your existing one.
 
      The best way to access your store in a component is to use the `connect()` function, that creates a new component that wraps around your existing one. This pattern is called _Higher-Order Components_, and is generally the preferred way of extending a component's functionality in React. This allows you to map state and action creators to your component, and have them passed in automatically as your store updates.
 
@@ -3690,7 +3699,7 @@ class ParentComponent extends React.Component {
 
 117. ### What is the difference between component and container in React Redux?
 
-    **Short definition:** It explains the main difference between component and container in React Redux.
+     **Short definition:** It explains the main difference between component and container in React Redux.
 
      **Component** is a class or function component that describes the presentational part of your application.
 
@@ -3700,7 +3709,7 @@ class ParentComponent extends React.Component {
 
 118. ### What is the purpose of the constants in Redux?
 
-    **Short definition:** This explains the purpose of the constants in Redux.
+     **Short definition:** This explains the purpose of the constants in Redux.
 
      Constants allows you to easily find all usages of that specific functionality across the project when you use an IDE. It also prevents you from introducing silly bugs caused by typos – in which case, you will get a `ReferenceError` immediately.
 
@@ -3716,7 +3725,6 @@ class ParentComponent extends React.Component {
      ```
 
      In Redux, you use them in two places:
-
      1. **During action creation:**
 
         Let's take `actions.js`:
@@ -3756,7 +3764,7 @@ class ParentComponent extends React.Component {
 
 119. ### What are the different ways to write `mapDispatchToProps()`?
 
-    **Short definition:** This lists the different ways to write mapDispatchToProps().
+     **Short definition:** This lists the different ways to write mapDispatchToProps().
 
      There are a few ways of binding _action creators_ to `dispatch()` in `mapDispatchToProps()`.
 
@@ -3784,7 +3792,7 @@ class ParentComponent extends React.Component {
 
 120. ### What is the use of the `ownProps` parameter in `mapStateToProps()` and `mapDispatchToProps()`?
 
-    **Short definition:** This explains what the ownProps parameter in mapStateToProps() and mapDispatchToProps() is used for.
+     **Short definition:** This explains what the ownProps parameter in mapStateToProps() and mapDispatchToProps() is used for.
 
      If the `ownProps` parameter is specified, React Redux will pass the props that were passed to the component into your _connect_ functions. So, if you use a connected component:
 
@@ -3808,10 +3816,9 @@ class ParentComponent extends React.Component {
 
 121. ### How to structure Redux top level directories?
 
-    **Short definition:** This shows how to structure Redux top level directories.
+     **Short definition:** This shows how to structure Redux top level directories.
 
      Most of the applications has several top-level directories as below:
-
      1. **Components**: Used for _dumb_ components unaware of Redux.
      2. **Containers**: Used for _smart_ components connected to Redux.
      3. **Actions**: Used for all action creators, where file names correspond to part of the app.
@@ -3824,7 +3831,7 @@ class ParentComponent extends React.Component {
 
 122. ### What is redux-saga?
 
-    **Short definition:** redux-saga is a library that aims to make side effects in React/Redux applications easier and better.
+     **Short definition:** redux-saga is a library that aims to make side effects in React/Redux applications easier and better.
 
      `redux-saga` is a library that aims to make side effects (asynchronous things like data fetching and impure things like accessing the browser cache) in React/Redux applications easier and better.
 
@@ -3838,7 +3845,7 @@ class ParentComponent extends React.Component {
 
 123. ### What is the mental model of redux-saga?
 
-    **Short definition:** Saga is like a separate thread in your application, that's solely responsible for side effects.
+     **Short definition:** Saga is like a separate thread in your application, that's solely responsible for side effects.
 
      _Saga_ is like a separate thread in your application, that's solely responsible for side effects. `redux-saga` is a redux _middleware_, which means this thread can be started, paused and cancelled from the main application with normal Redux actions, it has access to the full Redux application state and it can dispatch Redux actions as well.
 
@@ -3846,7 +3853,7 @@ class ParentComponent extends React.Component {
 
 124. ### What are the differences between `call()` and `put()` in redux-saga?
 
-    **Short definition:** It explains the main differences between call() and put() in redux-saga.
+     **Short definition:** It explains the main differences between call() and put() in redux-saga.
 
      Both `call()` and `put()` are effect creator functions. `call()` function is used to create effect description, which instructs middleware to call the promise. `put()` function creates an effect, which instructs middleware to dispatch an action to the store.
 
@@ -3870,7 +3877,7 @@ class ParentComponent extends React.Component {
 
 125. ### What is Redux Thunk?
 
-    **Short definition:** Redux Thunk middleware allows you to write action creators that return a function instead of an action.
+     **Short definition:** Redux Thunk middleware allows you to write action creators that return a function instead of an action.
 
      _Redux Thunk_ middleware allows you to write action creators that return a function instead of an action. The thunk can be used to delay the dispatch of an action, or to dispatch only if a certain condition is met. The inner function receives the store methods `dispatch()` and `getState()` as parameters.
 
@@ -3878,7 +3885,7 @@ class ParentComponent extends React.Component {
 
 126. ### What are the differences between `redux-saga` and `redux-thunk`?
 
-    **Short definition:** It explains the main differences between redux-saga and redux-thunk.
+     **Short definition:** It explains the main differences between redux-saga and redux-thunk.
 
      Both _Redux Thunk_ and _Redux Saga_ take care of dealing with side effects. In most of the scenarios, Thunk uses _Promises_ to deal with them, whereas Saga uses _Generators_. Thunk is simple to use and Promises are familiar to many developers, Sagas/Generators are more powerful but you will need to learn them. But both middleware can coexist, so you can start with Thunks and introduce Sagas when/if you need them.
 
@@ -3886,7 +3893,7 @@ class ParentComponent extends React.Component {
 
 127. ### What is Redux DevTools?
 
-    **Short definition:** Redux DevTools is a live-editing time travel environment for Redux with hot reloading, action replay, and customizable UI.
+     **Short definition:** Redux DevTools is a live-editing time travel environment for Redux with hot reloading, action replay, and customizable UI.
 
      _Redux DevTools_ is a live-editing time travel environment for Redux with hot reloading, action replay, and customizable UI. If you don't want to bother with installing Redux DevTools and integrating it into your project, consider using Redux DevTools Extension for Chrome and Firefox.
 
@@ -3894,10 +3901,9 @@ class ParentComponent extends React.Component {
 
 128. ### What are the features of Redux DevTools?
 
-    **Short definition:** This lists the features of Redux DevTools.
+     **Short definition:** This lists the features of Redux DevTools.
 
      Some of the main features of Redux DevTools are below,
-
      1. Lets you inspect every state and action payload.
      2. Lets you go back in time by _cancelling_ actions.
      3. If you change the reducer code, each _staged_ action will be re-evaluated.
@@ -3908,7 +3914,7 @@ class ParentComponent extends React.Component {
 
 129. ### What are Redux selectors and why use them?
 
-    **Short definition:** Selectors are functions that take Redux state as an argument and return some data to pass to the component.
+     **Short definition:** Selectors are functions that take Redux state as an argument and return some data to pass to the component.
 
      _Selectors_ are functions that take Redux state as an argument and return some data to pass to the component.
 
@@ -3919,7 +3925,6 @@ class ParentComponent extends React.Component {
      ```
 
      These selectors have two main benefits,
-
      1. The selector can compute derived data, allowing Redux to store the minimal possible state
      2. The selector is not recomputed unless one of its arguments changes
 
@@ -3927,7 +3932,7 @@ class ParentComponent extends React.Component {
 
 130. ### What is Redux Form?
 
-    **Short definition:** Redux Form works with React and Redux to enable a form in React to use Redux to store all of its state.
+     **Short definition:** Redux Form works with React and Redux to enable a form in React to use Redux to store all of its state.
 
      _Redux Form_ works with React and Redux to enable a form in React to use Redux to store all of its state. Redux Form can be used with raw HTML5 inputs, but it also works very well with common UI frameworks like Material UI, React Widgets and React Bootstrap.
 
@@ -3935,10 +3940,9 @@ class ParentComponent extends React.Component {
 
 131. ### What are the main features of Redux Form?
 
-    **Short definition:** This lists the main features of Redux Form.
+     **Short definition:** This lists the main features of Redux Form.
 
      Some of the main features of Redux Form are:
-
      1. Field values persistence via Redux store.
      2. Validation (sync/async) and submission.
      3. Formatting, parsing and normalization of field values.
@@ -3947,7 +3951,7 @@ class ParentComponent extends React.Component {
 
 132. ### How to add multiple middlewares to Redux?
 
-    **Short definition:** This shows how to add multiple middlewares to Redux.
+     **Short definition:** This shows how to add multiple middlewares to Redux.
 
      You can use `applyMiddleware()`.
 
@@ -3957,7 +3961,7 @@ class ParentComponent extends React.Component {
      import { createStore, applyMiddleware } from "redux";
      const createStoreWithMiddleware = applyMiddleware(
        ReduxThunk,
-       logger
+       logger,
      )(createStore);
      ```
 
@@ -3965,7 +3969,7 @@ class ParentComponent extends React.Component {
 
 133. ### How to set initial state in Redux?
 
-    **Short definition:** This shows how to set initial state in Redux.
+     **Short definition:** This shows how to set initial state in Redux.
 
      You need to pass initial state as second argument to createStore:
 
@@ -3986,13 +3990,13 @@ class ParentComponent extends React.Component {
 
 134. ### How Relay is different from Redux?
 
-    **Short definition:** This explains how Relay is different from Redux.
+     **Short definition:** This explains how Relay is different from Redux.
 
      Relay is similar to Redux in that they both use a single store. The main difference is that relay only manages state originated from the server, and all access to the state is used via _GraphQL_ queries (for reading data) and mutations (for changing data). Relay caches the data for you and optimizes data fetching for you, by fetching only changed data and nothing more.
 
 135. ### What is an action in Redux?
 
-    **Short definition:** Actions are plain JavaScript objects or payloads of information that send data from your application to your store.
+     **Short definition:** Actions are plain JavaScript objects or payloads of information that send data from your application to your store.
 
      _Actions_ are plain JavaScript objects or payloads of information that send data from your application to your store. They are the only source of information for the store. Actions must have a type property that indicates the type of action being performed.
 
@@ -4013,7 +4017,7 @@ class ParentComponent extends React.Component {
 
 136. ### What is the difference between React Native and React?
 
-    **Short definition:** It explains the main difference between React Native and React.
+     **Short definition:** It explains the main difference between React Native and React.
 
      **React** is a JavaScript library, supporting both front end web and being run on the server, for building user interfaces and web applications.
 
@@ -4023,7 +4027,7 @@ class ParentComponent extends React.Component {
 
 137. ### How to test React Native apps?
 
-    **Short definition:** This shows how to test React Native apps.
+     **Short definition:** This shows how to test React Native apps.
 
      React Native can be tested only in mobile simulators like iOS and Android. You can run the app in your mobile using expo app (https://expo.io) Where it syncs using QR code, your mobile and computer should be in same wireless network.
 
@@ -4031,7 +4035,7 @@ class ParentComponent extends React.Component {
 
 138. ### How to do logging in React Native?
 
-    **Short definition:** This shows how to do logging in React Native.
+     **Short definition:** This shows how to do logging in React Native.
 
      You can use `console.log`, `console.warn`, etc. As of React Native v0.29 you can simply run the following to see logs in the console:
 
@@ -4044,10 +4048,9 @@ class ParentComponent extends React.Component {
 
 139. ### How to debug your React Native?
 
-    **Short definition:** This shows how to debug your React Native.
+     **Short definition:** This shows how to debug your React Native.
 
      Follow the below steps to debug React Native app:
-
      1. Run your application in the iOS simulator.
      2. Press `Command + D` and a webpage should open up at `http://localhost:8081/debugger-ui`.
      3. Enable _Pause On Caught Exceptions_ for a better debugging experience.
@@ -4060,7 +4063,7 @@ class ParentComponent extends React.Component {
 
 140. ### What is reselect and how it works?
 
-    **Short definition:** Reselect is a selector library (for Redux) which uses memoization concept.
+     **Short definition:** Reselect is a selector library (for Redux) which uses memoization concept.
 
      _Reselect_ is a **selector library** (for Redux) which uses _memoization_ concept. It was originally written to compute derived data from Redux-like applications state, but it can't be tied to any architecture or library.
 
@@ -4070,7 +4073,7 @@ class ParentComponent extends React.Component {
 
 141. ### What is Flow?
 
-    **Short definition:** Flow is a static type checker designed to find type errors in JavaScript.
+     **Short definition:** Flow is a static type checker designed to find type errors in JavaScript.
 
      _Flow_ is a _static type checker_ designed to find type errors in JavaScript. Flow types can express much more fine-grained distinctions than traditional type systems. For example, Flow helps you catch errors involving `null`, unlike most type systems.
 
@@ -4078,7 +4081,7 @@ class ParentComponent extends React.Component {
 
 142. ### What is the difference between Flow and PropTypes?
 
-    **Short definition:** It explains the main difference between Flow and PropTypes.
+     **Short definition:** It explains the main difference between Flow and PropTypes.
 
      Flow is a _static analysis tool_ (static checker) which uses a superset of the language, allowing you to add type annotations to all of your code and catch an entire class of bugs at compile time.
 
@@ -4088,10 +4091,9 @@ class ParentComponent extends React.Component {
 
 143. ### How to use Font Awesome icons in React?
 
-    **Short definition:** This shows how to use Font Awesome icons in React.
+     **Short definition:** This shows how to use Font Awesome icons in React.
 
      The below steps followed to include Font Awesome in React:
-
      1. Install `font-awesome`:
 
         ```console
@@ -4116,12 +4118,11 @@ class ParentComponent extends React.Component {
 
 144. ### What is React Dev Tools?
 
-    **Short definition:** React Developer Tools let you inspect the component hierarchy, including component props and state.
+     **Short definition:** React Developer Tools let you inspect the component hierarchy, including component props and state.
 
      _React Developer Tools_ let you inspect the component hierarchy, including component props and state. It exists both as a browser extension (for Chrome and Firefox), and as a standalone app (works with other environments including Safari, IE, and React Native).
 
      The official extensions available for different browsers or environments.
-
      1. **Chrome extension**
      2. **Firefox extension**
      3. **Standalone app** (Safari, React Native, etc)
@@ -4130,7 +4131,7 @@ class ParentComponent extends React.Component {
 
 145. ### Why is DevTools not loading in Chrome for local files?
 
-    **Short definition:** This explains why is DevTools not loading in Chrome for local files.
+     **Short definition:** This explains why is DevTools not loading in Chrome for local files.
 
      If you opened a local HTML file in your browser (`file://...`) then you must first open _Chrome Extensions_ and check `Allow access to file URLs`.
 
@@ -4138,10 +4139,9 @@ class ParentComponent extends React.Component {
 
 146. ### How to use Polymer in React?
 
-    **Short definition:** This shows how to use Polymer in React.
+     **Short definition:** This shows how to use Polymer in React.
 
      You need to follow below steps to use Polymer in React,
-
      1. Create a Polymer element:
 
         ```jsx harmony
@@ -4178,10 +4178,9 @@ class ParentComponent extends React.Component {
 
 147. ### What are the advantages of React over Vue.js?
 
-    **Short definition:** This lists the advantages of React over Vue.js.
+     **Short definition:** This lists the advantages of React over Vue.js.
 
      React has the following advantages over Vue.js:
-
      1. Gives more flexibility in large apps developing.
      2. Easier to test.
      3. Suitable for mobile apps creating.
@@ -4193,7 +4192,7 @@ class ParentComponent extends React.Component {
 
 148. ### What is the difference between React and Angular?
 
-    **Short definition:** It explains the main difference between React and Angular.
+     **Short definition:** It explains the main difference between React and Angular.
 
      Let's see the difference between React and Angular in a table format.
 
@@ -4211,7 +4210,7 @@ class ParentComponent extends React.Component {
 
 149. ### Why React tab is not showing up in DevTools?
 
-    **Short definition:** This explains why react tab is not showing up in DevTools.
+     **Short definition:** This explains why react tab is not showing up in DevTools.
 
      When the page loads, _React DevTools_ sets a global named `__REACT_DEVTOOLS_GLOBAL_HOOK__`, then React communicates with that hook during initialization. If the website is not using React or if React fails to communicate with DevTools then it won't show up the tab.
 
@@ -4219,7 +4218,7 @@ class ParentComponent extends React.Component {
 
 150. ### What are Styled Components?
 
-    **Short definition:** styled-components is a JavaScript library for styling React applications.
+     **Short definition:** styled-components is a JavaScript library for styling React applications.
 
      `styled-components` is a JavaScript library for styling React applications. It removes the mapping between styles and components, and lets you write actual CSS augmented with JavaScript.
 
@@ -4227,7 +4226,7 @@ class ParentComponent extends React.Component {
 
 151. ### Give an example of Styled Components?
 
-    **Short definition:** This shows a simple example for the topic.
+     **Short definition:** This shows a simple example for the topic.
 
      Lets create `<Title>` and `<Wrapper>` components with specific styles for each.
 
@@ -4261,7 +4260,7 @@ class ParentComponent extends React.Component {
 
 152. ### What is Relay?
 
-    **Short definition:** Relay is a JavaScript framework for providing a data layer and client-server communication to web applications using the React view layer.
+     **Short definition:** Relay is a JavaScript framework for providing a data layer and client-server communication to web applications using the React view layer.
 
      Relay is a JavaScript framework for providing a data layer and client-server communication to web applications using the React view layer.
 
@@ -4271,10 +4270,9 @@ class ParentComponent extends React.Component {
 
 153. ### What are the main features of Reselect library?
 
-    **Short definition:** This lists the main features of Reselect library.
+     **Short definition:** This lists the main features of Reselect library.
 
      Let's see the main features of Reselect library,
-
      1. Selectors can compute derived data, allowing Redux to store the minimal possible state.
      2. Selectors are efficient. A selector is not recomputed unless one of its arguments changes.
      3. Selectors are composable. They can be used as input to other selectors.
@@ -4290,19 +4288,19 @@ class ParentComponent extends React.Component {
      const taxPercentSelector = (state) => state.shop.taxPercent;
 
      const subtotalSelector = createSelector(shopItemsSelector, (items) =>
-       items.reduce((acc, item) => acc + item.value, 0)
+       items.reduce((acc, item) => acc + item.value, 0),
      );
 
      const taxSelector = createSelector(
        subtotalSelector,
        taxPercentSelector,
-       (subtotal, taxPercent) => subtotal * (taxPercent / 100)
+       (subtotal, taxPercent) => subtotal * (taxPercent / 100),
      );
 
      export const totalSelector = createSelector(
        subtotalSelector,
        taxSelector,
-       (subtotal, tax) => ({ total: subtotal + tax })
+       (subtotal, tax) => ({ total: subtotal + tax }),
      );
 
      let exampleState = {
@@ -4324,7 +4322,7 @@ class ParentComponent extends React.Component {
 
 155. ### Can Redux only be used with React?
 
-    **Short definition:** Redux can be used as a data store for any UI layer.
+     **Short definition:** Redux can be used as a data store for any UI layer.
 
      Redux can be used as a data store for any UI layer. The most common usage is with React and React Native, but there are bindings available for Angular, Angular 2, Vue, Mithril, and more. Redux simply provides a subscription mechanism which can be used by any other code.
 
@@ -4332,7 +4330,7 @@ class ParentComponent extends React.Component {
 
 156. ### Do you need to have a particular build tool to use Redux?
 
-    **Short definition:** Redux is originally written in ES6 and transpiled for production into ES5 with Webpack and Babel.
+     **Short definition:** Redux is originally written in ES6 and transpiled for production into ES5 with Webpack and Babel.
 
      Redux is originally written in ES6 and transpiled for production into ES5 with Webpack and Babel. You should be able to use it regardless of your JavaScript build process. Redux also offers a UMD build that can be used directly without any build process at all.
 
@@ -4340,7 +4338,7 @@ class ParentComponent extends React.Component {
 
 157. ### How Redux Form `initialValues` get updated from state?
 
-    **Short definition:** This explains how Redux Form initialValues get updated from state.
+     **Short definition:** This explains how Redux Form initialValues get updated from state.
 
      You need to add `enableReinitialize : true` setting.
 
@@ -4357,7 +4355,7 @@ class ParentComponent extends React.Component {
 
 158. ### How React PropTypes allow different types for one prop?
 
-    **Short definition:** This explains how React PropTypes allow different types for one prop.
+     **Short definition:** This explains how React PropTypes allow different types for one prop.
 
      You can use `oneOfType()` method of `PropTypes`.
 
@@ -4373,7 +4371,7 @@ class ParentComponent extends React.Component {
 
 159. ### Can I import an SVG file as react component?
 
-    **Short definition:** You can import SVG directly as component instead of loading it as a file.
+     **Short definition:** You can import SVG directly as component instead of loading it as a file.
 
      You can import SVG directly as component instead of loading it as a file. This feature is available with `react-scripts@2.0.0` and higher.
 
@@ -4394,7 +4392,7 @@ class ParentComponent extends React.Component {
 
 160. ### What is render hijacking in react?
 
-    **Short definition:** The concept of render hijacking is the ability to control what a component will output from another component.
+     **Short definition:** The concept of render hijacking is the ability to control what a component will output from another component.
 
      The concept of render hijacking is the ability to control what a component will output from another component. It means that you decorate your component by wrapping it into a Higher-Order component. By wrapping, you can inject additional props or make other changes, which can cause changing logic of rendering. It does not actually enable hijacking, but by using HOC you make your component behave differently.
 
@@ -4402,7 +4400,7 @@ class ParentComponent extends React.Component {
 
 161. ### How to pass numbers to React component?
 
-    **Short definition:** This shows how to pass numbers to React component.
+     **Short definition:** This shows how to pass numbers to React component.
 
      We can pass `numbers` as `props` to React component using curly braces `{}` where as `strings` in double quotes `""` or single quotes `''`
 
@@ -4432,12 +4430,11 @@ class ParentComponent extends React.Component {
 
 162. ### Do I need to keep all my state into Redux? Should I ever use react internal state?
 
-    **Short definition:** This explains when state should stay local and when Redux makes sense.
+     **Short definition:** This explains when state should stay local and when Redux makes sense.
 
      It is up to the developer's decision, i.e., it is developer's job to determine what kinds of state make up your application, and where each piece of state should live. Some users prefer to keep every single piece of data in Redux, to maintain a fully serializable and controlled version of their application at all times. Others prefer to keep non-critical or UI state, such as “is this dropdown currently open”, inside a component's internal state.
 
      Below are the rules of thumb to determine what kind of data should be put into Redux
-
      1. Do other parts of the application care about this data?
      2. Do you need to be able to create further derived data based on this original data?
      3. Is the same data being used to drive multiple components?
@@ -4448,7 +4445,7 @@ class ParentComponent extends React.Component {
 
 163. ### What is the purpose of registerServiceWorker in React?
 
-    **Short definition:** This explains the purpose of registerServiceWorker in React.
+     **Short definition:** This explains the purpose of registerServiceWorker in React.
 
      React creates a service worker for you without any configuration by default. The service worker is a web API that helps you cache your assets and other files so that when the user is offline or on a slow network, he/she can still see results on the screen, as such, it helps you build a better user experience, that's what you should know about service worker for now. It's all about adding offline capabilities to your site.
 
@@ -4466,7 +4463,7 @@ class ParentComponent extends React.Component {
 
 164. ### What is React memo function?
 
-    **Short definition:** Class components can be restricted from re-rendering when their input props are the same using PureComponent or shouldComponentUpdate.
+     **Short definition:** Class components can be restricted from re-rendering when their input props are the same using PureComponent or shouldComponentUpdate.
 
      Class components can be restricted from re-rendering when their input props are the same using **PureComponent or shouldComponentUpdate**. Now you can do the same with function components by wrapping them in **React.memo**.
 
@@ -4480,7 +4477,7 @@ class ParentComponent extends React.Component {
 
 165. ### What is React lazy function?
 
-    **Short definition:** The React.lazy function lets you render a dynamic import as a regular component.
+     **Short definition:** The React.lazy function lets you render a dynamic import as a regular component.
 
      The `React.lazy` function lets you render a dynamic import as a regular component. It will automatically load the bundle containing the `OtherComponent` when the component gets rendered. This must return a Promise which resolves to a module with a default export containing a React component.
 
@@ -4503,7 +4500,7 @@ class ParentComponent extends React.Component {
 
 166. ### How to prevent unnecessary updates using setState?
 
-    **Short definition:** This shows how to prevent unnecessary updates using setState.
+     **Short definition:** This shows how to prevent unnecessary updates using setState.
 
      You can compare the current value of the state with an existing state value and decide whether to rerender the page or not. If the values are the same then you need to return **null** to stop re-rendering otherwise return the latest state value.
 
@@ -4526,7 +4523,7 @@ class ParentComponent extends React.Component {
 
 167. ### How do you render Array, Strings and Numbers in React 16 Version?
 
-    **Short definition:** This shows how to render Array, Strings and Numbers in React 16 Version.
+     **Short definition:** This shows how to render Array, Strings and Numbers in React 16 Version.
 
      **Arrays**: Unlike older releases, you don't need to make sure **render** method return a single element in React16. You are able to return multiple sibling elements without a wrapping element by returning an array.
 
@@ -4573,7 +4570,7 @@ class ParentComponent extends React.Component {
 
 168. ### What are hooks?
 
-    **Short definition:** Hooks is a special JavaScript function that allows you use state and other React features without writing a class.
+     **Short definition:** Hooks is a special JavaScript function that allows you use state and other React features without writing a class.
 
      Hooks is a special JavaScript function that allows you use state and other React features without writing a class. This pattern has been introduced as a new feature in React 16.8 and helped to isolate the stateful logic from the components.
 
@@ -4601,155 +4598,162 @@ class ParentComponent extends React.Component {
 
 169. ### What rules need to be followed for hooks?
 
-    **Short definition:** You need to follow two rules in order to use hooks.
+     **Short definition:** You need to follow two rules in order to use hooks.
 
      You need to follow two rules in order to use hooks,
-
      1. **Call Hooks only at the top level of your react functions:** You should always use hooks at the top level of react function before any early returns. i.e, You shouldn’t call Hooks inside loops, conditions, or nested functions. This will ensure that Hooks are called in the same order each time a component renders and it preserves the state of Hooks between multiple re-renders due to `useState` and `useEffect` calls.
 
      Let's see the difference using an example,
      **Correct usage:**:
+
      ```jsx
      function UserProfile() {
-      // Correct: Hooks called at the top level
-      const [name, setName] = useState('John');
-      const [country, setCountry] = useState('US');
+       // Correct: Hooks called at the top level
+       const [name, setName] = useState("John");
+       const [country, setCountry] = useState("US");
 
-      return (
-        <div>
-          <h1>Name: {name}</h1>
-          <p>Country: {country}</p>
-        </div>
-      );
+       return (
+         <div>
+           <h1>Name: {name}</h1>
+           <p>Country: {country}</p>
+         </div>
+       );
      }
      ```
+
      **Incorrect usage:**:
+
      ```jsx
      function UserProfile() {
-      const [name, setName] = useState('John');
+       const [name, setName] = useState("John");
 
-      if (name === 'John') {
-        // Incorrect: useState is called inside a conditional
-        const [country, setCountry] = useState('US'); 
-      }
+       if (name === "John") {
+         // Incorrect: useState is called inside a conditional
+         const [country, setCountry] = useState("US");
+       }
 
-      return (
-        <div>
-          <h1>Name: {name}</h1>
-          <p>Country: {country}</p> {/* This will throw an error if the name condition isn't met */}
-        </div>
-      );
+       return (
+         <div>
+           <h1>Name: {name}</h1>
+           <p>Country: {country}</p>{" "}
+           {/* This will throw an error if the name condition isn't met */}
+         </div>
+       );
      }
      ```
-     The `useState` hook for the country field is being called conditionally within an `if` block. This can lead to inconsistent state behavior and may cause hooks to be called in a different order on each re-render.
 
+     The `useState` hook for the country field is being called conditionally within an `if` block. This can lead to inconsistent state behavior and may cause hooks to be called in a different order on each re-render.
      2. **Call Hooks from React Functions only:** You shouldn’t call Hooks from regular JavaScript functions or class components. Instead, you should call them from either function components or custom hooks.
 
      Let's find the difference of correct and incorrect usage with below examples,
 
      **Correct usage:**:
+
      ```jsx
      //Example1:
      function Counter() {
-      // Correct: useState is used inside a functional component
-      const [count, setCount] = useState(0);
+       // Correct: useState is used inside a functional component
+       const [count, setCount] = useState(0);
 
-      return <div>Counter: {count}</div>;
+       return <div>Counter: {count}</div>;
      }
      //Example2:
      function useFetchData(url) {
-      const [data, setData] = useState(null);
+       const [data, setData] = useState(null);
 
-      useEffect(() => {
-        fetch(url)
-          .then((response) => response.json())
-          .then((data) => setData(data));
-      }, [url]);
+       useEffect(() => {
+         fetch(url)
+           .then((response) => response.json())
+           .then((data) => setData(data));
+       }, [url]);
 
-      return data;
+       return data;
      }
 
      function UserProfile() {
-      // Correct: Using a custom hook here
-      const user = useFetchData('https://some-api.com/user');
+       // Correct: Using a custom hook here
+       const user = useFetchData("https://some-api.com/user");
 
-      return (
-        <div>
-          <h1>{user ? user.name : 'Loading profile...'}</h1>
-        </div>
-      );
+       return (
+         <div>
+           <h1>{user ? user.name : "Loading profile..."}</h1>
+         </div>
+       );
      }
      ```
+
      **Incorrect usage:**:
+
      ```jsx
-      //Example1
-      function normalFunction() {
-        // Incorrect: Can't call hooks in normal functions
-        const [count, setCount] = useState(0); 
-      }
+     //Example1
+     function normalFunction() {
+       // Incorrect: Can't call hooks in normal functions
+       const [count, setCount] = useState(0);
+     }
 
-      //Example2
-      function fetchData(url) {
-        // Incorrect: Hooks can't be used in non-React functions
-        const [data, setData] = useState(null);
+     //Example2
+     function fetchData(url) {
+       // Incorrect: Hooks can't be used in non-React functions
+       const [data, setData] = useState(null);
 
-        useEffect(() => {
-          fetch(url)
-            .then((response) => response.json())
-            .then((data) => setData(data));
-        }, [url]);
+       useEffect(() => {
+         fetch(url)
+           .then((response) => response.json())
+           .then((data) => setData(data));
+       }, [url]);
 
-        return data;
-      }
+       return data;
+     }
      ```
+
      In the above incorrect usage example, both `useState` and `useEffect` are used in non-React functions(`normalFunction` and `fetchData`), which is not allowed.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-170.   ### How to ensure hooks followed the rules in your project?
+170.  ### How to ensure hooks followed the rules in your project?
 
-    **Short definition:** This shows how to ensure hooks followed the rules in your project.
+      **Short definition:** This shows how to ensure hooks followed the rules in your project.
 
-        React team released an ESLint plugin called **eslint-plugin-react-hooks** that enforces Hook's two rules. It is part of Hooks API. You can add this plugin to your project using the below command,
+          React team released an ESLint plugin called **eslint-plugin-react-hooks** that enforces Hook's two rules. It is part of Hooks API. You can add this plugin to your project using the below command,
 
-        ```javascript
-        npm install eslint-plugin-react-hooks --save-dev
-        ```
+          ```javascript
+          npm install eslint-plugin-react-hooks --save-dev
+          ```
 
-        And apply the below config in your ESLint config file,
+          And apply the below config in your ESLint config file,
 
-        ```javascript
-        // Your ESLint configuration
-        {
-          "plugins": [
-            // ...
-            "react-hooks"
-          ],
-          "rules": {
-            // ...
-            "react-hooks/rules-of-hooks": "error"
+          ```javascript
+          // Your ESLint configuration
+          {
+            "plugins": [
+              // ...
+              "react-hooks"
+            ],
+            "rules": {
+              // ...
+              "react-hooks/rules-of-hooks": "error"
+            }
           }
-        }
-        ```
+          ```
 
-        This plugin also provide another important rule through `react-hooks/exhaustive-deps`. It ensures that the dependencies of useEffect, useCallback, and useMemo hooks are correctly listed to avoid potential bugs.
+          This plugin also provide another important rule through `react-hooks/exhaustive-deps`. It ensures that the dependencies of useEffect, useCallback, and useMemo hooks are correctly listed to avoid potential bugs.
 
-        ```jsx
-        useEffect(() => {
-          // Forgetting `message` will result in incorrect behavior
-          console.log(message);
-        }, []); // Here `message` should be a dependency
-        ```
-        The recommended `eslint-config-react-app` preset already includes the hooks rules of this plugin.
-        For example, the linter enforce proper naming convention for hooks. If you rename your custom hooks which as prefix "use" to something else then linter won't allow you to call built-in hooks such as useState, useEffect etc inside of your custom hook anymore.
+          ```jsx
+          useEffect(() => {
+            // Forgetting `message` will result in incorrect behavior
+            console.log(message);
+          }, []); // Here `message` should be a dependency
+          ```
+          The recommended `eslint-config-react-app` preset already includes the hooks rules of this plugin.
+          For example, the linter enforce proper naming convention for hooks. If you rename your custom hooks which as prefix "use" to something else then linter won't allow you to call built-in hooks such as useState, useEffect etc inside of your custom hook anymore.
 
-        **Note:** This plugin is intended to use in Create React App by default.
+          **Note:** This plugin is intended to use in Create React App by default.
 
 **[⬆ Back to Top](#table-of-contents)**
 
 171. ### What are the differences between Flux and Redux?
 
-    **Short definition:** It explains the main differences between Flux and Redux.
+     **Short definition:** It explains the main differences between Flux and Redux.
 
      Below are the major differences between Flux and Redux
 
@@ -4766,10 +4770,9 @@ class ParentComponent extends React.Component {
 
 172. ### What are the benefits of React Router V4?
 
-    **Short definition:** This lists the benefits of React Router V4.
+     **Short definition:** This lists the benefits of React Router V4.
 
      Below are the main benefits of React Router V4 module,
-
      1. In React Router v4(version 4), the API is completely about components. A router can be visualized as a single component(`<BrowserRouter>`) which wraps specific child router components(`<Route>`).
      2. You don't need to manually set history. The router module will take care history by wrapping routes with `<BrowserRouter>` component.
      3. The application size is reduced by adding only the specific router module(Web, core, or native)
@@ -4778,10 +4781,9 @@ class ParentComponent extends React.Component {
 
 173. ### Can you describe about componentDidCatch lifecycle method signature?
 
-    **Short definition:** The componentDidCatch lifecycle method is invoked after an error has been thrown by a descendant component.
+     **Short definition:** The componentDidCatch lifecycle method is invoked after an error has been thrown by a descendant component.
 
      The **componentDidCatch** lifecycle method is invoked after an error has been thrown by a descendant component. The method receives two parameters,
-
      1. error: - The error object which was thrown
      2. info: - An object with a componentStack key contains the information about which component threw the error.
 
@@ -4795,10 +4797,9 @@ class ParentComponent extends React.Component {
 
 174. ### In which scenarios do error boundaries not catch errors?
 
-    **Short definition:** This explains in which scenarios do error boundaries not catch errors.
+     **Short definition:** This explains in which scenarios do error boundaries not catch errors.
 
      Below are the cases in which error boundaries don't work,
-
      1. Inside Event handlers
      2. Asynchronous code using **setTimeout or requestAnimationFrame** callbacks
      3. During Server side rendering
@@ -4808,7 +4809,7 @@ class ParentComponent extends React.Component {
 
 175. ### What is the behavior of uncaught errors in react 16?
 
-    **Short definition:** This explains the behavior of uncaught errors in react 16.
+     **Short definition:** This explains the behavior of uncaught errors in react 16.
 
      In React 16, errors that were not caught by any error boundary will result in unmounting of the whole React component tree. The reason behind this decision is that it is worse to leave corrupted UI in place than to completely remove it. For example, it is worse for a payments app to display a wrong amount than to render nothing.
 
@@ -4816,7 +4817,7 @@ class ParentComponent extends React.Component {
 
 176. ### What is the proper placement for error boundaries?
 
-    **Short definition:** The granularity of error boundaries usage is up to the developer based on project needs.
+     **Short definition:** The granularity of error boundaries usage is up to the developer based on project needs.
 
      The granularity of error boundaries usage is up to the developer based on project needs. You can follow either of these approaches,
      1. You can wrap top-level route components to display a generic error message for the entire application.
@@ -4826,7 +4827,7 @@ class ParentComponent extends React.Component {
 
 177. ### What is the benefit of component stack trace from error boundary?
 
-    **Short definition:** This explains the benefit of component stack trace from error boundary.
+     **Short definition:** This explains the benefit of component stack trace from error boundary.
 
      Apart from error messages and javascript stack, React16 will display the component stack trace with file names and line numbers using error boundary concept.
 
@@ -4838,7 +4839,7 @@ class ParentComponent extends React.Component {
 
 178. ### What are default props?
 
-    **Short definition:** The defaultProps can be defined as a property on the component to set the default values for the props.
+     **Short definition:** The defaultProps can be defined as a property on the component to set the default values for the props.
 
      The _defaultProps_ can be defined as a property on the component to set the default values for the props. These default props are used when props not supplied(i.e., undefined props), but not for `null` or `0` as props. That means, If you provide null value then it remains null value. It's the same behavior with 0 as well.
 
@@ -4866,7 +4867,7 @@ class ParentComponent extends React.Component {
 
 179. ### What is the purpose of displayName class property?
 
-    **Short definition:** This explains the purpose of displayName class property.
+     **Short definition:** This explains the purpose of displayName class property.
 
      The displayName string is used in debugging messages. Usually, you don’t need to set it explicitly because it’s inferred from the name of the function or class that defines the component. You might want to set it explicitly if you want to display a different name for debugging purposes or when you create a higher-order component.
 
@@ -4878,7 +4879,7 @@ class ParentComponent extends React.Component {
          /* ... */
        }
        WithSubscription.displayName = `WithSubscription(${getDisplayName(
-         WrappedComponent
+         WrappedComponent,
        )})`;
        return WithSubscription;
      }
@@ -4893,7 +4894,7 @@ class ParentComponent extends React.Component {
 
 180. ### What is the browser support for react applications?
 
-    **Short definition:** React supports all popular browsers, including Internet Explorer 9 and above, although some polyfills are required for older browsers such as IE 9 and IE 10.
+     **Short definition:** React supports all popular browsers, including Internet Explorer 9 and above, although some polyfills are required for older browsers such as IE 9 and IE 10.
 
      React supports all popular browsers, including Internet Explorer 9 and above, although some polyfills are required for older browsers such as IE 9 and IE 10. If you use **es5-shim and es5-sham** polyfill then it even support old browsers that doesn't support ES5 methods.
 
@@ -4901,7 +4902,7 @@ class ParentComponent extends React.Component {
 
 181. ### What is code-splitting?
 
-    **Short definition:** Code-Splitting is a feature supported by bundlers like Webpack and Browserify which can create multiple bundles that can be dynamically loaded at runtime.
+     **Short definition:** Code-Splitting is a feature supported by bundlers like Webpack and Browserify which can create multiple bundles that can be dynamically loaded at runtime.
 
      Code-Splitting is a feature supported by bundlers like Webpack and Browserify which can create multiple bundles that can be dynamically loaded at runtime. The react project supports code splitting via dynamic import() feature.
 
@@ -4940,31 +4941,31 @@ class ParentComponent extends React.Component {
   <details><summary><b>See Class</b></summary>
     <p>
 
-  ```javascript
-    import React, { Component } from "react";
+```javascript
+import React, { Component } from "react";
 
-     class App extends Component {
-       handleClick = () => {
-         import("./moduleA")
-           .then(({ moduleA }) => {
-             // Use moduleA
-           })
-           .catch((err) => {
-             // Handle failure
-           });
-       };
+class App extends Component {
+  handleClick = () => {
+    import("./moduleA")
+      .then(({ moduleA }) => {
+        // Use moduleA
+      })
+      .catch((err) => {
+        // Handle failure
+      });
+  };
 
-       render() {
-         return (
-           <div>
-             <button onClick={this.handleClick}>Load</button>
-           </div>
-         );
-       }
-     }
+  render() {
+    return (
+      <div>
+        <button onClick={this.handleClick}>Load</button>
+      </div>
+    );
+  }
+}
 
-     export default App;
-  ```
+export default App;
+```
 
   </p>
 </details>
@@ -4973,7 +4974,7 @@ class ParentComponent extends React.Component {
 
 182. ### What are Keyed Fragments?
 
-    **Short definition:** The Fragments declared with the explicit React.Fragment syntax may have keys.
+     **Short definition:** The Fragments declared with the explicit React.Fragment syntax may have keys.
 
      The Fragments declared with the explicit <React.Fragment> syntax may have keys. The general use case is mapping a collection to an array of fragments as below,
 
@@ -4999,7 +5000,7 @@ class ParentComponent extends React.Component {
 
 183. ### Does React support all HTML attributes?
 
-    **Short definition:** As of React 16, both standard or custom DOM attributes are fully supported.
+     **Short definition:** As of React 16, both standard or custom DOM attributes are fully supported.
 
      As of React 16, both standard or custom DOM attributes are fully supported. Since React components often take both custom and DOM-related props, React uses the camelCase convention just like the DOM APIs.
 
@@ -5017,7 +5018,7 @@ class ParentComponent extends React.Component {
 
 184. ### When component props defaults to true?
 
-    **Short definition:** This explains when component props defaults to true.
+     **Short definition:** This explains when component props defaults to true.
 
      If you pass no value for a prop, it defaults to true. This behavior is available so that it matches the behavior of HTML.
 
@@ -5035,10 +5036,9 @@ class ParentComponent extends React.Component {
 
 185. ### What is NextJS and major features of it?
 
-    **Short definition:** Next.js is a popular and lightweight framework for static and server‑rendered applications built with React.
+     **Short definition:** Next.js is a popular and lightweight framework for static and server‑rendered applications built with React.
 
      Next.js is a popular and lightweight framework for static and server‑rendered applications built with React. It also provides styling and routing solutions. Below are the major features provided by NextJS,
-
      1. Server-rendered by default
      2. Automatic code splitting for faster page loads
      3. Simple client-side routing (page based)
@@ -5050,7 +5050,7 @@ class ParentComponent extends React.Component {
 
 186. ### How do you pass an event handler to a component?
 
-    **Short definition:** This shows how to pass an event handler to a component.
+     **Short definition:** This shows how to pass an event handler to a component.
 
      You can pass event handlers and other functions as props to child components. The functions can be passed to child component as below,
 
@@ -5072,10 +5072,9 @@ class ParentComponent extends React.Component {
 
 187. ### How to prevent a function from being called multiple times?
 
-    **Short definition:** This shows how to prevent a function from being called multiple times.
+     **Short definition:** This shows how to prevent a function from being called multiple times.
 
      If you use an event handler such as **onClick or onScroll** and want to prevent the callback from being fired too quickly, then you can limit the rate at which callback is executed. This can be achieved in the below possible ways,
-
      1. **Throttling:** Changes based on a time based frequency. For example, it can be used using \_.throttle lodash function
      2. **Debouncing:** Publish changes after a period of inactivity. For example, it can be used using \_.debounce lodash function
      3. **RequestAnimationFrame throttling:** Changes based on requestAnimationFrame. For example, it can be used using raf-schd lodash function
@@ -5084,7 +5083,7 @@ class ParentComponent extends React.Component {
 
 188. ### How JSX prevents Injection Attacks?
 
-    **Short definition:** This explains how JSX prevents Injection Attacks.
+     **Short definition:** This explains how JSX prevents Injection Attacks.
 
      React DOM escapes any values embedded in JSX before rendering them. Thus it ensures that you can never inject anything that’s not explicitly written in your application. Everything is converted to a string before being rendered.
 
@@ -5101,7 +5100,7 @@ class ParentComponent extends React.Component {
 
 189. ### How do you update rendered elements?
 
-    **Short definition:** This shows how to update rendered elements.
+     **Short definition:** This shows how to update rendered elements.
 
      You can update UI(represented by rendered element) by passing the newly created element to ReactDOM's render method.
 
@@ -5125,7 +5124,7 @@ class ParentComponent extends React.Component {
 
 190. ### How do you say that props are readonly?
 
-    **Short definition:** This shows how to say that props are readonly.
+     **Short definition:** This shows how to say that props are readonly.
 
      When you declare a component as a function or a class, it must never modify its own props.
 
@@ -5143,10 +5142,9 @@ class ParentComponent extends React.Component {
 
 191. ### What are the conditions to safely use the index as a key?
 
-    **Short definition:** This lists the conditions to safely use the index as a key.
+     **Short definition:** This lists the conditions to safely use the index as a key.
 
      There are three conditions to make sure, it is safe use the index as a key.
-
      1. The list and items are static– they are not computed and do not change
      2. The items in the list have no ids
      3. The list is never reordered or filtered.
@@ -5155,7 +5153,7 @@ class ParentComponent extends React.Component {
 
 192. ### Should keys be globally unique?
 
-    **Short definition:** The keys used within arrays should be unique among their siblings but they don't need to be globally unique.
+     **Short definition:** The keys used within arrays should be unique among their siblings but they don't need to be globally unique.
 
      The keys used within arrays should be unique among their siblings but they don’t need to be globally unique. i.e, You can use the same keys with two different arrays.
 
@@ -5191,12 +5189,11 @@ class ParentComponent extends React.Component {
 
 193. ### What is the popular choice for form handling?
 
-    **Short definition:** Formik is a form library for react which provides solutions such as validation, keeping track of the visited fields, and handling form submission.
+     **Short definition:** Formik is a form library for react which provides solutions such as validation, keeping track of the visited fields, and handling form submission.
 
      `Formik` is a form library for react which provides solutions such as validation, keeping track of the visited fields, and handling form submission.
 
      In detail, You can categorize them as follows,
-
      1. Getting values in and out of form state
      2. Validation and error messages
      3. Handling form submission
@@ -5207,10 +5204,9 @@ class ParentComponent extends React.Component {
 
 194. ### What are the advantages of formik over redux form library?
 
-    **Short definition:** This lists the advantages of formik over redux form library.
+     **Short definition:** This lists the advantages of formik over redux form library.
 
      Below are the main reasons to recommend formik over redux form library,
-
      1. The form state is inherently short-term and local, so tracking it in Redux (or any kind of Flux library) is unnecessary.
      2. Redux-Form calls your entire top-level Redux reducer multiple times ON EVERY SINGLE KEYSTROKE. This way it increases input latency for large apps.
      3. Redux-Form is 22.5 kB minified gzipped whereas Formik is 12.7 kB
@@ -5219,7 +5215,7 @@ class ParentComponent extends React.Component {
 
 195. ### Why are you not required to use inheritance?
 
-    **Short definition:** In React, it is recommended to use composition over inheritance to reuse code between components.
+     **Short definition:** In React, it is recommended to use composition over inheritance to reuse code between components.
 
      In React, it is recommended to use composition over inheritance to reuse code between components. Both Props and composition give you all the flexibility you need to customize a component’s look and behavior explicitly and safely.
      Whereas, If you want to reuse non-UI functionality between components, it is suggested to extract it into a separate JavaScript module. Later components import it and use that function, object, or class, without extending it.
@@ -5228,7 +5224,7 @@ class ParentComponent extends React.Component {
 
 196. ### Can I use web components in react application?
 
-    **Short definition:** Yes, you can use web components in a react application.
+     **Short definition:** Yes, you can use web components in a react application.
 
      Yes, you can use web components in a react application. Even though many developers won't use this combination, it may require especially if you are using third-party UI components that are written using Web Components.
 
@@ -5250,12 +5246,11 @@ class ParentComponent extends React.Component {
 
 197. ### What is dynamic import?
 
-    **Short definition:** You can achieve code-splitting in your app using dynamic import.
+     **Short definition:** You can achieve code-splitting in your app using dynamic import.
 
      You can achieve code-splitting in your app using dynamic import.
 
      Let's take an example of addition,
-
      1. **Normal Import**
 
      ```javascript
@@ -5275,7 +5270,7 @@ class ParentComponent extends React.Component {
 
 198. ### What are loadable components?
 
-    **Short definition:** With the release of React 18, React.lazy and Suspense are now available for server-side rendering.
+     **Short definition:** With the release of React 18, React.lazy and Suspense are now available for server-side rendering.
 
      With the release of React 18, React.lazy and Suspense are now available for server-side rendering. However, prior to React 18, it was recommended to use Loadable Components for code-splitting in a server-side rendered app because React.lazy and Suspense were not available for server-side rendering. Loadable Components lets you render a dynamic import as a regular component. For example, you can use Loadable Components to load the OtherComponent in a separate bundle like this:
 
@@ -5300,16 +5295,13 @@ class ParentComponent extends React.Component {
 
 199. ### What is suspense component?
 
-    **Short definition:** React Suspense is a built-in feature that lets you defer rendering part of your component tree until some condition is met-usually, data or code has finished loading.
+     **Short definition:** React Suspense is a built-in feature that lets you defer rendering part of your component tree until some condition is met-usually, data or code has finished loading.
 
      React Suspense is a built-in feature that lets you defer rendering part of your component tree until some condition(asynchronous operation) is met—usually, data or code has finished loading. While waiting, Suspense lets you display a fallback UI like a spinner or placeholder.
-
-
      1. Lazy loading components uses suspense feature,
 
-
         If the module containing the dynamic import is not yet loaded by the time parent component renders, you must show some fallback content while you’re waiting for it to load using a loading indicator. This can be done using **Suspense** component.
-    
+
         ```javascript
         const OtherComponent = React.lazy(() => import("./OtherComponent"));
 
@@ -5323,31 +5315,35 @@ class ParentComponent extends React.Component {
           );
         }
         ```
+
         The above component shows fallback UI instead real component until `OtherComponent` is fully loaded.
 
      2. As an another example, suspend until async data(data fetching) is ready
-      ```jsx
-        function UserProfile() {
-          const user = use(fetchUser()); // throws a promise internally
-          return <div>{user.name}</div>;
-        }
 
-        function App() {
-          return (
-            <Suspense fallback={<div>Loading user...</div>}>
-              <UserProfile />
-            </Suspense>
-          );
-        }
+     ```jsx
+     function UserProfile() {
+       const user = use(fetchUser()); // throws a promise internally
+       return <div>{user.name}</div>;
+     }
+
+     function App() {
+       return (
+         <Suspense fallback={<div>Loading user...</div>}>
+           <UserProfile />
+         </Suspense>
+       );
+     }
+     ```
+
 
     ```
-     
+
 
 **[⬆ Back to Top](#table-of-contents)**
 
 200. ### What is route based code splitting?
 
-    **Short definition:** One of the best place to do code splitting is with routes.
+     **Short definition:** One of the best place to do code splitting is with routes.
 
      One of the best place to do code splitting is with routes. The entire page is going to re-render at once so users are unlikely to interact with other elements in the page at the same time. Due to this, the user experience won't be disturbed.
 
@@ -5378,7 +5374,7 @@ class ParentComponent extends React.Component {
 
 201. ### What is the purpose of default value in context?
 
-    **Short definition:** This explains the purpose of default value in context.
+     **Short definition:** This explains the purpose of default value in context.
 
      The defaultValue argument is only used when a component does not have a matching Provider above it in the tree. This can be helpful for testing components in isolation without wrapping them.
 
@@ -5392,12 +5388,11 @@ class ParentComponent extends React.Component {
 
 202. ### What is diffing algorithm?
 
-    **Short definition:** React needs to use algorithms to find out how to efficiently update the UI to match the most recent tree.
+     **Short definition:** React needs to use algorithms to find out how to efficiently update the UI to match the most recent tree.
 
      React needs to use algorithms to find out how to efficiently update the UI to match the most recent tree. The diffing algorithms is generating the minimum number of operations to transform one tree into another. However, the algorithms have a complexity in the order of O(n³) where n is the number of elements in the tree.
 
      In this case, displaying 1000 elements would require in the order of one billion comparisons. This is far too expensive. Instead, React implements a heuristic O(n) algorithm based on two assumptions:
-
      1. Two elements of different types will produce different trees.
      2. The developer can hint at which child elements may be stable across different renders with a key prop.
 
@@ -5405,10 +5400,9 @@ class ParentComponent extends React.Component {
 
 203. ### What are the rules covered by diffing algorithm?
 
-    **Short definition:** This lists the rules covered by diffing algorithm.
+     **Short definition:** This lists the rules covered by diffing algorithm.
 
      When diffing two trees, React first compares the two root elements. The behavior is different depending on the types of the root elements. It covers the below rules during reconciliation algorithm,
-
      1. **Elements Of Different Types:**
         Whenever the root elements have different types, React will tear down the old tree and build the new tree from scratch. For example, elements <a> to <img>, or from <Article> to <Comment> of different types lead a full rebuild.
      2. **DOM Elements Of The Same Type:**
@@ -5459,10 +5453,9 @@ class ParentComponent extends React.Component {
 
 204. ### When do you need to use refs?
 
-    **Short definition:** This explains when do you need to use refs.
+     **Short definition:** This explains when do you need to use refs.
 
      There are few use cases to go for refs,
-
      1. Managing focus, text selection, or media playback.
      2. Triggering imperative animations.
      3. Integrating with third-party DOM libraries.
@@ -5471,7 +5464,7 @@ class ParentComponent extends React.Component {
 
 205. ### Must prop be named as render for render props?
 
-    **Short definition:** This explains why prop be named as render for render props.
+     **Short definition:** This explains why prop be named as render for render props.
 
      Even though the pattern named render props, you don’t have to use a prop named render to use this pattern. i.e, Any prop that is a function that a component uses to know what to render is technically a “render prop”. Lets take an example with the children prop for render props,
 
@@ -5509,7 +5502,7 @@ class ParentComponent extends React.Component {
 
 206. ### What are the problems of using render props with pure components?
 
-    **Short definition:** If you create a function inside a render method, it negates the purpose of pure component.
+     **Short definition:** If you create a function inside a render method, it negates the purpose of pure component.
 
      If you create a function inside a render method, it negates the purpose of pure component. Because the shallow prop comparison will always return false for new props, and each render in this case will generate a new value for the render prop. You can solve this issue by defining the render function as instance method.
 
@@ -5517,7 +5510,7 @@ class ParentComponent extends React.Component {
 
 207. ### What is windowing technique?
 
-    **Short definition:** This explains the idea behind windowing technique.
+     **Short definition:** This explains the idea behind windowing technique.
 
      Windowing is a technique that only renders a small subset of your rows at any given time, and can dramatically reduce the time it takes to re-render the components as well as the number of DOM nodes created. If your application renders long lists of data then this technique is recommended. Both react-window and react-virtualized are popular windowing libraries which provides several reusable components for displaying lists, grids, and tabular data.
 
@@ -5525,7 +5518,7 @@ class ParentComponent extends React.Component {
 
 208. ### How do you print falsy values in JSX?
 
-    **Short definition:** This shows how to print falsy values in JSX.
+     **Short definition:** This shows how to print falsy values in JSX.
 
      The falsy values such as false, null, undefined, and true are valid children but they don't render anything. If you still want to display them then you need to convert it to string. Let's take an example on how to convert to a string,
 
@@ -5537,47 +5530,46 @@ class ParentComponent extends React.Component {
 
 209. ### What is the typical use case of portals?
 
-    **Short definition:** React Portals are primarily used to render UI components such as modals, tooltips, dropdowns, hovercards, and notifications outside of their parent component's DOM tree.
+     **Short definition:** React Portals are primarily used to render UI components such as modals, tooltips, dropdowns, hovercards, and notifications outside of their parent component's DOM tree.
 
      React Portals are primarily used to render UI components such as **modals, tooltips, dropdowns, hovercards, and notifications** outside of their parent component's DOM tree. This helps avoid common CSS issues caused by parent elements, such as:
-
-     *   `**overflow: hidden**` on parent elements clipping or hiding child elements like modals or tooltips,
-     *   **stacking context and** `**z-index**` **conflicts** created by parent containers that prevent child elements from appearing above other content.
+     - `**overflow: hidden**` on parent elements clipping or hiding child elements like modals or tooltips,
+     - **stacking context and** `**z-index**` **conflicts** created by parent containers that prevent child elements from appearing above other content.
 
      That means, you need to visually “break out” of its container. By rendering these UI elements into a separate DOM node (often directly under `<body>`), portals ensure they appear above all other content and are not restricted by the parent’s CSS or layout constraints, resulting in correct positioning and visibility regardless of the parent’s styling.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-210.   ### How do you set default value for uncontrolled component?
+210.  ### How do you set default value for uncontrolled component?
 
-    **Short definition:** This shows how to set default value for uncontrolled component.
+      **Short definition:** This shows how to set default value for uncontrolled component.
 
-     In React, the value attribute on form elements will override the value in the DOM. With an uncontrolled component, you might want React to specify the initial value, but leave subsequent updates uncontrolled. To handle this case, you can specify a **defaultValue** attribute instead of **value**.
+      In React, the value attribute on form elements will override the value in the DOM. With an uncontrolled component, you might want React to specify the initial value, but leave subsequent updates uncontrolled. To handle this case, you can specify a **defaultValue** attribute instead of **value**.
 
-     ```javascript
-     render() {
-       return (
-         <form onSubmit={this.handleSubmit}>
-           <label>
-             User Name:
-             <input
-               defaultValue="John"
-               type="text"
-               ref={this.input} />
-           </label>
-           <input type="submit" value="Submit" />
-         </form>
-       );
-     }
-     ```
+      ```javascript
+      render() {
+        return (
+          <form onSubmit={this.handleSubmit}>
+            <label>
+              User Name:
+              <input
+                defaultValue="John"
+                type="text"
+                ref={this.input} />
+            </label>
+            <input type="submit" value="Submit" />
+          </form>
+        );
+      }
+      ```
 
-     The same applies for `select` and `textArea` inputs. But you need to use **defaultChecked** for `checkbox` and `radio` inputs.
+      The same applies for `select` and `textArea` inputs. But you need to use **defaultChecked** for `checkbox` and `radio` inputs.
 
 **[⬆ Back to Top](#table-of-contents)**
 
 211. ### What is your favorite React stack?
 
-    **Short definition:** Even though the tech stack varies from developer to developer, the most popular stack is used in react boilerplate project code.
+     **Short definition:** Even though the tech stack varies from developer to developer, the most popular stack is used in react boilerplate project code.
 
      Even though the tech stack varies from developer to developer, the most popular stack is used in react boilerplate project code. It mainly uses Redux and redux-saga for state management and asynchronous side-effects, react-router for routing purpose, styled-components for styling react components, axios for invoking REST api, and other supported stack such as webpack, reselect, ESNext, Babel.
      You can clone the project https://github.com/react-boilerplate/react-boilerplate and start working on any new react project.
@@ -5586,7 +5578,7 @@ class ParentComponent extends React.Component {
 
 212. ### What is the difference between Real DOM and Virtual DOM?
 
-    **Short definition:** It explains the main difference between Real DOM and Virtual DOM.
+     **Short definition:** It explains the main difference between Real DOM and Virtual DOM.
 
      Below are the main differences between Real DOM and Virtual DOM,
 
@@ -5602,10 +5594,9 @@ class ParentComponent extends React.Component {
 
 213. ### How to add Bootstrap to a react application?
 
-    **Short definition:** This shows how to add Bootstrap to a react application.
+     **Short definition:** This shows how to add Bootstrap to a react application.
 
      Bootstrap can be added to your React app in a three possible ways,
-
      1. Using the Bootstrap CDN:
         This is the easiest way to add bootstrap. Add both bootstrap CSS and JS resources in a head tag.
      2. Bootstrap as Dependency:
@@ -5622,10 +5613,9 @@ class ParentComponent extends React.Component {
 
 214. ### Can you list down top websites or applications using react as front end framework?
 
-    **Short definition:** This lists down top websites or applications using react as front end framework.
+     **Short definition:** This lists down top websites or applications using react as front end framework.
 
      Below are the `top 10 websites` using React as their front-end framework,
-
      1. Facebook
      2. Uber
      3. Instagram
@@ -5641,7 +5631,7 @@ class ParentComponent extends React.Component {
 
 215. ### Is it recommended to use CSS In JS technique in React?
 
-    **Short definition:** This answers whether it recommended to use CSS In JS technique in React.
+     **Short definition:** This answers whether it recommended to use CSS In JS technique in React.
 
      React does not have any opinion about how styles are defined but if you are a beginner then good starting point is to define your styles in a separate \*.css file as usual and refer to them using className. This functionality is not part of React but came from third-party libraries. But If you want to try a different approach(CSS-In-JS) then styled-components library is a good option.
 
@@ -5649,7 +5639,7 @@ class ParentComponent extends React.Component {
 
 216. ### Do I need to rewrite all my class components with hooks?
 
-    **Short definition:** This answers whether i need to rewrite all my class components with hooks.
+     **Short definition:** This answers whether i need to rewrite all my class components with hooks.
 
      No. But you can try Hooks in a few components(or new components) without rewriting any existing code. Because there are no plans to remove classes in ReactJS.
 
@@ -5657,22 +5647,24 @@ class ParentComponent extends React.Component {
 
 217. ### What is useEffect hook? How to fetch data with React Hooks?
 
-    **Short definition:** The useEffect hook is a React Hook that lets you perform side effects in function components.
+     **Short definition:** The useEffect hook is a React Hook that lets you perform side effects in function components.
 
      The `useEffect` hook is a React Hook that lets you perform **side effects** in function components. Side effects are operations that interact with the outside world or system and aren't directly related to rendering UI — such as fetching data, setting up subscriptions, timers, manually manipulating the DOM, etc.
 
-     In function components, useEffect replaces the class component lifecycle methods(`componentDidMount`, `componentDidUpdate` and `componentWillUnmount`) with a single, unified API.     
+     In function components, useEffect replaces the class component lifecycle methods(`componentDidMount`, `componentDidUpdate` and `componentWillUnmount`) with a single, unified API.
 
      **Syntax**
+
      ```js
      useEffect(() => {
-        // Side effect logic here
+       // Side effect logic here
 
-        return () => {
-        // Cleanup logic (optional)
-        };
-        }, [dependencies]);
+       return () => {
+         // Cleanup logic (optional)
+       };
+     }, [dependencies]);
      ```
+
      This effect hook can be used to fetch data from an API and to set the data in the local state of the component with the useState hook’s update function.
 
      Here is an example of fetching a list of ReactJS articles from an API using fetch.
@@ -5711,7 +5703,7 @@ class ParentComponent extends React.Component {
 
 218. ### Is Hooks cover all use cases for classes?
 
-    **Short definition:** Hooks doesn't cover all use cases of classes but there is a plan to add them soon.
+     **Short definition:** Hooks doesn't cover all use cases of classes but there is a plan to add them soon.
 
      Hooks doesn't cover all use cases of classes but there is a plan to add them soon. Currently there are no Hook equivalents to the uncommon **getSnapshotBeforeUpdate** and **componentDidCatch** lifecycles yet.
 
@@ -5719,10 +5711,9 @@ class ParentComponent extends React.Component {
 
 219. ### What is the stable release for hooks support?
 
-    **Short definition:** React includes a stable implementation of React Hooks in 16.8 release for packages.
+     **Short definition:** React includes a stable implementation of React Hooks in 16.8 release for packages.
 
      React includes a stable implementation of React Hooks in 16.8 release for below packages
-
      1. React DOM
      2. React DOM Server
      3. React Test Renderer
@@ -5732,7 +5723,7 @@ class ParentComponent extends React.Component {
 
 220. ### Why do we use array destructuring (square brackets notation) in `useState`?
 
-    **Short definition:** This explains why do we use array destructuring (square brackets notation) in useState.
+     **Short definition:** This explains why do we use array destructuring (square brackets notation) in useState.
 
      When we declare a state variable with `useState`, it returns a pair — an array with two items. The first item is the current value, and the second is a function that updates the value. Using [0] and [1] to access them is a bit confusing because they have a specific meaning. This is why we use array destructuring instead.
 
@@ -5754,10 +5745,9 @@ class ParentComponent extends React.Component {
 
 221. ### What are the sources used for introducing hooks?
 
-    **Short definition:** Hooks got the ideas from several different sources.
+     **Short definition:** Hooks got the ideas from several different sources.
 
      Hooks got the ideas from several different sources. Below are some of them,
-
      1. Previous experiments with functional APIs in the react-future repository
      2. Community experiments with render prop APIs such as Reactions Component
      3. State variables and state cells in DisplayScript.
@@ -5768,7 +5758,7 @@ class ParentComponent extends React.Component {
 
 222. ### How do you access imperative API of web components?
 
-    **Short definition:** This shows how to access imperative API of web components.
+     **Short definition:** This shows how to access imperative API of web components.
 
      Web Components often expose an imperative API to implement its functions. You will need to use a **ref** to interact with the DOM node directly if you want to access imperative API of a web component. But if you are using third-party Web Components, the best solution is to write a React component that behaves as a **wrapper** for your Web Component.
 
@@ -5776,10 +5766,9 @@ class ParentComponent extends React.Component {
 
 223. ### What is formik?
 
-    **Short definition:** Formik is a small react form library that helps you with the three major problems.
+     **Short definition:** Formik is a small react form library that helps you with the three major problems.
 
      Formik is a small react form library that helps you with the three major problems,
-
      1. Getting values in and out of form state
      2. Validation and error messages
      3. Handling form submission
@@ -5788,7 +5777,7 @@ class ParentComponent extends React.Component {
 
 224. ### What are typical middleware choices for handling asynchronous calls in Redux?
 
-    **Short definition:** Some of the popular middleware choices for handling asynchronous calls in Redux eco system are Redux Thunk, Redux Promise, Redux Saga.
+     **Short definition:** Some of the popular middleware choices for handling asynchronous calls in Redux eco system are Redux Thunk, Redux Promise, Redux Saga.
 
      Some of the popular middleware choices for handling asynchronous calls in Redux eco system are `Redux Thunk, Redux Promise, Redux Saga`.
 
@@ -5796,7 +5785,7 @@ class ParentComponent extends React.Component {
 
 225. ### Do browsers understand JSX code?
 
-    **Short definition:** No, browsers can't understand JSX code.
+     **Short definition:** No, browsers can't understand JSX code.
 
      No, browsers can't understand JSX code. You need a transpiler to convert your JSX to regular Javascript that browsers can understand. The most widely used transpiler right now is Babel.
 
@@ -5804,7 +5793,7 @@ class ParentComponent extends React.Component {
 
 226. ### Describe about data flow in react?
 
-    **Short definition:** This describes about data flow in react.
+     **Short definition:** This describes about data flow in react.
 
      React implements one-way reactive data flow using props which reduce boilerplate and is easier to understand than traditional two-way data binding.
 
@@ -5812,9 +5801,10 @@ class ParentComponent extends React.Component {
 
 227. ### What is MobX?
 
-    **Short definition:** MobX is a simple, scalable and battle tested state management solution for applying functional reactive programming (TFRP).
+     **Short definition:** MobX is a simple, scalable and battle tested state management solution for applying functional reactive programming (TFRP).
 
      MobX is a simple, scalable and battle tested state management solution for applying functional reactive programming (TFRP). For ReactJS application, you need to install below packages,
+
      ```bash
      npm install mobx --save
      npm install mobx-react --save
@@ -5824,7 +5814,7 @@ class ParentComponent extends React.Component {
 
 228. ### What are the differences between Redux and MobX?
 
-    **Short definition:** It explains the main differences between Redux and MobX.
+     **Short definition:** It explains the main differences between Redux and MobX.
 
      Below are the main differences between Redux and MobX,
 
@@ -5841,10 +5831,9 @@ class ParentComponent extends React.Component {
 
 229. ### Should I learn ES6 before learning ReactJS?
 
-    **Short definition:** No, you don't have to learn es2015/es6 to learn react.
+     **Short definition:** No, you don't have to learn es2015/es6 to learn react.
 
      No, you don’t have to learn es2015/es6 to learn react. But you may find many resources or React ecosystem uses ES6 extensively. Let's see some of the frequently used ES6 features,
-
      1. **Destructuring:** To get props and use them in a component
 
         ```javascript
@@ -5880,7 +5869,7 @@ class ParentComponent extends React.Component {
 
 230. ### What is Concurrent Rendering?
 
-    **Short definition:** The Concurrent rendering makes React apps to be more responsive by rendering component trees without blocking the main UI thread.
+     **Short definition:** The Concurrent rendering makes React apps to be more responsive by rendering component trees without blocking the main UI thread.
 
      The Concurrent rendering makes React apps to be more responsive by rendering component trees without blocking the main UI thread. It allows React to interrupt a long-running render to handle a high-priority event. i.e, When you enabled concurrent Mode, React will keep an eye on other tasks that need to be done, and if there's something with a higher priority it will pause what it is currently rendering and let the other task finish first. You can enable this in two ways,
 
@@ -5898,7 +5887,7 @@ class ParentComponent extends React.Component {
 
 231. ### What is the difference between async mode and concurrent mode?
 
-    **Short definition:** It explains the main difference between async mode and concurrent mode.
+     **Short definition:** It explains the main difference between async mode and concurrent mode.
 
      Both refers the same thing. Previously concurrent Mode being referred to as "Async Mode" by React team. The name has been changed to highlight React’s ability to perform work on different priority levels. So it avoids the confusion from other approaches to Async Rendering.
 
@@ -5906,7 +5895,7 @@ class ParentComponent extends React.Component {
 
 232. ### Can I use javascript urls in react16.9?
 
-    **Short definition:** Yes, you can use javascript.
+     **Short definition:** Yes, you can use javascript.
 
      Yes, you can use javascript: URLs but it will log a warning in the console. Because URLs starting with javascript: are dangerous by including unsanitized output in a tag like `<a href>` and create a security hole.
 
@@ -5924,10 +5913,9 @@ class ParentComponent extends React.Component {
 
 233. ### What is the purpose of eslint plugin for hooks?
 
-    **Short definition:** This explains the purpose of eslint plugin for hooks.
+     **Short definition:** This explains the purpose of eslint plugin for hooks.
 
      The ESLint plugin enforces rules of Hooks to avoid bugs. It assumes that any function starting with ”use” and a capital letter right after it is a Hook. In particular, the rule enforces that,
-
      1. Calls to Hooks are either inside a PascalCase function (assumed to be a component) or another useSomething function (assumed to be a custom Hook).
      2. Hooks are called in the same order on every render.
 
@@ -5935,7 +5923,7 @@ class ParentComponent extends React.Component {
 
 234. ### What is the difference between Imperative and Declarative in React?
 
-    **Short definition:** It explains the main difference between Imperative and Declarative in React.
+     **Short definition:** It explains the main difference between Imperative and Declarative in React.
 
      Imagine a simple UI component, such as a "Like" button. When you tap it, it turns blue if it was previously grey, and grey if it was previously blue.
 
@@ -5971,10 +5959,9 @@ class ParentComponent extends React.Component {
 
 235. ### What are the benefits of using TypeScript with ReactJS?
 
-    **Short definition:** This lists the benefits of using TypeScript with ReactJS.
+     **Short definition:** This lists the benefits of using TypeScript with ReactJS.
 
      Below are some of the benefits of using TypeScript with ReactJS,
-
      1. It is possible to use latest JavaScript features
      2. Use of interfaces for complex type definitions
      3. IDEs such as VS Code was made for TypeScript
@@ -5984,7 +5971,7 @@ class ParentComponent extends React.Component {
 
 236. ### How do you make sure that user remains authenticated on page refresh while using Context API State Management?
 
-    **Short definition:** This shows how to make sure that user remains authenticated on page refresh while using Context API State Management.
+     **Short definition:** This shows how to make sure that user remains authenticated on page refresh while using Context API State Management.
 
      When a user logs in and reload, to persist the state generally we add the load user action in the useEffect hooks in the main App.js. While using Redux, loadUser action can be easily accessed.
 
@@ -6011,7 +5998,7 @@ class ParentComponent extends React.Component {
            <App />
          </AuthState>
        </React.StrictMode>,
-       document.getElementById("root")
+       document.getElementById("root"),
      );
      ```
 
@@ -6057,10 +6044,9 @@ class ParentComponent extends React.Component {
 
 237. ### What are the benefits of new JSX transform?
 
-    **Short definition:** This lists the benefits of new JSX transform.
+     **Short definition:** This lists the benefits of new JSX transform.
 
      There are three major benefits of new JSX transform,
-
      1. It is possible to use JSX without importing React packages
      2. The compiled output might improve the bundle size in a small amount
      3. The future improvements provides the flexibility to reduce the number of concepts to learn React.
@@ -6069,7 +6055,7 @@ class ParentComponent extends React.Component {
 
 238. ### How is the new JSX transform different from old transform??
 
-    **Short definition:** This explains how the new JSX transform different from old transform.
+     **Short definition:** This explains how the new JSX transform different from old transform.
 
      The new JSX transform doesn’t require React to be in scope. i.e, You don't need to import React package for simple scenarios.
 
@@ -6121,7 +6107,7 @@ class ParentComponent extends React.Component {
 
 239. ### What are React Server components?
 
-    **Short definition:** React Server Component is a way to write React component that gets rendered in the server-side with the purpose of improving React app performance.
+     **Short definition:** React Server Component is a way to write React component that gets rendered in the server-side with the purpose of improving React app performance.
 
      React Server Component is a way to write React component that gets rendered in the server-side with the purpose of improving React app performance. These components allow us to load components from the backend.
 
@@ -6131,7 +6117,7 @@ class ParentComponent extends React.Component {
 
 240. ### What is prop drilling?
 
-    **Short definition:** This explains the idea behind prop drilling.
+     **Short definition:** This explains the idea behind prop drilling.
 
      Prop Drilling is the process by which you pass data from one component of the React Component tree to another by going through other components that do not need the data but only help in passing it around.
 
@@ -6139,8 +6125,7 @@ class ParentComponent extends React.Component {
 
 241. ### What is the difference between useState and useRef hook?
 
-    **Short definition:** It explains the main difference between useState and useRef hook.
-
+     **Short definition:** It explains the main difference between useState and useRef hook.
      1. useState causes components to re-render after state updates whereas useRef doesn’t cause a component to re-render when the value or state changes.
         Essentially, useRef is like a “box” that can hold a mutable value in its (`.current`) property.
      2. useState allows us to update the state inside components. While useRef allows referencing DOM elements and tracking values.
@@ -6149,7 +6134,7 @@ class ParentComponent extends React.Component {
 
 242. ### What is a wrapper component?
 
-    **Short definition:** A wrapper in React is a component that wraps or surrounds another component or group of components.
+     **Short definition:** A wrapper in React is a component that wraps or surrounds another component or group of components.
 
      A wrapper in React is a component that wraps or surrounds another component or group of components. It can be used for a variety of purposes such as adding additional functionality, styling, or layout to the wrapped components.
 
@@ -6204,10 +6189,9 @@ class ParentComponent extends React.Component {
 
 243. ### What are the differences between useEffect and useLayoutEffect hooks?
 
-    **Short definition:** It explains the main differences between useEffect and useLayoutEffect hooks.
+     **Short definition:** It explains the main differences between useEffect and useLayoutEffect hooks.
 
      useEffect and useLayoutEffect are both React hooks that can be used to synchronize a component with an external system, such as a browser API or a third-party library. However, there are some key differences between the two:
-
      - Timing: useEffect runs after the browser has finished painting, while useLayoutEffect runs synchronously before the browser paints. This means that useLayoutEffect can be used to measure and update layout in a way that feels more synchronous to the user.
 
      - Browser Paint: useEffect allows browser to paint the changes before running the effect, hence it may cause some visual flicker. useLayoutEffect synchronously runs the effect before browser paints and hence it will avoid visual flicker.
@@ -6222,7 +6206,7 @@ class ParentComponent extends React.Component {
 
 244. ### What are the differences between Functional and Class Components?
 
-    **Short definition:** It explains the main differences between Functional and Class Components.
+     **Short definition:** It explains the main differences between Functional and Class Components.
 
      There are two different ways to create components in ReactJS. The main differences are listed down as below,
 
@@ -6282,14 +6266,14 @@ class ParentComponent extends React.Component {
              <button
                onClick={() => {
                  this.updateMessage();
-               }}>
+               }}
+             >
                Click!!
              </button>
            </>
          );
        }
      }
-
      ```
 
      You didn't use state in functional components because it was only supported in class components. But over the years hooks have been implemented in functional components which enables to use state too.
@@ -6325,9 +6309,8 @@ class ParentComponent extends React.Component {
          return (
            <h1>
              {" "}
-             This is a functional component and component name is {
-               this.props.name
-             }{" "}
+             This is a functional component and component name is{" "}
+             {this.props.name}{" "}
            </h1>
          );
        }
@@ -6370,7 +6353,7 @@ class ParentComponent extends React.Component {
 
 245. ### What is strict mode in React?
 
-    **Short definition:** React.StrictMode is a useful component for highlighting potential problems in an application.
+     **Short definition:** React.StrictMode is a useful component for highlighting potential problems in an application.
 
      `React.StrictMode` is a useful component for highlighting potential problems in an application. Just like `<Fragment>`, `<StrictMode>` does not render any extra DOM elements. It activates additional checks and warnings for its descendants. These checks apply for _development mode_ only.
 
@@ -6401,10 +6384,9 @@ class ParentComponent extends React.Component {
 
 246. ### What is the benefit of strict mode?
 
-    **Short definition:** This explains the benefit of strict mode.
+     **Short definition:** This explains the benefit of strict mode.
 
      The <StrictMode> will be helpful in the below cases,
-
      1. To find the bugs caused by impure rendering where the components will re-render twice.
      2. To find the bugs caused by missing cleanup of effects where the components will re-run effects one more extra time.
      3. Identifying components with **unsafe lifecycle methods**.
@@ -6417,7 +6399,7 @@ class ParentComponent extends React.Component {
 
 247. ### Why does strict mode render twice in React?
 
-    **Short definition:** StrictMode renders components twice in development mode(not production) in order to detect any problems with your code and warn you about those problems.
+     **Short definition:** StrictMode renders components twice in development mode(not production) in order to detect any problems with your code and warn you about those problems.
 
      StrictMode renders components twice in development mode(not production) in order to detect any problems with your code and warn you about those problems. This is used to detect accidental side effects in the render phase. If you used `create-react-app` development tool then it automatically enables StrictMode by default.
 
@@ -6426,7 +6408,7 @@ class ParentComponent extends React.Component {
      root.render(
        <StrictMode>
          <App />
-       </StrictMode>
+       </StrictMode>,
      );
      ```
 
@@ -6438,7 +6420,6 @@ class ParentComponent extends React.Component {
      ```
 
      To detect side effects the following functions are invoked twice:
-
      1. Function component bodies, excluding the code inside event handlers.
      2. Functions passed to `useState`, `useMemo`, or `useReducer` (any other Hook)
      3. Class component's `constructor`, `render`, and `shouldComponentUpdate` methods
@@ -6449,10 +6430,9 @@ class ParentComponent extends React.Component {
 
 248. ### What are the rules of JSX?
 
-    **Short definition:** This lists the rules of JSX.
+     **Short definition:** This lists the rules of JSX.
 
      The below 3 rules needs to be followed while using JSX in a react application.
-
      1. **Return a single root element**:
         If you are returning multiple elements from a component, wrap them in a single parent element. Otherwise you will receive the below error in your browser console.
 
@@ -6468,7 +6448,7 @@ class ParentComponent extends React.Component {
 
 249.  ### What is the reason behind multiple JSX tags to be wrapped?
 
-    **Short definition:** Behind the scenes, JSX is transformed into plain javascript objects.
+      **Short definition:** Behind the scenes, JSX is transformed into plain javascript objects.
 
       Behind the scenes, JSX is transformed into plain javascript objects. It is not possible to return two or more objects from a function without wrapping into an array. This is the reason you can't simply return two or more JSX tags from a function without
       wrapping them into a single parent tag or a Fragment.
@@ -6477,10 +6457,9 @@ class ParentComponent extends React.Component {
 
 250.  ### How do you prevent mutating array variables?
 
-    **Short definition:** This shows how to prevent mutating array variables.
+      **Short definition:** This shows how to prevent mutating array variables.
 
       The preexisting variables outside of the function scope including state, props and context leads to a mutation and they result in unpredictable bugs during the rendering stage. The below points should be taken care while working with arrays variables.
-
       1. You need to take copy of the original array and perform array operations on it for the rendering purpose. This is called local mutation.
       2. Avoid triggering mutation methods such as push, pop, sort and reverse methods on original array. It is safe to use filter, map and slice method because they create a new array.
 
@@ -6488,7 +6467,7 @@ class ParentComponent extends React.Component {
 
 251. ### What are capture phase events?
 
-    **Short definition:** The onClickCapture React event is helpful to catch all the events of child elements irrespective of event propagation logic or even if the events propagation stopped.
+     **Short definition:** The onClickCapture React event is helpful to catch all the events of child elements irrespective of event propagation logic or even if the events propagation stopped.
 
      The `onClickCapture` React event is helpful to catch all the events of child elements irrespective of event propagation logic or even if the events propagation stopped. This is useful if you need to log every click events for analytics purpose.
 
@@ -6504,19 +6483,16 @@ class ParentComponent extends React.Component {
      ```
 
      The event propagation for the above code snippet happens in the following order:
-
      1. It travels downwards in the DOM tree by calling all `onClickCapture` event handlers.
      2. It executes `onClick` event handler on the target element.
      3. It travels upwards in the DOM tree by call all `onClick` event handlers above to it.
 
 252. ### How does React updates screen in an application?
 
-    **Short definition:** This explains how React updates screen in an application.
+     **Short definition:** This explains how React updates screen in an application.
 
      React updates UI in three steps,
-
      1. **Triggering or initiating a render:** The component is going to triggered for render in two ways.
-
         1. **Initial render:** When the app starts, you can trigger the initial render by calling `creatRoot` with the target DOM node followed by invoking component's `render` method. For example, the following code snippet renders `App` component on root DOM node.
 
         ```jsx
@@ -6536,7 +6512,7 @@ class ParentComponent extends React.Component {
 
 253.  ### How does React batch multiple state updates?
 
-    **Short definition:** This explains how React batch multiple state updates.
+      **Short definition:** This explains how React batch multiple state updates.
 
       React prevents component from re-rendering for each and every state update by grouping multiple state updates within an event handler. This strategy improves the application performance and this process known as **batching**. The older version of React only supported batching for browser events whereas React18 supported for asynchronous actions, timeouts and intervals along with native events. This improved version of batching is called **automatic batching**.
 
@@ -6574,7 +6550,7 @@ class ParentComponent extends React.Component {
 
 254.  ### Is it possible to prevent automatic batching?
 
-    **Short definition:** Yes, it is possible to prevent automatic batching default behavior.
+      **Short definition:** Yes, it is possible to prevent automatic batching default behavior.
 
       Yes, it is possible to prevent automatic batching default behavior. There might be cases where you need to re-render your component after each state update or updating one state depends on another state variable. Considering this situation, React introduced `flushSync` method from `react-dom` API for the usecases where you need to flush state updates to DOM immediately.
 
@@ -6598,7 +6574,7 @@ class ParentComponent extends React.Component {
 
 255.  ### What is React hydration?
 
-    **Short definition:** React hydration is used to add client-side JavaScript interactivity to pre-rendered static HTML generated by the server.
+      **Short definition:** React hydration is used to add client-side JavaScript interactivity to pre-rendered static HTML generated by the server.
 
       React hydration is used to add client-side JavaScript interactivity to pre-rendered static HTML generated by the server. It is used only for server-side rendering(SSR) to enhance the initial rendering time and make it SEO friendly application. This hydration acts as a bridge to reduce the gap between server side and client-side rendering.
 
@@ -6649,7 +6625,7 @@ class ParentComponent extends React.Component {
 
 256.  ### How do you update objects inside state?
 
-    **Short definition:** This shows how to update objects inside state.
+      **Short definition:** This shows how to update objects inside state.
 
       You cannot update the objects which exists in the state directly. Instead, you should create a fresh new object (or copy from the existing object) and update the latest state using the newly created object. Eventhough JavaScript objects are mutable, you need to treat objects inside state as read-only while updating the state.
 
@@ -6718,7 +6694,7 @@ class ParentComponent extends React.Component {
 
 257.  ### How do you update nested objects inside state?
 
-    **Short definition:** This shows how to update nested objects inside state.
+      **Short definition:** This shows how to update nested objects inside state.
 
       You cannot simply use spread syntax for all kinds of objects inside state. Because spread syntax is shallow and it copies properties for one level deep only. If the object has nested object structure, UI doesn't work as expected with regular JavaScript nested property mutation. Let's demonstrate this behavior with an example of User object which has address nested object inside of it.
 
@@ -6757,7 +6733,7 @@ class ParentComponent extends React.Component {
 
 258.  ### How do you update arrays inside state?
 
-    **Short definition:** This shows how to update arrays inside state.
+      **Short definition:** This shows how to update arrays inside state.
 
       Eventhough arrays in JavaScript are mutable in nature, you need to treat them as immutable while storing them in a state. That means, similar to objects, the arrays cannot be updated directly inside state. Instead, you need to create a copy of the existing array and then set the state to use newly copied array.
 
@@ -6789,16 +6765,14 @@ class ParentComponent extends React.Component {
 
 259.  ### How do you use immer library for state updates?
 
-    **Short definition:** This shows how to use immer library for state updates.
+      **Short definition:** This shows how to use immer library for state updates.
 
       Immer library enforces the immutability of state based on **copy-on-write** mechanism. It uses JavaScript proxy to keep track of updates to immutable states. Immer has 3 main states as below,
-
       1. **Current state:** It refers to actual state
       2. **Draft state:** All new changes will be applied to this state. In this state, draft is just a proxy of the current state.
       3. **Next state:** It is formed after all mutations applied to the draft state
 
       Immer can be used by following below instructions,
-
       1. Install the dependency using `npm install use-immer` command
       2. Replace `useState` hook with `useImmer` hook by importing at the top
       3. The setter function of `useImmer` hook can be used to update the state.
@@ -6828,13 +6802,13 @@ class ParentComponent extends React.Component {
 
 260.  ### What are the benefits of preventing the direct state mutations?
 
-    **Short definition:** This lists the benefits of preventing the direct state mutations.
+      **Short definition:** This lists the benefits of preventing the direct state mutations.
 
 **[⬆ Back to Top](#table-of-contents)**
 
 261.  ### What are the preferred and non-preferred array operations for updating the state?
 
-    **Short definition:** This lists the preferred and non-preferred array operations for updating the state.
+      **Short definition:** This lists the preferred and non-preferred array operations for updating the state.
 
       The below table represent preferred and non-preferred array operations for updating the component state.
 
@@ -6851,7 +6825,7 @@ class ParentComponent extends React.Component {
 
 262. ### What will happen by defining nested function components?
 
-    **Short definition:** Technically it is possible to write nested function components but it is not suggested to write nested function definitions.
+     **Short definition:** Technically it is possible to write nested function components but it is not suggested to write nested function definitions.
 
 Technically it is possible to write nested function components but it is not suggested to write nested function definitions. Because it leads to unexpected bugs and performance issues.
 
@@ -6859,7 +6833,7 @@ Technically it is possible to write nested function components but it is not sug
 
 263. ### Can I use keys for non-list items?
 
-    **Short definition:** Keys are primarily used for rendering list items but they are not just for list items.
+     **Short definition:** Keys are primarily used for rendering list items but they are not just for list items.
 
      Keys are primarily used for rendering list items but they are not just for list items. You can also use them React to distinguish components. By default, React uses order of the components in
 
@@ -6867,219 +6841,218 @@ Technically it is possible to write nested function components but it is not sug
 
 264. ### What are the guidelines to be followed for writing reducers?
 
-    **Short definition:** This lists the guidelines to be followed for writing reducers.
+     **Short definition:** This lists the guidelines to be followed for writing reducers.
 
      There are two guidelines to be taken care while writing reducers in your code.
-
      1. Reducers must be pure without mutating the state. That means, same input always returns the same output. These reducers run during rendering time similar to state updater functions. So these functions should not send any requests, schedule time outs and any other side effects.
 
      2. Each action should describe a single user interaction even though there are multiple changes applied to data. For example, if you "reset" registration form which has many user input fields managed by a reducer, it is suggested to send one "reset" action instead of creating separate action for each fields. The proper ordering of actions should reflect the user interactions in the browser and it helps a lot for debugging purpose.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-265. ### How does ReactJS work behind the scenes?
+265.  ### How does ReactJS work behind the scenes?
 
-    **Short definition:** This explains how ReactJS work behind the scenes.
+      **Short definition:** This explains how ReactJS work behind the scenes.
 
-     ReactJS is a powerful JavaScript library for building user interfaces. While it appears simple on the surface, React performs a lot of complex operations behind the scenes to efficiently update the UI. Here's an overview of how it works internally:
+      ReactJS is a powerful JavaScript library for building user interfaces. While it appears simple on the surface, React performs a lot of complex operations behind the scenes to efficiently update the UI. Here's an overview of how it works internally:
 
-     #### **1. Virtual DOM & Component Rendering**
+      #### **1. Virtual DOM & Component Rendering**
 
-     React doesn't manipulate the real DOM directly. Instead, it uses a **Virtual DOM** — a lightweight JavaScript representation of the UI.
+      React doesn't manipulate the real DOM directly. Instead, it uses a **Virtual DOM** — a lightweight JavaScript representation of the UI.
 
-     When a component renders (e.g., `<App />`):
+      When a component renders (e.g., `<App />`):
 
-        *   React **executes the component function** (e.g., `App()`).
-        *   Hooks like `useState` are registered and tracked in order.
-        *   React builds a **Virtual DOM tree** from the returned JSX.
-        *   This virtual DOM is a **plain JS object** that describes the desired UI.
+          *   React **executes the component function** (e.g., `App()`).
+          *   Hooks like `useState` are registered and tracked in order.
+          *   React builds a **Virtual DOM tree** from the returned JSX.
+          *   This virtual DOM is a **plain JS object** that describes the desired UI.
 
-     This process ensures fast and efficient rendering before React decides how to update the real DOM.
+      This process ensures fast and efficient rendering before React decides how to update the real DOM.
 
-     #### 2. **React Fiber Architecture**
+      #### 2. **React Fiber Architecture**
 
-     React’s core engine is called **Fiber**, introduced in React 16. Fiber is a reimplementation of the React reconciliation algorithm with the following capabilities:
+      React’s core engine is called **Fiber**, introduced in React 16. Fiber is a reimplementation of the React reconciliation algorithm with the following capabilities:
 
-        *   Breaks rendering work into **units of work** (fiber nodes).
-        *   Enables **interruptible rendering** (important for responsiveness).
-        *   Supports **priority scheduling** and **concurrent rendering**.
+          *   Breaks rendering work into **units of work** (fiber nodes).
+          *   Enables **interruptible rendering** (important for responsiveness).
+          *   Supports **priority scheduling** and **concurrent rendering**.
 
-     Each Fiber node represents a component and stores:
+      Each Fiber node represents a component and stores:
 
-        *   The component type (function/class).
-        *   Props, state, and effects.
-        *   Links to parent, child, and sibling fibers.
+          *   The component type (function/class).
+          *   Props, state, and effects.
+          *   Links to parent, child, and sibling fibers.
 
-     #### 3. **Reconciliation (Diffing Algorithm)**
+      #### 3. **Reconciliation (Diffing Algorithm)**
 
-     When state or props change:
+      When state or props change:
 
-        *   React re-executes the component to produce a new virtual DOM.
-        *   It **compares the new virtual DOM to the previous one** using an efficient diffing algorithm.
-        *   React determines the **minimal set of DOM changes** required.
+          *   React re-executes the component to produce a new virtual DOM.
+          *   It **compares the new virtual DOM to the previous one** using an efficient diffing algorithm.
+          *   React determines the **minimal set of DOM changes** required.
 
-     This process is known as **reconciliation**.
+      This process is known as **reconciliation**.
 
-     #### 4. **Commit Phase (Real DOM Updates)**
+      #### 4. **Commit Phase (Real DOM Updates)**
 
-     Once reconciliation is done:
+      Once reconciliation is done:
 
-        *   React enters the **commit phase**.
-        *   It applies calculated changes to the **real DOM**.
-        *   It also runs side effects like `useEffect` or `useLayoutEffect`.
+          *   React enters the **commit phase**.
+          *   It applies calculated changes to the **real DOM**.
+          *   It also runs side effects like `useEffect` or `useLayoutEffect`.
 
-     This is the only time React interacts directly with the browser DOM.
+      This is the only time React interacts directly with the browser DOM.
 
-     #### 5. **Hooks and State Management**
+      #### 5. **Hooks and State Management**
 
-     With Hooks (like `useState`, `useEffect`):
+      With Hooks (like `useState`, `useEffect`):
 
-        *   React keeps an **internal list of hooks per component**.
-        *   Hooks are identified by their order in the function.
-        *   When state updates occur, React re-renders the component and re-runs the hooks in the same order.
+          *   React keeps an **internal list of hooks per component**.
+          *   Hooks are identified by their order in the function.
+          *   When state updates occur, React re-renders the component and re-runs the hooks in the same order.
 
-     #### 6. **React Scheduler**
+      #### 6. **React Scheduler**
 
-     React uses an internal **Scheduler** to control how updates are prioritized:
+      React uses an internal **Scheduler** to control how updates are prioritized:
 
-        *   Urgent tasks like clicks and inputs are processed immediately.
-        *   Non-urgent tasks (like data fetching) can be delayed or paused.
-        *   This improves responsiveness and allows for **time slicing** in Concurrent Mode.
-
-
-**[⬆ Back to Top](#table-of-contents)**
-
-266. ### How is `useReducer` Different from `useState`?
-
-    **Short definition:** This explains how useReducer Different from useState.
-
-     There are notable differences between `useState` and `useReducer` hooks.
-           
-        | Feature               | `useState`                           | `useReducer`                          |
-        |-----------------------|--------------------------------------|---------------------------------------|
-        | State complexity      | Simple (one variable or flat object) | Complex, multi-part or deeply nested  |
-        | Update style          | Direct (e.g. `setState(x)`)          | Through actions (e.g. `dispatch({})`) |
-        | Update logic          | In component                         | In reducer function                   |
-        | Reusability & testing | Less reusable                        | Highly reusable & testable            |
+          *   Urgent tasks like clicks and inputs are processed immediately.
+          *   Non-urgent tasks (like data fetching) can be delayed or paused.
+          *   This improves responsiveness and allows for **time slicing** in Concurrent Mode.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-267. ### What is useContext? What are the steps to follow for useContext?
+266.  ### How is `useReducer` Different from `useState`?
 
-    **Short definition:** This explains what useContext is and the basic steps to use it.
+      **Short definition:** This explains how useReducer Different from useState.
 
-     The `useContext` hook is a built-in React Hook that lets you access the value of a context inside a functional component without needing to wrap it in a <Context.Consumer> component.
+      There are notable differences between `useState` and `useReducer` hooks.
 
-     It helps you **avoid prop drilling** (passing props through multiple levels) by allowing components to access shared data like themes, authentication status, or user preferences.
+          | Feature               | `useState`                           | `useReducer`                          |
+          |-----------------------|--------------------------------------|---------------------------------------|
+          | State complexity      | Simple (one variable or flat object) | Complex, multi-part or deeply nested  |
+          | Update style          | Direct (e.g. `setState(x)`)          | Through actions (e.g. `dispatch({})`) |
+          | Update logic          | In component                         | In reducer function                   |
+          | Reusability & testing | Less reusable                        | Highly reusable & testable            |
 
-     The usage of useContext involves three main steps:
+**[⬆ Back to Top](#table-of-contents)**
+
+267.  ### What is useContext? What are the steps to follow for useContext?
+
+      **Short definition:** This explains what useContext is and the basic steps to use it.
+
+      The `useContext` hook is a built-in React Hook that lets you access the value of a context inside a functional component without needing to wrap it in a <Context.Consumer> component.
+
+      It helps you **avoid prop drilling** (passing props through multiple levels) by allowing components to access shared data like themes, authentication status, or user preferences.
+
+      The usage of useContext involves three main steps:
+
       #### **Step 1 : Create the Context**
-    
-        Use `React.createContext()` to create a context object.
-    
-        ```jsx
-        import React, { createContext } from 'react'; 
-    
-        const ThemeContext = createContext(); // default value optional
-        ```
-    
+
+          Use `React.createContext()` to create a context object.
+
+          ```jsx
+          import React, { createContext } from 'react';
+
+          const ThemeContext = createContext(); // default value optional
+          ```
+
       You typically export this so other components can import it.
 
       #### **Step 2: Provide the Context Value**
-    
-        Wrap your component tree (or a part of it) with the `Context.Provider` and pass a `value` prop.
-    
-        ```jsx
-        function App() {
-            return ( 
-                <ThemeContext.Provider value="dark">
-                   <MyComponent />
-                </ThemeContext.Provider>
-            ); 
-        }
-        ```
-    
-        Now any component inside `<ThemeContext.Provider>` can access the context value.
 
-        #### **Step 3: Consume the Context with** `**useContext**`
-    
-        In any functional component **inside the Provider**, use the `useContext` hook:
-    
-        ```jsx
-        import { useContext } from 'react'; 
-        function MyComponent() {
-            const theme = useContext(ThemeContext); // theme = "dark"
-            return <p>Current Theme: {theme}</p>; 
-        }
-        ```
+          Wrap your component tree (or a part of it) with the `Context.Provider` and pass a `value` prop.
+
+          ```jsx
+          function App() {
+              return (
+                  <ThemeContext.Provider value="dark">
+                     <MyComponent />
+                  </ThemeContext.Provider>
+              );
+          }
+          ```
+
+          Now any component inside `<ThemeContext.Provider>` can access the context value.
+
+          #### **Step 3: Consume the Context with** `**useContext**`
+
+          In any functional component **inside the Provider**, use the `useContext` hook:
+
+          ```jsx
+          import { useContext } from 'react';
+          function MyComponent() {
+              const theme = useContext(ThemeContext); // theme = "dark"
+              return <p>Current Theme: {theme}</p>;
+          }
+          ```
 
 **[⬆ Back to Top](#table-of-contents)**
 
-268. ### What are the use cases of useContext hook?
+268.  ### What are the use cases of useContext hook?
 
-    **Short definition:** This lists the use cases of useContext hook.
+      **Short definition:** This lists the use cases of useContext hook.
 
-     The `useContext` hook in React is used to share data across components without having to pass props manually through each level. Here are some common and effective use cases:
+      The `useContext` hook in React is used to share data across components without having to pass props manually through each level. Here are some common and effective use cases:
 
-        1.  **Theme Customization**  
-            `useContext` can be used to manage application-wide themes, such as light and dark modes, ensuring consistent styling and enabling user-driven customization.
-        2.  **Localization and Internationalization**  
-            It supports localization by providing translated strings or locale-specific content to components, adapting the application for users in different regions.
-        3.  **User Authentication and Session Management**  
-            `useContext` allows global access to authentication status and user data. This enables conditional rendering of components and helps manage protected routes or user-specific UI elements.
-        4.  **Shared Modal or Sidebar Visibility**  
-            It's ideal for managing the visibility of shared UI components like modals, drawers, or sidebars, especially when their state needs to be controlled from various parts of the app.
-        5.  **Combining with** `**useReducer**` **for Global State Management**  
-            When combined with `useReducer`, `useContext` becomes a powerful tool for managing more complex global state logic. This pattern helps maintain cleaner, scalable state logic without introducing external libraries like Redux.
-             Some of the common use cases of useContext are listed below,
+          1.  **Theme Customization**
+              `useContext` can be used to manage application-wide themes, such as light and dark modes, ensuring consistent styling and enabling user-driven customization.
+          2.  **Localization and Internationalization**
+              It supports localization by providing translated strings or locale-specific content to components, adapting the application for users in different regions.
+          3.  **User Authentication and Session Management**
+              `useContext` allows global access to authentication status and user data. This enables conditional rendering of components and helps manage protected routes or user-specific UI elements.
+          4.  **Shared Modal or Sidebar Visibility**
+              It's ideal for managing the visibility of shared UI components like modals, drawers, or sidebars, especially when their state needs to be controlled from various parts of the app.
+          5.  **Combining with** `**useReducer**` **for Global State Management**
+              When combined with `useReducer`, `useContext` becomes a powerful tool for managing more complex global state logic. This pattern helps maintain cleaner, scalable state logic without introducing external libraries like Redux.
+               Some of the common use cases of useContext are listed below,
 
 **[⬆ Back to Top](#table-of-contents)**
 
 269.  ### When to use client and server components?
 
-    **Short definition:** This explains when to use client and server components.
+      **Short definition:** This explains when to use client and server components.
 
       You can efficiently build nextjs application if you are aware about which part of the application needs to use client components and which other parts needs to use server components. The common cases of both client and server components are listed below:
 
-        **Client components:**
-        1. Whenever your need to add interactivity and event listeners such as onClick(), onChange(), etc to the pages
-        2. If you need to use State and Lifecycle Effects like useState(), useReducer(), useEffect() etc.
-        3. If there is a requirement to use browser-only APIs.
-        4. If you need to implement custom hooks that depend on state, effects, or browser-only APIs.
-        5. There are React Class components in the pages.
+          **Client components:**
+          1. Whenever your need to add interactivity and event listeners such as onClick(), onChange(), etc to the pages
+          2. If you need to use State and Lifecycle Effects like useState(), useReducer(), useEffect() etc.
+          3. If there is a requirement to use browser-only APIs.
+          4. If you need to implement custom hooks that depend on state, effects, or browser-only APIs.
+          5. There are React Class components in the pages.
 
-        **Server components:**
-        1. If the component logic is about data fetching.
-        2. If you need to access backend resources directly.
-        3. When you need to keep sensitive information((access tokens, API keys, etc)	) on the server.
-        4. If you want reduce client-side JavaScript and placing large dependencies on the server.
-
+          **Server components:**
+          1. If the component logic is about data fetching.
+          2. If you need to access backend resources directly.
+          3. When you need to keep sensitive information((access tokens, API keys, etc)	) on the server.
+          4. If you want reduce client-side JavaScript and placing large dependencies on the server.
 
 **[⬆ Back to Top](#table-of-contents)**
 
 270. ### What are the differences between page router and app router in nextjs?
 
-    **Short definition:** It explains the main differences between page router and app router in nextjs.
+     **Short definition:** It explains the main differences between page router and app router in nextjs.
 
      Next.js provides two different routing systems: the **Page Router** (traditional) and the **App Router** (introduced in Next.js 13). The App Router is built on React Server Components and offers more powerful features for modern web applications.
 
      Here are the main differences between them:
 
-     | Feature | Page Router | App Router |
-     |---------|-------------|------------|
-     | Directory | Uses `pages/` directory | Uses `app/` directory |
-     | Routing | File-based routing with files like `pages/about.js` | File-based routing with folders and special files like `app/about/page.js` |
-     | Components | All components are Client Components by default | All components are Server Components by default |
-     | Layouts | Custom `_app.js` and `_document.js` for shared layouts | Native nested layouts using `layout.js` files |
-     | Data Fetching | Uses `getServerSideProps`, `getStaticProps`, and `getInitialProps` | Uses `async/await` in Server Components with native `fetch` |
-     | Loading States | Manual implementation required | Built-in `loading.js` for streaming and suspense |
-     | Error Handling | Custom `_error.js` page | Built-in `error.js` for error boundaries at any level |
-     | Streaming | Limited support | Built-in support for streaming with Suspense |
-     | Server Actions | Not available | Native support for server-side mutations |
-     | Metadata | Using `Head` component from `next/head` | Native Metadata API with `metadata` object or `generateMetadata` function |
-     | Rendering | SSR, SSG, ISR, and CSR | SSR, SSG, ISR, CSR plus React Server Components |
+     | Feature        | Page Router                                                        | App Router                                                                 |
+     | -------------- | ------------------------------------------------------------------ | -------------------------------------------------------------------------- |
+     | Directory      | Uses `pages/` directory                                            | Uses `app/` directory                                                      |
+     | Routing        | File-based routing with files like `pages/about.js`                | File-based routing with folders and special files like `app/about/page.js` |
+     | Components     | All components are Client Components by default                    | All components are Server Components by default                            |
+     | Layouts        | Custom `_app.js` and `_document.js` for shared layouts             | Native nested layouts using `layout.js` files                              |
+     | Data Fetching  | Uses `getServerSideProps`, `getStaticProps`, and `getInitialProps` | Uses `async/await` in Server Components with native `fetch`                |
+     | Loading States | Manual implementation required                                     | Built-in `loading.js` for streaming and suspense                           |
+     | Error Handling | Custom `_error.js` page                                            | Built-in `error.js` for error boundaries at any level                      |
+     | Streaming      | Limited support                                                    | Built-in support for streaming with Suspense                               |
+     | Server Actions | Not available                                                      | Native support for server-side mutations                                   |
+     | Metadata       | Using `Head` component from `next/head`                            | Native Metadata API with `metadata` object or `generateMetadata` function  |
+     | Rendering      | SSR, SSG, ISR, and CSR                                             | SSR, SSG, ISR, CSR plus React Server Components                            |
 
      **Example of Page Router structure:**
+
      ```
      pages/
      ├── index.js          // Home page (/)
@@ -7091,6 +7064,7 @@ Technically it is possible to write nested function components but it is not sug
      ```
 
      **Example of App Router structure:**
+
      ```
      app/
      ├── page.js           // Home page (/)
@@ -7110,82 +7084,86 @@ Technically it is possible to write nested function components but it is not sug
 
 271. ### Can you describe the useMemo() Hook?
 
-    **Short definition:** The useMemo() Hook in React is used to optimize performance by memoizing the result of expensive calculations.
+     **Short definition:** The useMemo() Hook in React is used to optimize performance by memoizing the result of expensive calculations.
 
      The `useMemo()` Hook in React is used to **optimize performance** by **memoizing the result of expensive calculations**. It ensures that a function is **only re-executed when its dependencies change**, preventing unnecessary computations on every re-render.
 
      #### Syntax
 
      ```js
-      const memoizedValue = useMemo(() => computeExpensiveValue(arg), [dependencies]);
+     const memoizedValue = useMemo(
+       () => computeExpensiveValue(arg),
+       [dependencies],
+     );
      ```
-      - **`computeExpensiveValue`**:  
-      A function that returns the computed result.
+
+     - **`computeExpensiveValue`**:  
+       A function that returns the computed result.
 
      - **`dependencies`**:  
-      An array of values that, when changed, will cause the memoized function to re-run.
+       An array of values that, when changed, will cause the memoized function to re-run.
 
-      If the dependencies haven’t changed since the last render, React returns the **cached result** instead of re-running the function.
+     If the dependencies haven’t changed since the last render, React returns the **cached result** instead of re-running the function.
 
-      Let's exaplain the usage of `useMemo` hook with an example of user search and its respective filtered users list.
+     Let's exaplain the usage of `useMemo` hook with an example of user search and its respective filtered users list.
 
-      #### Example: Memoizing a Filtered List
-      ```javascript
-      import React, { useState, useMemo } from 'react';
+     #### Example: Memoizing a Filtered List
 
-      const users = [
-        { id: 1, name: 'Sudheer' },
-        { id: 2, name: 'Brendon' },
-        { id: 3, name: 'Charlie' },
-        { id: 4, name: 'Dary' },
-        { id: 5, name: 'Eden' }
-      ];
+     ```javascript
+     import React, { useState, useMemo } from "react";
 
-      export default function UserSearch({ users }) {
-        const [searchTerm, setSearchTerm] = useState('');
-        const [counter, setCounter] = useState(0);
+     const users = [
+       { id: 1, name: "Sudheer" },
+       { id: 2, name: "Brendon" },
+       { id: 3, name: "Charlie" },
+       { id: 4, name: "Dary" },
+       { id: 5, name: "Eden" },
+     ];
 
-        // Memoize the filtered user list based on the search term
-        const filteredUsers = useMemo(() => {
-          console.log("Filtering users...");
-          return users.filter(user =>
-            user.name.toLowerCase().includes(searchTerm.toLowerCase())
-          );
-        }, [searchTerm]);
+     export default function UserSearch({ users }) {
+       const [searchTerm, setSearchTerm] = useState("");
+       const [counter, setCounter] = useState(0);
 
-        return (
-          <div>
-            <h2>Counter: {counter}</h2>
-            <button onClick={() => setCounter(prev => prev + 1)}>Increment Counter</button>
+       // Memoize the filtered user list based on the search term
+       const filteredUsers = useMemo(() => {
+         console.log("Filtering users...");
+         return users.filter((user) =>
+           user.name.toLowerCase().includes(searchTerm.toLowerCase()),
+         );
+       }, [searchTerm]);
 
-            <h2>Search Users</h2>
-            <input
-              type="text"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              placeholder="Enter name"
-            />
+       return (
+         <div>
+           <h2>Counter: {counter}</h2>
+           <button onClick={() => setCounter((prev) => prev + 1)}>
+             Increment Counter
+           </button>
 
-            <ul>
-              {filteredUsers.map(user => (
-                <li key={user.id}>{user.name}</li>
-              ))}
-            </ul>
-          </div>
-        );
-      }
-      ```
+           <h2>Search Users</h2>
+           <input
+             type="text"
+             value={searchTerm}
+             onChange={(e) => setSearchTerm(e.target.value)}
+             placeholder="Enter name"
+           />
 
-      In the above example:
-        - The filteredUsers list is only recomputed when searchTerm changes.
-        - Pressing the "Increment Counter" button does not trigger the filtering logic again, as it's not a dependency.
-        - The console will only log "Filtering users..." when the search term updates.
+           <ul>
+             {filteredUsers.map((user) => (
+               <li key={user.id}>{user.name}</li>
+             ))}
+           </ul>
+         </div>
+       );
+     }
+     ```
+
+     In the above example: - The filteredUsers list is only recomputed when searchTerm changes. - Pressing the "Increment Counter" button does not trigger the filtering logic again, as it's not a dependency. - The console will only log "Filtering users..." when the search term updates.
 
 **[⬆ Back to Top](#table-of-contents)**
 
 272. ### Can Hooks be used in class components?
 
-    **Short definition:** No, Hooks cannot be used inside class components.
+     **Short definition:** No, Hooks cannot be used inside class components.
 
      No, Hooks cannot be used inside class components. They are specially designed for function components. This is because hooks depend on the sequence in which they are called during a component’s render, something that's only guaranteed in functional components. However, both class and function components can coexist in the same application.
 
@@ -7193,14 +7171,16 @@ Technically it is possible to write nested function components but it is not sug
 
 273. ### What is an updater function? Should an updater function be used in all cases?
 
-    **Short definition:** An updater function is a form of setState where you pass a function instead of a direct value.
+     **Short definition:** An updater function is a form of setState where you pass a function instead of a direct value.
 
      An **updater function** is a form of `setState` where you pass a **function** instead of a direct value. This function receives the **previous state** as an argument and returns the **next state**.
-     
+
      The updater function expression looks like below,
+
      ```js
-     setCount(prevCount => prevCount + 1); // Safe and predictable
+     setCount((prevCount) => prevCount + 1); // Safe and predictable
      ```
+
      Here, `prevCount => prevCount + 1` is the updater function.
 
      In the React community, there's often a recommendation to use updater functions when updating state that depends on its previous value. This helps prevent unexpected behaviors that can arise from working with outdated or "stale" state.
@@ -7209,184 +7189,186 @@ Technically it is possible to write nested function components but it is not sug
      However, if you’re doing multiple updates to the same state variable within a single handler, using the updater form ensures that each update correctly uses the latest state value, rather than a potentially outdated one.
 
      **Example: Multiple Updates in One Handler**
+
      ```js
      function handleCount() {
-        setCounter(a => a + 1);
-        setCounter(a => a + 1);
-        setCounter(a => a + 1);
+       setCounter((a) => a + 1);
+       setCounter((a) => a + 1);
+       setCounter((a) => a + 1);
      }
      ```
 
      In this example, `a => a + 1` is an **updater function**. React queues these updater functions and applies them sequentially, each using the most recent state value. As a result, the counter will correctly increment by 3.
 
      In many cases, such as setting state based on user input or assigning static values, you don’t need the updater function:
+
      ```js
-     setName('Sudheer');
+     setName("Sudheer");
      ```
-     
+
 **[⬆ Back to Top](#table-of-contents)**
 
 274. ### Can useState take a function as an initial value?
 
-    **Short definition:** Yes, useState can take a function as an initial value, and this is a useful feature in React called lazy initialization.
+     **Short definition:** Yes, useState can take a function as an initial value, and this is a useful feature in React called lazy initialization.
 
      Yes, `useState` can take a function as an initial value, and this is a useful feature in React called **lazy initialization**. This function is also known as **initializer function**.
 
      When you call useState(initialValue), you normally pass in a value directly:
-     
+
      ```js
-     const [count, setCount] = useState(0);  // initial value is 0
+     const [count, setCount] = useState(0); // initial value is 0
      ```
 
      But if calculating that initial value is expensive or involves logic, you can pass a function that returns the value:
+
      ```js
-        const [count, setCount] = useState(() => {
-        // This function only runs once — when the component first renders
-        return expensiveComputation();
-        });
+     const [count, setCount] = useState(() => {
+       // This function only runs once — when the component first renders
+       return expensiveComputation();
+     });
      ```
-     
+
      This function avoids doing heavy computation on every render. If you don't use this function form and invokes it directly, the function will run everytime the component renders and impact the performance.
-     For example, the below usage is not recommended. 
+     For example, the below usage is not recommended.
+
      ```js
      const [count, setCount] = useState(expensiveComputation());
      ```
 
 **[⬆ Back to Top](#table-of-contents)**
 
-275. ### What types of values can `useState` hold?
+275.  ### What types of values can `useState` hold?
 
-    **Short definition:** The useState hook accepts different types of values.
+          **Short definition:** The useState hook accepts different types of values.
 
-     The `useState` hook accepts different types of values.
+           The `useState` hook accepts different types of values.
 
-     *   Primitives: `number`, `string`, `boolean`
-     *   Arrays
-     *   Objects
-     *   Functions
-     *   `null` or `undefined`
+           *   Primitives: `number`, `string`, `boolean`
+           *   Arrays
+           *   Objects
+           *   Functions
+           *   `null` or `undefined`
 
-     But you needs to be cautious with **reference types (objects/arrays)** because React compares old and new values **by reference**, so direct mutations won't trigger a re-render.
-     For example, the correct and wrong ways of state updates as shown below, 
-     ```js
-     user.name = "Sudheer"; //wrong way
-     setUser(prev => ({ ...prev, name: 'Sudheer' })); //correct way
-     ```
+           But you needs to be cautious with **reference types (objects/arrays)** because React compares old and new values **by reference**, so direct mutations won't trigger a re-render.
+           For example, the correct and wrong ways of state updates as shown below,
+           ```js
+           user.name = "Sudheer"; //wrong way
+           setUser(prev => ({ ...prev, name: 'Sudheer' })); //correct way
+           ```
+
+      **[⬆ Back to Top](#table-of-contents)**
+
+276.  ### What happens if you call `useState` conditionally?
+
+      **Short definition:** As per rules of React Hooks, hooks must be called unconditionally.
+
+      As per rules of React Hooks, hooks must be called unconditionally. For example, if you conditionally call it:
+
+      ```js
+      if (someCondition) {
+        const [state, setState] = useState(0);
+      }
+      ```
+
+      React will throw a runtime error because it **relies on the order of Hook calls**, and conditional logic breaks that order.
+
 **[⬆ Back to Top](#table-of-contents)**
 
-276. ### What happens if you call `useState` conditionally?
+277.  ### Is useState Synchronous or Asynchronous?
 
-    **Short definition:** As per rules of React Hooks, hooks must be called unconditionally.
+          **Short definition:** The useState hook is synchronous, but state updates are asynchronous.
 
-     As per rules of React Hooks, hooks must be called unconditionally. For example, if you conditionally call it:
-     ```js
-     if (someCondition) { 
-        const [state, setState] = useState(0); 
-     }
-     ```
+           The `useState` hook is synchronous, but state updates are asynchronous. When you call `useState()`, it runs synchronously and returns the state variable and setter function as tuple.
+           ```js
+           const [count, setCount] = useState(0);
+           ```
+           This happens immediately during rendering.
+           However, the state update function (**setState**) is asynchronous in the sense that it doesn't update the state immediately.
+           React **batches** updates and applies them before the next render. You won’t see the updated value immediately after calling `setState`.
 
-     React will throw a runtime error because it **relies on the order of Hook calls**, and conditional logic breaks that order.
+           **Example:**
+           ```js
+           const [count, setCount] = useState(0);
 
-**[⬆ Back to Top](#table-of-contents)**
+           function handleClick() {
+             setCount(count + 1);
+             console.log(count); // ❗️Still logs the old value
+           }
+           ```
+           The > `console.log(count)` prints the **old value**, because the update hasn’t happened yet.
 
-277. ### Is useState Synchronous or Asynchronous?
+           To see the updated state value, you can use `useEffect()` hook. It runs **after the component has re-rendered.**  By the time `useEffect` runs:
 
-    **Short definition:** The useState hook is synchronous, but state updates are asynchronous.
+              *   The component has been updated.
+              *   The **state contains the new value**.
 
-     The `useState` hook is synchronous, but state updates are asynchronous. When you call `useState()`, it runs synchronously and returns the state variable and setter function as tuple.
-     ```js
-     const [count, setCount] = useState(0);
-     ```
-     This happens immediately during rendering.
-     However, the state update function (**setState**) is asynchronous in the sense that it doesn't update the state immediately.
-     React **batches** updates and applies them before the next render. You won’t see the updated value immediately after calling `setState`.
-     
-     **Example:**
-     ```js
-     const [count, setCount] = useState(0);
-    
-     function handleClick() {
-       setCount(count + 1);
-       console.log(count); // ❗️Still logs the old value
-     }
-     ```
-     The > `console.log(count)` prints the **old value**, because the update hasn’t happened yet.
-     
-     To see the updated state value, you can use `useEffect()` hook. It runs **after the component has re-rendered.**  By the time `useEffect` runs:
+              ```js
+              import React, { useState, useEffect } from 'react';
 
-        *   The component has been updated.
-        *   The **state contains the new value**.
-     
-        ```js
-        import React, { useState, useEffect } from 'react';
+              function Counter() {
+              const [count, setCount] = useState(0);
 
-        function Counter() {
-        const [count, setCount] = useState(0);
-        
-        const handleClick = () => {
-        setCount(count + 1);
-        console.log('Clicked count (old):', count); // Old value
-        };
-        
-        useEffect(() => {
-        console.log('Updated count:', count); // New value
-        }, [count]); // Only runs when `count` changes
-        
-        return <button onClick={handleClick}>Count: {count}</button>;
-        }
-        ```
-**[⬆ Back to Top](#table-of-contents)**
+              const handleClick = () => {
+              setCount(count + 1);
+              console.log('Clicked count (old):', count); // Old value
+              };
+
+              useEffect(() => {
+              console.log('Updated count:', count); // New value
+              }, [count]); // Only runs when `count` changes
+
+              return <button onClick={handleClick}>Count: {count}</button>;
+              }
+              ```
+
+      **[⬆ Back to Top](#table-of-contents)**
 
 278.  ### Can you explain how useState works internally?
 
-    **Short definition:** React's hooks, including useState, rely on some internal machinery that keeps track of state per component and per hook call during rendering.
+      **Short definition:** React's hooks, including useState, rely on some internal machinery that keeps track of state per component and per hook call during rendering.
 
       React’s hooks, including `useState`, rely on some internal machinery that keeps track of state **per component** and **per hook call** during rendering. Here's a simplified explanation of the internal mechanics:
 
       #### 1. **Hook List / Linked List**
-
-      *   React maintains a linked list or array of "hook states" for each component.
-      *   When a component renders, React keeps track of which hook it is currently processing via a cursor/index.
-      *   Each call to `useState()` corresponds to one "slot" in this list.
+      - React maintains a linked list or array of "hook states" for each component.
+      - When a component renders, React keeps track of which hook it is currently processing via a cursor/index.
+      - Each call to `useState()` corresponds to one "slot" in this list.
 
       #### 2. **State Storage**
-
-      *   Each slot stores:
-        *   The current state value.
-        *   A queue of pending state updates.
+      - Each slot stores:
+      - The current state value.
+      - A queue of pending state updates.
 
       #### 3. **Initial Render**
-        
-      *   When the component first renders, React:
-         *   Creates a new slot for `useState` with the initial state (e.g., `0`).
-         *   Returns `[state, updaterFunction]`.
+      - When the component first renders, React:
+      - Creates a new slot for `useState` with the initial state (e.g., `0`).
+      - Returns `[state, updaterFunction]`.
 
       #### 4. **Updater Function**
-    
-      *   The updater function (`setCount`) is a closure that, when called:
-        *   Enqueues a state update to React's internal queue.
-        *   Schedules a re-render of the component.
-    
+      - The updater function (`setCount`) is a closure that, when called:
+      - Enqueues a state update to React's internal queue.
+      - Schedules a re-render of the component.
+
       #### 5. **Re-render and State Update**
-    
-      *   On the next render:
-        *   React processes all queued updates for each hook slot.
-        *   Updates the stored state value accordingly.
-        *   Returns the new state to the component.
+      - On the next render:
+      - React processes all queued updates for each hook slot.
+      - Updates the stored state value accordingly.
+      - Returns the new state to the component.
 
       #### 6. **Important: Hook Order**
+      - Hooks must be called in the same order on every render so React can match hook calls to their internal slots.
+      - That’s why you can’t call hooks conditionally.
 
-      *   Hooks must be called in the same order on every render so React can match hook calls to their internal slots.
-      *   That’s why you can’t call hooks conditionally.
-      
       The pseudocode for internal implementation of `useState` looks like below,
-      ```js
+
+      ````js
         let hookIndex = 0;
         const hooks = [];
-        
+
         function useState(initialValue) {
             const currentIndex = hookIndex;
-        
+
             if (!hooks[currentIndex]) {
                 // First render: initialize state
                 hooks[currentIndex] = {
@@ -7394,176 +7376,190 @@ Technically it is possible to write nested function components but it is not sug
                     queue: [],
                 };
             }
-        
+
             const hook = hooks[currentIndex];
-        
+
             // Process queued updates
             hook.queue.forEach(update => {
                 hook.state = update(hook.state);
             });
             hook.queue = [];
-        
+
             // Define updater function
             function setState(action) {
                 // action can be new state or function(state) => new state
                 hook.queue.push(typeof action === 'function' ? action : () => action);
                 scheduleRender(); // triggers React re-render
             }
-        
+
             hookIndex++;
             return [hook.state, setState];
         }
         ```
-      
+
+      ````
+
 **[⬆ Back to Top](#table-of-contents)**
 
-279. ### What is `useReducer`? Why do you use useReducer?
+279.  ### What is `useReducer`? Why do you use useReducer?
 
-    **Short definition:** The useReducer hook is a React hook used to manage complex state logic inside functional components.
+      **Short definition:** The useReducer hook is a React hook used to manage complex state logic inside functional components.
 
-     The `useReducer` hook is a React hook used to manage **complex state logic** inside **functional components**. It is conceptually similar to **Redux**. i.e, Instead of directly updating state like with `useState`, you **dispatch an action** to a **reducer function**, and the reducer returns the new state.
+      The `useReducer` hook is a React hook used to manage **complex state logic** inside **functional components**. It is conceptually similar to **Redux**. i.e, Instead of directly updating state like with `useState`, you **dispatch an action** to a **reducer function**, and the reducer returns the new state.
 
-     The `useReducer` hook takes three arguments:
+      The `useReducer` hook takes three arguments:
 
-        ```js
-        const [state, dispatch] = useReducer(reducer, initialState, initFunction);
-        ```
+          ```js
+          const [state, dispatch] = useReducer(reducer, initialState, initFunction);
+          ```
 
-        *   `**reducer**`: A function `(state, action) => newState` that handles how state should change based on the action.
-        *   `**initialState**`: The starting state.
-        *   `**dispatch**`: A function you call to trigger an update by passing an action.
+          *   `**reducer**`: A function `(state, action) => newState` that handles how state should change based on the action.
+          *   `**initialState**`: The starting state.
+          *   `**dispatch**`: A function you call to trigger an update by passing an action.
 
-     The `useReducer` hook is used when:
+      The `useReducer` hook is used when:
+      - The **state is complex**, such as nested structures or multiple related values.
+      - State updates depend on the **previous state** and **logic**.
+      - You want to **separate state update logic** from UI code to make it cleaner and testable.
+      - You’re managing features like:
+        - Forms
+        - Wizards / Multi-step flows
+        - Undo/Redo functionality
+        - Shopping cart logic
+        - Toggle & conditional UI logic
 
-     *   The **state is complex**, such as nested structures or multiple related values.
-     *   State updates depend on the **previous state** and **logic**.
-     *   You want to **separate state update logic** from UI code to make it cleaner and testable.
-     *   You’re managing features like:
-         *   Forms
-         *   Wizards / Multi-step flows
-         *   Undo/Redo functionality
-         *   Shopping cart logic
-         *   Toggle & conditional UI logic
-         
 **[⬆ Back to Top](#table-of-contents)**
 
-280. ### How does `useReducer` works? Explain with an example
+280.  ### How does `useReducer` works? Explain with an example
 
-    **Short definition:** This explains how useReducer works.
+      **Short definition:** This explains how useReducer works.
 
-     The `useReducer` hooks works similarly to Redux, where:
+      The `useReducer` hooks works similarly to Redux, where:
 
-        *   You define a **reducer function** to handle state transitions.
-        *   You dispatch actions to update the state.
-     
-     **Counter Example with Increment, Decrement, and Reset:**
-     1. Reducer function:
+          *   You define a **reducer function** to handle state transitions.
+          *   You dispatch actions to update the state.
 
-        Define a counter reducer function that takes the current state and an action object with a type, and returns a new state based on that type.
-     
+      **Counter Example with Increment, Decrement, and Reset:**
+      1. Reducer function:
+
+         Define a counter reducer function that takes the current state and an action object with a type, and returns a new state based on that type.
+
          ```js
          function counterReducer(state, action) {
-            switch (action.type) {
-              case 'increment':
-                return { count: state.count + 1 };
-              case 'decrement':
-                return { count: state.count - 1 };
-              case 'reset':
-                return { count: 0 };
-              default:
-                return state;
-            }
-          }
+           switch (action.type) {
+             case "increment":
+               return { count: state.count + 1 };
+             case "decrement":
+               return { count: state.count - 1 };
+             case "reset":
+               return { count: 0 };
+             default:
+               return state;
+           }
+         }
          ```
-     2. Using `useReducer`:
-      Invoke `useReducer` with above reducer function along with initial state. Thereafter, you can attach dispatch actions for respective button handlers.
+
+      2. Using `useReducer`:
+         Invoke `useReducer` with above reducer function along with initial state. Thereafter, you can attach dispatch actions for respective button handlers.
+
       ```js
-      import React, { useReducer } from 'react';
+      import React, { useReducer } from "react";
 
-        function Counter() {
-          const initialState = { count: 0 };
-          const [state, dispatch] = useReducer(counterReducer, initialState);
+      function Counter() {
+        const initialState = { count: 0 };
+        const [state, dispatch] = useReducer(counterReducer, initialState);
 
-          return (
-            <div style={{ textAlign: 'center' }}>
-              <h2>Count: {state.count}</h2>
-              <button onClick={() => dispatch({ type: 'increment' })}>Increment</button>
-              <button onClick={() => dispatch({ type: 'decrement' })}>Decrement</button>
-              <button onClick={() => dispatch({ type: 'reset' })}>Reset</button>
-            </div>
-          );
-        }
+        return (
+          <div style={{ textAlign: "center" }}>
+            <h2>Count: {state.count}</h2>
+            <button onClick={() => dispatch({ type: "increment" })}>
+              Increment
+            </button>
+            <button onClick={() => dispatch({ type: "decrement" })}>
+              Decrement
+            </button>
+            <button onClick={() => dispatch({ type: "reset" })}>Reset</button>
+          </div>
+        );
+      }
 
       export default Counter;
       ```
+
       Once the new state has been returned, React re-renders the component with the updated `state.count`.
 
 **[⬆ Back to Top](#table-of-contents)**
 
 281. ### Can you combine **useReducer** with **useContext**?
 
-    **Short definition:** Yes, it's common to combine useReducer with useContext to build a lightweight state management system similar to Redux.
+     **Short definition:** Yes, it's common to combine useReducer with useContext to build a lightweight state management system similar to Redux.
 
-      Yes, it's common to combine **useReducer** with **useContext** to build a lightweight state management system similar to Redux:
+     Yes, it's common to combine **useReducer** with **useContext** to build a lightweight state management system similar to Redux:
 
-      ```js
-      const AppContext = React.createContext();
+     ```js
+     const AppContext = React.createContext();
 
-      function AppProvider({ children }) {
-        const [state, dispatch] = useReducer(reducer, initialState);
-        return (
-          <AppContext.Provider value={{ state, dispatch }}>
-            {children}
-          </AppContext.Provider>
-        );
-      }
-      ```
+     function AppProvider({ children }) {
+       const [state, dispatch] = useReducer(reducer, initialState);
+       return (
+         <AppContext.Provider value={{ state, dispatch }}>
+           {children}
+         </AppContext.Provider>
+       );
+     }
+     ```
 
 **[⬆ Back to Top](#table-of-contents)**
 
 282. ### Can you dispatch multiple actions in a row with useReducer?
 
-    **Short definition:** Yes, you can dispatch multiple actions in a row using useReducer but not directly in one call.
+     **Short definition:** Yes, you can dispatch multiple actions in a row using useReducer but not directly in one call.
 
      Yes, you can dispatch multiple actions in a row using `useReducer` but not directly in one call. You'd have to call dispatch multiple times or create a composite action in your reducer that performs multiple updates based on the action type.
-     
+
      **Example: Dispatching Multiple Actions**
      You can define a custom function with dispatching actions one by one.
+
      ```js
      function handleMultipleActions(dispatch) {
-       dispatch({ type: 'increment' });
-       dispatch({ type: 'increment' });
-       dispatch({ type: 'reset' });
+       dispatch({ type: "increment" });
+       dispatch({ type: "increment" });
+       dispatch({ type: "reset" });
      }
      ```
+
      After that, you need to invoke it through event handler
+
      ```js
      <button onClick={() => handleMultipleActions(dispatch)}>
        Run Multiple Actions
      </button>
      ```
+
      **Note:** You can also define a custom action type If you want multiple state changes to be handled in one reducer call.
+
      ```js
      case 'increment_twice':
        return { count: state.count + 2 };
      ```
+
      Then dispatch
+
      ```js
-     dispatch({ type: 'increment_twice' });
+     dispatch({ type: "increment_twice" });
      ```
 
 **[⬆ Back to Top](#table-of-contents)**
 
 283. ### Is dispatch from useReducer asynchronous and does it update state immediately?
 
-    **Short definition:** The dispatch function returned by useReducer is not asynchronous - it is a synchronous function call.
+     **Short definition:** The dispatch function returned by useReducer is not asynchronous - it is a synchronous function call.
 
      The `dispatch` function returned by `useReducer` is **not asynchronous** — it is a **synchronous** function call. When you call `dispatch(action)`, React **synchronously** invokes your reducer with the current state and the action, computes the new state, and **schedules a re-render**. However, the **state variable does not update immediately** within the same render cycle. The updated state is only available in the **next render**.
 
      This behavior is similar to `useState`'s `setState` — React **batches** state updates for performance optimization, meaning the component does not re-render immediately after each `dispatch` call. Instead, React processes all dispatched actions and re-renders once with the final state.
 
      #### Key Points
-
      1. **`dispatch` is synchronous:** The reducer runs immediately when `dispatch` is called.
      2. **State update is not immediate in the current render:** The state variable still holds the old value until the next render.
      3. **React batches updates:** Multiple `dispatch` calls within the same event handler result in a single re-render.
@@ -7572,11 +7568,11 @@ Technically it is possible to write nested function components but it is not sug
      #### Example demonstrating that state does not update immediately
 
      ```jsx
-     import React, { useReducer } from 'react';
+     import React, { useReducer } from "react";
 
      function reducer(state, action) {
        switch (action.type) {
-         case 'increment':
+         case "increment":
            return { count: state.count + 1 };
          default:
            return state;
@@ -7587,9 +7583,9 @@ Technically it is possible to write nested function components but it is not sug
        const [state, dispatch] = useReducer(reducer, { count: 0 });
 
        const handleClick = () => {
-         dispatch({ type: 'increment' });
+         dispatch({ type: "increment" });
          console.log(state.count); // Still logs the OLD value (e.g., 0), not 1
-         dispatch({ type: 'increment' });
+         dispatch({ type: "increment" });
          console.log(state.count); // Still logs the OLD value (e.g., 0), not 2
        };
 
@@ -7608,20 +7604,21 @@ Technically it is possible to write nested function components but it is not sug
      #### How to read updated state after dispatch
 
      If you need the updated value right after dispatching, you have several options:
-
      1. **Use `useEffect` to react to state changes:**
+
         ```jsx
         useEffect(() => {
-          console.log('Updated count:', state.count);
+          console.log("Updated count:", state.count);
         }, [state.count]);
         ```
 
      2. **Compute the next state manually:**
+
         ```jsx
         const handleClick = () => {
-          const nextState = reducer(state, { type: 'increment' });
-          console.log('Next state will be:', nextState.count);
-          dispatch({ type: 'increment' });
+          const nextState = reducer(state, { type: "increment" });
+          console.log("Next state will be:", nextState.count);
+          dispatch({ type: "increment" });
         };
         ```
 
@@ -7637,134 +7634,137 @@ Technically it is possible to write nested function components but it is not sug
 
 **[⬆ Back to Top](#table-of-contents)**
 
-284. ### How does useContext works? Explain with an example
+284.  ### How does useContext works? Explain with an example
 
-    **Short definition:** This explains how useContext works.
+      **Short definition:** This explains how useContext works.
 
-     The `useContext` hook can be used for authentication state management across multiple components and pages in a React application.
-    
-     Let's build a simple authentication flow with:
+      The `useContext` hook can be used for authentication state management across multiple components and pages in a React application.
 
-        *   **Login and Logout buttons**
-        *   Global `AuthContext` to share state
-        *   Components that can **access and update** auth status
-     
+      Let's build a simple authentication flow with:
+
+          *   **Login and Logout buttons**
+          *   Global `AuthContext` to share state
+          *   Components that can **access and update** auth status
+
       **1. Create the Auth Context:**
 
-       You can define `AuthProvider` which holds and provides `user`, `login()`, and `logout()` via context.
-        ```js
-        // AuthContext.js
-        import React, { createContext, useContext, useState } from 'react';
-        
-        const AuthContext = createContext();
-        
-        export function AuthProvider({ children }) {
-          const [user, setUser] = useState(null);
-        
-          const login = (username) => setUser({ name: username });
-          const logout = () => setUser(null);
-        
-          return (
-            <AuthContext.Provider value={{ user, login, logout }}>
-              {children}
-            </AuthContext.Provider>
-          );
-        }
-        
-        // Custom hook for cleaner usage
-        export const useAuth = () => useContext(AuthContext);
-        ```
-     **2. Wrap Your App with the Provider:**
-       
-        Wrap the above created provider in main `App.js` file      
-        ```js
-        // App.js
-        import React from 'react';
-        import { AuthProvider } from './AuthContext';
-        import HomePage from './HomePage';
-        import Dashboard from './Dashboard';
-        
-        function App() {
-          return (
-            <AuthProvider>
-              <HomePage />
-              <Dashboard />
-            </AuthProvider>
-          );
-        }
-        
-        export default App;
-        ```
-     **3. Home page with login:**
+      You can define `AuthProvider` which holds and provides `user`, `login()`, and `logout()` via context.
+      ```js
+      // AuthContext.js
+      import React, { createContext, useContext, useState } from 'react';
+
+          const AuthContext = createContext();
+
+          export function AuthProvider({ children }) {
+            const [user, setUser] = useState(null);
+
+            const login = (username) => setUser({ name: username });
+            const logout = () => setUser(null);
+
+            return (
+              <AuthContext.Provider value={{ user, login, logout }}>
+                {children}
+              </AuthContext.Provider>
+            );
+          }
+
+          // Custom hook for cleaner usage
+          export const useAuth = () => useContext(AuthContext);
+          ```
+
+      **2. Wrap Your App with the Provider:**
+
+          Wrap the above created provider in main `App.js` file
+          ```js
+          // App.js
+          import React from 'react';
+          import { AuthProvider } from './AuthContext';
+          import HomePage from './HomePage';
+          import Dashboard from './Dashboard';
+
+          function App() {
+            return (
+              <AuthProvider>
+                <HomePage />
+                <Dashboard />
+              </AuthProvider>
+            );
+          }
+
+          export default App;
+          ```
+
+      **3. Home page with login:**
       Read or access user and login details through custom useAuth hook and use it inside home page.
 
-        ```js
-         // HomePage.js
-         import React from 'react';
-         import { useAuth } from './AuthContext';
-    
-         function HomePage() {
-           const { user, login } = useAuth();
-    
-           return (
-             <div>
-               <h1>Home</h1>
-               {user ? (
-                 <p>Welcome back, {user.name}!</p>
-               ) : (
-                 <button onClick={() => login('Alice')}>Login</button>
-               )}
-             </div>
-           );
-         }
-    
-         export default HomePage;
-        ```
-     
-     **4. Dashboard with logout:**
+          ```js
+           // HomePage.js
+           import React from 'react';
+           import { useAuth } from './AuthContext';
+
+           function HomePage() {
+             const { user, login } = useAuth();
+
+             return (
+               <div>
+                 <h1>Home</h1>
+                 {user ? (
+                   <p>Welcome back, {user.name}!</p>
+                 ) : (
+                   <button onClick={() => login('Alice')}>Login</button>
+                 )}
+               </div>
+             );
+           }
+
+           export default HomePage;
+          ```
+
+      **4. Dashboard with logout:**
       Read or access user and logout details from `useAuth` custom hook and use it inside dashboard page.
 
       ```js
-        // Dashboard.js
-        import React from 'react';
-        import { useAuth } from './AuthContext';
-        
-        function Dashboard() {
-          const { user, logout } = useAuth();
-        
-          if (!user) {
-            return <p>Please login to view the dashboard.</p>;
-          }
-        
-          return (
-            <div>
-              <h2>Dashboard</h2>
-              <p>Logged in as: {user.name}</p>
-              <button onClick={logout}>Logout</button>
-            </div>
-          );
+      // Dashboard.js
+      import React from "react";
+      import { useAuth } from "./AuthContext";
+
+      function Dashboard() {
+        const { user, logout } = useAuth();
+
+        if (!user) {
+          return <p>Please login to view the dashboard.</p>;
         }
-        
-        export default Dashboard;
+
+        return (
+          <div>
+            <h2>Dashboard</h2>
+            <p>Logged in as: {user.name}</p>
+            <button onClick={logout}>Logout</button>
+          </div>
+        );
+      }
+
+      export default Dashboard;
       ```
 
 **[⬆ Back to Top](#table-of-contents)**
 
-285. ### Can You Use Multiple Contexts in One Component?
+285.  ### Can You Use Multiple Contexts in One Component?
 
-    **Short definition:** Yes, it is possible.
+      **Short definition:** Yes, it is possible.
 
-     Yes, it is possible. You can use multiple contexts inside the same component by calling useContext multiple times, once for each context.
+      Yes, it is possible. You can use multiple contexts inside the same component by calling useContext multiple times, once for each context.
 
-     It can be achieved with below steps,
+      It can be achieved with below steps,
 
-        *   Create multiple contexts using `createContext()`.
-        *   Wrap your component tree with multiple `<Provider>`s.
-        *   Call `useContext()` separately for each context in the same component.
-     
-     **Example: Using `ThemeContext` and `UserContext` Together**
-     ```js
-     import React, { createContext, useContext } from 'react';
+          *   Create multiple contexts using `createContext()`.
+          *   Wrap your component tree with multiple `<Provider>`s.
+          *   Call `useContext()` separately for each context in the same component.
+
+      **Example: Using `ThemeContext` and `UserContext` Together**
+
+      ```js
+      import React, { createContext, useContext } from "react";
 
       // Step 1: Create two contexts
       const ThemeContext = createContext();
@@ -7776,7 +7776,7 @@ Technically it is possible to write nested function components but it is not sug
         const user = useContext(UserContext);
 
         return (
-          <div style={{ background: theme === 'dark' ? '#333' : '#fff' }}>
+          <div style={{ background: theme === "dark" ? "#333" : "#fff" }}>
             <h1>Welcome, {user.name}</h1>
             <p>Current theme: {theme}</p>
           </div>
@@ -7787,7 +7787,7 @@ Technically it is possible to write nested function components but it is not sug
       function App() {
         return (
           <ThemeContext.Provider value="dark">
-            <UserContext.Provider value={{ name: 'Sudheer' }}>
+            <UserContext.Provider value={{ name: "Sudheer" }}>
               <Dashboard />
             </UserContext.Provider>
           </ThemeContext.Provider>
@@ -7795,82 +7795,88 @@ Technically it is possible to write nested function components but it is not sug
       }
 
       export default App;
-     ```
+      ```
 
 **[⬆ Back to Top](#table-of-contents)**
 
-286. ###  What's a common pitfall when using useContext with objects?
+286. ### What's a common pitfall when using useContext with objects?
 
-    **Short definition:** This explains the idea behind a common pitfall when using useContext with objects.
+     **Short definition:** This explains the idea behind a common pitfall when using useContext with objects.
 
      A **common pitfall** when using `useContext` with objects is **triggering unnecessary re-renders** across all consuming components — even when only part of the context value changes.
 
      When you provide an object as the context value, React compares the entire object reference. If the object changes (even slightly), React assumes the whole context has changed, and **all components using** `useContext(MyContext)` **will re-render**, regardless of whether they use the part that changed.
 
      **Example:**
+
      ```js
-        const MyContext = React.createContext();
+     const MyContext = React.createContext();
 
-        function MyProvider({ children }) {
-          const [user, setUser] = useState(null);
-          const [theme, setTheme] = useState('light');
+     function MyProvider({ children }) {
+       const [user, setUser] = useState(null);
+       const [theme, setTheme] = useState("light");
 
-          // This causes all consumers to re-render on any state change
-          const contextValue = { user, setUser, theme, setTheme };
+       // This causes all consumers to re-render on any state change
+       const contextValue = { user, setUser, theme, setTheme };
 
-          return (
-            <MyContext.Provider value={contextValue}>
-              {children}
-            </MyContext.Provider>
-          );
-        }
+       return (
+         <MyContext.Provider value={contextValue}>
+           {children}
+         </MyContext.Provider>
+       );
+     }
      ```
+
      In this case, a change in `theme` will also trigger a re-render in components that only care about `user`.
 
      This issue can be fixed in two ways,
 
      **1. Split Contexts**  
-     Create separate contexts for unrelated pieces of state:
+      Create separate contexts for unrelated pieces of state:
 
      ```jsx
-     const UserContext = React.createContext(); 
+     const UserContext = React.createContext();
      const ThemeContext = React.createContext();
      ```
 
      **2. Memoize Context Value**  
-     Use `useMemo` to prevent unnecessary re-renders:
+      Use `useMemo` to prevent unnecessary re-renders:
 
      ```jsx
-       const contextValue = useMemo(() => ({ user, setUser, theme, setTheme }), [user, theme]);
+     const contextValue = useMemo(
+       () => ({ user, setUser, theme, setTheme }),
+       [user, theme],
+     );
      ```
 
      However, this only helps if the object structure and dependencies are well controlled.
-    
-  **[⬆ Back to Top](#table-of-contents)**
+
+**[⬆ Back to Top](#table-of-contents)**
 
 287. ### What would the context value be for no matching provider?
-    
-    **Short definition:** This gives a short explanation of the topic.
+
+     **Short definition:** This gives a short explanation of the topic.
 
      When a component calls `useContext(SomeContext)` but **no matching** `<SomeContext.Provider>` **is present higher up in the component tree**, the **default value** passed to `React.createContext(defaultValue)` is returned.
-    
+
      ```js
-     const ThemeContext = React.createContext('light'); // 'light' is the default value
-    
+     const ThemeContext = React.createContext("light"); // 'light' is the default value
+
      function ThemedComponent() {
        const theme = useContext(ThemeContext);
        return <div>Current theme: {theme}</div>;
      }
-    
+
      // No ThemeContext.Provider anywhere in the tree
      ```
+
      In this case, `theme` will be 'light'. It's the default value you provided when you created the context.
-    
+
      **Note:** If you don’t specify a default value, the context value will be undefined when used without a provider:
-    
+
      ```jsx
      const AuthContext = React.createContext(); // No default
-    
+
      function Profile() {
        const auth = useContext(AuthContext);
        // auth will be undefined if there's no AuthContext.Provider
@@ -7881,12 +7887,11 @@ Technically it is possible to write nested function components but it is not sug
 
 288. ### How do reactive dependencies in the useEffect dependency array affect its execution behavior?
 
-    **Short definition:** This explains how do reactive dependencies in the useEffect dependency array affect its execution behavior.
+     **Short definition:** This explains how do reactive dependencies in the useEffect dependency array affect its execution behavior.
 
      The `useEffect` hook accepts an optional dependencies argument that accepts an array of reactive values. The **dependency array** determines **when** the effect runs. i.e, It makes `useEffect` _reactive_ to changes in specified values.
 
      #### **How Dependency Array Affects Behavior**
-
      1. **Empty Dependency Array:** `**[]**`
 
      ```css
@@ -7895,9 +7900,8 @@ Technically it is possible to write nested function components but it is not sug
      }, []);
      ```
 
-      *   Effect runs **only once** (like `componentDidMount`).
-      *   Ignores all state/prop changes.
-
+     - Effect runs **only once** (like `componentDidMount`).
+     - Ignores all state/prop changes.
      2. **With Specific Dependencies:** `**[count, user]**`
 
      ```css
@@ -7907,37 +7911,34 @@ Technically it is possible to write nested function components but it is not sug
      }, [count, user]);
      ```
 
-       *   Effect runs on **first render**, and
-       *   Again **every time** any dependency value changes.
-
+     - Effect runs on **first render**, and
+     - Again **every time** any dependency value changes.
      3. **No Dependency Array (Omitted)**
 
-          ```css
-          useEffect(() => {
-            // runs after **every** render
-          });
-          ```
+        ```css
+        useEffect(() => {
+          // runs after **every** render
+        });
+        ```
 
-           *   Effect runs after **every render**, regardless of what changed.
-           *   Can lead to **performance issues** if not used carefully.
+        - Effect runs after **every render**, regardless of what changed.
+        - Can lead to **performance issues** if not used carefully.
 
-       React uses shallow comparison of the dependencies. If any value has changed (!==), the effect will re-run.
-       
-       **Note:** This hook works well when dependencies are primitives or memoized objects/functions.
+     React uses shallow comparison of the dependencies. If any value has changed (!==), the effect will re-run.
+
+     **Note:** This hook works well when dependencies are primitives or memoized objects/functions.
 
 **[⬆ Back to Top](#table-of-contents)**
 
 289. ### When and how often does React invoke the setup and cleanup functions inside a useEffect hook?
 
-    **Short definition:** This explains when and how often does React invoke the setup and cleanup functions inside a useEffect hook.
-
+     **Short definition:** This explains when and how often does React invoke the setup and cleanup functions inside a useEffect hook.
      1. **Setup Function Execution (`useEffect`)**
 
-         The setup function (or the main function) you pass to `useEffect` runs at specific points:
-
-           1.  **After the component is mounted** (if the dependency array is empty `[]`)
-           2.  **After every render** (if no dependency array is provided)
-           3.  **After a dependency value changes** (if the dependency array contains variables)
+        The setup function (or the main function) you pass to `useEffect` runs at specific points:
+        1. **After the component is mounted** (if the dependency array is empty `[]`)
+        2. **After every render** (if no dependency array is provided)
+        3. **After a dependency value changes** (if the dependency array contains variables)
 
      2. **Cleanup Function Execution (Returned function from `useEffect`)**
 
@@ -7945,35 +7946,36 @@ Technically it is possible to write nested function components but it is not sug
 
 **[⬆ Back to Top](#table-of-contents)**
 
-290. ### What happens if you return a Promise from useEffect??
+290.  ### What happens if you return a Promise from useEffect??
 
-    **Short definition:** You should NOT return a Promise from useEffect.
+          **Short definition:** You should NOT return a Promise from useEffect.
 
-      You should NOT return a Promise from useEffect. React expects the function passed to useEffect to return either nothing (undefined) or a cleanup function (synchronous function). i.e, It does not expect or handle a returned Promise. If you still return a Promise, React will ignore it silently, and it may lead to bugs or warnings in strict mode.
+            You should NOT return a Promise from useEffect. React expects the function passed to useEffect to return either nothing (undefined) or a cleanup function (synchronous function). i.e, It does not expect or handle a returned Promise. If you still return a Promise, React will ignore it silently, and it may lead to bugs or warnings in strict mode.
 
-      **Incorrect:**
-      ```js
-      useEffect(async () => {
-        await fetchData(); // ❌ useEffect shouldn't be async
-      }, []);
-      ```
-      **Correct:**
-      ```jsx
-      useEffect(() => {
-        const fetchData = async () => {
-          const res = await fetch('/api');
-          const data = await res.json();
-          setData(data);
-        };
+            **Incorrect:**
+            ```js
+            useEffect(async () => {
+              await fetchData(); // ❌ useEffect shouldn't be async
+            }, []);
+            ```
+            **Correct:**
+            ```jsx
+            useEffect(() => {
+              const fetchData = async () => {
+                const res = await fetch('/api');
+                const data = await res.json();
+                setData(data);
+              };
 
-        fetchData();
-      }, []);
-      ```
-**[⬆ Back to Top](#table-of-contents)**
+              fetchData();
+            }, []);
+            ```
 
-290. ### Can you have multiple useEffect hooks in a single component?
+      **[⬆ Back to Top](#table-of-contents)**
 
-    **Short definition:** Yes, multiple useEffect hooks are allowed and recommended when you want to separate concerns.
+291.  ### Can you have multiple useEffect hooks in a single component?
+
+      **Short definition:** Yes, multiple useEffect hooks are allowed and recommended when you want to separate concerns.
 
       Yes, multiple useEffect hooks are allowed and recommended when you want to separate concerns.
 
@@ -7986,42 +7988,43 @@ Technically it is possible to write nested function components but it is not sug
         // Handles event listeners
       }, []);
       ```
+
       Each effect runs independently and helps make code modular and easier to debug.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-291. ### How to prevent infinite loops with useEffect?
+291.  ### How to prevent infinite loops with useEffect?
 
-    **Short definition:** This shows how to prevent infinite loops with useEffect.
+          **Short definition:** This shows how to prevent infinite loops with useEffect.
 
-        Infinite loops happen when the effect updates state that’s listed in its own dependency array, which causes the effect to re-run, updating state again and so on.
-        
-        **Infinite loop scenario:**
-        ```js
-        useEffect(() => {
-          setCount(count + 1);
-        }, [count]); // Triggers again every time count updates
-        ```
-        You need to ensure that setState calls do not depend on values that cause the effect to rerun, or isolate them with a guard.
-        ```js
-        useEffect(() => {
-          if (count < 5) {
-            setCount(count + 1);
-          }
-        }, [count]);
-        ```
-**[⬆ Back to Top](#table-of-contents)**
+              Infinite loops happen when the effect updates state that’s listed in its own dependency array, which causes the effect to re-run, updating state again and so on.
 
-292. ### What are the usecases of useLayoutEffect?
+              **Infinite loop scenario:**
+              ```js
+              useEffect(() => {
+                setCount(count + 1);
+              }, [count]); // Triggers again every time count updates
+              ```
+              You need to ensure that setState calls do not depend on values that cause the effect to rerun, or isolate them with a guard.
+              ```js
+              useEffect(() => {
+                if (count < 5) {
+                  setCount(count + 1);
+                }
+              }, [count]);
+              ```
 
-    **Short definition:** This lists the usecases of useLayoutEffect.
+      **[⬆ Back to Top](#table-of-contents)**
+
+292.  ### What are the usecases of useLayoutEffect?
+
+      **Short definition:** This lists the usecases of useLayoutEffect.
 
       You need to use `useLayoutEffect` when your effect **must run before the browser paints**, such as:
-
-      *   **Reading layout measurements** (e.g., element size, scroll position)
-      *   **Synchronously applying DOM styles** to prevent visual flicker
-      *   **Animating layout or transitions**
-      *   **Integrating with third-party libraries** that require DOM manipulation
+      - **Reading layout measurements** (e.g., element size, scroll position)
+      - **Synchronously applying DOM styles** to prevent visual flicker
+      - **Animating layout or transitions**
+      - **Integrating with third-party libraries** that require DOM manipulation
 
       If there's no visual or layout dependency, prefer `useEffect` — it's more performance-friendly.
 
@@ -8029,7 +8032,7 @@ Technically it is possible to write nested function components but it is not sug
       useLayoutEffect(() => {
         const width = divRef.current.offsetWidth;
         if (width < 400) {
-          divRef.current.style.background = 'blue'; // prevents flicker
+          divRef.current.style.background = "blue"; // prevents flicker
         }
       }, []);
       ```
@@ -8038,454 +8041,479 @@ Technically it is possible to write nested function components but it is not sug
 
 293. ### How does useLayoutEffect work during server-side rendering (SSR)?
 
-    **Short definition:** This explains how useLayoutEffect work during server-side rendering (SSR).
+     **Short definition:** This explains how useLayoutEffect work during server-side rendering (SSR).
 
      The `useLayoutEffect` hook does **not run on the server**, because there is no DOM. React issues a warning in server environments like Next.js if `useLayoutEffect` is used directly.
 
      This can be mitigated using a conditional polyfill:
 
-      ```jsx
-      const useIsomorphicLayoutEffect =
-        typeof window !== 'undefined' ? useLayoutEffect : useEffect;
-      ```
+     ```jsx
+     const useIsomorphicLayoutEffect =
+       typeof window !== "undefined" ? useLayoutEffect : useEffect;
+     ```
 
-      i.e, Use `useIsomorphicLayoutEffect` in components that render both on client and server.     
+     i.e, Use `useIsomorphicLayoutEffect` in components that render both on client and server.
 
-**[⬆ Back to Top](#table-of-contents)** 
+**[⬆ Back to Top](#table-of-contents)**
 
 294. ### What happens if you use useLayoutEffect for non-layout logic?
 
-    **Short definition:** Using useLayoutEffect for logic unrelated to layout or visual DOM changes is not recommended.
+     **Short definition:** Using useLayoutEffect for logic unrelated to layout or visual DOM changes is not recommended.
 
-      Using `useLayoutEffect` for logic **unrelated to layout or visual DOM changes** (such as logging, data fetching, or analytics) is **not recommended**. It can lead to **performance issues** or even unexpected behavior.
+     Using `useLayoutEffect` for logic **unrelated to layout or visual DOM changes** (such as logging, data fetching, or analytics) is **not recommended**. It can lead to **performance issues** or even unexpected behavior.
 
-      **Example: Anti-pattern**
-      ```js
-      useLayoutEffect(() => {
-        console.log("Tracking analytics");
-        fetch('/log-page-view');
-      }, []);
-      ```
-      The above usage delays the paint of the UI just to send a network request, which could (and should) be done after paint using useEffect.
+     **Example: Anti-pattern**
 
-**[⬆ Back to Top](#table-of-contents)** 
+     ```js
+     useLayoutEffect(() => {
+       console.log("Tracking analytics");
+       fetch("/log-page-view");
+     }, []);
+     ```
+
+     The above usage delays the paint of the UI just to send a network request, which could (and should) be done after paint using useEffect.
+
+**[⬆ Back to Top](#table-of-contents)**
 
 295. ### How does useLayoutEffect cause layout thrashing?
 
-    **Short definition:** This explains how useLayoutEffect cause layout thrashing.
+     **Short definition:** This explains how useLayoutEffect cause layout thrashing.
 
-      The `useLayoutEffect` can **cause layout thrashing** when you **repeatedly read and write to the DOM** in ways that force the browser to recalculate layout multiple times per frame. This is because `useLayoutEffect` runs _before the browser paints_, these reflows happen _synchronously_, blocking rendering and degrading performance.
+     The `useLayoutEffect` can **cause layout thrashing** when you **repeatedly read and write to the DOM** in ways that force the browser to recalculate layout multiple times per frame. This is because `useLayoutEffect` runs _before the browser paints_, these reflows happen _synchronously_, blocking rendering and degrading performance.
 
-      **Example:**
-      ```js
-      function ThrashingComponent() {
-        const ref = useRef();
+     **Example:**
 
-        useLayoutEffect(() => {
-          const height = ref.current.offsetHeight; //Read
-          ref.current.style.height = height + 20 + 'px'; //Write
-          const newHeight = ref.current.offsetHeight; //Read again — forces reflow
-        }, []);
+     ```js
+     function ThrashingComponent() {
+       const ref = useRef();
 
-        return <div ref={ref}>Hello</div>;
-      }
-      ```
-      In the above code, each read/write cycle triggers synchronous reflows, blocking the main thread and delays UI rendering.
+       useLayoutEffect(() => {
+         const height = ref.current.offsetHeight; //Read
+         ref.current.style.height = height + 20 + "px"; //Write
+         const newHeight = ref.current.offsetHeight; //Read again — forces reflow
+       }, []);
 
-      This issue can be avoided by batching your DOM reads and writes and prevent unnecessary reads after writes.
+       return <div ref={ref}>Hello</div>;
+     }
+     ```
 
-**[⬆ Back to Top](#table-of-contents)** 
+     In the above code, each read/write cycle triggers synchronous reflows, blocking the main thread and delays UI rendering.
 
-296. ### How Do You Use useRef to Access a DOM Element in React? Give an example.
-
-    **Short definition:** This shows how to use useRef to access a DOM element in React.
-
-        The `useRef` hook is commonly used in React to directly reference and interact with DOM elements — like focusing an input, scrolling to a section, or controlling media elements.
-        
-        When you assign a ref to a DOM element using useRef, React gives you access to the underlying DOM node via the .current property of the ref object.
-        
-        **Example: Focus an input**
-
-        ```js
-        import React, { useRef } from 'react';
-        
-        function FocusInput() {
-          const inputRef = useRef(null); // create the ref
-        
-          const handleFocus = () => {
-            inputRef.current.focus(); // access DOM element and focus it
-          };
-        
-          return (
-            <div>
-              <input type="text" ref={inputRef} />
-              <button onClick={handleFocus}>Focus the input</button>
-            </div>
-          );
-        }
-        ```
-       **Note:** The DOM reference is only available **after the component has mounted** — typically accessed in `useEffect` or event handlers.
+     This issue can be avoided by batching your DOM reads and writes and prevent unnecessary reads after writes.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-297. ### Can you use useRef to persist values across renders??
+296.  ### How Do You Use useRef to Access a DOM Element in React? Give an example.
 
-    **Short definition:** Yes, you can use useRef to persist values across renders in React.
+      **Short definition:** This shows how to use useRef to access a DOM element in React.
 
-        Yes, you can use `useRef` to persist values across renders in React. Unlike `useState`, changing `.current` does not cause re-renders, but the value is preserved across renders.
-        
-        **Example:**
-        ```js
-        function Timer() {
-          const renderCount = useRef(0);
-          useEffect(() => {
-            renderCount.current++;
-            console.log("Render count:", renderCount.current);
-          });
-        
-          return <div>Check console for render count.</div>;
-        }
-        ```
+          The `useRef` hook is commonly used in React to directly reference and interact with DOM elements — like focusing an input, scrolling to a section, or controlling media elements.
+
+          When you assign a ref to a DOM element using useRef, React gives you access to the underlying DOM node via the .current property of the ref object.
+
+          **Example: Focus an input**
+
+          ```js
+          import React, { useRef } from 'react';
+
+          function FocusInput() {
+            const inputRef = useRef(null); // create the ref
+
+            const handleFocus = () => {
+              inputRef.current.focus(); // access DOM element and focus it
+            };
+
+            return (
+              <div>
+                <input type="text" ref={inputRef} />
+                <button onClick={handleFocus}>Focus the input</button>
+              </div>
+            );
+          }
+          ```
+
+      **Note:** The DOM reference is only available **after the component has mounted** — typically accessed in `useEffect` or event handlers.
+
 **[⬆ Back to Top](#table-of-contents)**
 
-298. ###  Can useRef be used to store previous values?
+297.  ### Can you use useRef to persist values across renders??
 
-    **Short definition:** Yes, useRef is a common pattern when you want to compare current and previous props or state without causing re-renders.
+          **Short definition:** Yes, you can use useRef to persist values across renders in React.
 
-        Yes, `useRef` is a common pattern when you want to compare current and previous props or state without causing re-renders.
-        
-        **Example: Storing previous state value**
-        ```js
-        import { useEffect, useRef, useState } from 'react';
-        
-        function PreviousValueExample() {
-          const [count, setCount] = useState(0);
-          const prevCountRef = useRef();
-        
-          useEffect(() => {
-            prevCountRef.current = count;
-          }, [count]);
-        
-          const prevCount = prevCountRef.current;
-        
-          return (
-            <div>
-              <p>Current: {count}</p>
-              <p>Previous: {prevCount}</p>
-              <button onClick={() => setCount(c => c + 1)}>Increment</button>
-            </div>
-          );
-        }
-        ```
-     
+              Yes, you can use `useRef` to persist values across renders in React. Unlike `useState`, changing `.current` does not cause re-renders, but the value is preserved across renders.
+
+              **Example:**
+              ```js
+              function Timer() {
+                const renderCount = useRef(0);
+                useEffect(() => {
+                  renderCount.current++;
+                  console.log("Render count:", renderCount.current);
+                });
+
+                return <div>Check console for render count.</div>;
+              }
+              ```
+
+      **[⬆ Back to Top](#table-of-contents)**
+
+298.  ### Can useRef be used to store previous values?
+
+      **Short definition:** Yes, useRef is a common pattern when you want to compare current and previous props or state without causing re-renders.
+
+          Yes, `useRef` is a common pattern when you want to compare current and previous props or state without causing re-renders.
+
+          **Example: Storing previous state value**
+          ```js
+          import { useEffect, useRef, useState } from 'react';
+
+          function PreviousValueExample() {
+            const [count, setCount] = useState(0);
+            const prevCountRef = useRef();
+
+            useEffect(() => {
+              prevCountRef.current = count;
+            }, [count]);
+
+            const prevCount = prevCountRef.current;
+
+            return (
+              <div>
+                <p>Current: {count}</p>
+                <p>Previous: {prevCount}</p>
+                <button onClick={() => setCount(c => c + 1)}>Increment</button>
+              </div>
+            );
+          }
+          ```
+
 **[⬆ Back to Top](#table-of-contents)**
 
-299. ### Is it possible to access a ref in the render method?
+299.  ### Is it possible to access a ref in the render method?
 
-    **Short definition:** Yes, you can access a ref in the render method, but what you get from it depends on how you're using the ref and when in the component lifecycle you're rendering.
+      **Short definition:** Yes, you can access a ref in the render method, but what you get from it depends on how you're using the ref and when in the component lifecycle you're rendering.
 
-        Yes, you can access a ref in the render method, but what you get from it depends on how you're using the ref and when in the component lifecycle you're rendering.
-        
-        For example, when using ref to access a DOM node (e.g., divRef.current), it's not immediately available on the first render.
-        ```js
-        const divRef = useRef(null);
-        
-        console.log(divRef.current); // ❌ null on initial render
-        return <div ref={divRef}>Hello</div>;
-        ```
-     
+          Yes, you can access a ref in the render method, but what you get from it depends on how you're using the ref and when in the component lifecycle you're rendering.
+
+          For example, when using ref to access a DOM node (e.g., divRef.current), it's not immediately available on the first render.
+          ```js
+          const divRef = useRef(null);
+
+          console.log(divRef.current); // ❌ null on initial render
+          return <div ref={divRef}>Hello</div>;
+          ```
+
 **[⬆ Back to Top](#table-of-contents)**
 
 300. ### What are the common usecases of useRef hook?
 
-    **Short definition:** This lists the common usecases of useRef hook.
+     **Short definition:** This lists the common usecases of useRef hook.
 
-      Some of the common cases are:
-      *   Automatically focus an input when a component mounts.
-      *   Scroll to a specific element.
-      *   Measure element dimensions (`offsetWidth`, `clientHeight`).
-      *   Control video/audio playback.
-      *   Integrate with non-React libraries (like D3 or jQuery).
+     Some of the common cases are:
+     - Automatically focus an input when a component mounts.
+     - Scroll to a specific element.
+     - Measure element dimensions (`offsetWidth`, `clientHeight`).
+     - Control video/audio playback.
+     - Integrate with non-React libraries (like D3 or jQuery).
 
 **[⬆ Back to Top](#table-of-contents)**
 
 301. ### What is useImperativeHandle Hook? Give an example.
 
-    **Short definition:** useImperativeHandle is a React Hook that allows a child component to expose custom functions or properties to its parent component, when using ref.
+     **Short definition:** useImperativeHandle is a React Hook that allows a child component to expose custom functions or properties to its parent component, when using ref.
 
-      `useImperativeHandle` is a React Hook that allows a **child component** to expose **custom functions or properties** to its **parent component**, when using `ref`.
-      It is typically used with `forwardRef` and is very useful in cases like **modals**, **dialogs**, **custom inputs**, etc., where the parent needs to **control behavior imperatively** (e.g., open, close, reset).
+     `useImperativeHandle` is a React Hook that allows a **child component** to expose **custom functions or properties** to its **parent component**, when using `ref`.
+     It is typically used with `forwardRef` and is very useful in cases like **modals**, **dialogs**, **custom inputs**, etc., where the parent needs to **control behavior imperatively** (e.g., open, close, reset).
 
-      **Example: Dialog component**
-      ```js
-      import React, {
-        useRef,
-        useState,
-        useImperativeHandle,
-        forwardRef,
-      } from 'react';
-      import './Dialog.css'; 
+     **Example: Dialog component**
 
-      const Dialog = forwardRef((props, ref) => {
-        const [isOpen, setIsOpen] = useState(false);
-        const [formData, setFormData] = useState('');
+     ```js
+     import React, {
+       useRef,
+       useState,
+       useImperativeHandle,
+       forwardRef,
+     } from "react";
+     import "./Dialog.css";
 
-        useImperativeHandle(ref, () => ({
-          open: () => setIsOpen(true),
-          close: () => setIsOpen(false),
-          reset: () => setFormData(''),
-        }));
+     const Dialog = forwardRef((props, ref) => {
+       const [isOpen, setIsOpen] = useState(false);
+       const [formData, setFormData] = useState("");
 
-        if (!isOpen) return null;
+       useImperativeHandle(ref, () => ({
+         open: () => setIsOpen(true),
+         close: () => setIsOpen(false),
+         reset: () => setFormData(""),
+       }));
 
-        return (
-          <div className="dialog"> 
-            <h2>Dialog</h2>
-            <input
-              type="text"
-              value={formData}
-              placeholder="Type something..."
-              onChange={(e) => setFormData(e.target.value)}
-            />
-            <br />
-            <button onClick={() => setIsOpen(false)}>Close</button>
-          </div>
-        );
-      });
+       if (!isOpen) return null;
 
-      function Parent() {
-        const dialogRef = useRef();
+       return (
+         <div className="dialog">
+           <h2>Dialog</h2>
+           <input
+             type="text"
+             value={formData}
+             placeholder="Type something..."
+             onChange={(e) => setFormData(e.target.value)}
+           />
+           <br />
+           <button onClick={() => setIsOpen(false)}>Close</button>
+         </div>
+       );
+     });
 
-        return (
-          <div>
-            <h1>useImperativeHandle Dialog Example</h1>
-            <button onClick={() => dialogRef.current.open()}>Open Dialog</button>
-            <button onClick={() => dialogRef.current.reset()}>Reset Dialog</button>
-            <button onClick={() => dialogRef.current.close()}>Close Dialog</button>
+     function Parent() {
+       const dialogRef = useRef();
 
-            <Dialog ref={dialogRef} />
-          </div>
-        );
-      }
+       return (
+         <div>
+           <h1>useImperativeHandle Dialog Example</h1>
+           <button onClick={() => dialogRef.current.open()}>Open Dialog</button>
+           <button onClick={() => dialogRef.current.reset()}>
+             Reset Dialog
+           </button>
+           <button onClick={() => dialogRef.current.close()}>
+             Close Dialog
+           </button>
 
-      export default Parent;
-      ```
+           <Dialog ref={dialogRef} />
+         </div>
+       );
+     }
+
+     export default Parent;
+     ```
 
 **[⬆ Back to Top](#table-of-contents)**
 
 302. ### When should you use useImperativeHandle?
 
-    **Short definition:** This explains when should you use useImperativeHandle.
+     **Short definition:** This explains when should you use useImperativeHandle.
 
-      The useImperativeHandler hook will be used in below cases:
+     The useImperativeHandler hook will be used in below cases:
+     - You want to expose **imperative methods** from a child component
+       - Custom input controls exposing `focus`, `clear`, or `validate` methods
+       - Modal components exposing `open()` and `close()` methods
+       - Scroll containers exposing `scrollToTop()` or `scrollToBottom()` methods
+     - You want to **hide internal implementation** but provide controlled external access.
+     - You're building **reusable component libraries** (e.g., inputs, modals, form controls).
 
-      *   You want to expose **imperative methods** from a child component 
-            - Custom input controls exposing `focus`, `clear`, or `validate` methods
-            - Modal components exposing `open()` and `close()` methods
-            - Scroll containers exposing `scrollToTop()` or `scrollToBottom()` methods
-      *   You want to **hide internal implementation** but provide controlled external access.
-      *   You're building **reusable component libraries** (e.g., inputs, modals, form controls).
-  
 **[⬆ Back to Top](#table-of-contents)**
 
-303. ### Is that possible to use useImperativeHandle without forwardRef?
+303.  ### Is that possible to use useImperativeHandle without forwardRef?
 
-    **Short definition:** This answers whether that possible to use useImperativeHandle without forwardRef.
+      **Short definition:** This answers whether that possible to use useImperativeHandle without forwardRef.
 
-        **No.** `useImperativeHandle` only works when the component is wrapped in `forwardRef`. It's the combination that allows parent components to use a `ref` on a function component.
+          **No.** `useImperativeHandle` only works when the component is wrapped in `forwardRef`. It's the combination that allows parent components to use a `ref` on a function component.
 
 **[⬆ Back to Top](#table-of-contents)**
 
 304. ### How is useMemo different from useCallback?
 
-    **Short definition:** This explains how useMemo different from useCallback.
+     **Short definition:** This explains how useMemo different from useCallback.
 
      The following table compares both useMemo and useCallback:
 
-      | Feature | `useMemo` | `useCallback` |
-      | --- | --- | --- |
-      | **Purpose** | Memoizes the **result of a computation** | Memoizes a **function reference** |
-      | **Returns** | A **value** (e.g., result of a function) | A **function** |
-      | **Usage** | `useMemo(() => computeValue(), [deps])` | `useCallback(() => doSomething(), [deps])` |
-      | **Primary Use Case** | Avoid expensive recalculations | Prevent unnecessary re-creations of functions |
-      | **Common Scenario** | Filtering, sorting, calculating derived data | Passing callbacks to child components |
-      | **When It's Useful** | When the value is expensive to compute | When referential equality matters (e.g., props) |
-      | **Recomputed When** | Dependencies change | Dependencies change |
-      | **Returned Value Type** | Any (number, object, array, etc.) | Always a function |
-      | **Overhead** | Slight (evaluates a function and caches result) | Slight (caches a function reference) |
+     | Feature                 | `useMemo`                                       | `useCallback`                                   |
+     | ----------------------- | ----------------------------------------------- | ----------------------------------------------- |
+     | **Purpose**             | Memoizes the **result of a computation**        | Memoizes a **function reference**               |
+     | **Returns**             | A **value** (e.g., result of a function)        | A **function**                                  |
+     | **Usage**               | `useMemo(() => computeValue(), [deps])`         | `useCallback(() => doSomething(), [deps])`      |
+     | **Primary Use Case**    | Avoid expensive recalculations                  | Prevent unnecessary re-creations of functions   |
+     | **Common Scenario**     | Filtering, sorting, calculating derived data    | Passing callbacks to child components           |
+     | **When It's Useful**    | When the value is expensive to compute          | When referential equality matters (e.g., props) |
+     | **Recomputed When**     | Dependencies change                             | Dependencies change                             |
+     | **Returned Value Type** | Any (number, object, array, etc.)               | Always a function                               |
+     | **Overhead**            | Slight (evaluates a function and caches result) | Slight (caches a function reference)            |
 
 **[⬆ Back to Top](#table-of-contents)**
 
-305. ### Does useMemo prevent re-rendering of child components?
+305.  ### Does useMemo prevent re-rendering of child components?
 
-    **Short definition:** The useMemo hook does not directly prevent re-rendering of child components.
+      **Short definition:** The useMemo hook does not directly prevent re-rendering of child components.
 
-        The `useMemo` hook **does not directly prevent re-rendering of child components**. Its main purpose is to memoize the result of an expensive computation so that it doesn’t get recalculated unless its dependencies change. While this can improve performance, it doesn’t inherently control whether a child component re-renders.
-        
-        However, `useMemo` **can help prevent re-renders** when the memoized value is passed as a prop to a child component that is wrapped in `React.memo`. In that case, if the memoized value doesn’t change between renders (i.e., it has the same reference), React.memo can skip re-rendering the child. So, while `useMemo` doesn’t stop renders on its own, it **works in combination** with tools like `React.memo` to optimize rendering behavior.
+          The `useMemo` hook **does not directly prevent re-rendering of child components**. Its main purpose is to memoize the result of an expensive computation so that it doesn’t get recalculated unless its dependencies change. While this can improve performance, it doesn’t inherently control whether a child component re-renders.
+
+          However, `useMemo` **can help prevent re-renders** when the memoized value is passed as a prop to a child component that is wrapped in `React.memo`. In that case, if the memoized value doesn’t change between renders (i.e., it has the same reference), React.memo can skip re-rendering the child. So, while `useMemo` doesn’t stop renders on its own, it **works in combination** with tools like `React.memo` to optimize rendering behavior.
 
 **[⬆ Back to Top](#table-of-contents)**
 
-306. ### What is `useCallback` and why is it used?
+306.  ### What is `useCallback` and why is it used?
 
-    **Short definition:** The useCallback is a React Hook used to memoize function definitions between renders.
+      **Short definition:** The useCallback is a React Hook used to memoize function definitions between renders.
 
-        The `useCallback` is a React Hook used to memoize **function definitions** between renders. It returns the same function reference unless its dependencies change. This is especially useful when passing callbacks to optimized child components (e.g. those wrapped in `React.memo`) to prevent unnecessary re-renders.
-        
-        **Example:**
-        
-        ```css
-        const handleClick = useCallback(() => {
-          console.log('Button clicked');
-        }, []);
-        ```
-        
-        Without `useCallback`, a new function is created on every render, potentially causing child components to re-render unnecessarily.
+          The `useCallback` is a React Hook used to memoize **function definitions** between renders. It returns the same function reference unless its dependencies change. This is especially useful when passing callbacks to optimized child components (e.g. those wrapped in `React.memo`) to prevent unnecessary re-renders.
+
+          **Example:**
+
+          ```css
+          const handleClick = useCallback(() => {
+            console.log('Button clicked');
+          }, []);
+          ```
+
+          Without `useCallback`, a new function is created on every render, potentially causing child components to re-render unnecessarily.
 
 **[⬆ Back to Top](#table-of-contents)**
 
 307. ### What are Custom React Hooks, and How Can You Develop One?
 
-    **Short definition:** Custom Hooks in React are JavaScript functions that allow you to extract and reuse component logic using React's built-in Hooks like useState, useEffect, etc.
+     **Short definition:** Custom Hooks in React are JavaScript functions that allow you to extract and reuse component logic using React's built-in Hooks like useState, useEffect, etc.
 
-      **Custom Hooks** in React are JavaScript functions that allow you to **extract and reuse component logic** using React’s built-in Hooks like `useState`, `useEffect`, etc.
+     **Custom Hooks** in React are JavaScript functions that allow you to **extract and reuse component logic** using React’s built-in Hooks like `useState`, `useEffect`, etc.
 
-      They start with the word **"use"** and let you encapsulate logic that multiple components might share—such as fetching data, handling forms, or managing timers—without repeating code.
+     They start with the word **"use"** and let you encapsulate logic that multiple components might share—such as fetching data, handling forms, or managing timers—without repeating code.
 
-      Let's explain the custom hook usage with `useFetchData` example. The `useFetchData` custom Hook is a reusable function in React that simplifies the process of fetching data from an API. It encapsulates common logic such as initiating the fetch request, managing loading and error states, and storing the fetched data. By using built-in Hooks like `useState` and `useEffect`, `useFetchData` provides a clean interface that returns the `data`, `loading`, and `error` values, which can be directly used in components.
+     Let's explain the custom hook usage with `useFetchData` example. The `useFetchData` custom Hook is a reusable function in React that simplifies the process of fetching data from an API. It encapsulates common logic such as initiating the fetch request, managing loading and error states, and storing the fetched data. By using built-in Hooks like `useState` and `useEffect`, `useFetchData` provides a clean interface that returns the `data`, `loading`, and `error` values, which can be directly used in components.
 
-      ```jsx
-      import { useState, useEffect } from 'react';
+     ```jsx
+     import { useState, useEffect } from "react";
 
-      function useFetchData(url) {
-        const [data, setData] = useState(null);     // Holds the response
-        const [loading, setLoading] = useState(true); // Loading state
-        const [error, setError] = useState(null);     // Error state
+     function useFetchData(url) {
+       const [data, setData] = useState(null); // Holds the response
+       const [loading, setLoading] = useState(true); // Loading state
+       const [error, setError] = useState(null); // Error state
 
-        useEffect(() => {
-          let isMounted = true; // Prevent setting state on unmounted component
-          setLoading(true);
+       useEffect(() => {
+         let isMounted = true; // Prevent setting state on unmounted component
+         setLoading(true);
 
-          fetch(url)
-            .then((response) => {
-              if (!response.ok) throw new Error('Network response was not ok');
-              return response.json();
-            })
-            .then((json) => {
-              if (isMounted) {
-                setData(json);
-                setLoading(false);
-              }
-            })
-            .catch((err) => {
-              if (isMounted) {
-                setError(err.message);
-                setLoading(false);
-              }
-            });
+         fetch(url)
+           .then((response) => {
+             if (!response.ok) throw new Error("Network response was not ok");
+             return response.json();
+           })
+           .then((json) => {
+             if (isMounted) {
+               setData(json);
+               setLoading(false);
+             }
+           })
+           .catch((err) => {
+             if (isMounted) {
+               setError(err.message);
+               setLoading(false);
+             }
+           });
 
-          return () => {
-            isMounted = false; // Clean-up function to avoid memory leaks
-          };
-        }, [url]);
+         return () => {
+           isMounted = false; // Clean-up function to avoid memory leaks
+         };
+       }, [url]);
 
-        return { data, loading, error };
-      }
-      ```
+       return { data, loading, error };
+     }
+     ```
 
-      The above custom hook can be used to retrieve users data for `AuthorList`, `ReviewerList` components.
+     The above custom hook can be used to retrieve users data for `AuthorList`, `ReviewerList` components.
 
-      **Example: AuthorList component**
-      ```jsx
-      function AuthorList() {
-        const { data, loading, error } = useFetchData('https://api.example.com/authors');
+     **Example: AuthorList component**
 
-        if (loading) return <p>Loading authors...</p>;
-        if (error) return <p>Error: {error}</p>;
+     ```jsx
+     function AuthorList() {
+       const { data, loading, error } = useFetchData(
+         "https://api.example.com/authors",
+       );
 
-        return (
-          <ul>
-            {data.map((author) => (
-              <li key={author.id}>{author.name}</li>
-            ))}
-          </ul>
-        );
-      }
-      ```
-     
-      Some of the benefits of custom hooks are:
-       *   Promotes **code reuse**
-       *   Keeps components **clean and focused**
-       *   Makes complex logic **easier to test and maintain**
-  
+       if (loading) return <p>Loading authors...</p>;
+       if (error) return <p>Error: {error}</p>;
+
+       return (
+         <ul>
+           {data.map((author) => (
+             <li key={author.id}>{author.name}</li>
+           ))}
+         </ul>
+       );
+     }
+     ```
+
+     Some of the benefits of custom hooks are:
+     - Promotes **code reuse**
+     - Keeps components **clean and focused**
+     - Makes complex logic **easier to test and maintain**
+
 **[⬆ Back to Top](#table-of-contents)**
 
-309. ### How does React Fiber works? Explain in detail.
+309.  ### How does React Fiber works? Explain in detail.
 
-    **Short definition:** This explains how React Fiber works.
+      **Short definition:** This explains how React Fiber works.
 
       React Fiber is the **core engine** that enables advanced features like **concurrent rendering**, **prioritization**, and **interruptibility** in React. Here's how it works:
-          
+
       ### 1. **Fiber Tree Structure**
-          
+
       Each component in your app is represented by a **Fiber node** in a tree structure. A Fiber node contains:
-      *   Component type
-      *   Props & state
-      *   Pointers to parent, child, and sibling nodes
-      *   Effect tags to track changes (e.g., update, placement)
-      *   This forms the **Fiber Tree**, a data structure React uses instead of the traditional call stack.
-          
+      - Component type
+      - Props & state
+      - Pointers to parent, child, and sibling nodes
+      - Effect tags to track changes (e.g., update, placement)
+      - This forms the **Fiber Tree**, a data structure React uses instead of the traditional call stack.
+
       ### 2. **Two Phases of Rendering**
-          
-        #### **A. Render Phase (work-in-progress)**
-          
-      *   React builds a **work-in-progress Fiber tree**.
-      *   It walks through each component (begin phase), calculates what needs to change, and collects side effects (complete phase).
-      *   This phase is **interruptible**—React can pause it and resume later.
-        #### **B. Commit Phase**
-          
-      *   React applies changes to the **Real DOM**.
-      *   Runs lifecycle methods (e.g., `componentDidMount`, `useEffect`).
-      *   This phase is **non-interruptible** but fast.
-          
-        ### 3. **Work Units and Scheduling**
-          
-      *   React breaks rendering into **units of work** (small tasks).
-      *   These units are scheduled based on **priority** using the **React Scheduler**.
-      *   If time runs out (e.g., user starts typing), React can **pause and yield** control back to the browser.
-          
-        ### 4. **Double Buffering with Two Trees**
-          
-      *   React maintains two trees:
-      *   **Current Tree** – what's visible on the screen.
-      *   **Work-In-Progress Tree** – the next version being built in memory.
-      *   Only after the new tree is fully ready, React **commits** it, making it the new current tree.
-          
-        ### 5. **Concurrency and Prioritization**
-          
-      *   React can prepare multiple versions of UI at once (e.g., during slow data loading).
-      *   Updates can be **assigned priorities**, so urgent updates (like clicks) are handled faster than background work.
+
+          #### **A. Render Phase (work-in-progress)**
+
+
+      - React builds a **work-in-progress Fiber tree**.
+      - It walks through each component (begin phase), calculates what needs to change, and collects side effects (complete phase).
+      - This phase is **interruptible**—React can pause it and resume later.
+
+
+          #### **B. Commit Phase**
+
+
+      - React applies changes to the **Real DOM**.
+      - Runs lifecycle methods (e.g., `componentDidMount`, `useEffect`).
+      - This phase is **non-interruptible** but fast.
+
+
+          ### 3. **Work Units and Scheduling**
+
+
+      - React breaks rendering into **units of work** (small tasks).
+      - These units are scheduled based on **priority** using the **React Scheduler**.
+      - If time runs out (e.g., user starts typing), React can **pause and yield** control back to the browser.
+
+
+          ### 4. **Double Buffering with Two Trees**
+
+
+      - React maintains two trees:
+      - **Current Tree** – what's visible on the screen.
+      - **Work-In-Progress Tree** – the next version being built in memory.
+      - Only after the new tree is fully ready, React **commits** it, making it the new current tree.
+
+
+          ### 5. **Concurrency and Prioritization**
+
+
+      - React can prepare multiple versions of UI at once (e.g., during slow data loading).
+      - Updates can be **assigned priorities**, so urgent updates (like clicks) are handled faster than background work.
 
 **[⬆ Back to Top](#table-of-contents)**
 
 310. ### What is the useId hook and when should you use it?
 
-    **Short definition:** The useId hook is a React hook introduced in React 18 that generates unique IDs that are stable across server and client renders.
+     **Short definition:** The useId hook is a React hook introduced in React 18 that generates unique IDs that are stable across server and client renders.
 
      The `useId` hook is a React hook introduced in React 18 that generates **unique IDs** that are stable across server and client renders. It's primarily used for **accessibility attributes** like linking form labels to inputs.
 
      #### Syntax
+
      ```js
      const id = useId();
      ```
 
      #### Example: Accessible Form Input
+
      ```jsx
-     import { useId } from 'react';
+     import { useId } from "react";
 
      function EmailField() {
        const id = useId();
-       
+
        return (
          <div>
            <label htmlFor={id}>Email:</label>
@@ -8511,43 +8539,47 @@ Technically it is possible to write nested function components but it is not sug
 
 311. ### What is the useDeferredValue hook?
 
-    **Short definition:** The useDeferredValue hook is used to defer updating a part of the UI to keep other parts responsive.
+     **Short definition:** The useDeferredValue hook is used to defer updating a part of the UI to keep other parts responsive.
 
      The `useDeferredValue` hook is used to **defer updating a part of the UI** to keep other parts responsive. It accepts a value and returns a "deferred" version of that value that may lag behind. This is useful for optimizing performance when rendering expensive components.
 
      #### Syntax
+
      ```js
      const deferredValue = useDeferredValue(value);
      ```
 
      #### Example: Search with Deferred Results
+
      ```jsx
-     import { useState, useDeferredValue, useMemo } from 'react';
+     import { useState, useDeferredValue, useMemo } from "react";
 
      function SearchResults({ query }) {
        // Expensive computation or large list filtering
        const results = useMemo(() => {
-         return largeDataSet.filter(item => 
-           item.name.toLowerCase().includes(query.toLowerCase())
+         return largeDataSet.filter((item) =>
+           item.name.toLowerCase().includes(query.toLowerCase()),
          );
        }, [query]);
 
        return (
          <ul>
-           {results.map(item => <li key={item.id}>{item.name}</li>)}
+           {results.map((item) => (
+             <li key={item.id}>{item.name}</li>
+           ))}
          </ul>
        );
      }
 
      function SearchPage() {
-       const [query, setQuery] = useState('');
+       const [query, setQuery] = useState("");
        const deferredQuery = useDeferredValue(query);
        const isStale = query !== deferredQuery;
 
        return (
          <div>
-           <input 
-             value={query} 
+           <input
+             value={query}
              onChange={(e) => setQuery(e.target.value)}
              placeholder="Search..."
            />
@@ -8565,22 +8597,24 @@ Technically it is possible to write nested function components but it is not sug
 
 312. ### What is the useTransition hook and how does it differ from useDeferredValue?
 
-    **Short definition:** The useTransition hook allows you to mark certain state updates as non-urgent transitions, keeping the UI responsive during expensive re-renders.
+     **Short definition:** The useTransition hook allows you to mark certain state updates as non-urgent transitions, keeping the UI responsive during expensive re-renders.
 
      The `useTransition` hook allows you to mark certain state updates as **non-urgent transitions**, keeping the UI responsive during expensive re-renders. It returns a `isPending` flag and a `startTransition` function.
 
      #### Syntax
+
      ```js
      const [isPending, startTransition] = useTransition();
      ```
 
      #### Example: Tab Switching
+
      ```jsx
-     import { useState, useTransition } from 'react';
+     import { useState, useTransition } from "react";
 
      function TabContainer() {
        const [isPending, startTransition] = useTransition();
-       const [tab, setTab] = useState('home');
+       const [tab, setTab] = useState("home");
 
        function selectTab(nextTab) {
          startTransition(() => {
@@ -8590,15 +8624,13 @@ Technically it is possible to write nested function components but it is not sug
 
        return (
          <div>
-           <button onClick={() => selectTab('home')}>Home</button>
-           <button onClick={() => selectTab('posts')}>Posts (slow)</button>
-           <button onClick={() => selectTab('contact')}>Contact</button>
-           
+           <button onClick={() => selectTab("home")}>Home</button>
+           <button onClick={() => selectTab("posts")}>Posts (slow)</button>
+           <button onClick={() => selectTab("contact")}>Contact</button>
            {isPending && <Spinner />}
-           
-           {tab === 'home' && <HomeTab />}
-           {tab === 'posts' && <PostsTab />}  {/* Expensive component */}
-           {tab === 'contact' && <ContactTab />}
+           {tab === "home" && <HomeTab />}
+           {tab === "posts" && <PostsTab />} {/* Expensive component */}
+           {tab === "contact" && <ContactTab />}
          </div>
        );
      }
@@ -8606,22 +8638,23 @@ Technically it is possible to write nested function components but it is not sug
 
      #### Differences from useDeferredValue
 
-     | Feature | useTransition | useDeferredValue |
-     |---------|--------------|------------------|
-     | Controls | State updates (wraps `setState`) | Values (wraps a value) |
-     | Use case | When you control the state update | When you receive a value from props or other hooks |
-     | Returns | `[isPending, startTransition]` | Deferred value |
-     | Pending state | Built-in `isPending` flag | Manual comparison needed |
+     | Feature       | useTransition                     | useDeferredValue                                   |
+     | ------------- | --------------------------------- | -------------------------------------------------- |
+     | Controls      | State updates (wraps `setState`)  | Values (wraps a value)                             |
+     | Use case      | When you control the state update | When you receive a value from props or other hooks |
+     | Returns       | `[isPending, startTransition]`    | Deferred value                                     |
+     | Pending state | Built-in `isPending` flag         | Manual comparison needed                           |
 
 **[⬆ Back to Top](#table-of-contents)**
 
 313. ### What is the useSyncExternalStore hook?
 
-    **Short definition:** The useSyncExternalStore hook is designed to subscribe to external stores in a way that's compatible with concurrent rendering.
+     **Short definition:** The useSyncExternalStore hook is designed to subscribe to external stores in a way that's compatible with concurrent rendering.
 
      The `useSyncExternalStore` hook is designed to **subscribe to external stores** (non-React state sources) in a way that's compatible with concurrent rendering. It's primarily used by library authors for state management libraries.
 
      #### Syntax
+
      ```js
      const state = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot?);
      ```
@@ -8631,19 +8664,20 @@ Technically it is possible to write nested function components but it is not sug
      - **getServerSnapshot**: Optional function for SSR that returns the initial server snapshot
 
      #### Example: Browser Online Status
+
      ```jsx
-     import { useSyncExternalStore } from 'react';
+     import { useSyncExternalStore } from "react";
 
      function getSnapshot() {
        return navigator.onLine;
      }
 
      function subscribe(callback) {
-       window.addEventListener('online', callback);
-       window.addEventListener('offline', callback);
+       window.addEventListener("online", callback);
+       window.addEventListener("offline", callback);
        return () => {
-         window.removeEventListener('online', callback);
-         window.removeEventListener('offline', callback);
+         window.removeEventListener("online", callback);
+         window.removeEventListener("offline", callback);
        };
      }
 
@@ -8653,7 +8687,7 @@ Technically it is possible to write nested function components but it is not sug
 
      function StatusBar() {
        const isOnline = useOnlineStatus();
-       return <h1>{isOnline ? '✅ Online' : '❌ Disconnected'}</h1>;
+       return <h1>{isOnline ? "✅ Online" : "❌ Disconnected"}</h1>;
      }
      ```
 
@@ -8663,11 +8697,12 @@ Technically it is possible to write nested function components but it is not sug
 
 314. ### What is the useInsertionEffect hook?
 
-    **Short definition:** The useInsertionEffect hook is designed for CSS-in-JS library authors to inject styles into the DOM before any layout effects run.
+     **Short definition:** The useInsertionEffect hook is designed for CSS-in-JS library authors to inject styles into the DOM before any layout effects run.
 
      The `useInsertionEffect` hook is designed for **CSS-in-JS library authors** to inject styles into the DOM before any layout effects run. It fires synchronously before DOM mutations.
 
      #### Syntax
+
      ```js
      useInsertionEffect(() => {
        // Insert styles here
@@ -8678,6 +8713,7 @@ Technically it is possible to write nested function components but it is not sug
      ```
 
      #### Execution Order
+
      ```
      1. useInsertionEffect  → Inject styles
      2. DOM mutations       → React updates DOM
@@ -8687,8 +8723,9 @@ Technically it is possible to write nested function components but it is not sug
      ```
 
      #### Example: Dynamic Style Injection
+
      ```jsx
-     import { useInsertionEffect } from 'react';
+     import { useInsertionEffect } from "react";
 
      let isInserted = new Set();
 
@@ -8696,7 +8733,7 @@ Technically it is possible to write nested function components but it is not sug
        useInsertionEffect(() => {
          if (!isInserted.has(rule)) {
            isInserted.add(rule);
-           const style = document.createElement('style');
+           const style = document.createElement("style");
            style.textContent = rule;
            document.head.appendChild(style);
          }
@@ -8704,7 +8741,7 @@ Technically it is possible to write nested function components but it is not sug
      }
 
      function Button() {
-       useCSS('.dynamic-btn { background: blue; color: white; }');
+       useCSS(".dynamic-btn { background: blue; color: white; }");
        return <button className="dynamic-btn">Click me</button>;
      }
      ```
@@ -8715,13 +8752,14 @@ Technically it is possible to write nested function components but it is not sug
 
 315. ### How do you share state logic between components using custom hooks?
 
-    **Short definition:** This shows how to share state logic between components using custom hooks.
+     **Short definition:** This shows how to share state logic between components using custom hooks.
 
      Custom hooks allow you to **extract and share stateful logic** between components without changing their hierarchy. The state itself is not shared—each component using the hook gets its own isolated state.
 
      #### Example: useLocalStorage Hook
+
      ```jsx
-     import { useState, useEffect } from 'react';
+     import { useState, useEffect } from "react";
 
      function useLocalStorage(key, initialValue) {
        // Get stored value or use initial value
@@ -8749,21 +8787,21 @@ Technically it is possible to write nested function components but it is not sug
 
      // Usage in multiple components
      function ThemeToggle() {
-       const [theme, setTheme] = useLocalStorage('theme', 'light');
+       const [theme, setTheme] = useLocalStorage("theme", "light");
        return (
-         <button onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}>
+         <button onClick={() => setTheme(theme === "light" ? "dark" : "light")}>
            Current: {theme}
          </button>
        );
      }
 
      function FontSizeSelector() {
-       const [fontSize, setFontSize] = useLocalStorage('fontSize', 16);
+       const [fontSize, setFontSize] = useLocalStorage("fontSize", 16);
        return (
-         <input 
-           type="range" 
-           value={fontSize} 
-           onChange={(e) => setFontSize(Number(e.target.value))} 
+         <input
+           type="range"
+           value={fontSize}
+           onChange={(e) => setFontSize(Number(e.target.value))}
          />
        );
      }
@@ -8775,19 +8813,21 @@ Technically it is possible to write nested function components but it is not sug
 
 316. ### What is the useDebugValue hook?
 
-    **Short definition:** The useDebugValue hook is used to display a label for custom hooks in React DevTools.
+     **Short definition:** The useDebugValue hook is used to display a label for custom hooks in React DevTools.
 
      The `useDebugValue` hook is used to **display a label** for custom hooks in **React DevTools**. It helps developers debug custom hooks by showing meaningful information.
 
      #### Syntax
+
      ```js
      useDebugValue(value);
      useDebugValue(value, formatFn); // With optional formatter
      ```
 
      #### Example: Custom Hook with Debug Value
+
      ```jsx
-     import { useState, useEffect, useDebugValue } from 'react';
+     import { useState, useEffect, useDebugValue } from "react";
 
      function useOnlineStatus() {
        const [isOnline, setIsOnline] = useState(true);
@@ -8795,31 +8835,34 @@ Technically it is possible to write nested function components but it is not sug
        useEffect(() => {
          const handleOnline = () => setIsOnline(true);
          const handleOffline = () => setIsOnline(false);
-         
-         window.addEventListener('online', handleOnline);
-         window.addEventListener('offline', handleOffline);
-         
+
+         window.addEventListener("online", handleOnline);
+         window.addEventListener("offline", handleOffline);
+
          return () => {
-           window.removeEventListener('online', handleOnline);
-           window.removeEventListener('offline', handleOffline);
+           window.removeEventListener("online", handleOnline);
+           window.removeEventListener("offline", handleOffline);
          };
        }, []);
 
        // Shows "OnlineStatus: Online" or "OnlineStatus: Offline" in DevTools
-       useDebugValue(isOnline ? 'Online' : 'Offline');
+       useDebugValue(isOnline ? "Online" : "Offline");
 
        return isOnline;
      }
      ```
 
      #### With Formatting Function (for expensive computations)
+
      ```jsx
      function useUser(userId) {
        const [user, setUser] = useState(null);
-       
+
        // The format function only runs when DevTools is open
-       useDebugValue(user, (user) => user ? `User: ${user.name}` : 'Loading...');
-       
+       useDebugValue(user, (user) =>
+         user ? `User: ${user.name}` : "Loading...",
+       );
+
        return user;
      }
      ```
@@ -8830,15 +8873,16 @@ Technically it is possible to write nested function components but it is not sug
 
 317. ### How do you handle cleanup in useEffect?
 
-    **Short definition:** This shows how to handle cleanup in useEffect.
+     **Short definition:** This shows how to handle cleanup in useEffect.
 
      The cleanup function in `useEffect` is used to **clean up side effects** before the component unmounts or before the effect runs again. This prevents memory leaks, stale data, and unexpected behavior.
 
      #### Syntax
+
      ```js
      useEffect(() => {
        // Setup code
-       
+
        return () => {
          // Cleanup code
        };
@@ -8848,49 +8892,53 @@ Technically it is possible to write nested function components but it is not sug
      #### Common Cleanup Scenarios
 
      **1. Event Listeners**
+
      ```jsx
      useEffect(() => {
        const handleResize = () => setWidth(window.innerWidth);
-       window.addEventListener('resize', handleResize);
-       
-       return () => window.removeEventListener('resize', handleResize);
+       window.addEventListener("resize", handleResize);
+
+       return () => window.removeEventListener("resize", handleResize);
      }, []);
      ```
 
      **2. Timers and Intervals**
+
      ```jsx
      useEffect(() => {
        const intervalId = setInterval(() => {
-         setCount(c => c + 1);
+         setCount((c) => c + 1);
        }, 1000);
-       
+
        return () => clearInterval(intervalId);
      }, []);
      ```
 
      **3. Subscriptions**
+
      ```jsx
      useEffect(() => {
        const subscription = dataSource.subscribe(handleChange);
-       
+
        return () => subscription.unsubscribe();
      }, [dataSource]);
      ```
 
      **4. Abort Fetch Requests**
+
      ```jsx
      useEffect(() => {
        const controller = new AbortController();
-       
+
        fetch(url, { signal: controller.signal })
-         .then(response => response.json())
-         .then(data => setData(data))
-         .catch(err => {
-           if (err.name !== 'AbortError') {
+         .then((response) => response.json())
+         .then((data) => setData(data))
+         .catch((err) => {
+           if (err.name !== "AbortError") {
              setError(err);
            }
          });
-       
+
        return () => controller.abort();
      }, [url]);
      ```
@@ -8903,11 +8951,12 @@ Technically it is possible to write nested function components but it is not sug
 
 317. ### What are the differences between useEffect and useEvent (experimental)?
 
-    **Short definition:** It explains the main differences between useEffect and useEvent (experimental).
+     **Short definition:** It explains the main differences between useEffect and useEvent (experimental).
 
      `useEvent` is an **experimental hook** (not yet stable in React) designed to solve the problem of creating **stable event handlers** that always access the latest props and state without causing re-renders or needing to be in dependency arrays.
 
      #### The Problem useEvent Solves
+
      ```jsx
      // Problem: onTick changes on every render, causing interval to reset
      function Timer({ onTick }) {
@@ -8921,8 +8970,9 @@ Technically it is possible to write nested function components but it is not sug
      ```
 
      #### Solution with useEvent (Experimental)
+
      ```jsx
-     import { useEvent } from 'react'; // Experimental
+     import { useEvent } from "react"; // Experimental
 
      function Timer({ onTick }) {
        const stableOnTick = useEvent(onTick);
@@ -8938,13 +8988,13 @@ Technically it is possible to write nested function components but it is not sug
 
      #### Key Differences
 
-     | Feature | useEffect | useEvent (experimental) |
-     |---------|-----------|------------------------|
-     | Purpose | Run side effects | Create stable callbacks |
-     | Runs | After render | During render (creates function) |
-     | Returns | Cleanup function | Stable event handler |
-     | Closure | Captures values at render time | Always accesses latest values |
-     | Dependencies | Must list all used values | Not needed in other hooks' deps |
+     | Feature      | useEffect                      | useEvent (experimental)          |
+     | ------------ | ------------------------------ | -------------------------------- |
+     | Purpose      | Run side effects               | Create stable callbacks          |
+     | Runs         | After render                   | During render (creates function) |
+     | Returns      | Cleanup function               | Stable event handler             |
+     | Closure      | Captures values at render time | Always accesses latest values    |
+     | Dependencies | Must list all used values      | Not needed in other hooks' deps  |
 
      **Note:** Until `useEvent` is stable, you can use `useCallback` with `useRef` as a workaround for stable callbacks.
 
@@ -8952,7 +9002,7 @@ Technically it is possible to write nested function components but it is not sug
 
 318. ### What are the best practices for using React Hooks?
 
-    **Short definition:** Following best practices ensures your hooks are predictable, maintainable, and bug-free.
+     **Short definition:** Following best practices ensures your hooks are predictable, maintainable, and bug-free.
 
      Following best practices ensures your hooks are predictable, maintainable, and bug-free.
 
@@ -8961,9 +9011,11 @@ Technically it is possible to write nested function components but it is not sug
      - Only call hooks from React functions (components or custom hooks)
 
      #### 2. **Use the ESLint Plugin**
+
      ```bash
      npm install eslint-plugin-react-hooks --save-dev
      ```
+
      ```json
      {
        "plugins": ["react-hooks"],
@@ -8975,33 +9027,42 @@ Technically it is possible to write nested function components but it is not sug
      ```
 
      #### 3. **Keep Hooks Focused and Simple**
+
      ```jsx
      // ❌ Bad: One hook doing too much
      function useEverything() {
        const [user, setUser] = useState(null);
        const [posts, setPosts] = useState([]);
-       const [theme, setTheme] = useState('light');
+       const [theme, setTheme] = useState("light");
        // ... lots of unrelated logic
      }
 
      // ✅ Good: Separate concerns
-     function useUser() { /* user logic */ }
-     function usePosts() { /* posts logic */ }
-     function useTheme() { /* theme logic */ }
+     function useUser() {
+       /* user logic */
+     }
+     function usePosts() {
+       /* posts logic */
+     }
+     function useTheme() {
+       /* theme logic */
+     }
      ```
 
      #### 4. **Use Descriptive Names for Custom Hooks**
+
      ```jsx
      // ❌ Bad
-     function useData() { }
+     function useData() {}
 
      // ✅ Good
-     function useUserAuthentication() { }
-     function useFetchProducts() { }
-     function useFormValidation() { }
+     function useUserAuthentication() {}
+     function useFetchProducts() {}
+     function useFormValidation() {}
      ```
 
      #### 5. **Properly Manage Dependencies**
+
      ```jsx
      // ❌ Bad: Missing dependency
      useEffect(() => {
@@ -9015,6 +9076,7 @@ Technically it is possible to write nested function components but it is not sug
      ```
 
      #### 6. **Avoid Inline Object/Function Dependencies**
+
      ```jsx
      // ❌ Bad: New object on every render
      useEffect(() => {
@@ -9029,6 +9091,7 @@ Technically it is possible to write nested function components but it is not sug
      ```
 
      #### 7. **Clean Up Side Effects**
+
      Always return a cleanup function when subscribing to events, timers, or external data sources.
 
 **[⬆ Back to Top](#table-of-contents)**
@@ -9037,7 +9100,7 @@ Technically it is possible to write nested function components but it is not sug
 
 1. ### Why should we not update the state directly?
 
-    **Short definition:** This explains why should we not update the state directly.
+   **Short definition:** This explains why should we not update the state directly.
 
    If you try to update the state directly then it won't re-render the component.
 
@@ -9059,36 +9122,36 @@ Technically it is possible to write nested function components but it is not sug
 
 2. ### What is the purpose of callback function as an argument of `setState()`?
 
-    **Short definition:** This explains the purpose of callback function as an argument of setState().
+   **Short definition:** This explains the purpose of callback function as an argument of setState().
 
-    The callback function provided as the second argument to `setState` is executed after the state has been updated and the component has re-rendered. Because `setState()` is asynchronous, you cannot reliably perform actions that require the updated state immediately after calling `setState`. The callback ensures your code runs only after the update and re-render are complete.
+   The callback function provided as the second argument to `setState` is executed after the state has been updated and the component has re-rendered. Because `setState()` is asynchronous, you cannot reliably perform actions that require the updated state immediately after calling `setState`. The callback ensures your code runs only after the update and re-render are complete.
 
-    #### Example
+   #### Example
 
-    ```jsx
-    this.setState({ name: "Sudheer" }, () => {
-      console.log("The name has been updated and the component has re-rendered.");
-    });
-    ```
+   ```jsx
+   this.setState({ name: "Sudheer" }, () => {
+     console.log(
+       "The name has been updated and the component has re-rendered.",
+     );
+   });
+   ```
 
-    #### When to use the callback?
+   #### When to use the callback?
 
-    Use the `setState` callback when you need to perform an action immediately after the DOM has been updated in response to a state change. i.e, The callback is a reliable way to perform actions after a state update and re-render, especially when the timing is critical due to the asynchronous nature of state updates in React. For example, if you need to interact with the updated DOM, trigger analytics, or perform further computations that depend on the new state or rendered output.
+   Use the `setState` callback when you need to perform an action immediately after the DOM has been updated in response to a state change. i.e, The callback is a reliable way to perform actions after a state update and re-render, especially when the timing is critical due to the asynchronous nature of state updates in React. For example, if you need to interact with the updated DOM, trigger analytics, or perform further computations that depend on the new state or rendered output.
 
-    #### Note
-
-    - In modern React (with function components), you can achieve similar effects using the `useEffect` hook to respond to state changes.
-    - In class components, you can also use lifecycle methods like `componentDidUpdate` for broader post-update logic.
-    - The `setState` callback is still useful for one-off actions that directly follow a specific state change.
+   #### Note
+   - In modern React (with function components), you can achieve similar effects using the `useEffect` hook to respond to state changes.
+   - In class components, you can also use lifecycle methods like `componentDidUpdate` for broader post-update logic.
+   - The `setState` callback is still useful for one-off actions that directly follow a specific state change.
 
    **[⬆ Back to Top](#table-of-contents)**
 
 3. ### How to bind methods or event handlers in JSX callbacks?
 
-    **Short definition:** This shows how to bind methods or event handlers in JSX callbacks.
+   **Short definition:** This shows how to bind methods or event handlers in JSX callbacks.
 
    There are 3 possible ways to achieve this in class components:
-
    1. **Binding in Constructor:** In JavaScript classes, the methods are not bound by default. The same rule applies for React event handlers defined as class methods. Normally we bind them in constructor.
 
       ```javascript
@@ -9135,7 +9198,7 @@ Technically it is possible to write nested function components but it is not sug
 
 4. ### How to pass a parameter to an event handler or callback?
 
-    **Short definition:** This shows how to pass a parameter to an event handler or callback.
+   **Short definition:** This shows how to pass a parameter to an event handler or callback.
 
    You can use an _arrow function_ to wrap around an _event handler_ and pass parameters:
 
@@ -9162,7 +9225,7 @@ Technically it is possible to write nested function components but it is not sug
 
 5. ### What is the use of refs?
 
-    **Short definition:** This explains what refs is used for.
+   **Short definition:** This explains what refs is used for.
 
    The _ref_ is used to return a reference to the element. They _should be avoided_ in most cases, however, they can be useful when you need a direct access to the DOM element or an instance of a component.
 
@@ -9170,10 +9233,9 @@ Technically it is possible to write nested function components but it is not sug
 
 6. ### How to create refs?
 
-    **Short definition:** This shows how to create refs.
+   **Short definition:** This shows how to create refs.
 
    There are two approaches
-
    1. This is a recently added approach. _Refs_ are created using `React.createRef()` method and attached to React elements via the `ref` attribute. In order to use _refs_ throughout the component, just assign the _ref_ to the instance property within constructor.
 
       ```jsx harmony
@@ -9221,7 +9283,7 @@ Technically it is possible to write nested function components but it is not sug
 
 7. ### What are forward refs?
 
-    **Short definition:** Ref forwarding is a feature that lets some components take a ref they receive, and pass it further down to a child.
+   **Short definition:** Ref forwarding is a feature that lets some components take a ref they receive, and pass it further down to a child.
 
    _Ref forwarding_ is a feature that lets some components take a _ref_ they receive, and pass it further down to a child.
 
@@ -9241,7 +9303,7 @@ Technically it is possible to write nested function components but it is not sug
 
 8. ### Which is preferred option with in callback refs and findDOMNode()?
 
-    **Short definition:** It is preferred to use callback refs over findDOMNode() API.
+   **Short definition:** It is preferred to use callback refs over findDOMNode() API.
 
    It is preferred to use _callback refs_ over `findDOMNode()` API. Because `findDOMNode()` prevents certain improvements in React in the future.
 
@@ -9281,10 +9343,9 @@ Technically it is possible to write nested function components but it is not sug
 
 9. ### Why are String Refs legacy?
 
-    **Short definition:** This explains why are String Refs legacy.
+   **Short definition:** This explains why are String Refs legacy.
 
    If you worked with React before, you might be familiar with an older API where the `ref` attribute is a string, like `ref={'textInput'}`, and the DOM node is accessed as `this.refs.textInput`. We advise against it because _string refs have below issues_, and are considered legacy. String refs were **removed in React v16**.
-
    1. They _force React to keep track of currently executing component_. This is problematic because it makes react module stateful, and thus causes weird errors when react module is duplicated in the bundle.
    2. They are _not composable_ — if a library puts a ref on the passed child, the user can't put another ref on it. Callback refs are perfectly composable.
    3. They _don't work with static analysis_ like Flow. Flow can't guess the magic that framework does to make the string ref appear on `this.refs`, as well as its type (which could be different). Callback refs are friendlier to static analysis.
@@ -9315,7 +9376,6 @@ Technically it is possible to write nested function components but it is not sug
     **Short definition:** The component lifecycle has three distinct lifecycle phases.
 
     The component lifecycle has three distinct lifecycle phases:
-
     1. **Mounting:** The component is ready to mount in the browser DOM. This phase covers initialization from `constructor()`, `getDerivedStateFromProps()`, `render()`, and `componentDidMount()` lifecycle methods.
 
     2. **Updating:** In this phase, the component gets updated in two ways, sending the new props and updating the state either from `setState()` or `forceUpdate()`. This phase covers `getDerivedStateFromProps()`, `shouldComponentUpdate()`, `render()`, `getSnapshotBeforeUpdate()` and `componentDidUpdate()` lifecycle methods.
@@ -9323,7 +9383,6 @@ Technically it is possible to write nested function components but it is not sug
     3. **Unmounting:** In this last phase, the component is not needed and gets unmounted from the browser DOM. This phase includes `componentWillUnmount()` lifecycle method.
 
     It's worth mentioning that React internally has a concept of phases when applying changes to the DOM. They are separated as follows
-
     4. **Render** The component will render without any side effects. This applies to Pure components and in this phase, React can pause, abort, or restart the render.
 
     5. **Pre-commit** Before the component actually applies the changes to the DOM, there is a moment that allows React to read from the DOM through the `getSnapshotBeforeUpdate()`.
@@ -9345,7 +9404,6 @@ Technically it is possible to write nested function components but it is not sug
     **Short definition:** This explains the idea behind the lifecycle methods of React.
 
     Before React 16.3
-
     - **componentWillMount:** Executed before rendering and is used for App level configuration in your root component.
     - **componentDidMount:** Executed after first rendering and here all AJAX requests, DOM or state updates, and set up event listeners should occur.
     - **componentWillReceiveProps:** Executed when particular prop updates to trigger state transitions.
@@ -9355,7 +9413,6 @@ Technically it is possible to write nested function components but it is not sug
     - **componentWillUnmount:** It will be used to cancel any outgoing network requests, or remove all event listeners associated with the component.
 
     React 16.3+
-
     - **getDerivedStateFromProps:** Invoked right before calling `render()` and is invoked on _every_ render. This exists for rare use cases where you need a derived state. Worth reading [if you need derived state](https://reactjs.org/blog/2018/06/07/you-probably-dont-need-derived-state.html).
     - **componentDidMount:** Executed after first rendering and where all AJAX requests, DOM or state updates, and set up event listeners should occur.
     - **shouldComponentUpdate:** Determines if the component will be updated or not. By default, it returns `true`. If you are sure that the component doesn't need to render after the state or props are updated, you can return a false value. It is a great place to improve performance as it allows you to prevent a re-render if component receives a new prop.
@@ -9680,7 +9737,6 @@ Technically it is possible to write nested function components but it is not sug
     ```
 
     It includes everything we need to build a React app:
-
     1. React, JSX, ES6, and Flow syntax support.
     2. Language extras beyond ES6 like the object spread operator.
     3. Autoprefixed CSS, so you don’t need -webkit- or other prefixes.
@@ -9695,7 +9751,6 @@ Technically it is possible to write nested function components but it is not sug
     **Short definition:** The lifecycle methods are called in the following order when an instance of a component is being created and inserted into the DOM.
 
     The lifecycle methods are called in the following order when an instance of a component is being created and inserted into the DOM.
-
     1. `constructor()`
     2. `static getDerivedStateFromProps()`
     3. `render()`
@@ -9708,7 +9763,6 @@ Technically it is possible to write nested function components but it is not sug
     **Short definition:** This explains the idea behind the lifecycle methods going to be deprecated in React v16.
 
     The following lifecycle methods going to be unsafe coding practices and will be more problematic with async rendering.
-
     1. `componentWillMount()`
     2. `componentWillReceiveProps()`
     3. `componentWillUpdate()`
@@ -9792,7 +9846,6 @@ Technically it is possible to write nested function components but it is not sug
     **Short definition:** Recommended ordering of methods from mounting to render stage.
 
     _Recommended_ ordering of methods from _mounting_ to _render stage_:
-
     1. `static` methods
     2. `constructor()`
     3. `getChildContext()`
@@ -10065,9 +10118,7 @@ Technically it is possible to write nested function components but it is not sug
 40. ### What are the possible ways of updating objects in state?
 
     **Short definition:** This lists the possible ways of updating objects in state.
-
     1.  **Calling `setState()` with an object to merge with state:**
-
         - Using `Object.assign()` to create a copy of the object:
 
           ```javascript
@@ -10100,7 +10151,6 @@ Technically it is possible to write nested function components but it is not sug
     **Short definition:** This lists the approaches to include polyfills in your create-react-app.
 
     There are approaches to include polyfills in create-react-app,
-
     1.  **Manual import from `core-js`:**
 
         Create a file called (something like) `polyfills.js` and import it into root `index.js` file. Run `npm install core-js` or `yarn add core-js` and import your specific required features.
@@ -10200,7 +10250,6 @@ Technically it is possible to write nested function components but it is not sug
     You could use the ref prop to acquire a reference to the underlying `HTMLInputElement` object through a callback, store the reference as a class property, then use that reference to later trigger a click from your event handlers using the `HTMLElement.click` method.
 
     This can be done in two steps:
-
     1.  Create ref in render method:
 
         ```jsx harmony
@@ -10244,7 +10293,7 @@ Technically it is possible to write nested function components but it is not sug
             },
             (error) => {
               this.setState({ error });
-            }
+            },
           );
       }
 
@@ -10320,7 +10369,6 @@ Technically it is possible to write nested function components but it is not sug
     **Short definition:** This shows how to use connect() from React Redux.
 
     You need to follow two steps to use your store in your container:
-
     1.  **Use `mapStateToProps()`:** It maps the state variables from your store to the props that you specify.
     2.  **Connect the above props to your container:** The object returned by the `mapStateToProps` function is connected to the container. You can import `connect()` from `react-redux`.
 
@@ -10350,7 +10398,6 @@ Technically it is possible to write nested function components but it is not sug
     The **@** symbol is in fact a JavaScript expression used to signify decorators. _Decorators_ make it possible to annotate and modify classes and properties at design time.
 
     Let's take an example setting up Redux without and with a decorator.
-
     - **Without decorator:**
 
       ```javascript
@@ -10541,7 +10588,6 @@ Technically it is possible to write nested function components but it is not sug
     **Short definition:** This explains the idea behind HOC factory implementations.
 
     There are two main ways of implementing HOCs in React.
-
     1.  Props Proxy (PP) and
     2.  Inheritance Inversion (II).
 
@@ -10696,7 +10742,6 @@ Technically it is possible to write nested function components but it is not sug
     **Short definition:** This lists the possible return types of render method.
 
     Below are the list of following types used and return from render method,
-
     1.  **React elements:** Elements that instruct React to render a DOM node. It includes html elements such as `<div/>` and user defined elements.
     2.  **Arrays and fragments:** Return multiple elements to render as Arrays and Fragments to wrap multiple elements
     3.  **Portals:** Render children into a different DOM subtree.
@@ -10710,7 +10755,6 @@ Technically it is possible to write nested function components but it is not sug
     **Short definition:** The constructor is mainly used for two purposes.
 
     The constructor is mainly used for two purposes,
-
     1.  To initialize local state by assigning object to this.state
     2.  For binding event handler methods to the instance
         For example, the below code covers both the above cases,
@@ -10786,7 +10830,6 @@ Technically it is possible to write nested function components but it is not sug
     **Short definition:** An update can be caused by changes to props or state.
 
     An update can be caused by changes to props or state. The below methods are called in the following order when a component is being re-rendered.
-
     1.  static getDerivedStateFromProps()
     2.  shouldComponentUpdate()
     3.  render()
@@ -10800,7 +10843,6 @@ Technically it is possible to write nested function components but it is not sug
     **Short definition:** methods are called when there is an error during rendering, in a lifecycle method, or in the constructor of any child component.
 
     Below methods are called when there is an error during rendering, in a lifecycle method, or in the constructor of any child component.
-
     1.  static getDerivedStateFromError()
     2.  componentDidCatch()
 
@@ -10825,7 +10867,6 @@ Technically it is possible to write nested function components but it is not sug
     **Short definition:** This lists the limitations with HOCs.
 
     Higher-order components come with a few caveats apart from its benefits. Below are the few listed in an order,
-
     1.  **Don’t use HOCs inside the render method:**
         It is not recommended to apply a HOC to a component within the render method of a component.
 
@@ -11080,7 +11121,6 @@ Technically it is possible to write nested function components but it is not sug
     **Short definition:** This shows how to use contextType.
 
     ContextType is used to consume the context object. The contextType property can be used in two ways,
-
     1.  **contextType as property of class:**
         The contextType property on a class can be assigned a Context object created by React.createContext(). After that, you can consume the nearest current value of that Context type using this.context in any of the lifecycle methods and render function.
 
@@ -11299,7 +11339,7 @@ Technically it is possible to write nested function components but it is not sug
 
     ReactDOM.render(
       <Greeting message="World" />,
-      document.getElementById("root")
+      document.getElementById("root"),
     );
     ```
 
@@ -11314,7 +11354,7 @@ Technically it is possible to write nested function components but it is not sug
 
     ReactDOM.render(
       React.createElement(Greeting, { message: "World" }, null),
-      document.getElementById("root")
+      document.getElementById("root"),
     );
     ```
 
@@ -11357,7 +11397,6 @@ Technically it is possible to write nested function components but it is not sug
     **Short definition:** This lists the features of create react app.
 
     Below are the list of some of the features provided by create react app.
-
     1.  React, JSX, ES6, Typescript and Flow syntax support.
     2.  Autoprefixed CSS
     3.  CSS Reset/Normalize
@@ -11388,10 +11427,13 @@ Technically it is possible to write nested function components but it is not sug
     4.  Small "counter" example to demo how to add redux logic and React-Redux hooks API to interact with the store from components
         The below commands need to be executed along with template option as below,
     5.  **Javascript template:**
+
     ```js
     npx create-react-app my-app --template redux
     ```
+
     2.  **Typescript template:**
+
     ```js
     npx create-react-app my-app --template redux-typescript
     ```
